@@ -1,0 +1,71 @@
+## Page Background Config
+
+[predefinedPlain]
+name=Plain
+format=plain
+
+[predefinedRuled]
+name=Ruled
+format=ruled
+
+[predefinedLined]
+name=Ruled with vertical line
+format=lined
+
+[predefinedRightLined]
+name=Ruled with vertical line on the right
+format=lined
+config=m1=-72
+
+[predefinedStaves]
+name=Staves
+format=staves
+
+[predefinedGraph]
+name=Graph
+format=graph
+
+[predefinedDotted]
+name=Dotted
+format=dotted
+
+[predefinedIsoDotted]
+name=Isometric Dotted
+format=isodotted
+
+[predefinedIsoGraph]
+name=Isometric Graph
+format=isograph
+
+[graphWithBorder]
+name=Graph with border
+format=graph
+config=m1=40,rm=1
+
+[graphWithBorderBold5]
+name=Graph with border (bold every 5th)
+format=graph
+config=m1=20,rm=1,bli=5,blw=1
+
+
+# Original vector layouts by Trieflow LLC, GPL-2.0-or-later.
+# iq extends a standard format: other .xopp readers retain the base ruling as fallback.
+[inkquayMeeting]
+name=Meeting notes
+format=lined
+config=iq=1,m1=72,r1=24
+
+[inkquayCornell]
+name=Cornell notes
+format=lined
+config=iq=2,m1=166,r1=24
+
+[inkquayStoryboard]
+name=Storyboard
+format=graph
+config=iq=3,r1=126,m1=36
+
+[inkquayPractice]
+name=Practice staves
+format=staves
+config=iq=4

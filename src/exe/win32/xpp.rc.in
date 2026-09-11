@@ -1,0 +1,31 @@
+#include "winver.h"
+
+0 ICON "xournalpp.ico"
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION ${PROJECT_VERSION_MAJOR}, ${PROJECT_VERSION_MINOR}, ${PROJECT_VERSION_PATCH}, 0
+PRODUCTVERSION ${PROJECT_VERSION_MAJOR}, ${PROJECT_VERSION_MINOR}, ${PROJECT_VERSION_PATCH}, 0
+FILEOS VOS__WINDOWS32
+FILETYPE VFT_APP
+BEGIN
+    BLOCK "StringFileInfo"
+	BEGIN
+		/* Lang = US English, Charset = Multilingual */
+		BLOCK "040904E4"
+		BEGIN
+			VALUE "CompanyName", "Trieflow LLC\0"
+			VALUE "FileDescription", "InkQuay\0"
+			VALUE "FileVersion", "${PROJECT_VERSION}\0"
+			VALUE "ProductVersion", "${PROJECT_VERSION}\0"
+			VALUE "ProductName", "InkQuay\0"
+			VALUE "LegalCopyright", "Copyright 2026 Trieflow LLC; portions copyright Xournal++ contributors\0"
+			VALUE "LegalTrademarks", "\0"
+			VALUE "Comments", "\0"
+		END
+	END
+
+	BLOCK "VarFileInfo"
+	BEGIN
+		VALUE "Translation", 0x409, 1252
+	END
+END

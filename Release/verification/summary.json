@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-09-11T08:10:12.750518+00:00",
+  "sourceBaseline": "104f89826a9b1e2d0c098cea58639d6686f78526",
+  "sourceState": "implementation worktree validated before commit; exact implementation commit is in adjacent implementation-report.md",
+  "platform": "macOS arm64",
+  "xcode": "26.6.0",
+  "sdk": "26.5",
+  "compiler": "Apple Clang 21.0.0 (clang-2100.1.1.101)",
+  "cmake": "3.26.4",
+  "ninja": "1.13.2",
+  "deploymentTarget": "26.0 (local Homebrew validation only)",
+  "nativePackages": {
+    "gtk3": "3.24.52",
+    "glib": "2.88.3",
+    "poppler": "26.09.0",
+    "qpdf": "12.4.1",
+    "cairo": "1.18.4",
+    "libzip": "1.11.4_1",
+    "libxml2": "2.15.4",
+    "gettext": "1.0",
+    "gtest": "1.18.0 source-built C++20"
+  },
+  "build": {
+    "application": true,
+    "wrapper": true,
+    "unitBinary": true,
+    "gtkBinary": true,
+    "resourceTranslations": true,
+    "localInstallStage": true
+  },
+  "tests": {
+    "distinctDiscovered": 122,
+    "nonGuiExecuted": 119,
+    "passed": 119,
+    "failed": 0,
+    "gtkCompiledNotExecuted": 3,
+    "excluded": "PaletteTabTest|PageTemplateDialogTest"
+  },
+  "checks": {
+    "windowsPackageShellSyntax": true,
+    "inventoryPythonCompilation": true,
+    "nativeXmlParse": 6,
+    "gitDiffCheck": true
+  },
+  "redEvidence": [
+    "Missing new library/verifier APIs failed compilation",
+    "Missing real dialog constructor/library API failed compilation",
+    "Native layouts rendered identically before implementation: 1 failing test",
+    "Existing output accepted without overwrite authorization: 1 failing test",
+    "ASCII control character accepted in a name: 1 failing test"
+  ],
+  "artifacts": {
+    "build/inkquay": {
+      "bytes": 3052440,
+      "sha256": "aed55b2f26d5b2037d6d58b53204a9a677cc1f6d583224a1cd41163e6762289d"
+    },
+    "build/inkquay-wrapper": {
+      "bytes": 302368,
+      "sha256": "ebf58db846e907427a82e62bd37ffcf9e166c973b4408ec1e5902d25b34c4131"
+    },
+    "build/test/test-units": {
+      "bytes": 4435672,
+      "sha256": "749b4edaaf5f1a86befd6e2541ced934e37338b01223c986324eb76ae77ea9cd"
+    },
+    "build/test/test-gtk-integration": {
+      "bytes": 3491896,
+      "sha256": "00f44c4ff15178980ec18a270a18952f1d386e053ca53bc221109ce4b39ab031"
+    }
+  },
+  "windowsExecuted": false,
+  "guiExecuted": false,
+  "runtimeLicenseAuditComplete": false,
+  "storeReady": false,
+  "limits": [
+    "No Windows runtime or packaging execution",
+    "No pen hardware tests",
+    "GTK dialog test compiled only",
+    "Native fixture PNGs are not GUI screenshots",
+    "New GUI PDF cancellation not implemented; existing blocking scheduler retained",
+    "PDF checks verify structure, not visual fidelity or accessibility",
+    "MSYS2 source/package archives not frozen; corresponding-source and full resource-license audit pending",
+    "GLib rename/hash checks are not hostile-filesystem cross-process compare-and-swap guarantees"
+  ]
+}

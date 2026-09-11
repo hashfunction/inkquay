@@ -1,0 +1,5 @@
+[1/5] Building CXX object src/core/CMakeFiles/xournalpp-core.dir/control/pagetype/PageTemplateLibrary.cpp.o
+[2/5] Linking CXX static library src/core/libxournalpp-core.a
+[3/5] Linking CXX executable inkquay
+[4/5] Linking CXX executable test/test-units
+[5/5] Linking CXX executable test/test-gtk-integration

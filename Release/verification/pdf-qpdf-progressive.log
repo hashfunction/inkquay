@@ -1,0 +1,16 @@
+Note: Google Test filter = PdfExportVerifierTest.ChecksQpdfBackgroundAndProgressiveLayerExports
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+Setting up localisation for tests
+[----------] 1 test from PdfExportVerifierTest
+[ RUN      ] PdfExportVerifierTest.ChecksQpdfBackgroundAndProgressiveLayerExports
+xopp-Message: 01:08:29.877: PDF checks: 2/2 pages. Output: /var/folders/mt/ll630b9x785gtdp6529w25bh0000gn/T/inkquay-pdf-QGHWV3/background-export.pdf. Report: /var/folders/mt/ll630b9x785gtdp6529w25bh0000gn/T/inkquay-pdf-QGHWV3/background-export.pdf.ab42ed45-8eb4-4341-9890-657ad6f96c83.inkquay-report.json
+xopp-Message: 01:08:29.878: Checks cover PDF structure, page count, positive page sizes and unchanged protected files; visual fidelity and accessibility were not checked.
+xopp-Message: 01:08:29.879: PDF checks: 2/2 pages. Output: /var/folders/mt/ll630b9x785gtdp6529w25bh0000gn/T/inkquay-pdf-QGHWV3/progressive.pdf. Report: /var/folders/mt/ll630b9x785gtdp6529w25bh0000gn/T/inkquay-pdf-QGHWV3/progressive.pdf.6cfa23c2-e6ef-4644-b993-ceb10cbec959.inkquay-report.json
+xopp-Message: 01:08:29.879: Checks cover PDF structure, page count, positive page sizes and unchanged protected files; visual fidelity and accessibility were not checked.
+[       OK ] PdfExportVerifierTest.ChecksQpdfBackgroundAndProgressiveLayerExports (20 ms)
+[----------] 1 test from PdfExportVerifierTest (20 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (21 ms total)
+[  PASSED  ] 1 test.

@@ -1,0 +1,35 @@
+Note: Google Test filter = PdfExportVerifierTest.ExistingDestinationRequiresExplicitOverwriteAuthorization
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+Setting up localisation for tests
+[----------] 1 test from PdfExportVerifierTest
+[ RUN      ] PdfExportVerifierTest.ExistingDestinationRequiresExplicitOverwriteAuthorization
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/PdfExportVerifierTest.cpp:77: Failure
+Expected equality of these values:
+  result.status
+    Which is: 4-byte object <00-00 00-00>
+  PdfExportVerification::Status::Failed
+    Which is: 4-byte object <02-00 00-00>
+
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/PdfExportVerifierTest.cpp:77: Failure
+Value of: called
+  Actual: true
+Expected: false
+
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/PdfExportVerifierTest.cpp:77: Failure
+Expected equality of these values:
+  fs::file_size(output)
+    Which is: 1957
+  before
+    Which is: 1057
+
+[  FAILED  ] PdfExportVerifierTest.ExistingDestinationRequiresExplicitOverwriteAuthorization (13 ms)
+[----------] 1 test from PdfExportVerifierTest (13 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (14 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] PdfExportVerifierTest.ExistingDestinationRequiresExplicitOverwriteAuthorization
+
+ 1 FAILED TEST

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "status": "prepared-not-executed",
+  "sourceBaseline": "104f89826a9b1e2d0c098cea58639d6686f78526",
+  "windowsExecuted": false,
+  "runtimeLicenseAuditComplete": false,
+  "dependencySetup": ".github/actions/install_deps_windows/action.yml",
+  "qualificationFlags": [
+    "-DENABLE_GTEST=ON",
+    "-DDOWNLOAD_GTEST=OFF",
+    "-DENABLE_CPPTRACE=OFF",
+    "-DENABLE_AUDIO=OFF",
+    "-DENABLE_PLUGINS=OFF",
+    "-DENABLE_GTK_SOURCEVIEW=OFF"
+  ],
+  "versionPolicy": "MSYS2 rolling package inputs are not yet a reproducible pinned distribution. Record pacman -Q and the actual emitted stage; freeze audited package archives and corresponding sources before release.",
+  "actualWindowsPackages": null,
+  "actualWindowsFiles": null,
+  "inventoryCommand": "python script/inventoryWindows.py build/dist \"$MSYSTEM_PREFIX\" build/inkquay-windows-inventory.json",
+  "luaGObject": {
+    "shipped": false,
+    "reason": "Unqualified plugins omitted; no mutable rock download in release setup"
+  },
+  "gtestMacValidationOnly": {
+    "version": "1.18.0",
+    "source": "https://codeload.github.com/google/googletest/tar.gz/refs/tags/v1.18.0",
+    "sha256": "6e3191c1455468b3fc35a417fb565c1c5071aee1b7e7f85e30cf48a98d37d8b5",
+    "reason": "Homebrew C++17 bottle lacks char8_t printer symbol needed by C++20 tests; rebuilt verified source with C++20 in build-deps, not bundled"
+  },
+  "remainingGates": [
+    "Freeze native package/source inputs after real Windows build",
+    "Reconcile every DLL, icon, locale, schema and Poppler data file with licenses/corresponding source",
+    "Run Windows pen/PDF/path/cancellation and GUI acceptance",
+    "Root MSIX packaging, signing, certification, source publication and site verification"
+  ]
+}

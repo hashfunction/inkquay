@@ -1,0 +1,244 @@
+Internal ctest changing into directory: /Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/build
+Test project /Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/build
+        Start   1: ActionDatabaseTest.testActionTargetMatch
+  1/119 Test   #1: ActionDatabaseTest.testActionTargetMatch ...........................................   Passed    0.08 sec
+        Start   2: InkQuayBackgroundTest.OriginalLayoutsRenderDistinctNonemptyVectorPatterns
+  2/119 Test   #2: InkQuayBackgroundTest.OriginalLayoutsRenderDistinctNonemptyVectorPatterns ..........   Passed    0.06 sec
+        Start   3: ControlLoadHandler.testLoad
+  3/119 Test   #3: ControlLoadHandler.testLoad ........................................................   Passed    0.03 sec
+        Start   4: ControlLoadHandler.testLoadZipped
+  4/119 Test   #4: ControlLoadHandler.testLoadZipped ..................................................   Passed    0.03 sec
+        Start   5: ControlLoadHandler.testLoadUnzipped
+  5/119 Test   #5: ControlLoadHandler.testLoadUnzipped ................................................   Passed    0.02 sec
+        Start   6: ControlLoadHandler.testPages
+  6/119 Test   #6: ControlLoadHandler.testPages .......................................................   Passed    0.03 sec
+        Start   7: ControlLoadHandler.testPagesZipped
+  7/119 Test   #7: ControlLoadHandler.testPagesZipped .................................................   Passed    0.03 sec
+        Start   8: ControlLoadHandler.testPageType
+  8/119 Test   #8: ControlLoadHandler.testPageType ....................................................   Passed    0.02 sec
+        Start   9: ControlLoadHandler.testPageTypeZipped
+  9/119 Test   #9: ControlLoadHandler.testPageTypeZipped ..............................................   Passed    0.02 sec
+        Start  10: ControlLoadHandler.testPageTypeFormatCopyFix
+ 10/119 Test  #10: ControlLoadHandler.testPageTypeFormatCopyFix .......................................   Passed    0.03 sec
+        Start  11: ControlLoadHandler.testLayer
+ 11/119 Test  #11: ControlLoadHandler.testLayer .......................................................   Passed    0.03 sec
+        Start  12: ControlLoadHandler.testLayerZipped
+ 12/119 Test  #12: ControlLoadHandler.testLayerZipped .................................................   Passed    0.03 sec
+        Start  13: ControlLoadHandler.testText
+ 13/119 Test  #13: ControlLoadHandler.testText ........................................................   Passed    0.02 sec
+        Start  14: ControlLoadHandler.testTextZipped
+ 14/119 Test  #14: ControlLoadHandler.testTextZipped ..................................................   Passed    0.02 sec
+        Start  15: ControlLoadHandler.testImageZipped
+ 15/119 Test  #15: ControlLoadHandler.testImageZipped .................................................   Passed    0.03 sec
+        Start  16: ControlLoadHandler.imageLoadJpeg
+ 16/119 Test  #16: ControlLoadHandler.imageLoadJpeg ...................................................   Passed    0.03 sec
+        Start  17: ControlLoadHandler.imageSaveJpegBackwardCompat
+ 17/119 Test  #17: ControlLoadHandler.imageSaveJpegBackwardCompat .....................................   Passed    0.04 sec
+        Start  18: ControlLoadHandler.linebreaksLatex
+ 18/119 Test  #18: ControlLoadHandler.linebreaksLatex .................................................   Passed    0.03 sec
+        Start  19: ControlLoadHandler.testLoadStoreLoadDefault
+ 19/119 Test  #19: ControlLoadHandler.testLoadStoreLoadDefault ........................................   Passed    0.08 sec
+        Start  20: ControlLoadHandler.testLoadStoreLoadFloatBwCompat
+ 20/119 Test  #20: ControlLoadHandler.testLoadStoreLoadFloatBwCompat ..................................   Passed    0.07 sec
+        Start  21: ControlLoadHandler.testStrokeWidthRecovery
+ 21/119 Test  #21: ControlLoadHandler.testStrokeWidthRecovery .........................................   Passed    0.03 sec
+        Start  22: ControlLoadHandler.testLoadStoreCJK
+ 22/119 Test  #22: ControlLoadHandler.testLoadStoreCJK ................................................   Passed    0.03 sec
+        Start  23: ControlLoadHandler.testRelativePath
+ 23/119 Test  #23: ControlLoadHandler.testRelativePath ................................................   Passed    0.08 sec
+        Start  24: Metadata.testRead
+ 24/119 Test  #24: Metadata.testRead ..................................................................   Passed    0.03 sec
+        Start  25: Metadata.testWriteReadCycle
+ 25/119 Test  #25: Metadata.testWriteReadCycle ........................................................   Passed    0.02 sec
+        Start  26: PageTemplateLibraryTest.RoundTripsUnicodeAndProtectsBuiltins
+ 26/119 Test  #26: PageTemplateLibraryTest.RoundTripsUnicodeAndProtectsBuiltins .......................   Passed    0.03 sec
+        Start  27: PageTemplateLibraryTest.RejectsDuplicatesInvalidTemplatesAndBlankNames
+ 27/119 Test  #27: PageTemplateLibraryTest.RejectsDuplicatesInvalidTemplatesAndBlankNames .............   Passed    0.03 sec
+        Start  28: PageTemplateLibraryTest.FailedLoadLocksMutationsUntilExplicitRecovery
+ 28/119 Test  #28: PageTemplateLibraryTest.FailedLoadLocksMutationsUntilExplicitRecovery ..............   Passed    0.03 sec
+        Start  29: PageTemplateLibraryTest.DetectsExternalChangesWithoutLosingEitherCollection
+ 29/119 Test  #29: PageTemplateLibraryTest.DetectsExternalChangesWithoutLosingEitherCollection ........   Passed    0.03 sec
+        Start  30: PdfExportVerifierTest.DetectsTruncatedPageSetAndRetainsFaultyOutput
+ 30/119 Test  #30: PdfExportVerifierTest.DetectsTruncatedPageSetAndRetainsFaultyOutput ................   Passed    0.03 sec
+        Start  31: PdfExportVerifierTest.ChecksRealPdfAndCreatesDistinctReports
+ 31/119 Test  #31: PdfExportVerifierTest.ChecksRealPdfAndCreatesDistinctReports .......................   Passed    0.04 sec
+        Start  32: PdfExportVerifierTest.RejectsSourceHardlinkAndAncestorAliasBeforeCallingExporter
+ 32/119 Test  #32: PdfExportVerifierTest.RejectsSourceHardlinkAndAncestorAliasBeforeCallingExporter ...   Passed    0.03 sec
+        Start  33: PdfExportVerifierTest.PreservesExistingOutputOnFailureCancellationAndTargetRace
+ 33/119 Test  #33: PdfExportVerifierTest.PreservesExistingOutputOnFailureCancellationAndTargetRace ....   Passed    0.03 sec
+        Start  34: PdfExportVerifierTest.RejectsEmptyInvalidAndChangedProtectedFiles
+ 34/119 Test  #34: PdfExportVerifierTest.RejectsEmptyInvalidAndChangedProtectedFiles ..................   Passed    0.03 sec
+        Start  35: PdfExportVerifierTest.EscapesJsonControlCharactersAndUnicode
+ 35/119 Test  #35: PdfExportVerifierTest.EscapesJsonControlCharactersAndUnicode .......................   Passed    0.03 sec
+        Start  36: PdfExportVerifierTest.UsesRealDocumentExportBackendAndRangeCounts
+ 36/119 Test  #36: PdfExportVerifierTest.UsesRealDocumentExportBackendAndRangeCounts ..................   Passed    0.05 sec
+        Start  37: PdfExportVerifierTest.ExistingDestinationRequiresExplicitOverwriteAuthorization
+ 37/119 Test  #37: PdfExportVerifierTest.ExistingDestinationRequiresExplicitOverwriteAuthorization ....   Passed    0.03 sec
+        Start  38: PdfExportVerifierTest.ChecksQpdfBackgroundAndProgressiveLayerExports
+ 38/119 Test  #38: PdfExportVerifierTest.ChecksQpdfBackgroundAndProgressiveLayerExports ...............   Passed    0.04 sec
+        Start  39: SettingsTest.testLoadDoesNotThrowForNonExistingFilePath
+ 39/119 Test  #39: SettingsTest.testLoadDoesNotThrowForNonExistingFilePath ............................   Passed    0.03 sec
+        Start  40: SettingsTest.testReadWrite
+ 40/119 Test  #40: SettingsTest.testReadWrite .........................................................   Passed    0.02 sec
+        Start  41: ToolEnumsTest.testToolSizeSerialization
+ 41/119 Test  #41: ToolEnumsTest.testToolSizeSerialization ............................................   Passed    0.02 sec
+        Start  42: ToolEnumsTest.testToolTypeSerialization
+ 42/119 Test  #42: ToolEnumsTest.testToolTypeSerialization ............................................   Passed    0.02 sec
+        Start  43: ColorPalette.testDefaultWrite
+ 43/119 Test  #43: ColorPalette.testDefaultWrite ......................................................   Passed    0.02 sec
+        Start  44: ColorPalette.testDefaultLoad
+ 44/119 Test  #44: ColorPalette.testDefaultLoad .......................................................   Passed    0.02 sec
+        Start  45: ColorPalette.testRainbowLoad
+ 45/119 Test  #45: ColorPalette.testRainbowLoad .......................................................   Passed    0.02 sec
+        Start  46: ColorPalette.testOverflow
+ 46/119 Test  #46: ColorPalette.testOverflow ..........................................................   Passed    0.02 sec
+        Start  47: ColorPalette.testNotExistLoad
+ 47/119 Test  #47: ColorPalette.testNotExistLoad ......................................................   Passed    0.02 sec
+        Start  48: ColorPalette.testEmptyLoad
+ 48/119 Test  #48: ColorPalette.testEmptyLoad .........................................................   Passed    0.02 sec
+        Start  49: ColorPalette.testWrongHeader
+ 49/119 Test  #49: ColorPalette.testWrongHeader .......................................................   Passed    0.02 sec
+        Start  50: ColorPalette.testAttributesLoad
+ 50/119 Test  #50: ColorPalette.testAttributesLoad ....................................................   Passed    0.02 sec
+        Start  51: ColorPalette.testWrongColor
+ 51/119 Test  #51: ColorPalette.testWrongColor ........................................................   Passed    0.02 sec
+        Start  52: DocumentName.testUTF8
+ 52/119 Test  #52: DocumentName.testUTF8 ..............................................................   Passed    0.02 sec
+        Start  53: ErasableStroke.testOverlapTree
+ 53/119 Test  #53: ErasableStroke.testOverlapTree .....................................................   Passed    0.02 sec
+        Start  54: ErasableStroke.testGetStrokes
+ 54/119 Test  #54: ErasableStroke.testGetStrokes ......................................................   Passed    0.02 sec
+        Start  55: ErasableStroke.testIntersectWithPaddedBox
+ 55/119 Test  #55: ErasableStroke.testIntersectWithPaddedBox ..........................................   Passed    0.02 sec
+        Start  56: Image.testGetImageApplyOrientation
+ 56/119 Test  #56: Image.testGetImageApplyOrientation .................................................   Passed    0.03 sec
+        Start  57: LineStyle.testLineStyle
+ 57/119 Test  #57: LineStyle.testLineStyle ............................................................   Passed    0.02 sec
+        Start  58: StrokeStyle.testParseStyle
+ 58/119 Test  #58: StrokeStyle.testParseStyle .........................................................   Passed    0.02 sec
+        Start  59: StrokeStyle.testFormatStyle
+ 59/119 Test  #59: StrokeStyle.testFormatStyle ........................................................   Passed    0.02 sec
+        Start  60: UtilColor.testColorToRGB
+ 60/119 Test  #60: UtilColor.testColorToRGB ...........................................................   Passed    0.02 sec
+        Start  61: UtilColor.testColorToRGBAndBack
+ 61/119 Test  #61: UtilColor.testColorToRGBAndBack ....................................................   Passed    0.02 sec
+        Start  62: UtilElementRange.testParse
+ 62/119 Test  #62: UtilElementRange.testParse .........................................................   Passed    0.03 sec
+        Start  63: UtilElementRange.testInvalid
+ 63/119 Test  #63: UtilElementRange.testInvalid .......................................................   Passed    0.02 sec
+        Start  64: UtilElementRange.testPageCountIsZero
+ 64/119 Test  #64: UtilElementRange.testPageCountIsZero ...............................................   Passed    0.02 sec
+        Start  65: UtilI18n.testNoPlaceholder
+ 65/119 Test  #65: UtilI18n.testNoPlaceholder .........................................................   Passed    0.02 sec
+        Start  66: UtilI18n.testEscape
+ 66/119 Test  #66: UtilI18n.testEscape ................................................................   Passed    0.02 sec
+        Start  67: UtilI18n.testReplace
+ 67/119 Test  #67: UtilI18n.testReplace ...............................................................   Passed    0.02 sec
+        Start  68: UtilI18n.testMissing
+ 68/119 Test  #68: UtilI18n.testMissing ...............................................................   Passed    0.02 sec
+        Start  69: UtilI18n.testOrder
+ 69/119 Test  #69: UtilI18n.testOrder .................................................................   Passed    0.02 sec
+        Start  70: UtilI18n.testLatexString
+ 70/119 Test  #70: UtilI18n.testLatexString ...........................................................   Passed    0.02 sec
+        Start  71: UtilI18n.test3
+ 71/119 Test  #71: UtilI18n.test3 .....................................................................   Passed    0.02 sec
+        Start  72: UtilI18n.test16bit
+ 72/119 Test  #72: UtilI18n.test16bit .................................................................   Passed    0.02 sec
+        Start  73: UtilI18n.test32bit
+ 73/119 Test  #73: UtilI18n.test32bit .................................................................   Passed    0.02 sec
+        Start  74: UtilI18n.test64bit
+ 74/119 Test  #74: UtilI18n.test64bit .................................................................   Passed    0.02 sec
+        Start  75: UtilIntervals.testInterval
+ 75/119 Test  #75: UtilIntervals.testInterval .........................................................   Passed    0.02 sec
+        Start  76: UtilIntervals.testUnionOfIntervals
+ 76/119 Test  #76: UtilIntervals.testUnionOfIntervals .................................................   Passed    0.02 sec
+        Start  77: UtilObjectIOStream.testReadData
+ 77/119 Test  #77: UtilObjectIOStream.testReadData ....................................................   Passed    0.02 sec
+        Start  78: UtilObjectIOStream.testReadImage
+ 78/119 Test  #78: UtilObjectIOStream.testReadImage ...................................................   Passed    0.04 sec
+        Start  79: UtilObjectIOStream.testReadString
+ 79/119 Test  #79: UtilObjectIOStream.testReadString ..................................................   Passed    0.02 sec
+        Start  80: UtilObjectIOStream.testReadSizeT
+ 80/119 Test  #80: UtilObjectIOStream.testReadSizeT ...................................................   Passed    0.03 sec
+        Start  81: UtilObjectIOStream.testReadInt
+ 81/119 Test  #81: UtilObjectIOStream.testReadInt .....................................................   Passed    0.02 sec
+        Start  82: UtilObjectIOStream.testReadUInt
+ 82/119 Test  #82: UtilObjectIOStream.testReadUInt ....................................................   Passed    0.02 sec
+        Start  83: UtilObjectIOStream.testReadDouble
+ 83/119 Test  #83: UtilObjectIOStream.testReadDouble ..................................................   Passed    0.02 sec
+        Start  84: UtilObjectIOStream.testReadComplexObject
+ 84/119 Test  #84: UtilObjectIOStream.testReadComplexObject ...........................................   Passed    0.02 sec
+        Start  85: UtilObjectIOStream.testReadStroke
+ 85/119 Test  #85: UtilObjectIOStream.testReadStroke ..................................................   Passed    0.02 sec
+        Start  86: UtilPath.testUnsupportedUri
+ 86/119 Test  #86: UtilPath.testUnsupportedUri ........................................................   Passed    0.02 sec
+        Start  87: UtilPath.testPathFromUri
+ 87/119 Test  #87: UtilPath.testPathFromUri ...........................................................   Passed    0.02 sec
+        Start  88: UtilPath.testPathIsChildOf
+ 88/119 Test  #88: UtilPath.testPathIsChildOf .........................................................   Passed    0.02 sec
+        Start  89: UtilPath.testClearExtensions
+ 89/119 Test  #89: UtilPath.testClearExtensions .......................................................   Passed    0.02 sec
+        Start  90: UtilPath.normalizeAssetPath
+ 90/119 Test  #90: UtilPath.normalizeAssetPath ........................................................   Passed    0.02 sec
+        Start  91: UtilPath.pathGFilenameConvertion
+ 91/119 Test  #91: UtilPath.pathGFilenameConvertion ...................................................   Passed    0.03 sec
+        Start  92: UtilsRAII.testCLibbrairiesSPtr_Constructors
+ 92/119 Test  #92: UtilsRAII.testCLibbrairiesSPtr_Constructors ........................................   Passed    0.02 sec
+        Start  93: UtilsRAII.testCLibbrairiesSPtr_MoveAssignments
+ 93/119 Test  #93: UtilsRAII.testCLibbrairiesSPtr_MoveAssignments .....................................   Passed    0.02 sec
+        Start  94: UtilsRAII.testCLibbrairiesSPtr_CopyAssignments
+ 94/119 Test  #94: UtilsRAII.testCLibbrairiesSPtr_CopyAssignments .....................................   Passed    0.02 sec
+        Start  95: UtilsRAII.testCLibbrairiesSPtr_Reset
+ 95/119 Test  #95: UtilsRAII.testCLibbrairiesSPtr_Reset ...............................................   Passed    0.02 sec
+        Start  96: UtilsRAII.testGObjectSPtrConstructors
+ 96/119 Test  #96: UtilsRAII.testGObjectSPtrConstructors ..............................................   Passed    0.02 sec
+        Start  97: UtilsRAII.testGObjectSPtrReset
+ 97/119 Test  #97: UtilsRAII.testGObjectSPtrReset .....................................................   Passed    0.02 sec
+        Start  98: UtilRange.testEmptyValid
+ 98/119 Test  #98: UtilRange.testEmptyValid ...........................................................   Passed    0.02 sec
+        Start  99: UtilRange.testUnite
+ 99/119 Test  #99: UtilRange.testUnite ................................................................   Passed    0.02 sec
+        Start 100: UtilRange.testIntersect
+100/119 Test #100: UtilRange.testIntersect ............................................................   Passed    0.02 sec
+        Start 101: SaveNameUtils.testWildcardExpansion
+101/119 Test #101: SaveNameUtils.testWildcardExpansion ................................................   Passed    0.02 sec
+        Start 102: UtilStringUtils.testStartWith
+102/119 Test #102: UtilStringUtils.testStartWith ......................................................   Passed    0.02 sec
+        Start 103: UtilStringUtils.testSplit
+103/119 Test #103: UtilStringUtils.testSplit ..........................................................   Passed    0.02 sec
+        Start 104: UtilStringUtils.testSplitEmpty
+104/119 Test #104: UtilStringUtils.testSplitEmpty .....................................................   Passed    0.02 sec
+        Start 105: UtilStringUtils.testSplitOne
+105/119 Test #105: UtilStringUtils.testSplitOne .......................................................   Passed    0.02 sec
+        Start 106: UtilStringUtils.testEndsWith
+106/119 Test #106: UtilStringUtils.testEndsWith .......................................................   Passed    0.02 sec
+        Start 107: UtilStringUtils.testCompare
+107/119 Test #107: UtilStringUtils.testCompare ........................................................   Passed    0.02 sec
+        Start 108: UtilsVectors.testTinyVector
+108/119 Test #108: UtilsVectors.testTinyVector ........................................................   Passed    0.02 sec
+        Start 109: UtilsVectors.testSmallVectorPushPop
+109/119 Test #109: UtilsVectors.testSmallVectorPushPop ................................................   Passed    0.02 sec
+        Start 110: UtilsVectors.testSmallVectorCopyMove
+110/119 Test #110: UtilsVectors.testSmallVectorCopyMove ...............................................   Passed    0.02 sec
+        Start 111: UtilXojPreviewExtractor.testNonExistingFile
+111/119 Test #111: UtilXojPreviewExtractor.testNonExistingFile ........................................   Passed    0.02 sec
+        Start 112: UtilXojPreviewExtractor.testExtensionCheck
+112/119 Test #112: UtilXojPreviewExtractor.testExtensionCheck .........................................   Passed    0.02 sec
+        Start 113: UtilXojPreviewExtractor.testLoadGzipped
+113/119 Test #113: UtilXojPreviewExtractor.testLoadGzipped ............................................   Passed    0.02 sec
+        Start 114: UtilXojPreviewExtractor.testLoadGzipped2
+114/119 Test #114: UtilXojPreviewExtractor.testLoadGzipped2 ...........................................   Passed    0.02 sec
+        Start 115: UtilXojPreviewExtractor.testLoad1Unzipped
+115/119 Test #115: UtilXojPreviewExtractor.testLoad1Unzipped ..........................................   Passed    0.02 sec
+        Start 116: UtilXojPreviewExtractor.testLoad1Zipped
+116/119 Test #116: UtilXojPreviewExtractor.testLoad1Zipped ............................................   Passed    0.02 sec
+        Start 117: UtilXojPreviewExtractor.testLoad2Zipped
+117/119 Test #117: UtilXojPreviewExtractor.testLoad2Zipped ............................................   Passed    0.02 sec
+        Start 118: UtilXojPreviewExtractor.testNoPreview
+118/119 Test #118: UtilXojPreviewExtractor.testNoPreview ..............................................   Passed    0.02 sec
+        Start 119: UtilXojPreviewExtractor.testInvalidFile
+119/119 Test #119: UtilXojPreviewExtractor.testInvalidFile ............................................   Passed    0.02 sec
+
+100% tests passed, 0 tests failed out of 119
+
+Total Test time (real) =   3.34 sec

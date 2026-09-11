@@ -1,0 +1,99 @@
+[1/99] Generating LINGUAS
+[2/99] Generating af_ZA.po
+[3/99] Generating bn_BD.po
+[4/99] Generating ca.po
+[5/99] Generating ar.po
+[6/99] Generating cs.po
+[7/99] Generating el.po
+[8/99] Generating da.po
+[9/99] Generating de.po
+[10/99] Generating en_GB.po
+[11/99] Generating eo_UY.po
+[12/99] Generating es.po
+[13/99] Generating eu.po
+[14/99] Generating fi.po
+[15/99] Generating fr.po
+[16/99] Generating gl.po
+[17/99] Generating he.po
+[18/99] Generating hi.po
+[19/99] Generating hu.po
+[20/99] Generating id.po
+[21/99] Generating it.po
+[22/99] Generating ka_GE.po
+[23/99] Generating ja.po
+[24/99] Generating ko.po
+[25/99] Generating ml_IN.po
+[26/99] Generating nl.po
+[27/99] Generating no.po
+[28/99] Generating pt_PT.po
+[29/99] Generating pl.po
+[30/99] Generating pt_BR.po
+[31/99] Generating ro.po
+[32/99] Generating ru.po
+[33/99] Generating si_LK.po
+[34/99] Generating sl_SI.po
+[35/99] Generating ta_IN.po
+[36/99] Generating sv.po
+[37/99] Generating th.po
+[38/99] Generating uk_UA.po
+[39/99] Generating tr.po
+[40/99] Generating vi.po
+[41/99] Generating zh.po
+[42/99] Generating zh_HK.po
+[43/99] Generating zh_TW.po
+[44/99] Building CXX object src/xoj-preview-extractor/CMakeFiles/xournalpp-thumbnailer.dir/__/util/GzUtil.cpp.o
+[45/99] Building CXX object src/xoj-preview-extractor/CMakeFiles/xournalpp-thumbnailer.dir/__/util/PlaceholderString.cpp.o
+[46/99] Building CXX object src/xoj-preview-extractor/CMakeFiles/xournalpp-thumbnailer.dir/__/util/StringUtils.cpp.o
+[47/99] Generating af_ZA.gmo
+[48/99] Generating ar.gmo
+[49/99] Generating bn_BD.gmo
+[50/99] Generating ca.gmo
+[51/99] Generating cs.gmo
+[52/99] Generating da.gmo
+[53/99] Generating de.gmo
+[54/99] Generating el.gmo
+[55/99] Generating en_GB.gmo
+[56/99] Generating eo_UY.gmo
+[57/99] Generating es.gmo
+[58/99] Building CXX object src/util/CMakeFiles/util.dir/XojMsgBox.cpp.o
+[59/99] Generating eu.gmo
+[60/99] Generating fi.gmo
+[61/99] Building CXX object src/xoj-preview-extractor/CMakeFiles/xournalpp-thumbnailer.dir/xournalpp-thumbnailer.cpp.o
+[62/99] Linking CXX static library src/util/libutil.a
+[63/99] Generating fr.gmo
+[64/99] Generating gl.gmo
+[65/99] Generating he.gmo
+[66/99] Generating hi.gmo
+[67/99] Generating hu.gmo
+[68/99] Generating id.gmo
+[69/99] Generating it.gmo
+[70/99] Generating ja.gmo
+[71/99] Generating ka_GE.gmo
+[72/99] Generating ko.gmo
+[73/99] Generating ml_IN.gmo
+[74/99] Generating nl.gmo
+[75/99] Generating no.gmo
+[76/99] Generating pl.gmo
+[77/99] Generating pt_PT.gmo
+[78/99] Generating pt_BR.gmo
+[79/99] Generating ro.gmo
+[80/99] Generating si_LK.gmo
+[81/99] Generating ru.gmo
+[82/99] Generating sl_SI.gmo
+[83/99] Generating ta_IN.gmo
+[84/99] Generating sv.gmo
+[85/99] Generating th.gmo
+[86/99] Generating tr.gmo
+[87/99] Generating uk_UA.gmo
+[88/99] Generating vi.gmo
+[89/99] Building CXX object src/xoj-preview-extractor/CMakeFiles/xournalpp-thumbnailer.dir/__/util/Stacktrace.cpp.o
+[90/99] Generating zh_HK.gmo
+[91/99] Generating zh.gmo
+[92/99] Generating zh_TW.gmo
+[93/99] Linking CXX executable inkquay-wrapper
+[94/99] Linking CXX executable inkquay
+[95/99] Building CXX object src/xoj-preview-extractor/CMakeFiles/xournalpp-thumbnailer.dir/__/util/PathUtil.cpp.o
+[96/99] Building CXX object src/xoj-preview-extractor/CMakeFiles/xournalpp-thumbnailer.dir/__/util/XojPreviewExtractor.cpp.o
+[97/99] Generating ../resources-templates/pagetemplates.ini
+[98/99] Generating ../resources-templates/toolbar.ini
+[99/99] Linking CXX executable src/xoj-preview-extractor/xournalpp-thumbnailer

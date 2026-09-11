@@ -1,0 +1,5 @@
+# Preserve raw compiler/test evidence, including tool-emitted trailing spaces.
+Release/verification/*.log -whitespace
+
+# Windows build scripts require LF checkout.
+*.sh text eol=lf

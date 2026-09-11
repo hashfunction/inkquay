@@ -1,0 +1,72 @@
+Note: Google Test filter = PageTemplateLibraryTest.*:PdfExportVerifierTest.*:InkQuayBackgroundTest.*
+[==========] Running 11 tests from 3 test suites.
+[----------] Global test environment set-up.
+Setting up localisation for tests
+[----------] 1 test from InkQuayBackgroundTest
+[ RUN      ] InkQuayBackgroundTest.OriginalLayoutsRenderDistinctNonemptyVectorPatterns
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/InkQuayBackgroundTest.cpp:18: Failure
+Expected: (hashes[i]) != (hashes[j]), actual: "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c" vs "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c"
+
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/InkQuayBackgroundTest.cpp:18: Failure
+Expected: (hashes[i]) != (hashes[j]), actual: "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c" vs "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c"
+
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/InkQuayBackgroundTest.cpp:18: Failure
+Expected: (hashes[i]) != (hashes[j]), actual: "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c" vs "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c"
+
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/InkQuayBackgroundTest.cpp:18: Failure
+Expected: (hashes[i]) != (hashes[j]), actual: "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c" vs "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c"
+
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/InkQuayBackgroundTest.cpp:18: Failure
+Expected: (hashes[i]) != (hashes[j]), actual: "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c" vs "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c"
+
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/InkQuayBackgroundTest.cpp:18: Failure
+Expected: (hashes[i]) != (hashes[j]), actual: "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c" vs "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c"
+
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/InkQuayBackgroundTest.cpp:18: Failure
+Expected: (hashes[i]) != (hashes[j]), actual: "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c" vs "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c"
+
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/InkQuayBackgroundTest.cpp:18: Failure
+Expected: (hashes[i]) != (hashes[j]), actual: "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c" vs "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c"
+
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/InkQuayBackgroundTest.cpp:18: Failure
+Expected: (hashes[i]) != (hashes[j]), actual: "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c" vs "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c"
+
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/InkQuayBackgroundTest.cpp:18: Failure
+Expected: (hashes[i]) != (hashes[j]), actual: "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c" vs "f2c7196e69e9783cc3b2bd4bd525b980be22cc648b5dbd0b39261b7a87d5738c"
+
+[  FAILED  ] InkQuayBackgroundTest.OriginalLayoutsRenderDistinctNonemptyVectorPatterns (27 ms)
+[----------] 1 test from InkQuayBackgroundTest (27 ms total)
+
+[----------] 4 tests from PageTemplateLibraryTest
+[ RUN      ] PageTemplateLibraryTest.RoundTripsUnicodeAndProtectsBuiltins
+[       OK ] PageTemplateLibraryTest.RoundTripsUnicodeAndProtectsBuiltins (2 ms)
+[ RUN      ] PageTemplateLibraryTest.RejectsDuplicatesInvalidTemplatesAndBlankNames
+[       OK ] PageTemplateLibraryTest.RejectsDuplicatesInvalidTemplatesAndBlankNames (0 ms)
+[ RUN      ] PageTemplateLibraryTest.FailedLoadLocksMutationsUntilExplicitRecovery
+[       OK ] PageTemplateLibraryTest.FailedLoadLocksMutationsUntilExplicitRecovery (0 ms)
+[ RUN      ] PageTemplateLibraryTest.DetectsExternalChangesWithoutLosingEitherCollection
+[       OK ] PageTemplateLibraryTest.DetectsExternalChangesWithoutLosingEitherCollection (0 ms)
+[----------] 4 tests from PageTemplateLibraryTest (4 ms total)
+
+[----------] 6 tests from PdfExportVerifierTest
+[ RUN      ] PdfExportVerifierTest.DetectsTruncatedPageSetAndRetainsFaultyOutput
+[       OK ] PdfExportVerifierTest.DetectsTruncatedPageSetAndRetainsFaultyOutput (12 ms)
+[ RUN      ] PdfExportVerifierTest.ChecksRealPdfAndCreatesDistinctReports
+[       OK ] PdfExportVerifierTest.ChecksRealPdfAndCreatesDistinctReports (4 ms)
+[ RUN      ] PdfExportVerifierTest.RejectsSourceHardlinkAndAncestorAliasBeforeCallingExporter
+[       OK ] PdfExportVerifierTest.RejectsSourceHardlinkAndAncestorAliasBeforeCallingExporter (2 ms)
+[ RUN      ] PdfExportVerifierTest.PreservesExistingOutputOnFailureCancellationAndTargetRace
+[       OK ] PdfExportVerifierTest.PreservesExistingOutputOnFailureCancellationAndTargetRace (3 ms)
+[ RUN      ] PdfExportVerifierTest.RejectsEmptyInvalidAndChangedProtectedFiles
+[       OK ] PdfExportVerifierTest.RejectsEmptyInvalidAndChangedProtectedFiles (1 ms)
+[ RUN      ] PdfExportVerifierTest.EscapesJsonControlCharactersAndUnicode
+[       OK ] PdfExportVerifierTest.EscapesJsonControlCharactersAndUnicode (0 ms)
+[----------] 6 tests from PdfExportVerifierTest (25 ms total)
+
+[----------] Global test environment tear-down
+[==========] 11 tests from 3 test suites ran. (60 ms total)
+[  PASSED  ] 10 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] InkQuayBackgroundTest.OriginalLayoutsRenderDistinctNonemptyVectorPatterns
+
+ 1 FAILED TEST

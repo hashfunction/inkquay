@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+<!-- Original InkQuay mark. Copyright 2026 Trieflow LLC. GPL-2.0-or-later. -->
+<rect x="8" y="8" width="240" height="240" rx="54" fill="#143b45"/>
+<path d="M60 48h104l28 28v128H60z" fill="#f9f3df"/><path d="M164 48v28h28" fill="#b9d3d1"/>
+<path d="M80 104h66M80 126h49M80 170h96" stroke="#679291" stroke-width="7" stroke-linecap="round"/>
+<path d="m120 159 17-36 47-47 24 24-47 47z" fill="#d99046" stroke="#143b45" stroke-width="5" stroke-linejoin="round"/>
+<path d="m120 159 10-22 12 12z" fill="#143b45"/>
+</svg>

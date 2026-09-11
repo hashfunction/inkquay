@@ -1,0 +1,25 @@
+-- MacOS X Deployment target: 26.0
+CMake Warning at cmake/include/Version.cmake:10 (message):
+  include/Version.cmake: Can't find lsb_release in your path.  Setting
+  DISTRO_CODENAME to unknown.
+Call Stack (most recent call first):
+  CMakeLists.txt:59 (include)
+
+
+104f8982-dirty
+-- Disable cpptrace by lack of debug symbols in Release mode
+-- Disable Audio support
+-- Found qpdf: 12.4.1
+-- Disable Xournal++ Plugins
+-- Disable GtkSourceView TeX syntax highlighting
+
+Configuration:
+    Compiler:                   /Applications/Xcode-26.6.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++
+    X11 support enabled:        
+    GTEST enabled:              ON
+    GCOV enabled:               OFF
+    Profiling enabled:          OFF
+
+-- Configuring done (0.2s)
+-- Generating done (0.1s)
+-- Build files have been written to: /Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/build

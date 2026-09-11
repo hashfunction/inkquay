@@ -1,0 +1,20 @@
+Note: Google Test filter = PageTemplateLibraryTest.RejectsDuplicatesInvalidTemplatesAndBlankNames
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+Setting up localisation for tests
+[----------] 1 test from PageTemplateLibraryTest
+[ RUN      ] PageTemplateLibraryTest.RejectsDuplicatesInvalidTemplatesAndBlankNames
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/PageTemplateLibraryTest.cpp:48: Failure
+Expected: lib.saveUserPreset({"bad", "Bad\x01Name", valid(), false}) throws an exception of type std::exception.
+  Actual: it throws nothing.
+
+[  FAILED  ] PageTemplateLibraryTest.RejectsDuplicatesInvalidTemplatesAndBlankNames (1 ms)
+[----------] 1 test from PageTemplateLibraryTest (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (2 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] PageTemplateLibraryTest.RejectsDuplicatesInvalidTemplatesAndBlankNames
+
+ 1 FAILED TEST

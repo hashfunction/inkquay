@@ -1,0 +1,32 @@
+InkQuay — Trieflow LLC
+Copyright 2026 Trieflow LLC. Modifications are licensed GPL-2.0-or-later.
+
+Based on Xournal++ v1.3.7, commit 104f89826a9b1e2d0c098cea58639d6686f78526.
+Xournal++ copyright its contributors, GPL-2.0-or-later. Full upstream history,
+LICENSE, AUTHORS, debian/copyright and existing per-file notices are preserved.
+The application is independent of and is not endorsed by the Xournal++ project.
+
+Original InkQuay application/file marks and four vector page layouts:
+Copyright 2026 Trieflow LLC, GPL-2.0-or-later. App metadata is CC0-1.0.
+Functional upstream icons remain under their respective notices. In particular,
+debian/copyright identifies GPLv3+ color icons, ISC Lucide icons, CC BY-SA 4.0
+geometry/app/file assets, CC0 metadata, and BSD/BSL build helpers. Retained
+GPLv3+ material can impose GPLv3 distribution obligations; the application's
+GPLv2-or-later grant permits later GPL versions. Do not infer all-asset clearance.
+
+Native dependencies include GTK3/GLib, Cairo, Pango, GdkPixbuf, Poppler, qpdf,
+libxml2, libzip, zlib, librsvg and their linked libraries. Their exact emitted
+versions, source/patch inputs and license texts must be reconciled with the
+Windows stage inventory before distribution. package.sh copies available MSYS2
+package notices and script/inventoryWindows.py records actual packages/files.
+A package notice or top-level GPL file alone does not clear the whole stage.
+
+LuaGObject, Lua plugins, audio and GTKSourceView resources are omitted from the
+InkQuay release configuration. GoogleTest is build/test-only, BSD-3-Clause;
+release builds require a system package and never silently download it.
+
+Modified application source and build scripts, applicable native corresponding
+source and complete notices must accompany the eventual GPL distribution.
+Product/support/privacy/source URLs are under https://inkquay.trieflow.com.
+The source URL is a release gate until root publishes and verifies the matching
+source bundle. This notice is an inventory starting point, not legal clearance.

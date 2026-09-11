@@ -1,0 +1,12 @@
+Note: Google Test filter = InkQuayBackgroundTest.*
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+Setting up localisation for tests
+[----------] 1 test from InkQuayBackgroundTest
+[ RUN      ] InkQuayBackgroundTest.OriginalLayoutsRenderDistinctNonemptyVectorPatterns
+[       OK ] InkQuayBackgroundTest.OriginalLayoutsRenderDistinctNonemptyVectorPatterns (83 ms)
+[----------] 1 test from InkQuayBackgroundTest (83 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (83 ms total)
+[  PASSED  ] 1 test.

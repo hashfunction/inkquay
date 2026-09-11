@@ -1,0 +1,56 @@
+name: InkQuay Windows qualification
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/inkquay]
+permissions:
+  contents: read
+jobs:
+  windows-x64:
+    runs-on: windows-2025
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: ./.github/actions/install_deps_windows
+        with:
+          msystem: MINGW64
+          msys_package_env: x86_64
+      - name: Record exact installed input versions and package hashes
+        run: |
+          mkdir -p build-evidence
+          pacman -Q > build-evidence/msys2-installed-packages.txt
+          pacman -Qi > build-evidence/msys2-package-metadata.txt
+          bash script/record-msys2-inputs.sh
+          cmake --version > build-evidence/cmake-version.txt
+          c++ --version > build-evidence/compiler-version.txt
+      - name: Configure qualified local-only features
+        run: |
+          cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_GTEST=ON -DDOWNLOAD_GTEST=OFF -DENABLE_CPPTRACE=OFF -DENABLE_AUDIO=OFF -DENABLE_PLUGINS=OFF -DENABLE_GTK_SOURCEVIEW=OFF
+      - name: Build native application and test executables
+        run: |
+          cmake --build build --target pot translations --parallel 2
+          cmake --build build --parallel 2
+          cmake --build build --target test-units test-gtk-integration --parallel 2
+      - name: Run real native and GTK tests
+        run: ctest --test-dir build --output-on-failure --output-junit "$PWD/build-evidence/tests.xml"
+      - name: Stage application and native input inventory
+        run: |
+          bash windows-setup/package.sh build
+          cp build/inkquay-windows-inventory.json build-evidence/
+      - name: Verify isolated packaged main window
+        shell: pwsh
+        run: ./script/test-packaged-startup.ps1
+      - name: Preserve metadata only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: InkQuay-Windows-qualification
+          path: |
+            build-evidence/*.json
+            build-evidence/*.txt
+            build-evidence/*.xml
+          retention-days: 14
+          if-no-files-found: error
