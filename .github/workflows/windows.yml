@@ -39,6 +39,7 @@ jobs:
         run: ctest --test-dir build --timeout 60 --output-on-failure --output-junit "$PWD/build-evidence/tests.xml"
       - name: Stage application and native input inventory
         run: |
+          python script/test_inventoryWindows.py
           bash windows-setup/package.sh build
           cp build/inkquay-windows-inventory.json build-evidence/
       - name: Verify isolated packaged main window
