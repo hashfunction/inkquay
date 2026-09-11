@@ -8,7 +8,9 @@ import shutil
 import sys
 import os
 import tempfile
+from types import SimpleNamespace
 import unittest
+from unittest import mock
 import xml.etree.ElementTree as ET
 
 
@@ -103,6 +105,78 @@ class WorkflowFilesTests(unittest.TestCase):
         with self.assertRaises(FileExistsError):
             self.w.prepare(self.root)
         self.assertEqual((self.root / "source.xopp").read_bytes(), before)
+
+    def test_read_regular_uses_only_identity_and_content_metadata(self):
+        target = self.root / "source.xopp"
+        real_stat = Path.stat
+
+        def stat_with_unrelated_drift(path, *args, **kwargs):
+            result = real_stat(path, *args, **kwargs)
+            if path != target:
+                return result
+            return SimpleNamespace(
+                st_mode=result.st_mode,
+                st_dev=result.st_dev,
+                st_ino=result.st_ino,
+                st_size=result.st_size,
+                st_mtime_ns=result.st_mtime_ns,
+                st_atime_ns=result.st_atime_ns + 1,
+            )
+
+        expected = target.read_bytes()
+        with mock.patch.object(Path, "stat", stat_with_unrelated_drift):
+            self.assertEqual(self.w.read_regular(target), expected)
+
+    def test_read_regular_rejects_path_identity_drift(self):
+        target = self.root / "source.xopp"
+        real_lstat = Path.lstat
+        target_observations = 0
+
+        def lstat_with_identity_drift(path, *args, **kwargs):
+            nonlocal target_observations
+            result = real_lstat(path, *args, **kwargs)
+            if path != target:
+                return result
+            target_observations += 1
+            if target_observations == 1:
+                return result
+            return SimpleNamespace(
+                st_mode=result.st_mode,
+                st_dev=result.st_dev,
+                st_ino=result.st_ino + 1,
+                st_size=result.st_size,
+                st_mtime_ns=result.st_mtime_ns,
+                st_file_attributes=getattr(result, "st_file_attributes", 0),
+            )
+
+        with mock.patch.object(Path, "lstat", lstat_with_identity_drift):
+            with self.assertRaisesRegex(ValueError, "path_identity"):
+                self.w.read_regular(target)
+
+    def test_read_regular_reports_descriptor_observations(self):
+        target = self.root / "source.xopp"
+        real_fstat = os.fstat
+        observations = 0
+
+        def fstat_with_size_drift(fd):
+            nonlocal observations
+            result = real_fstat(fd)
+            observations += 1
+            if observations == 1:
+                return result
+            return SimpleNamespace(
+                st_mode=result.st_mode,
+                st_dev=result.st_dev,
+                st_ino=result.st_ino,
+                st_size=result.st_size + 1,
+                st_mtime_ns=result.st_mtime_ns,
+            )
+
+        with mock.patch.object(self.w.os, "fstat", fstat_with_size_drift):
+            with self.assertRaisesRegex(
+                ValueError, r"before=.*after=.*path=.*read_length="
+            ):
+                self.w.read_regular(target)
 
     def test_real_poppler_confirms_count_text_and_rendered_template(self):
         self.export()

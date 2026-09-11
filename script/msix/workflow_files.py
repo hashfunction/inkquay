@@ -20,25 +20,67 @@ SCOPE_DISCLOSURE = (
 )
 
 
+def _lstat_nonreparse_chain(path):
+    target = None
+    for item in (path, *path.parents):
+        observed = item.lstat()
+        if stat.S_ISLNK(observed.st_mode) or getattr(
+            observed, "st_file_attributes", 0
+        ) & 0x400:
+            raise ValueError("Linked/reparse workflow path: " + str(item))
+        if target is None:
+            target = observed
+    return target
+
+
+def _identity_content(observed):
+    return (
+        observed.st_dev,
+        observed.st_ino,
+        observed.st_size,
+        observed.st_mtime_ns,
+    )
+
+
 def read_regular(path):
     path = Path(path).absolute()
-    for item in (path, *path.parents):
-        s = item.lstat()
-        if stat.S_ISLNK(s.st_mode) or getattr(s, "st_file_attributes", 0) & 0x400:
-            raise ValueError("Linked/reparse workflow path: " + str(item))
-    with path.open("rb") as stream:
+    initial_path = _lstat_nonreparse_chain(path)
+    flags = os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0)
+    descriptor = os.open(path, flags)
+    with os.fdopen(descriptor, "rb") as stream:
         before = os.fstat(stream.fileno())
         if not stat.S_ISREG(before.st_mode) or before.st_size > LIMIT:
             raise ValueError("Expected bounded regular workflow file: " + str(path))
         data = stream.read(LIMIT + 1)
         after = os.fstat(stream.fileno())
-    if (
-        (before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns)
-        != (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns)
-        or len(data) != before.st_size
-        or path.stat() != after
-    ):
-        raise ValueError("Workflow file changed during observation: " + str(path))
+        final_path = _lstat_nonreparse_chain(path)
+
+    initial_values = _identity_content(initial_path)
+    before_values = _identity_content(before)
+    after_values = _identity_content(after)
+    path_values = _identity_content(final_path)
+    reasons = []
+    if initial_values[:2] != before_values[:2]:
+        reasons.append("opened_identity")
+    elif initial_values[2:] != before_values[2:]:
+        reasons.append("opened_content_metadata")
+    if before_values[:2] != after_values[:2]:
+        reasons.append("descriptor_identity")
+    elif before_values[2:] != after_values[2:]:
+        reasons.append("descriptor_content_metadata")
+    if len(data) != after.st_size:
+        reasons.append("read_length")
+    if path_values[:2] != after_values[:2]:
+        reasons.append("path_identity")
+    elif path_values[2:] != after_values[2:]:
+        reasons.append("path_content_metadata")
+    if reasons:
+        raise ValueError(
+            "Workflow file changed during observation: "
+            f"{path}; reasons={','.join(reasons)}; before={before_values}; "
+            f"after={after_values}; path={path_values}; read_length={len(data)}; "
+            f"initial_path={initial_values}"
+        )
     return data
 
 
