@@ -69,6 +69,37 @@ class NativeInventoryTests(unittest.TestCase):
         self.assertEqual(result['/mingw64/share/Résumé note.txt'], {'alpha'})
         self.assertEqual(result['/mingw64/share/shared.txt'], {'alpha', 'beta'})
 
+    def test_wrapper_requires_its_own_exact_build_bytes_and_staged_path(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            stage, prefix = root / 'stage', root / 'prefix'
+            for folder in (stage, prefix):
+                for name in inventory.REQUIRED_PACKAGE_FILES:
+                    path = folder / name
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_bytes(b'package bytes')
+            owners = {'/mingw64/' + name: {'alpha'} for name in inventory.REQUIRED_PACKAGE_FILES}
+            app, wrapper = stage / 'bin/inkquay.exe', stage / 'bin/inkquay-wrapper.exe'
+            app.write_bytes(b'actual main build')
+            wrapper.write_bytes(b'actual wrapper build')
+            app_hash, wrapper_hash = inventory.digest(app), inventory.digest(wrapper)
+            def verify():
+                files = inventory.inventory_files(stage, prefix, '/mingw64', {'alpha': '1'}, owners)
+                return inventory.validate_provenance(files, '/mingw64', owners, app_hash, wrapper_hash)
+            self.assertEqual(verify()['stagedFiles'], len(inventory.REQUIRED_PACKAGE_FILES) + 2)
+            for changed in (app, wrapper):
+                original = changed.read_bytes()
+                changed.write_bytes(b'changed executable')
+                with self.subTest(changed=changed.name), self.assertRaisesRegex(ValueError, 'exact application build'):
+                    verify()
+                changed.write_bytes(original)
+            wrapper.rename(stage / 'bin/another-wrapper.exe')
+            with self.assertRaisesRegex(ValueError, 'missing'):
+                verify()
+            wrapper.write_bytes(b'actual wrapper build')
+            with self.assertRaisesRegex(ValueError, 'package owner'):
+                verify()
+
     def test_malformed_package_listing_is_rejected(self):
         for listing in ('alpha\n', 'alpha relative/path\n'):
             with self.subTest(listing=listing), self.assertRaises(ValueError):
