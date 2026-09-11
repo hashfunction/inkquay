@@ -28,6 +28,7 @@ runs:
           mingw-w64-${{inputs.msys_package_env}}-imagemagick
           make
           diffutils
+          git
           mingw-w64-${{inputs.msys_package_env}}-qpdf
           mingw-w64-${{inputs.msys_package_env}}-zstd
           mingw-w64-${{inputs.msys_package_env}}-gtest

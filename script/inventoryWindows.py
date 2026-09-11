@@ -58,6 +58,7 @@ def main():
     if sys.platform != 'win32' or not os.environ.get('MSYSTEM'):
         raise SystemExit('Run this inventory with native Python inside the Windows MSYS2 build environment.')
     stage, prefix, report = map(Path, sys.argv[1:])
+    source_commit = subprocess.check_output(['git', '-C', str(Path(__file__).resolve().parents[1]), 'rev-parse', 'HEAD'], text=True).strip()
     packages = dict(line.split(' ', 1) for line in subprocess.check_output(['pacman', '-Q'], text=True, encoding='utf-8').splitlines())
     # One installed-file snapshot replaces a process launch for every copied icon
     # and DLL. Byte comparisons still decide whether package provenance applies.
@@ -66,7 +67,7 @@ def main():
     result = {
         'schemaVersion': 1,
         'recordedAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
-        'sourceCommit': subprocess.check_output(['git', '-C', str(Path(__file__).resolve().parents[1]), 'rev-parse', 'HEAD'], text=True).strip(),
+        'sourceCommit': source_commit,
         'platform': sys.platform, 'msystem': os.environ['MSYSTEM'], 'packages': packages,
         'files': files, 'licenseAuditComplete': False,
         'remainingGates': ['Audit every emitted library/resource and its corresponding source obligations', 'Execute the staged application and PDF/pen tests', 'Validate final MSIX identity, installation, signing and certification'],

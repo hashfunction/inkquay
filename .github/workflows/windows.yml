@@ -21,6 +21,8 @@ jobs:
       - name: Record exact installed input versions and package hashes
         run: |
           mkdir -p build-evidence
+          git --version > build-evidence/git-version.txt
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
           pacman -Q > build-evidence/msys2-installed-packages.txt
           pacman -Qi > build-evidence/msys2-package-metadata.txt
           bash script/record-msys2-inputs.sh
