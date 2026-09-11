@@ -6,6 +6,33 @@
 #include <gtest/gtest.h>
 
 #include "control/jobs/PdfExportVerifier.h"
+
+#ifdef _WIN32
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#include <windows.h>
+#endif
+#include <system_error>
+
+// MinGW's std::filesystem does not implement link creation. Exercise real Windows
+// links through the native API; missing host privileges are a test failure.
+static void createTestSymlink(const fs::path& target, const fs::path& link, bool directory = false) {
+#ifdef _WIN32
+    const DWORD flags = directory ? SYMBOLIC_LINK_FLAG_DIRECTORY : 0;
+    if (!CreateSymbolicLinkW(link.c_str(), target.c_str(), flags | 0x2)) {
+        if (!CreateSymbolicLinkW(link.c_str(), target.c_str(), flags)) {
+            throw std::system_error(GetLastError(), std::system_category(), "CreateSymbolicLinkW test fixture");
+        }
+    }
+#else
+    if (directory) {
+        fs::create_directory_symlink(target, link);
+    } else {
+        fs::create_symlink(target, link);
+    }
+#endif
+}
 class PdfExportVerifierTest: public ::testing::Test {
 protected:
     fs::path dir;
@@ -73,7 +100,7 @@ TEST_F(PdfExportVerifierTest, RejectsSourceHardlinkAndAncestorAliasBeforeCalling
     auto writer = [&](const fs::path&) { called = true; };
     EXPECT_EQ(PdfExportVerifier::exportChecked(alias, expected, writer).status, PdfExportVerification::Status::Failed);
     EXPECT_FALSE(called);
-    fs::create_directory_symlink(dir, dir / "directory");
+    createTestSymlink(dir, dir / "directory", true);
     EXPECT_EQ(PdfExportVerifier::exportChecked(dir / "directory" / "background.pdf", expected, writer).status,
               PdfExportVerification::Status::Failed);
     EXPECT_FALSE(called);
@@ -302,7 +329,7 @@ TEST_F(PdfExportVerifierTest, ConsentCannotOverrideSourceAndBackgroundProtection
     const auto writer = [&](const fs::path&) { called = true; };
     EXPECT_FALSE(PdfExportVerifier::exportChecked(approved(alias), expected, writer).published);
     EXPECT_FALSE(PdfExportVerifier::exportChecked(approved(dir / "source.xopp"), expected, writer).published);
-    fs::create_directory_symlink(dir, dir / "ancestor");
+    createTestSymlink(dir, dir / "ancestor", true);
     EXPECT_FALSE(PdfExportVerifier::exportChecked(approved(dir / "ancestor" / "background.pdf"), expected, writer)
                          .published);
     EXPECT_FALSE(called);
@@ -317,7 +344,7 @@ TEST_F(PdfExportVerifierTest, NoReplaceMovePreservesOccupiedRecoveryAndDanglingL
     EXPECT_EQ(read(from), "from bytes");
     EXPECT_EQ(read(to), "to bytes");
     fs::remove(to);
-    fs::create_symlink(dir / "missing", to);
+    createTestSymlink(dir / "missing", to);
     EXPECT_THROW(xoj::moveExportFileNoReplace(from, to), std::system_error);
     EXPECT_TRUE(fs::is_symlink(to));
     EXPECT_EQ(read(from), "from bytes");

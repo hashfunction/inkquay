@@ -59,6 +59,7 @@ TEST_F(PageTemplateLibraryTest, FailedLoadLocksMutationsUntilExplicitRecovery) {
     std::ifstream f(dir / "user.ini");
     std::string text((std::istreambuf_iterator<char>(f)), {});
     EXPECT_EQ(text, "[library]\nversion=99\n");
+    f.close();
     fs::remove(dir / "user.ini");
     lib.load();
     EXPECT_NO_THROW(lib.saveUserPreset({"new", "New", valid(), false}));
