@@ -93,7 +93,7 @@ cp "$prefix"/bin/libqpdf*.dll "$setup_dir"/bin
 
 echo "record package and copied-file provenance"
 mkdir -p "$setup_dir/share/inkquay/licenses"
-cp "$script_dir/../LICENSE" "$script_dir/../AUTHORS" "$script_dir/../debian/copyright" "$script_dir/../Release/THIRD-PARTY-NOTICES.txt" "$setup_dir/share/inkquay/licenses/"
+cp "$script_dir/../LICENSE" "$script_dir/../AUTHORS" "$script_dir/../debian/copyright" "$script_dir/../copyright.txt" "$script_dir/../Release/THIRD-PARTY-NOTICES.txt" "$setup_dir/share/inkquay/licenses/"
 # Include package-provided notice directories; the final distribution inventory remains a release gate.
 if [[ -d "$prefix/share/licenses" ]]; then cp -r "$prefix/share/licenses" "$setup_dir/share/inkquay/licenses/msys2"; fi
 python "$script_dir/../script/inventoryWindows.py" "$setup_dir" "$prefix" "$build_dir/inkquay-windows-inventory.json" "$build_dir/inkquay.exe"

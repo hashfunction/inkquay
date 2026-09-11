@@ -48,6 +48,7 @@ SOURCE_COPIES = {
     "share/inkquay/licenses/LICENSE": "LICENSE",
     "share/inkquay/licenses/AUTHORS": "AUTHORS",
     "share/inkquay/licenses/copyright": "debian/copyright",
+    "share/inkquay/licenses/copyright.txt": "copyright.txt",
     "share/inkquay/licenses/THIRD-PARTY-NOTICES.txt": "Release/THIRD-PARTY-NOTICES.txt",
     "share/inkquay/ui/pixmaps/com.trieflow.inkquay.png": "ui/pixmaps/com.trieflow.inkquay.png",
     "share/inkquay/ui/pixmaps/com.trieflow.inkquay.svg": "ui/pixmaps/com.trieflow.inkquay.svg",

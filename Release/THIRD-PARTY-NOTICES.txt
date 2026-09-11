@@ -3,13 +3,15 @@ Copyright 2026 Trieflow LLC. Modifications are licensed GPL-2.0-or-later.
 
 Based on Xournal++ v1.3.7, commit 104f89826a9b1e2d0c098cea58639d6686f78526.
 Xournal++ copyright its contributors, GPL-2.0-or-later. Full upstream history,
-LICENSE, AUTHORS, debian/copyright and existing per-file notices are preserved.
+LICENSE, AUTHORS, copyright.txt, debian/copyright and existing per-file notices
+are preserved. The package includes copyright.txt with the detailed upstream
+author and asset attributions; copyright retains the Debian packaging summary.
 The application is independent of and is not endorsed by the Xournal++ project.
 
 Original InkQuay application/file marks and four vector page layouts:
 Copyright 2026 Trieflow LLC, GPL-2.0-or-later. App metadata is CC0-1.0.
 Functional upstream icons remain under their respective notices. In particular,
-debian/copyright identifies GPLv3+ color icons, ISC Lucide icons, CC BY-SA 4.0
+copyright.txt identifies GPLv3+ color icons, ISC Lucide icons, CC BY-SA 4.0
 geometry/app/file assets, CC0 metadata, and BSD/BSL build helpers. Retained
 GPLv3+ material can impose GPLv3 distribution obligations; the application's
 GPLv2-or-later grant permits later GPL versions. Do not infer all-asset clearance.

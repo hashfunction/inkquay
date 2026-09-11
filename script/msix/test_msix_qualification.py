@@ -6,6 +6,8 @@ import json
 import os
 from pathlib import Path
 import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 import zipfile
@@ -172,6 +174,66 @@ class PackageTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     msix.create_input_inventory(self.release, self.source, self.commit)
                 p.write_bytes(old)
+
+    def test_detailed_upstream_attribution_is_preserved_and_required(self):
+        relative = "share/inkquay/licenses/copyright.txt"
+        original = Path(__file__).resolve().parents[2] / "copyright.txt"
+        expected = original.read_bytes()
+        self.assertIn(b"Nararyans R.I.", expected)
+        self.assertIn(b"Lucide Contributors", expected)
+        self.assertIn(b"CC-BY-SA-4.0", expected)
+        self.assertEqual((self.release / relative).read_bytes(), expected)
+        package, record = self.package()
+        self.assertEqual(record["sourceInputs"]["copyright.txt"], digest(expected))
+        with zipfile.ZipFile(package) as archive:
+            self.assertEqual(archive.read(relative), expected)
+
+        # Neither a missing notice nor a consistently rehashed generic GPL
+        # summary may replace the detailed copyright and asset attribution.
+        for replacement in (None, (self.source / "debian/copyright").read_bytes()):
+            with self.subTest(replacement="missing" if replacement is None else "generic"):
+                target = self.release / relative
+                if replacement is None:
+                    target.unlink()
+                else:
+                    target.write_bytes(replacement)
+                native = json.loads(self.native.read_text())
+                native["files"] = [r for r in native["files"] if r["path"] != relative]
+                if replacement is not None:
+                    native["files"].append({"path": relative, **digest(replacement)})
+                self.native.write_text(json.dumps(native))
+                with self.assertRaisesRegex(ValueError, "Missing|notice/artwork"):
+                    msix.create_input_inventory(self.release, self.source, self.commit)
+
+    def test_actual_package_notice_copy_preserves_detailed_source_bytes(self):
+        actual = Path(__file__).resolve().parents[2]
+        script = (actual / "windows-setup/package.sh").read_text()
+        copy_commands = [
+            line for line in script.splitlines()
+            if line.startswith('cp "$script_dir/../LICENSE"')
+        ]
+        self.assertEqual(len(copy_commands), 1)
+        setup = self.root / "package stage with spaces"
+        destination = setup / "share/inkquay/licenses"
+        destination.mkdir(parents=True)
+        # Run the actual source-notice copy command with only its input/output
+        # directories adapted; do not run native package/build work on macOS.
+        if sys.platform == "win32":
+            # The qualification records the MINGW64 Python executable. Select
+            # that same MSYS2 installation's bash, never a PATH WSL launcher.
+            bash = Path(sys.executable).resolve().parents[2] / "usr/bin/bash.exe"
+            self.assertTrue(bash.is_file(), "Expected the qualified MSYS2 bash")
+            directories = 'script_dir=$(cygpath -u "$1"); setup_dir=$(cygpath -u "$2"); '
+        else:
+            bash = "bash"
+            directories = 'script_dir=$1; setup_dir=$2; '
+        subprocess.run(
+            [str(bash), "-c", directories + copy_commands[0],
+             "notice-copy", str(actual / "windows-setup"), str(setup)],
+            check=True,
+        )
+        for name, source in (("copyright", "debian/copyright"), ("copyright.txt", "copyright.txt")):
+            self.assertEqual((destination / name).read_bytes(), (actual / source).read_bytes())
 
     def test_startup_source_title_inventory_and_executable_are_bound(self):
         old = self.startup.read_text()
