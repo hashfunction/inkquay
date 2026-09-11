@@ -96,7 +96,7 @@ mkdir -p "$setup_dir/share/inkquay/licenses"
 cp "$script_dir/../LICENSE" "$script_dir/../AUTHORS" "$script_dir/../debian/copyright" "$script_dir/../Release/THIRD-PARTY-NOTICES.txt" "$setup_dir/share/inkquay/licenses/"
 # Include package-provided notice directories; the final distribution inventory remains a release gate.
 if [[ -d "$prefix/share/licenses" ]]; then cp -r "$prefix/share/licenses" "$setup_dir/share/inkquay/licenses/msys2"; fi
-python "$script_dir/../script/inventoryWindows.py" "$setup_dir" "$prefix" "$build_dir/inkquay-windows-inventory.json"
+python "$script_dir/../script/inventoryWindows.py" "$setup_dir" "$prefix" "$build_dir/inkquay-windows-inventory.json" "$build_dir/inkquay.exe"
 
 # Root's MSIX pipeline consumes dist. NSIS is an explicit local packaging option.
 if [[ "${INKQUAY_BUILD_NSIS:-0}" == 1 ]]; then

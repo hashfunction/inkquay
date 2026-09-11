@@ -20,16 +20,20 @@ def pacman_prefix(prefix):
     return result.rstrip('/')
 
 
-def validate_provenance(files, msys_prefix, owners):
+def validate_provenance(files, msys_prefix, owners, built_application_sha256=None):
     if not any(path.startswith(msys_prefix + '/') for path in owners):
         raise ValueError('No installed files match the package ownership prefix: ' + msys_prefix)
     rows = {row['path']: row for row in files}
+    if built_application_sha256 is not None and rows.get('bin/inkquay.exe', {}).get('sha256') != built_application_sha256:
+        raise ValueError('Staged InkQuay executable is missing or differs from the exact application build')
     for required in REQUIRED_PACKAGE_FILES:
         if required not in rows or not rows[required].get('package'):
             raise ValueError('Required staged runtime/configuration has no verified package owner: ' + required)
     for row in files:
-        if row.get('sourcePath') and Path(row['path']).suffix.lower() in ('.dll', '.exe') and not row.get('package'):
-            raise ValueError('Copied runtime has no unambiguous package owner: ' + row['path'])
+        if Path(row['path']).suffix.lower() in ('.dll', '.exe') and not row.get('package'):
+            if row['path'] == 'bin/inkquay.exe' and built_application_sha256 and row.get('sha256') == built_application_sha256:
+                continue
+            raise ValueError('Staged runtime has no verified package owner or exact application build identity: ' + row['path'])
     return {
         'stagedFiles': len(files),
         'byteMatchedSourceFiles': sum('sourcePath' in row for row in files),
@@ -86,7 +90,10 @@ def inventory_files(stage, prefix, msys_prefix, packages, owners):
 def main():
     if sys.platform != 'win32' or not os.environ.get('MSYSTEM'):
         raise SystemExit('Run this inventory with native Python inside the Windows MSYS2 build environment.')
-    stage, prefix, report = map(Path, sys.argv[1:])
+    stage, prefix, report, built_application = map(Path, sys.argv[1:])
+    if built_application.name != 'inkquay.exe' or not built_application.is_file():
+        raise ValueError('The exact built InkQuay executable is required for application provenance')
+    built_application_sha256 = digest(built_application)
     source_commit = subprocess.check_output(['git', '-C', str(Path(__file__).resolve().parents[1]), 'rev-parse', 'HEAD'], text=True).strip()
     packages = dict(line.split(' ', 1) for line in subprocess.check_output(['pacman', '-Q'], text=True, encoding='utf-8').splitlines())
     # One installed-file snapshot replaces a process launch for every copied icon
@@ -94,7 +101,7 @@ def main():
     owners = package_file_owners(subprocess.check_output(['pacman', '-Ql'], text=True, encoding='utf-8'))
     msys_prefix = pacman_prefix(prefix)
     files = inventory_files(stage, prefix, msys_prefix, packages, owners)
-    counts = validate_provenance(files, msys_prefix, owners)
+    counts = validate_provenance(files, msys_prefix, owners, built_application_sha256)
     result = {
         'schemaVersion': 2,
         'recordedAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
@@ -102,6 +109,7 @@ def main():
         'platform': sys.platform, 'msystem': os.environ['MSYSTEM'], 'packages': packages,
         'nativePackagePrefix': str(prefix), 'pacmanPackagePrefix': msys_prefix,
         'provenanceCounts': counts,
+        'builtApplication': {'path': str(built_application), 'sha256': built_application_sha256},
         'files': files, 'licenseAuditComplete': False,
         'remainingGates': ['Audit every emitted library/resource and its corresponding source obligations', 'Execute the staged application and PDF/pen tests', 'Validate final MSIX identity, installation, signing and certification'],
         'omitted': ['LuaGObject and plugins', 'Audio support', 'GTKSourceView and GTK demo applications'],

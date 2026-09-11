@@ -30,6 +30,40 @@ class NativeInventoryTests(unittest.TestCase):
             with self.subTest(unowned=unowned), self.assertRaisesRegex(ValueError, 'package owner'):
                 inventory.validate_provenance(files + [{'path': unowned, 'sourcePath': unowned}], '/mingw64', owners)
 
+    def test_changed_or_missing_native_input_is_rejected_after_inventory(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            stage, prefix = root / 'stage', root / 'prefix'
+            for folder in (stage, prefix):
+                for name in inventory.REQUIRED_PACKAGE_FILES:
+                    path = folder / name
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_bytes(b'package bytes')
+            owners = {'/mingw64/' + name: {'alpha'} for name in inventory.REQUIRED_PACKAGE_FILES}
+            extra = 'bin/libgio-2.0-0.dll'
+            owners['/mingw64/' + extra] = {'alpha'}
+            (stage / extra).write_bytes(b'unverified bytes')
+            for has_source in (False, True):
+                if has_source:
+                    (prefix / extra).write_bytes(b'original bytes')
+                with self.subTest(has_source=has_source), self.assertRaisesRegex(ValueError, 'package owner'):
+                    files = inventory.inventory_files(stage, prefix, '/mingw64', {'alpha': '1'}, owners)
+                    inventory.validate_provenance(files, '/mingw64', owners)
+
+    def test_only_exact_built_application_is_exempt_from_package_ownership(self):
+        owners = {'/mingw64/bin/libfontconfig-1.dll': {'alpha'}}
+        files = [{'path': name, 'sourcePath': name, 'package': 'alpha'} for name in inventory.REQUIRED_PACKAGE_FILES]
+        application = {'path': 'bin/inkquay.exe', 'sha256': 'a' * 64}
+        with self.assertRaises(ValueError):
+            inventory.validate_provenance(files, '/mingw64', owners, 'a' * 64)
+        with self.assertRaises(ValueError):
+            inventory.validate_provenance(files + [application], '/mingw64', owners)
+        inventory.validate_provenance(files + [application], '/mingw64', owners, 'a' * 64)
+        with self.assertRaises(ValueError):
+            inventory.validate_provenance(files + [application], '/mingw64', owners, 'b' * 64)
+        with self.assertRaises(ValueError):
+            inventory.validate_provenance(files + [{'path': 'bin/other.exe', 'sha256': 'a' * 64}], '/mingw64', owners, 'a' * 64)
+
     def test_ownership_index_preserves_spaces_unicode_and_ambiguity(self):
         result = inventory.package_file_owners('alpha /mingw64/share/Résumé note.txt\nbeta /mingw64/share/shared.txt\nalpha /mingw64/share/shared.txt\n')
         self.assertEqual(result['/mingw64/share/Résumé note.txt'], {'alpha'})
