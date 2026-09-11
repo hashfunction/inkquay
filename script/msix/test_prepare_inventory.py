@@ -27,6 +27,10 @@ class SourceStatusTests(unittest.TestCase):
         )
         (self.source / "tracked.txt").write_text("original\n", encoding="utf-8")
         (self.source / "old-name.txt").write_text("rename me\n", encoding="utf-8")
+        # Model a real checkout: attributes are present in the commit before
+        # Git decides how to materialize any tracked file.
+        attributes = Path(__file__).resolve().parents[2] / ".gitattributes"
+        (self.source / ".gitattributes").write_bytes(attributes.read_bytes())
         subprocess.run(["git", "-C", str(self.source), "add", "."], check=True)
         subprocess.run(
             ["git", "-C", str(self.source), "commit", "-qm", "fixture"], check=True
@@ -36,8 +40,6 @@ class SourceStatusTests(unittest.TestCase):
         ).strip()
 
     def test_windows_and_msys_checkout_rules_produce_the_same_clean_bytes(self):
-        attributes = Path(__file__).resolve().parents[2] / ".gitattributes"
-        (self.source / ".gitattributes").write_bytes(attributes.read_bytes())
         (self.source / "sample.png").write_bytes(b"\x89PNG\r\n\x1a\n\x00binary\r\n")
         log = self.source / "Release/verification/raw.log"
         log.parent.mkdir(parents=True)
@@ -52,6 +54,12 @@ class SourceStatusTests(unittest.TestCase):
         self.assertEqual((clone / "tracked.txt").read_bytes(), b"original\n")
         self.assertEqual((clone / "sample.png").read_bytes(), (self.source / "sample.png").read_bytes())
         self.assertEqual((clone / "Release/verification/raw.log").read_bytes(), log.read_bytes())
+        attributes = subprocess.check_output(
+            ["git", "-C", str(clone), "check-attr", "text", "eol", "--", "tracked.txt"],
+            text=True,
+        )
+        self.assertIn("tracked.txt: text: auto", attributes)
+        self.assertIn("tracked.txt: eol: lf", attributes)
         commit = subprocess.check_output(["git", "-C", str(clone), "rev-parse", "HEAD"], text=True).strip()
         for autocrlf in ("true", "false"):
             subprocess.run(["git", "-C", str(clone), "config", "core.autocrlf", autocrlf], check=True)
