@@ -44,9 +44,14 @@ jobs:
           python script/test_inventoryWindows.py
           bash windows-setup/package.sh build
           cp build/inkquay-windows-inventory.json build-evidence/
+          python -c 'import sys; print(sys.executable)' > build-evidence/python-executable.txt
+          python script/msix/prepare_inventory.py --source-commit "$GITHUB_SHA"
       - name: Verify isolated packaged main window
         shell: pwsh
         run: ./script/test-packaged-startup.ps1
+      - name: Qualify temporary MSIX installation and owned cleanup
+        shell: pwsh
+        run: ./script/msix/qualify-msix.ps1
       - name: Preserve metadata only
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -56,6 +61,9 @@ jobs:
             build-evidence/*.json
             build-evidence/*.txt
             build-evidence/*.xml
+            build-evidence/msix-install/*.json
+            build-evidence/msix-install/*.png
+            build-evidence/msix-install/*.txt
             build/Testing/Temporary/LastTest.log
             build/Testing/Temporary/LastTestsFailed.log
           retention-days: 14

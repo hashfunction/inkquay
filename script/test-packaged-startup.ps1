@@ -3,6 +3,13 @@ Set-StrictMode -Version Latest
 if (-not $IsWindows -or $env:CI -ne 'true') { throw 'Requires an isolated Windows CI runner.' }
 Set-Location (Resolve-Path (Join-Path $PSScriptRoot '..'))
 $executable = (Resolve-Path 'build/dist/bin/inkquay.exe').Path
+$inventoryPath = (Resolve-Path 'build-evidence/package-inventory.json').Path
+$inventoryHash = (Get-FileHash $inventoryPath -Algorithm SHA256).Hash.ToLowerInvariant()
+$inventory = Get-Content -LiteralPath $inventoryPath -Raw | ConvertFrom-Json
+$executableHash = (Get-FileHash $executable -Algorithm SHA256).Hash.ToLowerInvariant()
+if ($inventory.sourceCommit -cne $env:GITHUB_SHA -or $inventory.files.'bin/inkquay.exe'.sha256 -cne $executableHash) {
+  throw 'Same-run package inventory does not bind the source and executable.'
+}
 $env:APPDATA = Join-Path (Get-Location).Path 'build-evidence/runtime-profile'
 $env:LOCALAPPDATA = $env:APPDATA
 $env:LANG = 'C'
@@ -26,7 +33,11 @@ try {
   $process.Refresh()
   if ($process.HasExited -or $process.MainWindowTitle -cne 'Unsaved Document - InkQuay') { throw 'InkQuay did not retain its actual empty-document window.' }
   if ((Get-Content 'build-evidence/startup-error.txt' -Raw) -match 'Fontconfig error:') { throw 'The staged app reported a Fontconfig configuration error.' }
-  @{ source_commit=$env:GITHUB_SHA; generated_at_utc=[DateTime]::UtcNow.ToString('o'); windows_native_startup=$true; window_title=$process.MainWindowTitle; executable_sha256=(Get-FileHash $executable -Algorithm SHA256).Hash; interactive_pdf_workflows_verified=$false; physical_tablet_tested=$false; native_source_clearance=$false; msix_built=$false; submitted=$false } | ConvertTo-Json | Set-Content build-evidence/windows-startup.json -Encoding utf8NoBOM
+  if ((Get-FileHash $inventoryPath -Algorithm SHA256).Hash.ToLowerInvariant() -cne $inventoryHash -or
+      (Get-FileHash $executable -Algorithm SHA256).Hash.ToLowerInvariant() -cne $executableHash) {
+    throw 'Startup inputs changed while observing the actual process.'
+  }
+  @{ package_inventory_sha256=$inventoryHash; source_commit=$env:GITHUB_SHA; generated_at_utc=[DateTime]::UtcNow.ToString('o'); windows_native_startup=$true; window_title=$process.MainWindowTitle; executable_sha256=(Get-FileHash $executable -Algorithm SHA256).Hash; interactive_pdf_workflows_verified=$false; physical_tablet_tested=$false; native_source_clearance=$false; msix_built=$false; submitted=$false } | ConvertTo-Json | Set-Content build-evidence/windows-startup.json -Encoding utf8NoBOM
 } finally {
   if (-not $process.HasExited) {
     $process.CloseMainWindow() | Out-Null
