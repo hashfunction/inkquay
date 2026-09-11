@@ -84,3 +84,83 @@ The workflow records relevant Git configuration and requires a clean source
 checkout before dependency inventory/configuration, as well as at staging.
 The exact current Windows checkout and post-build cleanliness still require a
 fresh native run; the local regression alone is not native qualification.
+
+## Installed note/template/PDF consumer workflow
+
+The installation qualifier now requires `qualify-workflow.ps1` after the genuine
+startup observation and before normal close/uninstall. A new directory under its
+already owned temporary tree contains an original generated one-page PDF and a
+PDF-backed `.xopp` with text and a pen stroke. The driver opens that note, selects
+Cornell in the real template dialog, saves a named preset, cancels the default,
+reopens the library, applies its saved final entry, inserts a page, and saves a new
+note. It exports through File → Export as PDF, observes/dismisses the result
+dialog, reopens the actual PDF through File → Open, and exports again.
+
+The installed GTK startup evidence exposes only its root through UIA. This driver
+therefore uses public menu mnemonics, accelerators, GTK chooser location input and
+normal Tab navigation, rather than private GTK actions or injected settings.
+Every input requires the retained process handle, exact installed executable and
+package identity, plus the exact native HWND/title/owner/foreground relationship.
+Journal menu order and Cornell selector index come from the actual source
+resources. The known `gdkWindowToplevel`/`gdkWindowTemp` classes are present in the
+retained GTK 3.24.52 Win32 source. The template selector's mnemonic focuses the
+first control; reverse Tab wraps to the last Ok button. That keyboard behavior,
+focus delivery, GTK dialog ownership/titles and initial template selection still
+require the first actual Windows workflow run; local helpers do not qualify them.
+A missing/wrong window or ineffective keyboard sequence times out or produces
+incorrect files and fails. Screenshots require the exact owned foreground HWND,
+visible-desktop bounds and nonblank pixels. The checked-export message has no
+explicit product GtkWindow title; its owned GTK result window is accepted only
+after independent verification of the freshly emitted successful PDF report.
+Screenshots of those dialogs remain available for human review.
+
+`workflow_files.py` creates only original synthetic fixtures. It never calls an
+InkQuay API or writes a template/settings file. Its independent oracle requires:
+
+- Original source/background hashes unchanged; a saved two-page note containing
+  the original annotation and PDF reference, and the Cornell second-page config
+  and size.
+- Exactly one fresh UUID application report per output, strict integer counts,
+  published/pass status, exactly the existing structural-scope disclosure and no
+  additional warnings/errors/recovery residue, exact output byte
+  count/path and the complete expected protected-input hash set.
+- Actual Poppler `pdfinfo`/`pdftotext`/`pdftoppm` checks of two pages, original
+  source/note text, Cornell labels on page two and its rendered cue divider.
+  Raster output is limited to 850 pixels on its larger dimension. These existing
+  same-run MSYS2 checker executables are resolved beside the recorded Python,
+  fingerprinted before/after use and recorded separately from the installed app.
+- The saved note and first export unchanged after the second export. The original
+  input manifest is also checked for mutation between steps.
+
+The package source-input record binds the new observer/oracle and the actual menu,
+dialog and preset resources. Existing runtime-module confinement is executed again
+after the workflow, including any PDF/font modules loaded lazily. Installation
+acceptance and `interactive_pdf_workflows_verified` become true only if the entire
+workflow, normal exit, uninstall and existing cleanup/package checks pass. The
+separate staged-startup receipt remains startup-only.
+
+Only JSON and screenshots under `build-evidence/msix-install/workflow` are added
+to the public metadata artifact. App-generated reports, including failed reports,
+are retained without changing their bytes. Generated notes/PDFs remain in the
+owned temporary tree and are removed by existing cleanup after stopping the owned
+process. No app binaries, arbitrary profile files or private keys are uploaded.
+Errors from workflow and report retention remain visible, and existing installation
+cleanup retains its primary/cleanup-error separation.
+
+Local checks (not Windows acceptance):
+
+```sh
+python script/msix/test_workflow_files.py -v
+python script/msix/test_msix_qualification.py -v
+pwsh -NoProfile -File script/msix/test_workflow_helpers.ps1
+```
+
+The eight new real-file/Poppler tests cover altered originals, invalid applied
+ruling, failed/mistyped/misbound reports, changed count/text, absent divider,
+duplicate reports, links and existing paths. The PowerShell test covers exact
+window/owner/PID/handle selection, ambiguity and error surfaces. On Windows it
+also opens an owned native fixture to test discovery/foreground and wrong-PID
+rejection; on other hosts that native case is explicitly unexecuted. These fixtures
+are not consumer-app interaction evidence. No physical tablet, handwriting
+recognition, encrypted/large-document, broad accessibility or general visual
+fidelity claim is added by this bounded generated-document workflow.

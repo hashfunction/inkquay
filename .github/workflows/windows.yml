@@ -75,6 +75,8 @@ jobs:
             build-evidence/msix-install/*.json
             build-evidence/msix-install/*.png
             build-evidence/msix-install/*.txt
+            build-evidence/msix-install/workflow/*.json
+            build-evidence/msix-install/workflow/*.png
             build/Testing/Temporary/LastTest.log
             build/Testing/Temporary/LastTestsFailed.log
           retention-days: 14

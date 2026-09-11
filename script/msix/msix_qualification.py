@@ -64,6 +64,12 @@ SOURCE_FILES = tuple(SOURCE_COPIES.values()) + (
     "windows-setup/package.sh",
     "script/msix/copy_notice_supplement.py",
     "script/msix/msix_qualification.py",
+    "script/msix/qualify-workflow.ps1",
+    "script/msix/workflow_files.py",
+    "script/msix/WorkflowNative.cs",
+    "ui/mainmenubar.xml",
+    "ui/pageTemplate.glade",
+    "resources-templates/pagetemplates.ini.in",
     "CMakeLists.txt",
 )
 RUNTIME = {

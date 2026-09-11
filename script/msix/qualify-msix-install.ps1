@@ -336,7 +336,7 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         installed = $null; installedByUs = $false; process = $null; processOwned = $false; cleanupProcessExit = $null
         installAttempted = $false; brokerProcessId = 0; addCompleted = $false; ownedPackageFullName = $null; preflightPackageFullNames = @(); residualPackageFullNames = @(); processHandle = $null; processExit = $null
         unsignedPackageSha256 = $null; signedPackageSha256 = $null; signTool = $null
-        aumid = $null; processPackageFullName = $null; modules = @(); window = $null
+        aumid = $null; processPackageFullName = $null; modules = @(); window = $null; workflow = $null
         executableSha256 = $null
         cleanClose = $false; uninstallVerified = $false
     }
@@ -483,38 +483,45 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         Start-Sleep -Seconds 3
         $state.process.Refresh()
         if ($state.process.HasExited -or $state.process.MainWindowHandle -eq 0 -or $state.process.MainWindowTitle -cne 'Unsaved Document - InkQuay') { throw 'Activated InkQuay did not survive the stable-window interval.' }
-        $installRoot = Get-CanonicalPath $state.installed.InstallLocation
-        $windowsRoot = Get-CanonicalPath $env:SystemRoot
-        $modules = [Collections.Generic.List[object]]::new()
-        $requiredRuntime = @{}
-        foreach ($entry in $state.record.runtime.PSObject.Properties) { $requiredRuntime[[string]$entry.Value] = $false }
-        foreach ($module in @($state.process.Modules)) {
-            Assert-NoReparsePath $module.FileName
-            $path = Get-CanonicalPath $module.FileName
-            $platformSignature = $null
-            if (Test-PathInside $path $installRoot) {
-                $relative = $path.Substring($installRoot.Length).TrimStart('\','/').Replace('\','/')
-                $expected = Get-RecordPayloadEntry $state.record $relative
-                $hash = Assert-FileMatchesRecord $path $expected "Loaded module $relative"
-                if ($requiredRuntime.ContainsKey($relative)) { $requiredRuntime[$relative] = $true }
-                $origin = 'package'
-            } elseif (Test-PathInside $path $windowsRoot) {
-                $relative = $null
-                $hash = (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant()
-                $origin = 'windows'
-            } else {
-                $defenderRoot = Join-Path ([Environment]::GetFolderPath('CommonApplicationData')) 'Microsoft/Windows Defender/Platform'
-                $platformSignature = Get-VerifiedDefenderModuleEvidence -Path $path -PlatformRoot $defenderRoot
-                $relative = $null
-                $hash = $platformSignature.sha256
-                $origin = 'microsoft_defender_signed_platform'
+        $collectModules = { param([string]$EvidenceName)
+            $installRoot = Get-CanonicalPath $state.installed.InstallLocation
+            $windowsRoot = Get-CanonicalPath $env:SystemRoot
+            $modules = [Collections.Generic.List[object]]::new()
+            $requiredRuntime = @{}
+            foreach ($entry in $state.record.runtime.PSObject.Properties) { $requiredRuntime[[string]$entry.Value] = $false }
+            foreach ($module in @($state.process.Modules)) {
+                Assert-NoReparsePath $module.FileName
+                $path = Get-CanonicalPath $module.FileName
+                $platformSignature = $null
+                if (Test-PathInside $path $installRoot) {
+                    $relative = $path.Substring($installRoot.Length).TrimStart('\','/').Replace('\','/')
+                    $expected = Get-RecordPayloadEntry $state.record $relative
+                    $hash = Assert-FileMatchesRecord $path $expected "Loaded module $relative"
+                    if ($requiredRuntime.ContainsKey($relative)) { $requiredRuntime[$relative] = $true }
+                    $origin = 'package'
+                } elseif (Test-PathInside $path $windowsRoot) {
+                    $relative = $null
+                    $hash = (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant()
+                    $origin = 'windows'
+                } else {
+                    $defenderRoot = Join-Path ([Environment]::GetFolderPath('CommonApplicationData')) 'Microsoft/Windows Defender/Platform'
+                    $platformSignature = Get-VerifiedDefenderModuleEvidence -Path $path -PlatformRoot $defenderRoot
+                    $relative = $null
+                    $hash = $platformSignature.sha256
+                    $origin = 'microsoft_defender_signed_platform'
+                }
+                $modules.Add([ordered]@{ name=$module.ModuleName; path=$path; origin=$origin; relative_path=$relative; sha256=$hash; platform_signature=$platformSignature })
             }
-            $modules.Add([ordered]@{ name=$module.ModuleName; path=$path; origin=$origin; relative_path=$relative; sha256=$hash; platform_signature=$platformSignature })
-        }
-        foreach ($relative in $requiredRuntime.Keys) { if (-not $requiredRuntime[$relative]) { throw "Activated process did not load required packaged GTK/Poppler runtime: $relative" } }
-        $state.modules = @($modules)
-        Write-NewUtf8Json (Join-Path $state.output 'loaded-modules.json') $state.modules
+            foreach ($relative in $requiredRuntime.Keys) { if (-not $requiredRuntime[$relative]) { throw "Activated process did not load required packaged GTK/Poppler runtime: $relative" } }
+            $state.modules = @($modules)
+            Write-NewUtf8Json (Join-Path $state.output $EvidenceName) $state.modules
+        }.GetNewClosure()
+        & $collectModules 'loaded-modules.json'
         $state.window = Get-WindowQualification $state.process $state.output
+        . (Join-Path $PSScriptRoot 'qualify-workflow.ps1')
+        $state.workflow = Invoke-InkQuayWorkflow $state (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+        if ($state.workflow.passed -ne $true) { throw 'Installed template/PDF consumer workflow did not pass.' }
+        & $collectModules 'workflow-loaded-modules.json'
         $state.process.Refresh()
         if ($state.process.HasExited -or $state.process.MainWindowHandle -eq 0) { throw 'Activated InkQuay did not survive the stable-window interval.' }
     }.GetNewClosure()
@@ -636,8 +643,10 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         clean_close_verified = $state.cleanClose
         uninstall_verified = $state.uninstallVerified
         installation_qualification_passed = $qualificationPassed
-        workflow_acceptance = $false
-        template_pdf_workflow_tested = $false
+        workflow = $state.workflow
+        workflow_acceptance = ($qualificationPassed -and $null -ne $state.workflow -and $state.workflow.passed -eq $true)
+        template_pdf_workflow_tested = ($qualificationPassed -and $null -ne $state.workflow -and $state.workflow.passed -eq $true)
+        interactive_pdf_workflows_verified = ($qualificationPassed -and $null -ne $state.workflow -and $state.workflow.passed -eq $true)
         physical_tablet_tested = $false
         upgrade_tested = $false
         wack_tested = $false
