@@ -14,6 +14,7 @@
 #include "util/PathUtil.h"
 #ifdef _WIN32
 #include <io.h>
+#include <fcntl.h>
 #include <windows.h>
 #else
 #include <sys/stat.h>
@@ -53,16 +54,53 @@ Stamp stamp(FILE* file) {
             uint64_t(time.tv_sec) * 1000000000 + uint64_t(time.tv_nsec)};
 #endif
 }
+fs::file_type exportPathType(const fs::path& path) {
+#ifdef _WIN32
+    // MinGW does not reliably expose native reparse points via symlink_status.
+    const auto attributes = GetFileAttributesW(path.c_str());
+    if (attributes == INVALID_FILE_ATTRIBUTES) {
+        const auto error = GetLastError();
+        if (error == ERROR_FILE_NOT_FOUND || error == ERROR_PATH_NOT_FOUND)
+            return fs::file_type::not_found;
+        throw std::system_error(error, std::system_category(), "Cannot inspect export path");
+    }
+    if (attributes & FILE_ATTRIBUTE_REPARSE_POINT)
+        return fs::file_type::symlink;
+    return attributes & FILE_ATTRIBUTE_DIRECTORY ? fs::file_type::directory : fs::file_type::regular;
+#else
+    return fs::symlink_status(path).type();
+#endif
+}
 void regularPath(const fs::path& path) {
-    if (fs::symlink_status(path).type() != fs::file_type::regular)
+    if (exportPathType(path) != fs::file_type::regular)
         throw std::runtime_error("Export target is not a regular file or is a symbolic link");
 }
 using File = std::unique_ptr<FILE, decltype(&fclose)>;
 File openFile(const fs::path& path) {
     regularPath(path);
+#ifdef _WIN32
+    // Inspect the leaf itself even if a link is substituted after regularPath.
+    const auto handle = CreateFileW(path.c_str(), GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+                                    nullptr, OPEN_EXISTING, FILE_FLAG_OPEN_REPARSE_POINT, nullptr);
+    if (handle == INVALID_HANDLE_VALUE)
+        throw std::system_error(GetLastError(), std::system_category(), "Cannot open selected export target");
+    const auto descriptor = _open_osfhandle(reinterpret_cast<intptr_t>(handle), _O_RDONLY | _O_BINARY);
+    if (descriptor == -1) {
+        const auto error = errno;
+        CloseHandle(handle);
+        throw std::system_error(error, std::generic_category(), "Cannot read selected export target handle");
+    }
+    File file(_fdopen(descriptor, "rb"), fclose);
+    if (!file) {
+        const auto error = errno;
+        _close(descriptor);
+        throw std::system_error(error, std::generic_category(), "Cannot read selected export target stream");
+    }
+#else
     File file(g_fopen(Util::toGFilename(path).c_str(), "rb"), fclose);
     if (!file)
         throw std::system_error(errno, std::generic_category(), "Cannot read selected export target");
+#endif
     return file;
 }
 }  // namespace
@@ -83,7 +121,7 @@ xoj::ExportFileIdentity xoj::inspectExportFile(const fs::path& path) {
 }
 xoj::ExportDestination xoj::ExportDestination::capture(const fs::path& path) {
     ExportDestination selection{fs::absolute(path), std::nullopt, false};
-    if (fs::symlink_status(selection.path).type() != fs::file_type::not_found)
+    if (exportPathType(selection.path) != fs::file_type::not_found)
         selection.existing = inspectExportFile(selection.path);
     return selection;
 }
@@ -93,7 +131,7 @@ void xoj::ExportDestination::validateCurrent() const {
             throw std::runtime_error("Replacement was not confirmed for the selected file");
         if (inspectExportFile(path) != *existing)
             throw std::runtime_error("The confirmed export target changed; choose the destination again");
-    } else if (fs::symlink_status(path).type() != fs::file_type::not_found) {
+    } else if (exportPathType(path) != fs::file_type::not_found) {
         throw std::runtime_error("The selected new filename is now occupied; its file was retained");
     }
 }

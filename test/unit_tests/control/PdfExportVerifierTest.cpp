@@ -1,5 +1,7 @@
 // Copyright 2026 Trieflow LLC. GPL-2.0-or-later.
 #include <fstream>
+#include <utility>
+#include <vector>
 
 #include <cairo-pdf.h>
 #include <glib.h>
@@ -17,7 +19,7 @@
 
 // MinGW's std::filesystem does not implement link creation. Exercise real Windows
 // links through the native API; missing host privileges are a test failure.
-static void createTestSymlink(const fs::path& target, const fs::path& link, bool directory = false) {
+static void createNativeTestSymlink(const fs::path& target, const fs::path& link, bool directory = false) {
 #ifdef _WIN32
     const DWORD flags = directory ? SYMBOLIC_LINK_FLAG_DIRECTORY : 0;
     if (!CreateSymbolicLinkW(link.c_str(), target.c_str(), flags | 0x2)) {
@@ -36,6 +38,11 @@ static void createTestSymlink(const fs::path& target, const fs::path& link, bool
 class PdfExportVerifierTest: public ::testing::Test {
 protected:
     fs::path dir;
+    std::vector<std::pair<fs::path, bool>> fixtureLinks;
+    void createTestSymlink(const fs::path& target, const fs::path& link, bool directory = false) {
+        createNativeTestSymlink(target, link, directory);
+        fixtureLinks.emplace_back(link, directory);
+    }
     void SetUp() override {
         char* p = g_dir_make_tmp("inkquay-pdf-XXXXXX", nullptr);
         dir = p;
@@ -43,7 +50,19 @@ protected:
         std::ofstream(dir / "source.xopp") << "original source";
         pdf(dir / "background.pdf", 3);
     }
-    void TearDown() override { fs::remove_all(dir); }
+    void TearDown() override {
+        // MinGW's filesystem can classify a directory symlink as a directory and
+        // recursively follow it. Remove our exact fixture links without traversal.
+        for (const auto& [link, directory]: fixtureLinks) {
+#ifdef _WIN32
+            const bool removed = directory ? RemoveDirectoryW(link.c_str()) : DeleteFileW(link.c_str());
+            ASSERT_TRUE(removed) << "Cannot remove fixture link: " << GetLastError();
+#else
+            ASSERT_TRUE(fs::remove(link));
+#endif
+        }
+        fs::remove_all(dir);
+    }
     void pdf(const fs::path& path, int pages) {
         auto* surface = cairo_pdf_surface_create(path.string().c_str(), 600, 800);
         auto* cr = cairo_create(surface);
@@ -346,7 +365,25 @@ TEST_F(PdfExportVerifierTest, NoReplaceMovePreservesOccupiedRecoveryAndDanglingL
     fs::remove(to);
     createTestSymlink(dir / "missing", to);
     EXPECT_THROW(xoj::moveExportFileNoReplace(from, to), std::system_error);
+#ifdef _WIN32
+    WIN32_FIND_DATAW info{};
+    const auto handle = FindFirstFileW(to.c_str(), &info);
+    ASSERT_NE(handle, INVALID_HANDLE_VALUE);
+    FindClose(handle);
+    EXPECT_TRUE(info.dwFileAttributes & FILE_ATTRIBUTE_REPARSE_POINT);
+    EXPECT_EQ(info.dwReserved0, IO_REPARSE_TAG_SYMLINK);
+#else
     EXPECT_TRUE(fs::is_symlink(to));
+#endif
     EXPECT_EQ(read(from), "from bytes");
     EXPECT_THROW(xoj::ExportDestination::capture(to), std::runtime_error);
+}
+
+TEST_F(PdfExportVerifierTest, RejectsExistingFileSymlinkWithoutFollowingItsTarget) {
+    const auto link = dir / "linked.pdf";
+    const auto target = dir / "real.pdf";
+    std::ofstream(target) << "retained bytes";
+    createTestSymlink(target, link);
+    EXPECT_THROW(xoj::ExportDestination::capture(link), std::runtime_error);
+    EXPECT_EQ(read(target), "retained bytes");
 }
