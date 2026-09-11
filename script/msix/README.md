@@ -61,3 +61,12 @@ Seven real-package mutations were RED before requiring the exact typed unpack
 count derived from the source-bound payload. The actual Add/cleanup closure was
 RED before reporting unresolved registration uncertainty without deleting a
 registration whose ownership was never established. Both regressions now pass.
+
+Before creating the stage receipt, `prepare_inventory.py` writes
+`build-evidence/source-status.json` from Git's NUL-delimited porcelain status.
+Any tracked or untracked source change still fails qualification. The bounded
+record and exception retain exact status/path entries (plus the complete status
+byte count and SHA-256), so the metadata-only artifact identifies build tooling
+that writes outside ignored build directories. Dependency setup records now go
+to ignored `build-evidence` paths rather than creating an untracked file under
+`Release`.

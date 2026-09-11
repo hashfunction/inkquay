@@ -35,6 +35,6 @@ runs:
           mingw-w64-${{inputs.msys_package_env}}-python
     - shell: msys2 {0}
       run: |
-        mkdir -p Release
-        pacman -Q > Release/msys2-packages.txt
-        printf '%s\n' 'LuaGObject and Lua plugins are omitted from InkQuay release builds.' > Release/lua-policy.txt
+        mkdir -p build-evidence
+        pacman -Q > build-evidence/msys2-packages-after-setup.txt
+        printf '%s\n' 'LuaGObject and Lua plugins are omitted from InkQuay release builds.' > build-evidence/lua-policy.txt
