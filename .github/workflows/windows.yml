@@ -35,7 +35,8 @@ jobs:
           cmake --build build --parallel 2
           cmake --build build --target test-units test-gtk-integration --parallel 2
       - name: Run real native and GTK tests
-        run: ctest --test-dir build --output-on-failure --output-junit "$PWD/build-evidence/tests.xml"
+        timeout-minutes: 10
+        run: ctest --test-dir build --timeout 60 --output-on-failure --output-junit "$PWD/build-evidence/tests.xml"
       - name: Stage application and native input inventory
         run: |
           bash windows-setup/package.sh build
@@ -52,5 +53,7 @@ jobs:
             build-evidence/*.json
             build-evidence/*.txt
             build-evidence/*.xml
+            build/Testing/Temporary/LastTest.log
+            build/Testing/Temporary/LastTestsFailed.log
           retention-days: 14
           if-no-files-found: error

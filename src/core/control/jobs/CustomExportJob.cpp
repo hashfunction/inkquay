@@ -145,13 +145,11 @@ void CustomExportJob::run() {
 
         try {
             const auto expected = PdfExportVerifier::captureForDocument(*doc, exportRange, progressiveMode);
-            pdfVerification = PdfExportVerifier::exportChecked(
-                    filepath, expected,
-                    [&](const fs::path& staged) {
+            pdfVerification =
+                    PdfExportVerifier::exportChecked(exportDestination.value(), expected, [&](const fs::path& staged) {
                         if (!pdfe->createPdf(staged, exportRange, progressiveMode))
                             throw std::runtime_error(pdfe->getLastError());
-                    },
-                    [] { return false; }, true);
+                    });
         } catch (const std::exception& error) {
             errorMsg = error.what();
         }

@@ -29,6 +29,15 @@ protected:
         cairo_destroy(cr);
         cairo_surface_destroy(surface);
     }
+    std::string read(const fs::path& path) {
+        std::ifstream file(path, std::ios::binary);
+        return {std::istreambuf_iterator<char>(file), {}};
+    }
+    xoj::ExportDestination approved(const fs::path& path) {
+        auto destination = xoj::ExportDestination::capture(path);
+        destination.overwriteConfirmed = true;
+        return destination;
+    }
     PdfExportExpectation expectation() {
         return PdfExportVerifier::capture(3, dir / "source.xopp", dir / "background.pdf");
     }
@@ -51,8 +60,8 @@ TEST_F(PdfExportVerifierTest, ChecksRealPdfAndCreatesDistinctReports) {
     EXPECT_EQ(first.status, PdfExportVerification::Status::Passed);
     EXPECT_EQ(first.actualPages, 3U);
     EXPECT_GT(first.outputBytes, 0U);
-    auto second = PdfExportVerifier::exportChecked(
-            first.output, expectation(), [&](const fs::path& p) { pdf(p, 3); }, [] { return false; }, true);
+    auto second = PdfExportVerifier::exportChecked(approved(first.output), expectation(),
+                                                   [&](const fs::path& p) { pdf(p, 3); });
     EXPECT_EQ(second.status, PdfExportVerification::Status::Passed);
     EXPECT_NE(first.report, second.report);
 }
@@ -73,19 +82,19 @@ TEST_F(PdfExportVerifierTest, PreservesExistingOutputOnFailureCancellationAndTar
     auto out = dir / "out.pdf";
     std::ofstream(out) << "old";
     auto failed = PdfExportVerifier::exportChecked(
-            out, expectation(), [](const fs::path&) { throw std::runtime_error("writer failed"); },
-            [] { return false; }, true);
+            approved(out), expectation(), [](const fs::path&) { throw std::runtime_error("writer failed"); },
+            [] { return false; });
     EXPECT_EQ(failed.status, PdfExportVerification::Status::Failed);
     auto cancelled = PdfExportVerifier::exportChecked(
-            out, expectation(), [&](const fs::path& p) { pdf(p, 3); }, [] { return true; }, true);
+            approved(out), expectation(), [&](const fs::path& p) { pdf(p, 3); }, [] { return true; });
     EXPECT_EQ(cancelled.status, PdfExportVerification::Status::Cancelled);
     auto race = PdfExportVerifier::exportChecked(
-            out, expectation(),
+            approved(out), expectation(),
             [&](const fs::path& p) {
                 pdf(p, 3);
                 std::ofstream(out) << "other writer";
             },
-            [] { return false; }, true);
+            [] { return false; });
     EXPECT_EQ(race.status, PdfExportVerification::Status::Failed);
     std::ifstream f(out);
     std::string contents((std::istreambuf_iterator<char>(f)), {});
@@ -173,4 +182,144 @@ TEST_F(PdfExportVerifierTest, ChecksQpdfBackgroundAndProgressiveLayerExports) {
                       .actualPages,
               2U);
     EXPECT_EQ(expectation().protectedFiles, before.protectedFiles);
+}
+
+TEST_F(PdfExportVerifierTest, GuiNewNameMustNotOverwriteFileCreatedBeforeWorkerStarts) {
+    const auto output = dir / "new-name.pdf";
+    ASSERT_FALSE(fs::exists(output));  // The chooser selected a new name.
+    const auto destination = xoj::ExportDestination::capture(output);
+    std::ofstream(output) << "late owner";
+    auto result = PdfExportVerifier::exportChecked(destination, expectation(), [&](const fs::path& p) { pdf(p, 3); });
+    EXPECT_EQ(result.status, PdfExportVerification::Status::Failed);
+    EXPECT_FALSE(result.published);
+    std::ifstream file(output);
+    EXPECT_EQ(std::string((std::istreambuf_iterator<char>(file)), {}), "late owner");
+}
+TEST_F(PdfExportVerifierTest, GuiApprovalMustNotAuthorizeReplacementBeforeWorkerStarts) {
+    const auto output = dir / "approved.pdf";
+    std::ofstream(output) << "approved owner";
+    const auto destination = approved(output);
+    // The user approved the file above, then a different file took its name.
+    fs::remove(output);
+    std::ofstream(output) << "unapproved replacement";
+    auto result = PdfExportVerifier::exportChecked(destination, expectation(), [&](const fs::path& p) { pdf(p, 3); });
+    EXPECT_EQ(result.status, PdfExportVerification::Status::Failed);
+    EXPECT_FALSE(result.published);
+    std::ifstream file(output);
+    EXPECT_EQ(std::string((std::istreambuf_iterator<char>(file)), {}), "unapproved replacement");
+}
+
+TEST_F(PdfExportVerifierTest, ConfirmedReplacementPublishesAndReportsRecoverableOriginal) {
+    const auto output = dir / "confirmed.pdf";
+    std::ofstream(output) << "approved original bytes";
+    const auto destination = approved(output);
+    const auto result =
+            PdfExportVerifier::exportChecked(destination, expectation(), [&](const fs::path& p) { pdf(p, 3); });
+    ASSERT_TRUE(result.published) << result.error;
+    ASSERT_EQ(result.recoveryFiles.size(), 1U);
+    EXPECT_EQ(read(result.recoveryFiles.front()), "approved original bytes");
+    EXPECT_EQ(xoj::inspectExportFile(result.recoveryFiles.front()), *destination.existing);
+    EXPECT_EQ(PdfExportVerifier::verify(output, expectation()).actualPages, 3U);
+    EXPECT_NE(read(result.report).find("\"recoveryFiles\": ["), std::string::npos);
+    const auto recoveryUtf8 = result.recoveryFiles.front().u8string();
+    EXPECT_NE(read(result.report)
+                      .find(PdfExportVerifier::jsonString(std::string(recoveryUtf8.begin(), recoveryUtf8.end()))),
+              std::string::npos);
+}
+
+TEST_F(PdfExportVerifierTest, SameBytesOnAnotherFileDoNotInheritConsent) {
+    const auto output = dir / "confirmed.pdf";
+    std::ofstream(output) << "same contents";
+    const auto destination = approved(output);
+    // Keep the original inode alive, guaranteeing the replacement has a different identity.
+    fs::rename(output, dir / "moved.pdf");
+    std::ofstream(output) << "same contents";
+    bool called = false;
+    const auto result =
+            PdfExportVerifier::exportChecked(destination, expectation(), [&](const fs::path&) { called = true; });
+    EXPECT_FALSE(called);
+    EXPECT_FALSE(result.published);
+    EXPECT_EQ(result.status, PdfExportVerification::Status::Failed);
+    EXPECT_EQ(read(output), "same contents");
+    EXPECT_EQ(read(dir / "moved.pdf"), "same contents");
+}
+
+TEST_F(PdfExportVerifierTest, InspectionWithoutConfirmationCannotReplace) {
+    const auto output = dir / "unconfirmed.pdf";
+    std::ofstream(output) << "owner";
+    const auto destination = xoj::ExportDestination::capture(output);
+    bool called = false;
+    const auto result =
+            PdfExportVerifier::exportChecked(destination, expectation(), [&](const fs::path&) { called = true; });
+    EXPECT_FALSE(called);
+    EXPECT_FALSE(result.published);
+    EXPECT_EQ(read(output), "owner");
+}
+
+TEST_F(PdfExportVerifierTest, CancellationAfterDisplacementRestoresApprovedTarget) {
+    const auto output = dir / "cancel.pdf";
+    std::ofstream(output) << "approved original";
+    int cancellationChecks = 0;
+    const auto result = PdfExportVerifier::exportChecked(
+            approved(output), expectation(), [&](const fs::path& p) { pdf(p, 3); },
+            [&] { return ++cancellationChecks == 3; });
+    EXPECT_EQ(cancellationChecks, 3);
+    EXPECT_EQ(result.status, PdfExportVerification::Status::Cancelled);
+    EXPECT_FALSE(result.published);
+    EXPECT_EQ(read(output), "approved original");
+    EXPECT_TRUE(result.recoveryFiles.empty());
+    EXPECT_EQ(PdfExportVerifier::verify(result.output, expectation()).actualPages, 3U);
+}
+
+TEST_F(PdfExportVerifierTest, LateOwnerBlocksPublicationAndRollbackWithoutLosingEitherFile) {
+    const auto output = dir / "collision.pdf";
+    std::ofstream(output) << "approved original";
+    int cancellationChecks = 0;
+    const auto result = PdfExportVerifier::exportChecked(
+            approved(output), expectation(), [&](const fs::path& p) { pdf(p, 3); },
+            [&] {
+                if (++cancellationChecks == 3) {
+                    EXPECT_FALSE(fs::exists(output));  // The approved file has been displaced.
+                    std::ofstream(output) << "late concurrent owner";
+                }
+                return false;
+            });
+    EXPECT_EQ(cancellationChecks, 3);
+    EXPECT_EQ(result.status, PdfExportVerification::Status::Failed);
+    EXPECT_FALSE(result.published);
+    EXPECT_EQ(read(output), "late concurrent owner");
+    ASSERT_EQ(result.recoveryFiles.size(), 1U);
+    EXPECT_EQ(read(result.recoveryFiles.front()), "approved original");
+    EXPECT_EQ(PdfExportVerifier::verify(result.output, expectation()).actualPages, 3U);
+    EXPECT_NE(read(result.report).find("\"published\": false"), std::string::npos);
+}
+
+TEST_F(PdfExportVerifierTest, ConsentCannotOverrideSourceAndBackgroundProtection) {
+    const auto expected = expectation();
+    const auto alias = dir / "protected.pdf";
+    fs::create_hard_link(dir / "background.pdf", alias);
+    bool called = false;
+    const auto writer = [&](const fs::path&) { called = true; };
+    EXPECT_FALSE(PdfExportVerifier::exportChecked(approved(alias), expected, writer).published);
+    EXPECT_FALSE(PdfExportVerifier::exportChecked(approved(dir / "source.xopp"), expected, writer).published);
+    fs::create_directory_symlink(dir, dir / "ancestor");
+    EXPECT_FALSE(PdfExportVerifier::exportChecked(approved(dir / "ancestor" / "background.pdf"), expected, writer)
+                         .published);
+    EXPECT_FALSE(called);
+    EXPECT_EQ(expectation().protectedFiles, expected.protectedFiles);
+}
+
+TEST_F(PdfExportVerifierTest, NoReplaceMovePreservesOccupiedRecoveryAndDanglingLink) {
+    const auto from = dir / "from", to = dir / "to";
+    std::ofstream(from) << "from bytes";
+    std::ofstream(to) << "to bytes";
+    EXPECT_THROW(xoj::moveExportFileNoReplace(from, to), std::system_error);
+    EXPECT_EQ(read(from), "from bytes");
+    EXPECT_EQ(read(to), "to bytes");
+    fs::remove(to);
+    fs::create_symlink(dir / "missing", to);
+    EXPECT_THROW(xoj::moveExportFileNoReplace(from, to), std::system_error);
+    EXPECT_TRUE(fs::is_symlink(to));
+    EXPECT_EQ(read(from), "from bytes");
+    EXPECT_THROW(xoj::ExportDestination::capture(to), std::runtime_error);
 }

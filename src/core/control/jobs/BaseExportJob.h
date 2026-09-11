@@ -60,6 +60,7 @@ protected:
 private:
 protected:
     fs::path filepath;
+    std::optional<xoj::ExportDestination> exportDestination;
 
     /**
      * Error message to show to the user

@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "util/ElementRange.h"
+#include "util/ExportDestination.h"
 
 #include "filesystem.h"
 class Document;
@@ -21,6 +22,7 @@ struct PdfExportVerification {
     uintmax_t outputBytes = 0;
     bool published = false;
     fs::path output, report;
+    std::vector<fs::path> recoveryFiles;
     std::vector<std::string> warnings;
     std::string error;
 };
@@ -34,7 +36,11 @@ public:
     static PdfExportVerification exportChecked(
             const fs::path& output, const PdfExportExpectation& expected,
             const std::function<void(const fs::path&)>& exporter,
-            const std::function<bool()>& cancelled = [] { return false; }, bool allowOverwrite = false);
+            const std::function<bool()>& cancelled = [] { return false; });
+    static PdfExportVerification exportChecked(
+            const xoj::ExportDestination& destination, const PdfExportExpectation& expected,
+            const std::function<void(const fs::path&)>& exporter,
+            const std::function<bool()>& cancelled = [] { return false; });
     static void writeReportAtomic(const fs::path& path, const PdfExportVerification& result,
                                   const PdfExportExpectation& expected);
     static std::string jsonString(const std::string& value);

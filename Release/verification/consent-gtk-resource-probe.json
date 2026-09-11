@@ -1,0 +1,9 @@
+{
+  "method": "Read-only evaluation of getInstallUiPath formula from the generated local config; no GTK execution",
+  "installPrefix": "/usr/local",
+  "priorPaletteResource": "/usr/local/share/inkquay/ui/paletteSettings.glade",
+  "priorResourceExists": false,
+  "sourcePaletteResource": "/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/ui/paletteSettings.glade",
+  "sourceResourceExists": true,
+  "windowsAttribution": "Windows runtime stall attribution still requires rerun; recorded Windows log has no hung stack."
+}

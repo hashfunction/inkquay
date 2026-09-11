@@ -1,0 +1,57 @@
+{
+  "baselineFeatureCommit": "5ae5b00390fdffde1fb92ec09033199c0a1351cb",
+  "redSourceHead": "f532d4838784b8178d3da909f5d5dc978f20395f",
+  "parentAtRepair": "607884744565711b5ef5f3748062e643bc683648",
+  "platform": "macOS arm64, Xcode 26.6 / Apple Clang 21 / SDK 26.5; Homebrew GTK 3.24.52, GLib 2.88.3, Poppler 26.09.0, qpdf 12.4.1, Cairo 1.18.4; local deployment target 26.0",
+  "red": {
+    "tests": 2,
+    "passed": 0,
+    "failed": 2,
+    "filter": "PdfExportVerifierTest.Gui*",
+    "outcome": "Old GUI allowOverwrite=true API published and overwrote both late-created and unapproved replacement files. Regression bodies preserved in consent-red-reproduction.md."
+  },
+  "green": {
+    "pdfVerifierTests": 18,
+    "allNonGuiTests": 128,
+    "failed": 0,
+    "nonGuiSeconds": 3.52,
+    "discoveredDistinctTests": 132,
+    "gtkTestsCompiledNotExecuted": 4
+  },
+  "commands": [
+    "PKG_CONFIG_PATH=/opt/homebrew/opt/libxml2/lib/pkgconfig cmake -S . -B build",
+    "cmake --build build --target pot translations",
+    "cmake --build build --target test-units test-gtk-integration xournalpp xournalpp-wrapper -j6",
+    "./build/test/test-units '--gtest_filter=PdfExportVerifierTest.*'",
+    "ctest --test-dir build -E 'PaletteTabTest|PageTemplateDialogTest|PdfDestinationConsentTest' --output-on-failure",
+    "ctest --test-dir build -N",
+    "cmake --install build --prefix \"$PWD/build/stage\""
+  ],
+  "build": "Native app, wrapper, test-units and test-gtk-integration built successfully. Translations and local install stage completed. Existing jsonString signedness warning remains; compiler warnings are not a Windows certification result.",
+  "coverage": [
+    "new name occupied before worker start",
+    "confirmed target changed before worker start",
+    "same content with different file identity",
+    "captured existing target without confirmation",
+    "successful confirmed replacement plus original recovery and report",
+    "failure/cancellation before publication",
+    "cancellation after displacement restores original",
+    "late owner blocks both publication and rollback, preserving original/current/diagnostic",
+    "source, hardlink and ancestor alias guards even with consent",
+    "native no-replace move refuses existing files and dangling symlinks",
+    "original Cairo/qpdf/document range and progressive exports"
+  ],
+  "guiRegression": "Actual SaveExportDialog GTK confirmation and typed destination callback are compiled, not executed locally; ordinary/custom worker integration inspected in source.",
+  "gtkStartup": "Palette tests now resolve source UI resources instead of uninstalled prefix; resource probe records missing prior path. GtkApplication startup initializes GTK. Fixture uses NON_UNIQUE application and teardown. Windows stall attribution requires rerun.",
+  "limits": [
+    "Recovery protocol is not atomic cross-process conditional replacement; temporary target absence and crash recovery files are possible. Original files are retained even after successful replacement.",
+    "No locked-Mac GUI execution. Windows native no-replace operations and all four GTK tests require Windows rerun.",
+    "Parent owns workflow, packaged launch, native binary/source/license closure, MSIX, signing, Store and public release."
+  ],
+  "artifacts": {
+    "build/inkquay": "f4e06b54799c2b9bca0c5219a46cff2ae267969a150561bc325726bcea6e639b",
+    "build/inkquay-wrapper": "756192e13053795f41717fd72c628c561f1d5f5b2a215137adfbe88629a45fff",
+    "build/test/test-units": "43bfe8201ad17526637cc448e96245a60e51fb799dac03216178fcd6f21449a8",
+    "build/test/test-gtk-integration": "aece5f7ac4831792a46dc46bf6bbb79247bf31aa31f839d87c6390b193844d09"
+  }
+}

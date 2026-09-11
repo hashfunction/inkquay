@@ -1,0 +1,335 @@
+Note: Google Test filter = PdfExportVerifierTest.Gui*
+[==========] Running 2 tests from 1 test suite.
+[----------] Global test environment set-up.
+Setting up localisation for tests
+[----------] 2 tests from PdfExportVerifierTest
+[ RUN      ] PdfExportVerifierTest.GuiNewNameMustNotOverwriteFileCreatedBeforeWorkerStarts
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/PdfExportVerifierTest.cpp:184: Failure
+Expected equality of these values:
+  result.status
+    Which is: 4-byte object <00-00 00-00>
+  PdfExportVerification::Status::Failed
+    Which is: 4-byte object <02-00 00-00>
+
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/PdfExportVerifierTest.cpp:185: Failure
+Value of: result.published
+  Actual: true
+Expected: false
+
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/PdfExportVerifierTest.cpp:187: Failure
+Expected equality of these values:
+  std::string((std::istreambuf_iterator<char>(file)), {})
+    Which is: "%PDF-1.7\n%\xB5\xED\xAE\xFB\n4 0 obj\n<< /Length 5 0 R\n   /Filter /FlateDecode\n>>\nstream\nx\x9C" "3T0\0B]C aa`\xA0\x90\x9C\xCBU\xC8" "e\0\x16\vrW\xD0O4PH/\xE6" "2R(\a\x8Ay\x1q\x16Wt\xAC\x82\x81\x9E\x81" "B\n\x97\xA1\x81\x82\xAF\x82\x91\x1\b\xE5*\x18\x2\xB5\x82p\x8E" "B0W \x17\0\xBD\xDF\x10\x8E\nendstream\nendobj\n5 0 obj\n   77\nendobj\n3 0 obj\n<<\n   /ExtGState <<\n      /a0 << /CA 1 /ca 1 >>\n   >>\n>>\nendobj\n7 0 obj\n<< /Type /ObjStm\n   /Length 8 0 R\n   /N 1\n   /First 4\n   /Filter /FlateDecode\n>>\nstream\nx\x9C" "3S0\xE0\x8A\xE6\x8A\xE5\x2\0\x6" "8\x1]\nendstream\nendobj\n8 0 obj\n   16\nendobj\n11 0 obj\n<< /Length 12 0 R\n   /Filter /FlateDecode\n>>\nstream\nx\x9C" "3T0\0B]C aa`\xA0\x90\x9C\xCBU\xC8" "e\0\x16\vrW\xD0O4PH/\xE6" "2R(\a\x8Ay\x1q\x16Wt\xAC\x82\x81\x9E\x81" "B\n\x97\xA1\x81\x82\xAF\x82\x91\x1\b\xE5*\x18\x2\xB5\x82p\x8E" "B0W \x17\0\xBD\xDF\x10\x8E\nendstream\nendobj\n12 0 obj\n   77\nendobj\n10 0 obj\n<<\n   /ExtGState <<\n      /a0 << /CA 1 /ca 1 >>\n   >>\n>>\nendobj\n14 0 obj\n<< /Type /ObjStm\n   /Length 15 0 R\n   /N 1\n   /First 5\n   /Filter /FlateDecode\n>>\nstream\nx\x9C" "34V0\xE0\x8A\xE6\x8A\xE5\x2\0\a\xDA\x1\x8B\nendstream\nendobj\n15 0 obj\n   17\nendobj\n18 0 obj\n<< /Length 19 0 R\n   /Filter /FlateDecode\n>>\nstream\nx\x9C" "3T0\0B]C aa`\xA0\x90\x9C\xCBU\xC8" "e\0\x16\vrW\xD0O4PH/\xE6" "2R(\a\x8Ay\x1q\x16Wt\xAC\x82\x81\x9E\x81" "B\n\x97\xA1\x81\x82\xAF\x82\x91\x1\b\xE5*\x18\x2\xB5\x82p\x8E" "B0W \x17\0\xBD\xDF\x10\x8E\nendstream\nendobj\n19 0 obj\n   77\nendobj\n17 0 obj\n<<\n   /ExtGState <<\n      /a0 << /CA 1 /ca 1 >>\n   >>\n>>\nendobj\n21 0 obj\n<< /Type /ObjStm\n   /Length 22 0 R\n   /N 1\n   /First 5\n   /Filter /FlateDecode\n>>\nstream\nx\x9C" "32P0\xE0\x8A\xE6\x8A\xE5\x2\0\a\xCB\x1\x89\nendstream\nendobj\n22 0 obj\n   17\nendobj\n23 0 obj\n<< /Type /ObjStm\n   /Length 26 0 R\n   /N 6\n   /First 36\n   /Filter /FlateDecode\n>>\nstream\nx\x9C\xC5\x91\xC1k\xC2" "0\x18\xC5\xEF\xF9+\xDE" "eL\xF\xB3I\xDA\xB5U\x8A\a\x15" "d\x8C\x81\xE8nc\x87\x10" "C-\x8C\xA6$\xE9\x98\xFF\xFD\x92\xB8n\f\xF4\xE4" "AJ\x12\xBE\x97\xEF\xE5{?\xCA@\t\xCF\x90\xA7\x84\x83\xE5\x19\x99\"-\v\xC2r\xE4\x8C\x13\xFE\x88" "2-HU!y=v\n\xC9" "F\xD4\xCA\x12\0\xC9s\xB3\xB7x\x3\a\xC5\x16\xD3\xB8{S8\xDE\xE3\xFDR\xF7\xAD" "CJ\xE6\xF3h\xDF\x18\xBD\xEF\xA5" "2\x18I\xD1\x18\r6a\xE5$\xC3\xE8\xE0\\ggI\x12\xD5\xDA\x88\xEE\xD0H;\xD1\xA6\x1E\x8FO\xCF\x18%\\\xA3\xDB\x95p\n\xA3\xD5\x8CS\x9E\xD3)c\x94" "eEV>\xD0\xE2\x9E\xD2\xF1" "0\xE4/#\xEE\xC0\xA2\x7F#\x8C\xF2" "9XH\x16\x85\x17\xB5o\xC4" "B\x7F\xF9\xEC\xD4\x7F" "9\xA5(\xFD\x1A" "B\xB7\xCE\xB7[d\xBF\xFDk\xA3\xFB\xEU\x15\x8AP\x9F" "fDu\x90v^5\xA2\xB5]\x98%\x8F\x83\xFC\x4gz5TK\xDF\xB5R\x9F\x8DT\xDB\xF5\"\x88>s\xD0\xB7\xCA\xEA\xDEHe\x91\xFE\xCE\xDCy\xA3t\xA7\xE8\xD6\xFF\x9Fsx\xFC\x1A<\xC6n\xC0\xC7\xE8\x5@v\x16" "0\xBD\n\xB0\xBC\x5`q\x1\x90\xFF\a\\\n'>t\xFD\xC3W\ag4\xFA\xA6oiS\xE5\x91\nendstream\nendobj\n26 0 obj\n   324\nendobj\n27 0 obj\n<< /Type /XRef\n   /Length 99\n   /Filter /FlateDecode\n   /Size 28\n   /W [1 2 2]\n   /Root 25 0 R\n   /Info 24 0 R\n>>\nstream\nx\x9C%\xCA\xB1\x11@@\x14\x4\xD0\xDD\x7F\xE7" "dDF\xA4\x5\x89H\x15z\x12)\x81@\x1" "b\xB9\\\xA4\nu\xF0w.y\xB3\xBB\xB3\0\xBE\xCF\xD0\x2\xC2\x88\v jqh+=1\x89%_\x2mR\xDD\x1D\x1B\xB5UJ\xAB\x13\xBA|\x89\f\xAF\xEA \x1Em\x8D\xA7\xD8\x8BS\xDC\xF9GQ0\xCD\xBE\xA5\r\xF8\x1V@\v\x9D\nendstream\nendobj\nstartxref\n1689\n%%EOF\n"
+  "late owner"
+With diff:
+@@ -1,136 +1 @@
+-%PDF-1.7
+-%\xB5\xED\xAE\xFB
+-4 0 obj
+-<< /Length 5 0 R
+-   /Filter /FlateDecode
+->>
+-stream
+-x\x9C" "3T0\0B]C aa`\xA0\x90\x9C\xCBU\xC8" "e\0\x16\vrW\xD0O4PH/\xE6" "2R(\a\x8Ay\x1q\x16Wt\xAC\x82\x81\x9E\x81" "B
+-\x97\xA1\x81\x82\xAF\x82\x91\x1\b\xE5*\x18\x2\xB5\x82p\x8E" "B0W \x17\0\xBD\xDF\x10\x8E
+-endstream
+-endobj
+-5 0 obj
+-   77
+-endobj
+-3 0 obj
+-<<
+-   /ExtGState <<
+-      /a0 << /CA 1 /ca 1 >>
+-   >>
+->>
+-endobj
+-7 0 obj
+-<< /Type /ObjStm
+-   /Length 8 0 R
+-   /N 1
+-   /First 4
+-   /Filter /FlateDecode
+->>
+-stream
+-x\x9C" "3S0\xE0\x8A\xE6\x8A\xE5\x2\0\x6" "8\x1]
+-endstream
+-endobj
+-8 0 obj
+-   16
+-endobj
+-11 0 obj
+-<< /Length 12 0 R
+-   /Filter /FlateDecode
+->>
+-stream
+-x\x9C" "3T0\0B]C aa`\xA0\x90\x9C\xCBU\xC8" "e\0\x16\vrW\xD0O4PH/\xE6" "2R(\a\x8Ay\x1q\x16Wt\xAC\x82\x81\x9E\x81" "B
+-\x97\xA1\x81\x82\xAF\x82\x91\x1\b\xE5*\x18\x2\xB5\x82p\x8E" "B0W \x17\0\xBD\xDF\x10\x8E
+-endstream
+-endobj
+-12 0 obj
+-   77
+-endobj
+-10 0 obj
+-<<
+-   /ExtGState <<
+-      /a0 << /CA 1 /ca 1 >>
+-   >>
+->>
+-endobj
+-14 0 obj
+-<< /Type /ObjStm
+-   /Length 15 0 R
+-   /N 1
+-   /First 5
+-   /Filter /FlateDecode
+->>
+-stream
+-x\x9C" "34V0\xE0\x8A\xE6\x8A\xE5\x2\0\a\xDA\x1\x8B
+-endstream
+-endobj
+-15 0 obj
+-   17
+-endobj
+-18 0 obj
+-<< /Length 19 0 R
+-   /Filter /FlateDecode
+->>
+-stream
+-x\x9C" "3T0\0B]C aa`\xA0\x90\x9C\xCBU\xC8" "e\0\x16\vrW\xD0O4PH/\xE6" "2R(\a\x8Ay\x1q\x16Wt\xAC\x82\x81\x9E\x81" "B
+-\x97\xA1\x81\x82\xAF\x82\x91\x1\b\xE5*\x18\x2\xB5\x82p\x8E" "B0W \x17\0\xBD\xDF\x10\x8E
+-endstream
+-endobj
+-19 0 obj
+-   77
+-endobj
+-17 0 obj
+-<<
+-   /ExtGState <<
+-      /a0 << /CA 1 /ca 1 >>
+-   >>
+->>
+-endobj
+-21 0 obj
+-<< /Type /ObjStm
+-   /Length 22 0 R
+-   /N 1
+-   /First 5
+-   /Filter /FlateDecode
+->>
+-stream
+-x\x9C" "32P0\xE0\x8A\xE6\x8A\xE5\x2\0\a\xCB\x1\x89
+-endstream
+-endobj
+-22 0 obj
+-   17
+-endobj
+-23 0 obj
+-<< /Type /ObjStm
+-   /Length 26 0 R
+-   /N 6
+-   /First 36
+-   /Filter /FlateDecode
+->>
+-stream
+-x\x9C\xC5\x91\xC1k\xC2" "0\x18\xC5\xEF\xF9+\xDE" "eL\xF\xB3I\xDA\xB5U\x8A\a\x15" "d\x8C\x81\xE8nc\x87\x10" "C-\x8C\xA6$\xE9\x98\xFF\xFD\x92\xB8n\f\xF4\xE4" "AJ\x12\xBE\x97\xEF\xE5{?\xCA@\t\xCF\x90\xA7\x84\x83\xE5\x19\x99\"-\v\xC2r\xE4\x8C\x13\xFE\x88" "2-HU!y=v
+-\xC9" "F\xD4\xCA\x12\0\xC9s\xB3\xB7x\x3\a\xC5\x16\xD3\xB8{S8\xDE\xE3\xFDR\xF7\xAD" "CJ\xE6\xF3h\xDF\x18\xBD\xEF\xA5" "2\x18I\xD1\x18\r6a\xE5$\xC3\xE8\xE0\\ggI\x12\xD5\xDA\x88\xEE\xD0H;\xD1\xA6\x1E\x8FO\xCF\x18%\\\xA3\xDB\x95p
+-\xA3\xD5\x8CS\x9E\xD3)c\x94" "eEV>\xD0\xE2\x9E\xD2\xF1" "0\xE4/#\xEE\xC0\xA2\x7F#\x8C\xF2" "9XH\x16\x85\x17\xB5o\xC4" "B\x7F\xF9\xEC\xD4\x7F" "9\xA5(\xFD\x1A" "B\xB7\xCE\xB7[d\xBF\xFDk\xA3\xFB\xEU\x15\x8AP\x9F" "fDu\x90v^5\xA2\xB5]\x98%\x8F\x83\xFC\x4gz5TK\xDF\xB5R\x9F\x8DT\xDB\xF5\"\x88>s\xD0\xB7\xCA\xEA\xDEHe\x91\xFE\xCE\xDCy\xA3t\xA7\xE8\xD6\xFF\x9Fsx\xFC\x1A<\xC6n\xC0\xC7\xE8\x5@v\x16" "0\xBD
+-\xB0\xBC\x5`q\x1\x90\xFF\a\\
+-'>t\xFD\xC3W\ag4\xFA\xA6oiS\xE5\x91
+-endstream
+-endobj
+-26 0 obj
+-   324
+-endobj
+-27 0 obj
+-<< /Type /XRef
+-   /Length 99
+-   /Filter /FlateDecode
+-   /Size 28
+-   /W [1 2 2]
+-   /Root 25 0 R
+-   /Info 24 0 R
+->>
+-stream
+-x\x9C%\xCA\xB1\x11@@\x14\x4\xD0\xDD\x7F\xE7" "dDF\xA4\x5\x89H\x15z\x12)\x81@\x1" "b\xB9\\\xA4
+-u\xF0w.y\xB3\xBB\xB3\0\xBE\xCF\xD0\x2\xC2\x88\v jqh+=1\x89%_\x2mR\xDD\x1D\x1B\xB5UJ\xAB\x13\xBA|\x89\f\xAF\xEA \x1Em\x8D\xA7\xD8\x8BS\xDC\xF9GQ0\xCD\xBE\xA5\r\xF8\x1V@\v\x9D
+-endstream
+-endobj
+-startxref
+-1689
+-%%EOF\n
++late owner
+
+
+[  FAILED  ] PdfExportVerifierTest.GuiNewNameMustNotOverwriteFileCreatedBeforeWorkerStarts (14 ms)
+[ RUN      ] PdfExportVerifierTest.GuiApprovalMustNotAuthorizeReplacementBeforeWorkerStarts
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/PdfExportVerifierTest.cpp:197: Failure
+Expected equality of these values:
+  result.status
+    Which is: 4-byte object <00-00 00-00>
+  PdfExportVerification::Status::Failed
+    Which is: 4-byte object <02-00 00-00>
+
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/PdfExportVerifierTest.cpp:198: Failure
+Value of: result.published
+  Actual: true
+Expected: false
+
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/test/unit_tests/control/PdfExportVerifierTest.cpp:200: Failure
+Expected equality of these values:
+  std::string((std::istreambuf_iterator<char>(file)), {})
+    Which is: "%PDF-1.7\n%\xB5\xED\xAE\xFB\n4 0 obj\n<< /Length 5 0 R\n   /Filter /FlateDecode\n>>\nstream\nx\x9C" "3T0\0B]C aa`\xA0\x90\x9C\xCBU\xC8" "e\0\x16\vrW\xD0O4PH/\xE6" "2R(\a\x8Ay\x1q\x16Wt\xAC\x82\x81\x9E\x81" "B\n\x97\xA1\x81\x82\xAF\x82\x91\x1\b\xE5*\x18\x2\xB5\x82p\x8E" "B0W \x17\0\xBD\xDF\x10\x8E\nendstream\nendobj\n5 0 obj\n   77\nendobj\n3 0 obj\n<<\n   /ExtGState <<\n      /a0 << /CA 1 /ca 1 >>\n   >>\n>>\nendobj\n7 0 obj\n<< /Type /ObjStm\n   /Length 8 0 R\n   /N 1\n   /First 4\n   /Filter /FlateDecode\n>>\nstream\nx\x9C" "3S0\xE0\x8A\xE6\x8A\xE5\x2\0\x6" "8\x1]\nendstream\nendobj\n8 0 obj\n   16\nendobj\n11 0 obj\n<< /Length 12 0 R\n   /Filter /FlateDecode\n>>\nstream\nx\x9C" "3T0\0B]C aa`\xA0\x90\x9C\xCBU\xC8" "e\0\x16\vrW\xD0O4PH/\xE6" "2R(\a\x8Ay\x1q\x16Wt\xAC\x82\x81\x9E\x81" "B\n\x97\xA1\x81\x82\xAF\x82\x91\x1\b\xE5*\x18\x2\xB5\x82p\x8E" "B0W \x17\0\xBD\xDF\x10\x8E\nendstream\nendobj\n12 0 obj\n   77\nendobj\n10 0 obj\n<<\n   /ExtGState <<\n      /a0 << /CA 1 /ca 1 >>\n   >>\n>>\nendobj\n14 0 obj\n<< /Type /ObjStm\n   /Length 15 0 R\n   /N 1\n   /First 5\n   /Filter /FlateDecode\n>>\nstream\nx\x9C" "34V0\xE0\x8A\xE6\x8A\xE5\x2\0\a\xDA\x1\x8B\nendstream\nendobj\n15 0 obj\n   17\nendobj\n18 0 obj\n<< /Length 19 0 R\n   /Filter /FlateDecode\n>>\nstream\nx\x9C" "3T0\0B]C aa`\xA0\x90\x9C\xCBU\xC8" "e\0\x16\vrW\xD0O4PH/\xE6" "2R(\a\x8Ay\x1q\x16Wt\xAC\x82\x81\x9E\x81" "B\n\x97\xA1\x81\x82\xAF\x82\x91\x1\b\xE5*\x18\x2\xB5\x82p\x8E" "B0W \x17\0\xBD\xDF\x10\x8E\nendstream\nendobj\n19 0 obj\n   77\nendobj\n17 0 obj\n<<\n   /ExtGState <<\n      /a0 << /CA 1 /ca 1 >>\n   >>\n>>\nendobj\n21 0 obj\n<< /Type /ObjStm\n   /Length 22 0 R\n   /N 1\n   /First 5\n   /Filter /FlateDecode\n>>\nstream\nx\x9C" "32P0\xE0\x8A\xE6\x8A\xE5\x2\0\a\xCB\x1\x89\nendstream\nendobj\n22 0 obj\n   17\nendobj\n23 0 obj\n<< /Type /ObjStm\n   /Length 26 0 R\n   /N 6\n   /First 36\n   /Filter /FlateDecode\n>>\nstream\nx\x9C\xC5\x91\xC1k\xC2" "0\x18\xC5\xEF\xF9+\xDE" "eL\xF\xB3I\xDA\xB5U\x8A\a\x15" "d\x8C\x81\xE8nc\x87\x10" "C-\x8C\xA6$\xE9\x98\xFF\xFD\x92\xB8n\f\xF4\xE4" "AJ\x12\xBE\x97\xEF\xE5{?\xCA@\t\xCF\x90\xA7\x84\x83\xE5\x19\x99\"-\v\xC2r\xE4\x8C\x13\xFE\x88" "2-HU!y=v\n\xC9" "F\xD4\xCA\x12\0\xC9s\xB3\xB7x\x3\a\xC5\x16\xD3\xB8{S8\xDE\xE3\xFDR\xF7\xAD" "CJ\xE6\xF3h\xDF\x18\xBD\xEF\xA5" "2\x18I\xD1\x18\r6a\xE5$\xC3\xE8\xE0\\ggI\x12\xD5\xDA\x88\xEE\xD0H;\xD1\xA6\x1E\x8FO\xCF\x18%\\\xA3\xDB\x95p\n\xA3\xD5\x8CS\x9E\xD3)c\x94" "eEV>\xD0\xE2\x9E\xD2\xF1" "0\xE4/#\xEE\xC0\xA2\x7F#\x8C\xF2" "9XH\x16\x85\x17\xB5o\xC4" "B\x7F\xF9\xEC\xD4\x7F" "9\xA5(\xFD\x1A" "B\xB7\xCE\xB7[d\xBF\xFDk\xA3\xFB\xEU\x15\x8AP\x9F" "fDu\x90v^5\xA2\xB5]\x98%\x8F\x83\xFC\x4gz5TK\xDF\xB5R\x9F\x8DT\xDB\xF5\"\x88>s\xD0\xB7\xCA\xEA\xDEHe\x91\xFE\xCE\xDCy\xA3t\xA7\xE8\xD6\xFF\x9Fsx\xFC\x1A<\xC6n\xC0\xC7\xE8\x5@v\x16" "0\xBD\n\xB0\xBC\x5`q\x1\x90\xFF\a\\\n'>t\xFD\xC3W\ag4\xFA\xA6oiS\xE5\x91\nendstream\nendobj\n26 0 obj\n   324\nendobj\n27 0 obj\n<< /Type /XRef\n   /Length 99\n   /Filter /FlateDecode\n   /Size 28\n   /W [1 2 2]\n   /Root 25 0 R\n   /Info 24 0 R\n>>\nstream\nx\x9C%\xCA\xB1\x11@@\x14\x4\xD0\xDD\x7F\xE7" "dDF\xA4\x5\x89H\x15z\x12)\x81@\x1" "b\xB9\\\xA4\nu\xF0w.y\xB3\xBB\xB3\0\xBE\xCF\xD0\x2\xC2\x88\v jqh+=1\x89%_\x2mR\xDD\x1D\x1B\xB5UJ\xAB\x13\xBA|\x89\f\xAF\xEA \x1Em\x8D\xA7\xD8\x8BS\xDC\xF9GQ0\xCD\xBE\xA5\r\xF8\x1V@\v\x9D\nendstream\nendobj\nstartxref\n1689\n%%EOF\n"
+  "unapproved replacement"
+With diff:
+@@ -1,136 +1 @@
+-%PDF-1.7
+-%\xB5\xED\xAE\xFB
+-4 0 obj
+-<< /Length 5 0 R
+-   /Filter /FlateDecode
+->>
+-stream
+-x\x9C" "3T0\0B]C aa`\xA0\x90\x9C\xCBU\xC8" "e\0\x16\vrW\xD0O4PH/\xE6" "2R(\a\x8Ay\x1q\x16Wt\xAC\x82\x81\x9E\x81" "B
+-\x97\xA1\x81\x82\xAF\x82\x91\x1\b\xE5*\x18\x2\xB5\x82p\x8E" "B0W \x17\0\xBD\xDF\x10\x8E
+-endstream
+-endobj
+-5 0 obj
+-   77
+-endobj
+-3 0 obj
+-<<
+-   /ExtGState <<
+-      /a0 << /CA 1 /ca 1 >>
+-   >>
+->>
+-endobj
+-7 0 obj
+-<< /Type /ObjStm
+-   /Length 8 0 R
+-   /N 1
+-   /First 4
+-   /Filter /FlateDecode
+->>
+-stream
+-x\x9C" "3S0\xE0\x8A\xE6\x8A\xE5\x2\0\x6" "8\x1]
+-endstream
+-endobj
+-8 0 obj
+-   16
+-endobj
+-11 0 obj
+-<< /Length 12 0 R
+-   /Filter /FlateDecode
+->>
+-stream
+-x\x9C" "3T0\0B]C aa`\xA0\x90\x9C\xCBU\xC8" "e\0\x16\vrW\xD0O4PH/\xE6" "2R(\a\x8Ay\x1q\x16Wt\xAC\x82\x81\x9E\x81" "B
+-\x97\xA1\x81\x82\xAF\x82\x91\x1\b\xE5*\x18\x2\xB5\x82p\x8E" "B0W \x17\0\xBD\xDF\x10\x8E
+-endstream
+-endobj
+-12 0 obj
+-   77
+-endobj
+-10 0 obj
+-<<
+-   /ExtGState <<
+-      /a0 << /CA 1 /ca 1 >>
+-   >>
+->>
+-endobj
+-14 0 obj
+-<< /Type /ObjStm
+-   /Length 15 0 R
+-   /N 1
+-   /First 5
+-   /Filter /FlateDecode
+->>
+-stream
+-x\x9C" "34V0\xE0\x8A\xE6\x8A\xE5\x2\0\a\xDA\x1\x8B
+-endstream
+-endobj
+-15 0 obj
+-   17
+-endobj
+-18 0 obj
+-<< /Length 19 0 R
+-   /Filter /FlateDecode
+->>
+-stream
+-x\x9C" "3T0\0B]C aa`\xA0\x90\x9C\xCBU\xC8" "e\0\x16\vrW\xD0O4PH/\xE6" "2R(\a\x8Ay\x1q\x16Wt\xAC\x82\x81\x9E\x81" "B
+-\x97\xA1\x81\x82\xAF\x82\x91\x1\b\xE5*\x18\x2\xB5\x82p\x8E" "B0W \x17\0\xBD\xDF\x10\x8E
+-endstream
+-endobj
+-19 0 obj
+-   77
+-endobj
+-17 0 obj
+-<<
+-   /ExtGState <<
+-      /a0 << /CA 1 /ca 1 >>
+-   >>
+->>
+-endobj
+-21 0 obj
+-<< /Type /ObjStm
+-   /Length 22 0 R
+-   /N 1
+-   /First 5
+-   /Filter /FlateDecode
+->>
+-stream
+-x\x9C" "32P0\xE0\x8A\xE6\x8A\xE5\x2\0\a\xCB\x1\x89
+-endstream
+-endobj
+-22 0 obj
+-   17
+-endobj
+-23 0 obj
+-<< /Type /ObjStm
+-   /Length 26 0 R
+-   /N 6
+-   /First 36
+-   /Filter /FlateDecode
+->>
+-stream
+-x\x9C\xC5\x91\xC1k\xC2" "0\x18\xC5\xEF\xF9+\xDE" "eL\xF\xB3I\xDA\xB5U\x8A\a\x15" "d\x8C\x81\xE8nc\x87\x10" "C-\x8C\xA6$\xE9\x98\xFF\xFD\x92\xB8n\f\xF4\xE4" "AJ\x12\xBE\x97\xEF\xE5{?\xCA@\t\xCF\x90\xA7\x84\x83\xE5\x19\x99\"-\v\xC2r\xE4\x8C\x13\xFE\x88" "2-HU!y=v
+-\xC9" "F\xD4\xCA\x12\0\xC9s\xB3\xB7x\x3\a\xC5\x16\xD3\xB8{S8\xDE\xE3\xFDR\xF7\xAD" "CJ\xE6\xF3h\xDF\x18\xBD\xEF\xA5" "2\x18I\xD1\x18\r6a\xE5$\xC3\xE8\xE0\\ggI\x12\xD5\xDA\x88\xEE\xD0H;\xD1\xA6\x1E\x8FO\xCF\x18%\\\xA3\xDB\x95p
+-\xA3\xD5\x8CS\x9E\xD3)c\x94" "eEV>\xD0\xE2\x9E\xD2\xF1" "0\xE4/#\xEE\xC0\xA2\x7F#\x8C\xF2" "9XH\x16\x85\x17\xB5o\xC4" "B\x7F\xF9\xEC\xD4\x7F" "9\xA5(\xFD\x1A" "B\xB7\xCE\xB7[d\xBF\xFDk\xA3\xFB\xEU\x15\x8AP\x9F" "fDu\x90v^5\xA2\xB5]\x98%\x8F\x83\xFC\x4gz5TK\xDF\xB5R\x9F\x8DT\xDB\xF5\"\x88>s\xD0\xB7\xCA\xEA\xDEHe\x91\xFE\xCE\xDCy\xA3t\xA7\xE8\xD6\xFF\x9Fsx\xFC\x1A<\xC6n\xC0\xC7\xE8\x5@v\x16" "0\xBD
+-\xB0\xBC\x5`q\x1\x90\xFF\a\\
+-'>t\xFD\xC3W\ag4\xFA\xA6oiS\xE5\x91
+-endstream
+-endobj
+-26 0 obj
+-   324
+-endobj
+-27 0 obj
+-<< /Type /XRef
+-   /Length 99
+-   /Filter /FlateDecode
+-   /Size 28
+-   /W [1 2 2]
+-   /Root 25 0 R
+-   /Info 24 0 R
+->>
+-stream
+-x\x9C%\xCA\xB1\x11@@\x14\x4\xD0\xDD\x7F\xE7" "dDF\xA4\x5\x89H\x15z\x12)\x81@\x1" "b\xB9\\\xA4
+-u\xF0w.y\xB3\xBB\xB3\0\xBE\xCF\xD0\x2\xC2\x88\v jqh+=1\x89%_\x2mR\xDD\x1D\x1B\xB5UJ\xAB\x13\xBA|\x89\f\xAF\xEA \x1Em\x8D\xA7\xD8\x8BS\xDC\xF9GQ0\xCD\xBE\xA5\r\xF8\x1V@\v\x9D
+-endstream
+-endobj
+-startxref
+-1689
+-%%EOF\n
++unapproved replacement
+
+
+[  FAILED  ] PdfExportVerifierTest.GuiApprovalMustNotAuthorizeReplacementBeforeWorkerStarts (3 ms)
+[----------] 2 tests from PdfExportVerifierTest (17 ms total)
+
+[----------] Global test environment tear-down
+[==========] 2 tests from 1 test suite ran. (19 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 2 tests, listed below:
+[  FAILED  ] PdfExportVerifierTest.GuiNewNameMustNotOverwriteFileCreatedBeforeWorkerStarts
+[  FAILED  ] PdfExportVerifierTest.GuiApprovalMustNotAuthorizeReplacementBeforeWorkerStarts
+
+ 2 FAILED TESTS

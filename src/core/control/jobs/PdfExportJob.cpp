@@ -35,13 +35,11 @@ void PdfExportJob::run() {
         auto expected = PdfExportVerifier::capture(doc->getPageCount(), doc->getFilepath(), doc->getPdfFilepath());
         std::unique_ptr<XojPdfExport> pdfe = XojPdfExportFactory::createExport(doc, control);
         lock.unlock();
-        pdfVerification = PdfExportVerifier::exportChecked(
-                filepath, expected,
-                [&](const fs::path& staged) {
+        pdfVerification =
+                PdfExportVerifier::exportChecked(exportDestination.value(), expected, [&](const fs::path& staged) {
                     if (!pdfe->createPdf(staged, false))
                         throw std::runtime_error(pdfe->getLastError());
-                },
-                [] { return false; }, true);
+                });
     } catch (const std::exception& error) {
         errorMsg = error.what();
     }

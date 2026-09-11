@@ -18,6 +18,7 @@ protected:
 
     // Setting up the testing environment
     void SetUp() override;
+    void TearDown() override;
 
     // This the callback in which the actual test is run
     // It needs to be a callback because it requires the GtkApplication to be running already.

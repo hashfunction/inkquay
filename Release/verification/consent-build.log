@@ -1,0 +1,9 @@
+[1/5] Building CXX object src/core/CMakeFiles/xournalpp-core.dir/control/jobs/PdfExportVerifier.cpp.o
+/Users/hashfunction/workspace/project_app_factory/microsoft-store/apps/inkquay/source/src/core/control/jobs/PdfExportVerifier.cpp:121:25: warning: implicit conversion changes signedness: 'const char' to 'unsigned char' [-Wsign-conversion]
+  121 |     for (unsigned char c: value) {
+      |                        ~^
+1 warning generated.
+[2/5] Linking CXX static library src/core/libxournalpp-core.a
+[3/5] Linking CXX executable inkquay
+[4/5] Linking CXX executable test/test-gtk-integration
+[5/5] Linking CXX executable test/test-units

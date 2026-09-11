@@ -1,0 +1,52 @@
+Note: Google Test filter = PdfExportVerifierTest.*
+[==========] Running 18 tests from 1 test suite.
+[----------] Global test environment set-up.
+Setting up localisation for tests
+[----------] 18 tests from PdfExportVerifierTest
+[ RUN      ] PdfExportVerifierTest.DetectsTruncatedPageSetAndRetainsFaultyOutput
+[       OK ] PdfExportVerifierTest.DetectsTruncatedPageSetAndRetainsFaultyOutput (12 ms)
+[ RUN      ] PdfExportVerifierTest.ChecksRealPdfAndCreatesDistinctReports
+[       OK ] PdfExportVerifierTest.ChecksRealPdfAndCreatesDistinctReports (5 ms)
+[ RUN      ] PdfExportVerifierTest.RejectsSourceHardlinkAndAncestorAliasBeforeCallingExporter
+[       OK ] PdfExportVerifierTest.RejectsSourceHardlinkAndAncestorAliasBeforeCallingExporter (2 ms)
+[ RUN      ] PdfExportVerifierTest.PreservesExistingOutputOnFailureCancellationAndTargetRace
+[       OK ] PdfExportVerifierTest.PreservesExistingOutputOnFailureCancellationAndTargetRace (4 ms)
+[ RUN      ] PdfExportVerifierTest.RejectsEmptyInvalidAndChangedProtectedFiles
+[       OK ] PdfExportVerifierTest.RejectsEmptyInvalidAndChangedProtectedFiles (1 ms)
+[ RUN      ] PdfExportVerifierTest.EscapesJsonControlCharactersAndUnicode
+[       OK ] PdfExportVerifierTest.EscapesJsonControlCharactersAndUnicode (0 ms)
+[ RUN      ] PdfExportVerifierTest.UsesRealDocumentExportBackendAndRangeCounts
+xopp-Message: 02:03:00.266: PDF checks: 2/2 pages. Output: /var/folders/mt/ll630b9x785gtdp6529w25bh0000gn/T/inkquay-pdf-XRBCV3/range.pdf. Report: /var/folders/mt/ll630b9x785gtdp6529w25bh0000gn/T/inkquay-pdf-XRBCV3/range.pdf.10b87efb-8b4f-4066-b930-2a747d9107da.inkquay-report.json
+xopp-Message: 02:03:00.266: Checks cover PDF structure, page count, positive page sizes and unchanged protected files; visual fidelity and accessibility were not checked.
+[       OK ] PdfExportVerifierTest.UsesRealDocumentExportBackendAndRangeCounts (5 ms)
+[ RUN      ] PdfExportVerifierTest.ExistingDestinationRequiresExplicitOverwriteAuthorization
+[       OK ] PdfExportVerifierTest.ExistingDestinationRequiresExplicitOverwriteAuthorization (1 ms)
+[ RUN      ] PdfExportVerifierTest.ChecksQpdfBackgroundAndProgressiveLayerExports
+xopp-Message: 02:03:00.306: PDF checks: 2/2 pages. Output: /var/folders/mt/ll630b9x785gtdp6529w25bh0000gn/T/inkquay-pdf-XO0MV3/background-export.pdf. Report: /var/folders/mt/ll630b9x785gtdp6529w25bh0000gn/T/inkquay-pdf-XO0MV3/background-export.pdf.19631ec8-b7ef-4b38-94b4-51348c2dbfd2.inkquay-report.json
+xopp-Message: 02:03:00.306: Checks cover PDF structure, page count, positive page sizes and unchanged protected files; visual fidelity and accessibility were not checked.
+xopp-Message: 02:03:00.307: PDF checks: 2/2 pages. Output: /var/folders/mt/ll630b9x785gtdp6529w25bh0000gn/T/inkquay-pdf-XO0MV3/progressive.pdf. Report: /var/folders/mt/ll630b9x785gtdp6529w25bh0000gn/T/inkquay-pdf-XO0MV3/progressive.pdf.7dc3ab65-668f-43cd-ac6a-6c1acd05f3bf.inkquay-report.json
+xopp-Message: 02:03:00.307: Checks cover PDF structure, page count, positive page sizes and unchanged protected files; visual fidelity and accessibility were not checked.
+[       OK ] PdfExportVerifierTest.ChecksQpdfBackgroundAndProgressiveLayerExports (39 ms)
+[ RUN      ] PdfExportVerifierTest.GuiNewNameMustNotOverwriteFileCreatedBeforeWorkerStarts
+[       OK ] PdfExportVerifierTest.GuiNewNameMustNotOverwriteFileCreatedBeforeWorkerStarts (1 ms)
+[ RUN      ] PdfExportVerifierTest.GuiApprovalMustNotAuthorizeReplacementBeforeWorkerStarts
+[       OK ] PdfExportVerifierTest.GuiApprovalMustNotAuthorizeReplacementBeforeWorkerStarts (1 ms)
+[ RUN      ] PdfExportVerifierTest.ConfirmedReplacementPublishesAndReportsRecoverableOriginal
+[       OK ] PdfExportVerifierTest.ConfirmedReplacementPublishesAndReportsRecoverableOriginal (3 ms)
+[ RUN      ] PdfExportVerifierTest.SameBytesOnAnotherFileDoNotInheritConsent
+[       OK ] PdfExportVerifierTest.SameBytesOnAnotherFileDoNotInheritConsent (1 ms)
+[ RUN      ] PdfExportVerifierTest.InspectionWithoutConfirmationCannotReplace
+[       OK ] PdfExportVerifierTest.InspectionWithoutConfirmationCannotReplace (1 ms)
+[ RUN      ] PdfExportVerifierTest.CancellationAfterDisplacementRestoresApprovedTarget
+[       OK ] PdfExportVerifierTest.CancellationAfterDisplacementRestoresApprovedTarget (3 ms)
+[ RUN      ] PdfExportVerifierTest.LateOwnerBlocksPublicationAndRollbackWithoutLosingEitherFile
+[       OK ] PdfExportVerifierTest.LateOwnerBlocksPublicationAndRollbackWithoutLosingEitherFile (4 ms)
+[ RUN      ] PdfExportVerifierTest.ConsentCannotOverrideSourceAndBackgroundProtection
+[       OK ] PdfExportVerifierTest.ConsentCannotOverrideSourceAndBackgroundProtection (3 ms)
+[ RUN      ] PdfExportVerifierTest.NoReplaceMovePreservesOccupiedRecoveryAndDanglingLink
+[       OK ] PdfExportVerifierTest.NoReplaceMovePreservesOccupiedRecoveryAndDanglingLink (0 ms)
+[----------] 18 tests from PdfExportVerifierTest (94 ms total)
+
+[----------] Global test environment tear-down
+[==========] 18 tests from 1 test suite ran. (95 ms total)
+[  PASSED  ] 18 tests.

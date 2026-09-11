@@ -55,10 +55,12 @@ void BaseExportJob::showFileChooser(std::function<void()> onFileSelected, std::f
         return job->testAndSetFilepath(p);
     };
 
-    auto callback = [settings, onFileSelected = std::move(onFileSelected),
-                     onCancel = std::move(onCancel)](std::optional<fs::path> p) {
-        if (p && !p->empty()) {
-            settings->setLastSavePath(p->parent_path());
+    auto callback = [this, settings, onFileSelected = std::move(onFileSelected),
+                     onCancel = std::move(onCancel)](std::optional<xoj::ExportDestination> destination) {
+        if (destination && !destination->path.empty()) {
+            filepath = destination->path;
+            exportDestination = std::move(destination);
+            settings->setLastSavePath(filepath.parent_path());
             onFileSelected();
         } else {
             onCancel();

@@ -40,9 +40,6 @@ std::string sha256(const fs::path& path) {
     g_checksum_free(checksum);
     return result;
 }
-std::optional<std::string> existingHash(const fs::path& path) {
-    return fs::exists(path) ? std::optional(sha256(path)) : std::nullopt;
-}
 void checkProtected(const PdfExportExpectation& expected) {
     for (const auto& [path, hash]: expected.protectedFiles)
         if (sha256(path) != hash)
@@ -173,6 +170,12 @@ void PdfExportVerifier::writeReportAtomic(const fs::path& path, const PdfExportV
         first = false;
         json << "{\"path\":" << quotedPath(file) << ",\"sha256Before\":" << jsonString(hash) << '}';
     }
+    json << "],\n  \"recoveryFiles\": [";
+    for (size_t i = 0; i < result.recoveryFiles.size(); ++i) {
+        if (i)
+            json << ',';
+        json << quotedPath(result.recoveryFiles[i]);
+    }
     json << "],\n  \"published\": " << (result.published ? "true" : "false") << "\n}\n";
     fs::path temp = path;
     temp += ".tmp-" + uuid();
@@ -195,18 +198,25 @@ void PdfExportVerifier::writeReportAtomic(const fs::path& path, const PdfExportV
 }
 PdfExportVerification PdfExportVerifier::exportChecked(const fs::path& output, const PdfExportExpectation& expected,
                                                        const std::function<void(const fs::path&)>& exporter,
-                                                       const std::function<bool()>& cancelled, bool allowOverwrite) {
+                                                       const std::function<bool()>& cancelled) {
+    // CLI/new-file callers never implicitly approve a current destination.
+    return exportChecked(xoj::ExportDestination{fs::absolute(output), std::nullopt, false}, expected, exporter,
+                         cancelled);
+}
+PdfExportVerification PdfExportVerifier::exportChecked(const xoj::ExportDestination& destination,
+                                                       const PdfExportExpectation& expected,
+                                                       const std::function<void(const fs::path&)>& exporter,
+                                                       const std::function<bool()>& cancelled) {
+    const auto& output = destination.path;
     PdfExportVerification result;
     result.output = output;
     result.expectedPages = expected.pageCount;
-    fs::path directory, staged;
+    fs::path directory, staged, displaced;
+    bool displacedTarget = false;
     try {
         protectOutput(output, expected);
         checkProtected(expected);
-        auto before = existingHash(output);
-        if (before && !allowOverwrite)
-            throw std::runtime_error("Destination exists. Choose another filename or explicitly confirm replacement in "
-                                     "the export dialog.");
+        destination.validateCurrent();
         if (cancelled()) {
             result.status = PdfExportVerification::Status::Cancelled;
             result.error = "PDF export cancelled before writing";
@@ -225,20 +235,26 @@ PdfExportVerification PdfExportVerifier::exportChecked(const fs::path& output, c
                 result.status == PdfExportVerification::Status::Warning) {
                 protectOutput(output, expected);
                 checkProtected(expected);
-                if (existingHash(output) != before)
-                    throw std::runtime_error(
-                            "Destination changed during export; existing file retained. Choose another filename.");
-                if (before) {
-                    if (g_rename(Util::toGFilename(staged).c_str(), Util::toGFilename(output).c_str()) != 0)
-                        throw std::runtime_error("Cannot publish checked PDF; existing output retained");
-                } else {
-                    fs::create_hard_link(staged, output);
+                destination.validateCurrent();
+                if (destination.existing) {
+                    // Move the actual named target aside without replacing anything. Validate
+                    // that moved file against chooser-time consent before publishing new bytes.
+                    displaced = directory / "previous-output.pdf";
+                    xoj::moveExportFileNoReplace(output, displaced);
+                    displacedTarget = true;
+                    if (xoj::inspectExportFile(displaced) != *destination.existing)
+                        throw std::runtime_error("The approved destination was replaced before publication");
+                    if (cancelled()) {
+                        result.status = PdfExportVerification::Status::Cancelled;
+                        throw std::runtime_error("PDF export cancelled before publication");
+                    }
                 }
+                fs::create_hard_link(staged, output);  // Atomic no-replace, including a late competing owner.
                 result.output = output;
                 result.published = true;
                 std::error_code cleanupError;
                 fs::remove(staged, cleanupError);
-                if (!cleanupError)
+                if (!cleanupError && displaced.empty())
                     fs::remove(directory, cleanupError);
                 if (cleanupError) {
                     result.status = PdfExportVerification::Status::Warning;
@@ -248,8 +264,23 @@ PdfExportVerification PdfExportVerifier::exportChecked(const fs::path& output, c
             }
         }
     } catch (const std::exception& error) {
-        result.status = PdfExportVerification::Status::Failed;
+        if (result.status != PdfExportVerification::Status::Cancelled)
+            result.status = PdfExportVerification::Status::Failed;
         result.error = error.what();
+        if (displacedTarget) {
+            try {
+                xoj::moveExportFileNoReplace(displaced, output);
+                displacedTarget = false;
+            } catch (const std::exception& restoreError) {
+                result.warnings.emplace_back(
+                        std::string("Previous destination could not be restored without replacing another file: ") +
+                        restoreError.what());
+            }
+        }
+    }
+    if (displacedTarget) {
+        result.recoveryFiles.push_back(displaced);
+        result.warnings.emplace_back("Previous destination retained for recovery: " + displaced.string());
     }
     if (!result.published && !staged.empty() && fs::exists(staged)) {
         result.output = staged;

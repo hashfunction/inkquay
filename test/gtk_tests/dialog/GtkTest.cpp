@@ -8,11 +8,19 @@
 void GtkTest::SetUp() {
     argn = 1;
     argv = new char*[2];
-    argv[0] = strdup("xournalpp_test");
+    argv[0] = g_strdup("inkquay_test");
     argv[1] = nullptr;
-    app = gtk_application_new("com.trieflow.inkquay.test", G_APPLICATION_FLAGS_NONE);
+    app = gtk_application_new("com.trieflow.inkquay.test", G_APPLICATION_NON_UNIQUE);
     g_signal_connect(app, "activate", G_CALLBACK(applicationCallback), this);
     g_application_run(G_APPLICATION(app), argn, argv);
+}
+
+void GtkTest::TearDown() {
+    // A test must not leave registered windows/application state for another test process.
+    while (GList* windows = gtk_application_get_windows(app)) gtk_widget_destroy(GTK_WIDGET(windows->data));
+    g_object_unref(app);
+    g_free(argv[0]);
+    delete[] argv;
 }
 
 // This the callback in which the actual test is run

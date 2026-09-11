@@ -12,10 +12,12 @@
 #pragma once
 
 #include <functional>
+#include <memory>
 #include <optional>
 
 #include <gtk/gtk.h>  // for GtkWindow
 
+#include "util/ExportDestination.h"
 #include "util/raii/GtkWindowUPtr.h"
 
 #include "filesystem.h"  // for path
@@ -40,16 +42,30 @@ public:
     SaveExportDialog(Settings* settings, fs::path suggestedPath, const char* windowTitle, const char* buttonLabel,
                      std::function<bool(fs::path&, const char* filterName)> pathValidation,
                      std::function<void(std::optional<fs::path>)> callback);
-    ~SaveExportDialog() = default;
+    /// PDF exports receive the exact target inspected before the replacement question.
+    SaveExportDialog(Settings* settings, fs::path suggestedPath, const char* windowTitle, const char* buttonLabel,
+                     std::function<bool(fs::path&, const char* filterName)> pathValidation,
+                     std::function<void(std::optional<ExportDestination>)> callback);
+    ~SaveExportDialog();
 
     inline GtkWindow* getWindow() const { return window.get(); }
 
 private:
     /// Closes the dialog and calls the callback on `path`
-    void close(std::optional<fs::path> path);
+    void close(std::optional<ExportDestination> destination);
+    void inspectDestination(fs::path path);
+    void confirmDestination(ExportDestination destination);
+
+    // Only the GTK thread accesses owner. A pending file inspection can outlive the dialog.
+    struct InspectionState {
+        SaveExportDialog* owner;
+    };
+    std::shared_ptr<InspectionState> inspection;
+    bool inspectionPending = false;
+    bool needsExportConsent = true;
 
     xoj::util::GtkWindowUPtr window;
-    std::function<void(std::optional<fs::path>)> callback;
+    std::function<void(std::optional<ExportDestination>)> callback;
     std::function<bool(fs::path&, const char* filterName)> pathValidation;
     gulong signalId{};
 };
