@@ -27,8 +27,12 @@ LuaGObject, Lua plugins, audio and GTKSourceView resources are omitted from the
 InkQuay release configuration. GoogleTest is build/test-only, BSD-3-Clause;
 release builds require a system package and never silently download it.
 
-Modified application source and build scripts, applicable native corresponding
-source and complete notices must accompany the eventual GPL distribution.
-Product/support/privacy/source URLs are under https://inkquay.trieflow.com.
-The source URL is a release gate until root publishes and verifies the matching
-source bundle. This notice is an inventory starting point, not legal clearance.
+Original native, Cargo and Rust notice supplements are under
+licenses/supplement/originals; supplement/NOTICE-INDEX.json records their exact
+source paths and hashes. Existing notices remain intact. The source-input index
+identifies the exact retained native recipes and Cargo source archives; not every
+platform/dev/build dependency is linked into the application.
+
+Modified application source, native corresponding source, original notices and
+build/relink/repackage instructions: https://inkquay.trieflow.com/source
+The package's supplement/SOURCE-INPUTS.json identifies the matching source inputs.

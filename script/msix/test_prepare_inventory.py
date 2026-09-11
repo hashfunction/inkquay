@@ -130,6 +130,19 @@ class SourceStatusTests(unittest.TestCase):
         self.assertEqual(record["statusBytes"], len(raw))
         self.assertEqual(record["statusSha256"], hashlib.sha256(raw).hexdigest())
 
+    def test_original_notice_bytes_survive_autocrlf_checkout(self):
+        relative = "Release/notice-supplement/originals/native/COPYING"
+        original = b"Original upstream copyright\r\nLicensed as received.\r\n"
+        notice = self.source / relative
+        notice.parent.mkdir(parents=True)
+        notice.write_bytes(original)
+        subprocess.run(["git", "-C", str(self.source), "add", "."], check=True)
+        subprocess.run(["git", "-C", str(self.source), "commit", "-qm", "original notice"], check=True)
+        clone = self.source.parent / "notice checkout"
+        subprocess.run(["git", "clone", "-q", "--no-local", "-c", "core.autocrlf=true",
+                        str(self.source), str(clone)], check=True)
+        self.assertEqual((clone / relative).read_bytes(), original)
+
     def test_clean_checkout_writes_clean_evidence(self):
         evidence = self.source / "ignored-build" / "source-status.json"
         (self.source / ".git/info/exclude").write_text(

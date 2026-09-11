@@ -53,11 +53,17 @@ SOURCE_COPIES = {
     "share/inkquay/ui/pixmaps/com.trieflow.inkquay.png": "ui/pixmaps/com.trieflow.inkquay.png",
     "share/inkquay/ui/pixmaps/com.trieflow.inkquay.svg": "ui/pixmaps/com.trieflow.inkquay.svg",
 }
+NOTICE_SOURCE = "Release/notice-supplement"
+NOTICE_DESTINATION = "share/inkquay/licenses/supplement"
+for _notice_name in ("NOTICE-INDEX.json", "SOURCE-INPUTS.json", "README.txt"):
+    SOURCE_COPIES[f"{NOTICE_DESTINATION}/{_notice_name}"] = f"{NOTICE_SOURCE}/{_notice_name}"
 SOURCE_FILES = tuple(SOURCE_COPIES.values()) + (
     "Release/windows-dependencies.json",
     "src/core/control/Control.cpp",
     "script/inventoryWindows.py",
     "windows-setup/package.sh",
+    "script/msix/copy_notice_supplement.py",
+    "script/msix/msix_qualification.py",
     "CMakeLists.txt",
 )
 RUNTIME = {
@@ -211,6 +217,59 @@ def file_record(path):
         return _digest(stream)
 
 
+def notice_sources(source_root):
+    """Require the complete original-file map before copying or packaging."""
+    root = Path(source_root) / NOTICE_SOURCE
+    index = _load_json(root / "NOTICE-INDEX.json", "original notice index")
+    rows = index.get("files")
+    if (index.get("schemaVersion") != 1 or not isinstance(rows, list) or not rows
+            or type(index.get("fileCount")) is not int or index["fileCount"] != len(rows)):
+        raise ValueError("Incomplete original notice index")
+    expected, seen = {}, {}
+    for row in rows:
+        if not isinstance(row, dict):
+            raise ValueError("Invalid original notice row")
+        name = _checked_path(row.get("path"))
+        _register_path(name, seen)
+        if (not name.startswith("originals/") or type(row.get("bytes")) is not int
+                or row["bytes"] < 0 or not isinstance(row.get("sha256"), str)
+                or not re.fullmatch(r"[0-9a-f]{64}", row["sha256"])):
+            raise ValueError("Invalid original notice path/size/hash")
+        expected[name.removeprefix("originals/")] = {key: row[key] for key in ("bytes", "sha256")}
+    # Exact set equality rejects both omitted mappings and unindexed additions.
+    # Zero-byte original files are valid only at their recorded exact hash.
+    if inventory_tree(root / "originals") != expected:
+        raise ValueError("Original notice files differ from complete index")
+    return {f"{NOTICE_DESTINATION}/originals/{name}": f"{NOTICE_SOURCE}/originals/{name}"
+            for name in expected}
+
+
+def copy_notice_supplement(source_root, release):
+    source_root, release = Path(source_root), Path(release)
+    copies = notice_sources(source_root)
+    copies.update({target: source for target, source in SOURCE_COPIES.items()
+                   if target.startswith(NOTICE_DESTINATION + "/")})
+    measured = {target: file_record(source_root / source) for target, source in copies.items()}
+    parent = release / NOTICE_DESTINATION
+    for ancestor in parent.absolute().parents:
+        if ancestor.exists() or os.path.lexists(ancestor):
+            _reject_link(ancestor)
+    if os.path.lexists(parent):
+        raise ValueError("Notice destination already exists; preserving prior bytes")
+    parent.mkdir(parents=True)
+    for target, source in copies.items():
+        path = release / target
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with _regular_stream(source_root / source) as original, path.open("xb") as output:
+            shutil.copyfileobj(original, output, 1024 * 1024)
+        if file_record(path) != measured[target]:
+            raise ValueError("Original notice changed while copying")
+    expected = {name.removeprefix(NOTICE_DESTINATION + "/"): value for name, value in measured.items()}
+    if inventory_tree(parent) != expected:
+        raise ValueError("Copied notice supplement differs from exact sources")
+    return measured
+
+
 def source_inputs(source_root):
     source_root = Path(source_root)
     control = (source_root / "src/core/control/Control.cpp").read_text(encoding="utf-8")
@@ -223,7 +282,8 @@ def source_inputs(source_root):
         raise ValueError(
             "Actual application title differs from exact InkQuay qualification title"
         )
-    return {name: file_record(source_root / name) for name in SOURCE_FILES}
+    names = tuple(SOURCE_FILES) + tuple(notice_sources(source_root).values())
+    return {name: file_record(source_root / name) for name in names}
 
 
 def create_input_inventory(release, source_root, source_commit):
@@ -235,7 +295,8 @@ def create_input_inventory(release, source_root, source_commit):
         if name not in files or files[name]["bytes"] == 0:
             raise ValueError(f"Missing runtime/resource/notice: {name}")
     sources = source_inputs(source_root)
-    for staged, original in SOURCE_COPIES.items():
+    copies = dict(SOURCE_COPIES, **notice_sources(source_root))
+    for staged, original in copies.items():
         if files.get(staged) != sources[original]:
             raise ValueError(
                 f"Original source notice/artwork changed or missing: {original}"
@@ -253,6 +314,18 @@ def create_input_inventory(release, source_root, source_commit):
         native.get("packages"), dict
     ):
         raise ValueError("Missing complete native inventory files/packages")
+    source_index = _load_json(source_root / NOTICE_SOURCE / "SOURCE-INPUTS.json", "retained source-input index")
+    if (source_index.get("schemaVersion") != 1
+            or source_index.get("sourceUrl") != "https://inkquay.trieflow.com/source"
+            or not isinstance(source_index.get("nativeOwners"), list)):
+        raise ValueError("Invalid retained source-input index")
+    source_versions = {}
+    for owner in source_index["nativeOwners"]:
+        if (not isinstance(owner, dict) or not isinstance(owner.get("package"), str)
+                or not owner["package"] or owner["package"] in source_versions
+                or not isinstance(owner.get("version"), str) or not owner["version"]):
+            raise ValueError("Invalid or duplicate retained source owner")
+        source_versions[owner["package"]] = owner["version"]
     built = {
         "bin/inkquay.exe": native.get("builtApplication", {}).get("sha256"),
         "bin/inkquay-wrapper.exe": native.get("builtWrapper", {}).get("sha256"),
@@ -283,6 +356,8 @@ def create_input_inventory(release, source_root, source_commit):
                 raise ValueError(
                     "Native owner differs from installed package version snapshot"
                 )
+            if source_versions.get(package) != row["packageVersion"]:
+                raise ValueError(f"Native owner/version has no matching retained source: {package}")
         elif Path(name).suffix.lower() in (".exe", ".dll"):
             if built.get(name) != row["sha256"]:
                 raise ValueError(
