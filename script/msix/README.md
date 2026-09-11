@@ -70,3 +70,17 @@ byte count and SHA-256), so the metadata-only artifact identifies build tooling
 that writes outside ignored build directories. Dependency setup records now go
 to ignored `build-evidence` paths rather than creating an untracked file under
 `Release`.
+
+### Consistent Windows checkout bytes
+
+Windows run `34615260594` built and passed native tests, then rejected 1,183
+modified tracked files. Checkout used Git for Windows 2.55.0.windows.5 while
+native inventory used MSYS Git 2.55.0. A real-repository regression reproduces
+the CRLF checkout mismatch under their differing `core.autocrlf` defaults.
+The tracked attributes now require LF for detected text; binary files and raw
+compiler/test logs retain their bytes. Git treats only the declared text EOL
+representation as checkout metadata; other content changes are not ignored or reset.
+The workflow records relevant Git configuration and requires a clean source
+checkout before dependency inventory/configuration, as well as at staging.
+The exact current Windows checkout and post-build cleanliness still require a
+fresh native run; the local regression alone is not native qualification.

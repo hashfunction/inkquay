@@ -1,5 +1,9 @@
+# Keep Git for Windows and MSYS Git on identical source bytes regardless of
+# their different core.autocrlf defaults. Auto detection preserves binary files.
+* text=auto eol=lf
+
 # Preserve raw compiler/test evidence, including tool-emitted trailing spaces.
-Release/verification/*.log -whitespace
+Release/verification/*.log -text -whitespace
 
 # Windows build scripts require LF checkout.
 *.sh text eol=lf

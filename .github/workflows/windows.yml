@@ -23,6 +23,16 @@ jobs:
           mkdir -p build-evidence
           git --version > build-evidence/git-version.txt
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          command -v git > build-evidence/git-executable.txt
+          git config --show-origin --get-regexp '^core\.(autocrlf|eol|filemode)$' > build-evidence/git-checkout-config.txt || test "$?" -eq 1
+          python - <<'PYTHON'
+          import os
+          from pathlib import Path
+          import sys
+          sys.path.insert(0, "script/msix")
+          from prepare_inventory import require_clean_source
+          require_clean_source(Path.cwd(), os.environ["GITHUB_SHA"], Path("build-evidence/source-status-before-build.json"))
+          PYTHON
           pacman -Q > build-evidence/msys2-installed-packages.txt
           pacman -Qi > build-evidence/msys2-package-metadata.txt
           bash script/record-msys2-inputs.sh

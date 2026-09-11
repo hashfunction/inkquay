@@ -35,6 +35,44 @@ class SourceStatusTests(unittest.TestCase):
             ["git", "-C", str(self.source), "rev-parse", "HEAD"], text=True
         ).strip()
 
+    def test_windows_and_msys_checkout_rules_produce_the_same_clean_bytes(self):
+        attributes = Path(__file__).resolve().parents[2] / ".gitattributes"
+        (self.source / ".gitattributes").write_bytes(attributes.read_bytes())
+        (self.source / "sample.png").write_bytes(b"\x89PNG\r\n\x1a\n\x00binary\r\n")
+        log = self.source / "Release/verification/raw.log"
+        log.parent.mkdir(parents=True)
+        log.write_bytes(b"native raw output\r\nwith trailing spaces  \r\n")
+        subprocess.run(["git", "-C", str(self.source), "add", "."], check=True)
+        subprocess.run(["git", "-C", str(self.source), "commit", "-qm", "checkout policy"], check=True)
+        clone = self.source.parent / "windows checkout"
+        subprocess.run(["git", "clone", "-q", "--no-local", "-c", "core.autocrlf=true",
+                        str(self.source), str(clone)], check=True)
+        # actions/checkout uses Git for Windows; the native build uses MSYS Git.
+        # A tracked policy must produce identical bytes under both defaults.
+        self.assertEqual((clone / "tracked.txt").read_bytes(), b"original\n")
+        self.assertEqual((clone / "sample.png").read_bytes(), (self.source / "sample.png").read_bytes())
+        self.assertEqual((clone / "Release/verification/raw.log").read_bytes(), log.read_bytes())
+        commit = subprocess.check_output(["git", "-C", str(clone), "rev-parse", "HEAD"], text=True).strip()
+        for autocrlf in ("true", "false"):
+            subprocess.run(["git", "-C", str(clone), "config", "core.autocrlf", autocrlf], check=True)
+            self.assertTrue(prepare_inventory.collect_source_status(clone, commit)["clean"], autocrlf)
+
+        (clone / "Release/verification/raw.log").write_bytes(
+            b"changed raw output\r\nwith trailing spaces   \r\n"
+        )
+        self.assertFalse(prepare_inventory.collect_source_status(clone, commit)["clean"])
+        subprocess.run(
+            ["git", "-C", str(clone), "checkout", "--", "Release/verification/raw.log"],
+            check=True,
+        )
+        (clone / "sample.png").write_bytes(b"\x89PNG\r\n\x1a\n\x00changed binary\r\n")
+        self.assertFalse(prepare_inventory.collect_source_status(clone, commit)["clean"])
+        subprocess.run(
+            ["git", "-C", str(clone), "checkout", "--", "sample.png"], check=True
+        )
+        (clone / "tracked.txt").write_bytes(b"actual source modification\n")
+        self.assertFalse(prepare_inventory.collect_source_status(clone, commit)["clean"])
+
     def test_dirty_checkout_records_exact_status_paths_and_stays_rejected(self):
         (self.source / ".git/info/exclude").write_text(
             "/evidence/\n", encoding="utf-8"
