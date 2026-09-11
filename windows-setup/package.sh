@@ -72,6 +72,14 @@ cp -r "$prefix"/share/glib-2.0 "$setup_dir"/share/
 echo "copy poppler shared"
 cp -r "$prefix"/share/poppler "$setup_dir"/share/
 
+echo "copy font configuration and included rules"
+# libfontconfig resolves ../etc/fonts relative to its DLL on Windows. Preserve
+# the package configuration and materialize any conf.d links in the app stage.
+mkdir -p "$setup_dir/etc" "$setup_dir/share/xml"
+cp -Lr "$prefix/etc/fonts" "$setup_dir/etc/"
+cp -Lr "$prefix/share/fontconfig" "$setup_dir/share/"
+cp -Lr "$prefix/share/xml/fontconfig" "$setup_dir/share/xml/"
+
 echo "copy gspawn-win64-helper"
 cp "$prefix"/bin/gspawn-win64-helper{,-console}.exe "$setup_dir"/bin/
 

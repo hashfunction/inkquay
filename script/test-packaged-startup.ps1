@@ -9,6 +9,8 @@ $env:LANG = 'C'
 $env:LANGUAGE = 'C'
 New-Item -ItemType Directory -Force $env:APPDATA | Out-Null
 $env:Path = "$env:SystemRoot\System32;$env:SystemRoot"
+# A runner's build environment must not provide the missing product config.
+Remove-Item Env:FONTCONFIG_FILE, Env:FONTCONFIG_PATH -ErrorAction SilentlyContinue
 $process = Start-Process $executable -PassThru -RedirectStandardOutput 'build-evidence/startup-output.txt' -RedirectStandardError 'build-evidence/startup-error.txt'
 try {
   $deadline = (Get-Date).AddSeconds(45)
@@ -23,6 +25,7 @@ try {
   Start-Sleep -Seconds 3
   $process.Refresh()
   if ($process.HasExited -or $process.MainWindowTitle -cne 'Unsaved Document - InkQuay') { throw 'InkQuay did not retain its actual empty-document window.' }
+  if ((Get-Content 'build-evidence/startup-error.txt' -Raw) -match 'Fontconfig error:') { throw 'The staged app reported a Fontconfig configuration error.' }
   @{ source_commit=$env:GITHUB_SHA; generated_at_utc=[DateTime]::UtcNow.ToString('o'); windows_native_startup=$true; window_title=$process.MainWindowTitle; executable_sha256=(Get-FileHash $executable -Algorithm SHA256).Hash; interactive_pdf_workflows_verified=$false; physical_tablet_tested=$false; native_source_clearance=$false; msix_built=$false; submitted=$false } | ConvertTo-Json | Set-Content build-evidence/windows-startup.json -Encoding utf8NoBOM
 } finally {
   if (-not $process.HasExited) {

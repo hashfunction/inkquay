@@ -8,6 +8,35 @@ from pathlib import Path
 import subprocess
 import sys
 
+REQUIRED_PACKAGE_FILES = ('bin/libfontconfig-1.dll', 'bin/gdbus.exe', 'etc/fonts/fonts.conf')
+
+
+def pacman_prefix(prefix):
+    # MSYS2 converts MSYSTEM_PREFIX when it launches native Python. Convert the
+    # actual native path back once; pacman's file inventory uses POSIX paths.
+    result = subprocess.check_output(['cygpath', '-u', str(prefix)], text=True, encoding='utf-8').strip()
+    if not result.startswith('/') or result.startswith('//') or '\n' in result or '\r' in result or ':' in result or '\\' in result:
+        raise ValueError('cygpath did not return one absolute POSIX package prefix')
+    return result.rstrip('/')
+
+
+def validate_provenance(files, msys_prefix, owners):
+    if not any(path.startswith(msys_prefix + '/') for path in owners):
+        raise ValueError('No installed files match the package ownership prefix: ' + msys_prefix)
+    rows = {row['path']: row for row in files}
+    for required in REQUIRED_PACKAGE_FILES:
+        if required not in rows or not rows[required].get('package'):
+            raise ValueError('Required staged runtime/configuration has no verified package owner: ' + required)
+    for row in files:
+        if row.get('sourcePath') and Path(row['path']).suffix.lower() in ('.dll', '.exe') and not row.get('package'):
+            raise ValueError('Copied runtime has no unambiguous package owner: ' + row['path'])
+    return {
+        'stagedFiles': len(files),
+        'byteMatchedSourceFiles': sum('sourcePath' in row for row in files),
+        'packageOwnedFiles': sum('package' in row for row in files),
+        'unresolvedFiles': sum('package' not in row for row in files),
+    }
+
 
 def digest(path):
     checksum = hashlib.sha256()
@@ -63,12 +92,16 @@ def main():
     # One installed-file snapshot replaces a process launch for every copied icon
     # and DLL. Byte comparisons still decide whether package provenance applies.
     owners = package_file_owners(subprocess.check_output(['pacman', '-Ql'], text=True, encoding='utf-8'))
-    files = inventory_files(stage, prefix, os.environ['MSYSTEM_PREFIX'], packages, owners)
+    msys_prefix = pacman_prefix(prefix)
+    files = inventory_files(stage, prefix, msys_prefix, packages, owners)
+    counts = validate_provenance(files, msys_prefix, owners)
     result = {
-        'schemaVersion': 1,
+        'schemaVersion': 2,
         'recordedAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
         'sourceCommit': source_commit,
         'platform': sys.platform, 'msystem': os.environ['MSYSTEM'], 'packages': packages,
+        'nativePackagePrefix': str(prefix), 'pacmanPackagePrefix': msys_prefix,
+        'provenanceCounts': counts,
         'files': files, 'licenseAuditComplete': False,
         'remainingGates': ['Audit every emitted library/resource and its corresponding source obligations', 'Execute the staged application and PDF/pen tests', 'Validate final MSIX identity, installation, signing and certification'],
         'omitted': ['LuaGObject and plugins', 'Audio support', 'GTKSourceView and GTK demo applications'],

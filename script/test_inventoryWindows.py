@@ -6,6 +6,30 @@ import inventoryWindows as inventory
 
 
 class NativeInventoryTests(unittest.TestCase):
+    def test_native_prefix_is_converted_once_instead_of_using_converted_environment(self):
+        with mock.patch.dict(inventory.os.environ, {'MSYSTEM_PREFIX': 'D:/a/_temp/msys64/mingw64'}), mock.patch.object(inventory.subprocess, 'check_output', return_value='/mingw64\n') as convert:
+            self.assertEqual(inventory.pacman_prefix(Path('D:/a/_temp/msys64/mingw64')), '/mingw64')
+        convert.assert_called_once_with(['cygpath', '-u', str(Path('D:/a/_temp/msys64/mingw64'))], text=True, encoding='utf-8')
+
+    def test_non_posix_conversion_and_unmatched_owner_prefix_fail(self):
+        for output in ('D:/a/_temp/msys64/mingw64\n', '/mingw64\n/unexpected', ''):
+            with self.subTest(output=output), mock.patch.object(inventory.subprocess, 'check_output', return_value=output), self.assertRaises(ValueError):
+                inventory.pacman_prefix(Path('native-prefix'))
+        with self.assertRaisesRegex(ValueError, 'package ownership prefix'):
+            inventory.validate_provenance([], '/wrong', {'/mingw64/bin/a.dll': {'alpha'}})
+
+    def test_required_font_config_and_runtime_owner_must_match(self):
+        owners = {'/mingw64/bin/libfontconfig-1.dll': {'alpha'}}
+        files = [{'path': name, 'sourcePath': name, 'package': 'alpha'} for name in inventory.REQUIRED_PACKAGE_FILES]
+        result = inventory.validate_provenance(files, '/mingw64', owners)
+        self.assertEqual(result['packageOwnedFiles'], len(files))
+        for missing in inventory.REQUIRED_PACKAGE_FILES:
+            with self.subTest(missing=missing), self.assertRaises(ValueError):
+                inventory.validate_provenance([row for row in files if row['path'] != missing], '/mingw64', owners)
+        for unowned in ('bin/another.dll', 'bin/helper.exe'):
+            with self.subTest(unowned=unowned), self.assertRaisesRegex(ValueError, 'package owner'):
+                inventory.validate_provenance(files + [{'path': unowned, 'sourcePath': unowned}], '/mingw64', owners)
+
     def test_ownership_index_preserves_spaces_unicode_and_ambiguity(self):
         result = inventory.package_file_owners('alpha /mingw64/share/Résumé note.txt\nbeta /mingw64/share/shared.txt\nalpha /mingw64/share/shared.txt\n')
         self.assertEqual(result['/mingw64/share/Résumé note.txt'], {'alpha'})
