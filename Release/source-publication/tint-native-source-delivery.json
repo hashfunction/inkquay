@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "product": "PixelQuay",
+  "verifiedAt": "2026-09-11T15:10:23.411561+00:00",
+  "releaseUrl": "https://github.com/hashfunction/pixelquay/releases/tag/native-sources-2026-09-11-c9f4add",
+  "tag": "native-sources-2026-09-11-c9f4add",
+  "prerelease": true,
+  "applicationSnapshot": "c9f4add7101993c532634c386959fe06f8208aa1",
+  "applicationSourceUrl": "https://github.com/hashfunction/pixelquay/tree/c9f4add7101993c532634c386959fe06f8208aa1",
+  "sourceEvidenceSha256": "3e6086b34d28cb33650ccabb1a371f96c63da2dfcaec5fe394730ccae5159d5f",
+  "sourceArchiveCount": 63,
+  "sourceArchiveBytes": 524235576,
+  "artifacts": [
+    {
+      "name": "pixelquay-native-sources-c9f4add.tar",
+      "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar",
+      "bytes": 524318720,
+      "sha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+      "unauthenticatedDownloadVerified": true
+    },
+    {
+      "name": "source-manifest.json",
+      "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/source-manifest.json",
+      "bytes": 24904,
+      "sha256": "0f18d5b71467c113b5b4e112d449a6008715bc550ba2a495cb28de9ada8d8933",
+      "unauthenticatedDownloadVerified": true
+    },
+    {
+      "name": "SHA256SUMS",
+      "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/SHA256SUMS",
+      "bytes": 190,
+      "sha256": "635887749d7309275db7d9d908508cf38cffd47ee3e01b0fa46cd501bebe509f",
+      "unauthenticatedDownloadVerified": true
+    }
+  ],
+  "completeCorrespondingSource": false,
+  "licenseConversionApplied": false,
+  "containsApplicationBinaries": false,
+  "containsBinaryPackageArchives": false,
+  "independentReview": "../review-native-source-delivery.md",
+  "remaining": [
+    "Complete corresponding-source assembly and toolchain/build parity",
+    "Relinking/repackaging instructions and verification",
+    "Combined-license selections",
+    "Application workflow and Store release gates"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-pango-1.58.2-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-pango-1.58.2-1-any.pkg.tar.zst",
+  "bytes": 697948,
+  "licenses": [
+    "spdx:LGPL-2.1"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 7417,
+      "sha256": "df346959eabd0f985d569e97904cf23a72d6dfa2f37ccca5bed7ba18f6127b9e"
+    },
+    ".PKGINFO": {
+      "bytes": 877,
+      "sha256": "42efc80998ab7f14aead60f86ac9c4ced4b6ef87b2205bb20eac4d9bf4b4d425"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/pango/COPYING",
+      "bytes": 25292,
+      "path": "binary-metadata/mingw-w64-x86_64-pango/original-notices/mingw64/share/licenses/pango/COPYING",
+      "sha256": "d245807f90032872d1438d741ed21e2490e1175dc8aa3afa5ddb6c8e529b58e5"
+    }
+  ],
+  "package": "mingw-w64-x86_64-pango",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/31154837955/job/92791986382)",
+  "pkgbase": "mingw-w64-pango",
+  "pkgbuildSha256": "7c477eff7aab5a3932203eac21096fc9c70621f51ba223232f334b3e6338dd9b",
+  "sha256": "6aa68db02f6158dba802da406d25b29650011beb2d5d1b0a0050081e19874e57",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libpango-1.0-0.dll",
+      "bytes": 434535,
+      "path": "bin/libpango-1.0-0.dll",
+      "sha256": "078881c139e7dd422c4cb5f9c43b939712eb7ad4f3d7d25c41639873e8aec6d6"
+    },
+    {
+      "archivePath": "mingw64/bin/libpangocairo-1.0-0.dll",
+      "bytes": 83118,
+      "path": "bin/libpangocairo-1.0-0.dll",
+      "sha256": "b9f800abeafd27c07dc9f9fa4a41bb614564038ce7ac5753ca6c60c1d7d555cc"
+    },
+    {
+      "archivePath": "mingw64/bin/libpangoft2-1.0-0.dll",
+      "bytes": 111841,
+      "path": "bin/libpangoft2-1.0-0.dll",
+      "sha256": "38602e75c85e149bf7294bccb8792f54299daed45509a8ac4b3a18e3921ec56e"
+    },
+    {
+      "archivePath": "mingw64/bin/libpangowin32-1.0-0.dll",
+      "bytes": 111376,
+      "path": "bin/libpangowin32-1.0-0.dll",
+      "sha256": "2fb6d21cce830182c9d4bf22015dec9abbb0846ebce828ca0a5d4cefc74e46c6"
+    }
+  ],
+  "version": "1.58.2-1"
+}

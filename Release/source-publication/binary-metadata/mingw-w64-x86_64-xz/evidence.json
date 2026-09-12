@@ -1,0 +1,66 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-xz-5.8.4-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-xz-5.8.4-1-any.pkg.tar.zst",
+  "bytes": 433655,
+  "licenses": [
+    "spdx:0BSD AND LGPL-2.1-or-later AND GPL-2.0-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6858,
+      "sha256": "175ff1706bab45e9c0b67689159471914b1ab5a2bd624b485df3f42cc46b49a7"
+    },
+    ".PKGINFO": {
+      "bytes": 660,
+      "sha256": "262a34eba4127122e47bf7de178649e4c77cd18411a6429a36fc79064a71e93e"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/xz/COPYING",
+      "bytes": 3119,
+      "path": "binary-metadata/mingw-w64-x86_64-xz/original-notices/mingw64/share/licenses/xz/COPYING",
+      "sha256": "616a3ad264ce29b8f1cb97e53037b139d406899ca8d1f799651e17bfa09830b8"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/xz/COPYING.0BSD",
+      "bytes": 607,
+      "path": "binary-metadata/mingw-w64-x86_64-xz/original-notices/mingw64/share/licenses/xz/COPYING.0BSD",
+      "sha256": "0b01625d853911cd0e2e088dcfb743261034a091bb379246cb25a14cc4c74bf1"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/xz/COPYING.GPLv2",
+      "bytes": 17984,
+      "path": "binary-metadata/mingw-w64-x86_64-xz/original-notices/mingw64/share/licenses/xz/COPYING.GPLv2",
+      "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/xz/COPYING.GPLv3",
+      "bytes": 35149,
+      "path": "binary-metadata/mingw-w64-x86_64-xz/original-notices/mingw64/share/licenses/xz/COPYING.GPLv3",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/xz/COPYING.LGPLv2.1",
+      "bytes": 26419,
+      "path": "binary-metadata/mingw-w64-x86_64-xz/original-notices/mingw64/share/licenses/xz/COPYING.LGPLv2.1",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    }
+  ],
+  "package": "mingw-w64-x86_64-xz",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/34389532584/job/102594147019)",
+  "pkgbase": "mingw-w64-xz",
+  "pkgbuildSha256": "b93950051015573095f0d9cd50428ed6dd80d726c2786a2eeef005257888b3ba",
+  "sha256": "2de0f26da60b7ff7aa192a226330d7de6b1099cb9b9f9de4145affb80146bbc8",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/liblzma-5.dll",
+      "bytes": 190709,
+      "path": "bin/liblzma-5.dll",
+      "sha256": "ccb6a179acf35e704b2ffd7f232677982c4856bd1dda1341713a27518cf97ce1"
+    }
+  ],
+  "version": "5.8.4-1"
+}

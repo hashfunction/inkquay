@@ -1,0 +1,35 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-p11-kit-0.26.5-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-p11-kit-0.26.5-1-any.pkg.tar.zst",
+  "bytes": 650805,
+  "licenses": [
+    "spdx:BSD-3-Clause"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6490,
+      "sha256": "fd8bbc9d1df5376f52ab13d58c3ddcd27fd722cb23e3ad8a496a84b47785207d"
+    },
+    ".PKGINFO": {
+      "bytes": 713,
+      "sha256": "da37b7e41fc951b8edc0d336ee78d5fc33d75fa3f538b25e3c4b68f78e82ee55"
+    }
+  },
+  "originalNotices": [],
+  "package": "mingw-w64-x86_64-p11-kit",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/31203153642/job/92947745365)",
+  "pkgbase": "mingw-w64-p11-kit",
+  "pkgbuildSha256": "98fa23420fa595ea71cf51fdb3f5cc2bcd77a0b996e36549057fe82b8c1e723f",
+  "sha256": "171b877586efd64888648007a56c3a263eb2d4abc82594c90d30b1b7e4b9f5eb",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libp11-kit-0.dll",
+      "bytes": 1594910,
+      "path": "bin/libp11-kit-0.dll",
+      "sha256": "ada3949f3763db47a754eec56388f3305c41c259eb3bbae188a820fd01c5445b"
+    }
+  ],
+  "version": "0.26.5-1"
+}

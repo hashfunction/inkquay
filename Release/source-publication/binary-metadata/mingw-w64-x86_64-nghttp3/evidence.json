@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-nghttp3-1.18.0-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-nghttp3-1.18.0-1-any.pkg.tar.zst",
+  "bytes": 141172,
+  "licenses": [
+    "spdx:MIT"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6733,
+      "sha256": "3bd6a83a89f09e3d2ab14d5c833564221141d0e541d4d3db2368670f4333a754"
+    },
+    ".PKGINFO": {
+      "bytes": 485,
+      "sha256": "1983ea2c66d755e13225d3bb2e5edeb20ac87ba7042a9ee115fa5342d053bd3f"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/nghttp3/COPYING",
+      "bytes": 1081,
+      "path": "binary-metadata/mingw-w64-x86_64-nghttp3/original-notices/mingw64/share/licenses/nghttp3/COPYING",
+      "sha256": "58cc3fc8c6d6cb2485ab35eb5918e849b5bf1e56522974e106d7a39a88d61dcd"
+    }
+  ],
+  "package": "mingw-w64-x86_64-nghttp3",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/30354342574/job/90258936967)",
+  "pkgbase": "mingw-w64-nghttp3",
+  "pkgbuildSha256": "adcd40ca02d70b22eab0be56688af5f4da6f886366821759b4c3954e6d36adf5",
+  "sha256": "00c55f940bb8d2f4b06690858efcaa42158dc33ccb7b7b8412e05659d3e22802",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libnghttp3-9.dll",
+      "bytes": 207858,
+      "path": "bin/libnghttp3-9.dll",
+      "sha256": "f94b97f5f882e70c13c2f540e2bcb3da5f5bba0e2e40dcd784dd5ef65771f001"
+    }
+  ],
+  "version": "1.18.0-1"
+}

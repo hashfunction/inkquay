@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-lerc-4.1.1-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-lerc-4.1.1-1-any.pkg.tar.zst",
+  "bytes": 312675,
+  "licenses": [
+    "spdx:Apache-2.0"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6729,
+      "sha256": "f89b82d0b6db911b23b16e0dce14e1958c4b228121c5c9cdf207cced21823853"
+    },
+    ".PKGINFO": {
+      "bytes": 533,
+      "sha256": "8bea2777ac34009da9d70b58991a5e41ca65731d8116bffc452db53ffec0e3af"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/lerc/LICENSE",
+      "bytes": 9198,
+      "path": "binary-metadata/mingw-w64-x86_64-lerc/original-notices/mingw64/share/licenses/lerc/LICENSE",
+      "sha256": "77a8b761727c75e2167b15bfdf61b2c0bcf8792271228bebe80779106ad00671"
+    }
+  ],
+  "package": "mingw-w64-x86_64-lerc",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/28847968752/job/85556200187)",
+  "pkgbase": "mingw-w64-lerc",
+  "pkgbuildSha256": "d477c9d1c50148da657e69bd428783f71515622dea8bf091d7cba93e2a069de7",
+  "sha256": "5bc170650bc02812a7c674a5f7b8ff2781b4bfa259ab2da2264c3008e2a04c72",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libLerc.dll",
+      "bytes": 804265,
+      "path": "bin/libLerc.dll",
+      "sha256": "6887fb5aeabf382a835a4cb693025e8d48d9c90e82ca4eae5d2d8ffb70c6ca9a"
+    }
+  ],
+  "version": "4.1.1-1"
+}

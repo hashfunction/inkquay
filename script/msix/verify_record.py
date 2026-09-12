@@ -13,6 +13,9 @@ parser.add_argument("--record", type=Path, required=True)
 parser.add_argument("--package", type=Path, required=True)
 parser.add_argument("--source-commit", required=True)
 parser.add_argument("--installed-root", type=Path)
+parser.add_argument(
+    "--identity-mode", choices=("qualification", "store"), default="qualification"
+)
 args = parser.parse_args()
 source = Path(__file__).resolve().parents[2]
 actual = subprocess.run(
@@ -40,10 +43,13 @@ verify_record_inputs(
     source / "build-evidence/package-inventory.json",
     source / "build-evidence/windows-startup.json",
     source,
+    args.identity_mode,
 )
 if args.installed_root:
     verify_installed(
-        args.installed_root, _load_json(args.record, "qualification record")["payload"]
+        args.installed_root,
+        _load_json(args.record, "qualification record")["payload"],
+        args.identity_mode,
     )
 print(
     "PASS: exact source/stage/notices/startup/package binding reverified before installation"

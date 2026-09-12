@@ -1,0 +1,708 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-gtk3-3.24.52-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-gtk3-3.24.52-1-any.pkg.tar.zst",
+  "bytes": 11595280,
+  "licenses": [
+    "spdx:LGPL-2.1-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 8610,
+      "sha256": "5274dac852edec423c95ee724fe49b53eb748bb5e03f6f65e3dbcb652a1c6f3f"
+    },
+    ".PKGINFO": {
+      "bytes": 1082,
+      "sha256": "75ea01d6cd7aa5ffda35be12db3c2964ec15325db05043f6e9eb3be0d630161e"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/gtk3/COPYING",
+      "bytes": 25383,
+      "path": "binary-metadata/mingw-w64-x86_64-gtk3/original-notices/mingw64/share/licenses/gtk3/COPYING",
+      "sha256": "b7993225104d90ddd8024fd838faf300bea5e83d91203eab98e29512acebd69c"
+    }
+  ],
+  "package": "mingw-w64-x86_64-gtk3",
+  "packager": "CI (msys2/msys2-autobuild/b28ef76c/23565667578)",
+  "pkgbase": "mingw-w64-gtk3",
+  "pkgbuildSha256": "9e3cd207ab5e0dd95ff48dd74e15af0f0328966c118a9006ca57d2049c327577",
+  "sha256": "3a03940cb82203466d7ebf5f61a00ab51b6ef8d9b6e7bd94a6eaaa46ec6e7aeb",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libgdk-3-0.dll",
+      "bytes": 1384574,
+      "path": "bin/libgdk-3-0.dll",
+      "sha256": "2deedc5411a5b452f1aa35347984fef6293ac87a17c54a7676a81547b19362fd"
+    },
+    {
+      "archivePath": "mingw64/bin/libgtk-3-0.dll",
+      "bytes": 7165030,
+      "path": "bin/libgtk-3-0.dll",
+      "sha256": "e2cc2698e2e04214e04b18d685550b76558423ebdb2b0a0782171876fe13eb9c"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/schemas/org.gtk.Demo.gschema.xml",
+      "bytes": 618,
+      "path": "share/glib-2.0/schemas/org.gtk.Demo.gschema.xml",
+      "sha256": "f9e3f8512354afa545267568e17d91de66f89806c55921c6fc55e018995d8be4"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/schemas/org.gtk.exampleapp.gschema.xml",
+      "bytes": 845,
+      "path": "share/glib-2.0/schemas/org.gtk.exampleapp.gschema.xml",
+      "sha256": "0d9746cf7ab1afee3599587aaa0c39929a410fc650c6f1ff1e103c8fd5c9e14b"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/schemas/org.gtk.Settings.ColorChooser.gschema.xml",
+      "bytes": 931,
+      "path": "share/glib-2.0/schemas/org.gtk.Settings.ColorChooser.gschema.xml",
+      "sha256": "e476913ef61e6719ff56c2e4c5b8b276af3020bfb0d007263c2a241835730882"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/schemas/org.gtk.Settings.Debug.gschema.xml",
+      "bytes": 833,
+      "path": "share/glib-2.0/schemas/org.gtk.Settings.Debug.gschema.xml",
+      "sha256": "de0685fdc2f6e890e32445a79aa938e5566b8dd406dd71d6c6a66c69e3f941e3"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/schemas/org.gtk.Settings.EmojiChooser.gschema.xml",
+      "bytes": 623,
+      "path": "share/glib-2.0/schemas/org.gtk.Settings.EmojiChooser.gschema.xml",
+      "sha256": "22aba28a5a78745d87eeded88f1b86f7ddea24b1b90771151ef494c660a1b591"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/schemas/org.gtk.Settings.FileChooser.gschema.xml",
+      "bytes": 6212,
+      "path": "share/glib-2.0/schemas/org.gtk.Settings.FileChooser.gschema.xml",
+      "sha256": "c7089f41d22b3854c05fe4996ff271949b40148a40b9c6f0ae0349792dc94b77"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/16x16/apps/gtk3-demo-symbolic.symbolic.png",
+      "bytes": 324,
+      "path": "share/icons/hicolor/16x16/apps/gtk3-demo-symbolic.symbolic.png",
+      "sha256": "f8d1b35e19a987a22b3b4a9bd666ced1551d812f2bb3be3e064cc0dfc4b70d24"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/16x16/apps/gtk3-demo.png",
+      "bytes": 874,
+      "path": "share/icons/hicolor/16x16/apps/gtk3-demo.png",
+      "sha256": "a8bf5a3c4db10cc10cf0b0778b03120bff74ebd1bac8aa1934dc749cb9b5bba2"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/16x16/apps/gtk3-widget-factory-symbolic.symbolic.png",
+      "bytes": 237,
+      "path": "share/icons/hicolor/16x16/apps/gtk3-widget-factory-symbolic.symbolic.png",
+      "sha256": "1181f481962d6d909ce4c54b7c2089944cb2a17054b866871c5682999adc54e1"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/16x16/apps/gtk3-widget-factory.png",
+      "bytes": 550,
+      "path": "share/icons/hicolor/16x16/apps/gtk3-widget-factory.png",
+      "sha256": "4a2f580124ee631cdc5428944ab390a3ddbb4b23da2a065db7dea4453518ec08"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/22x22/apps/gtk3-demo-symbolic.symbolic.png",
+      "bytes": 437,
+      "path": "share/icons/hicolor/22x22/apps/gtk3-demo-symbolic.symbolic.png",
+      "sha256": "1ef80a6b9eafeeaad19992a67cd55d11cf1bb98511bcbac73cc291818454a02b"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/22x22/apps/gtk3-demo.png",
+      "bytes": 1281,
+      "path": "share/icons/hicolor/22x22/apps/gtk3-demo.png",
+      "sha256": "bc5089aa0071c4f29b8264e0462a5a845d26b35d1eca3762bf4a56a5408ade57"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/22x22/apps/gtk3-widget-factory-symbolic.symbolic.png",
+      "bytes": 332,
+      "path": "share/icons/hicolor/22x22/apps/gtk3-widget-factory-symbolic.symbolic.png",
+      "sha256": "43696c8bebedb537f5ee248511e26334b3d70bd2f40f38a693bf4777b003a6cd"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/22x22/apps/gtk3-widget-factory.png",
+      "bytes": 685,
+      "path": "share/icons/hicolor/22x22/apps/gtk3-widget-factory.png",
+      "sha256": "e9fe1c862329f56ef99cb0bc0b32d21ef0c46fb23b3546c3c8386fe190c7927c"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/24x24/apps/gtk3-demo-symbolic.symbolic.png",
+      "bytes": 465,
+      "path": "share/icons/hicolor/24x24/apps/gtk3-demo-symbolic.symbolic.png",
+      "sha256": "2aff06a669b08ad4103d0fc20829e6591412a6284418b7ef899fafa9fd494596"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/24x24/apps/gtk3-demo.png",
+      "bytes": 1374,
+      "path": "share/icons/hicolor/24x24/apps/gtk3-demo.png",
+      "sha256": "02cc3b381a4afc61a7a0e4dc5c66ae1b0fe4bd1c3d7d3ba39c91894320b0dac6"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/24x24/apps/gtk3-widget-factory-symbolic.symbolic.png",
+      "bytes": 336,
+      "path": "share/icons/hicolor/24x24/apps/gtk3-widget-factory-symbolic.symbolic.png",
+      "sha256": "b5420c19113f6e656c6de9d615525806580f6c388a6faf0434af88b83285d885"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/24x24/apps/gtk3-widget-factory.png",
+      "bytes": 750,
+      "path": "share/icons/hicolor/24x24/apps/gtk3-widget-factory.png",
+      "sha256": "54ecf9f80df708bdc63ca13a17d48e8e9c6abb43ff123a7f7bc7916a88e49810"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/256x256/apps/gtk3-demo-symbolic.symbolic.png",
+      "bytes": 3937,
+      "path": "share/icons/hicolor/256x256/apps/gtk3-demo-symbolic.symbolic.png",
+      "sha256": "42259f61bcfea444b35ef71e900ca0fd65831b22acbea8f365c3e7079bd8fbf9"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/256x256/apps/gtk3-demo.png",
+      "bytes": 18667,
+      "path": "share/icons/hicolor/256x256/apps/gtk3-demo.png",
+      "sha256": "c1a0f98e2d9ccd06c773807a85312a0c5dcd19825431aca64ed1195452340093"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/256x256/apps/gtk3-widget-factory-symbolic.symbolic.png",
+      "bytes": 2950,
+      "path": "share/icons/hicolor/256x256/apps/gtk3-widget-factory-symbolic.symbolic.png",
+      "sha256": "ca8ddcbb900b492ccc6451f98ea5f07106d5adbdb139cb0c9e77b4cb69e57c83"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/256x256/apps/gtk3-widget-factory.png",
+      "bytes": 10864,
+      "path": "share/icons/hicolor/256x256/apps/gtk3-widget-factory.png",
+      "sha256": "db77f349df70ae6fd4b9581e6925840d5ce54de3244ce985c30c5e20cc327255"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/32x32/apps/gtk3-demo-symbolic.symbolic.png",
+      "bytes": 581,
+      "path": "share/icons/hicolor/32x32/apps/gtk3-demo-symbolic.symbolic.png",
+      "sha256": "208abe71b465c66d276dcce880e90ce703a12978f1ad1ffd3301ae2587a75484"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/32x32/apps/gtk3-demo.png",
+      "bytes": 1748,
+      "path": "share/icons/hicolor/32x32/apps/gtk3-demo.png",
+      "sha256": "176460f12685765e0fe82cc9f83d0e0ec17d9c99226287717b3485e9ad8f3ddd"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/32x32/apps/gtk3-widget-factory-symbolic.symbolic.png",
+      "bytes": 369,
+      "path": "share/icons/hicolor/32x32/apps/gtk3-widget-factory-symbolic.symbolic.png",
+      "sha256": "27dcb8c8c2b9067282f911973827c9114c1d4bce26f42cfcdf0410c2a8a68b43"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/32x32/apps/gtk3-widget-factory.png",
+      "bytes": 963,
+      "path": "share/icons/hicolor/32x32/apps/gtk3-widget-factory.png",
+      "sha256": "f5cabc6b4c0cdb7bad344ab929028359f3b90f243c77875d26711ed1de21d1ae"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/48x48/apps/gtk3-demo-symbolic.symbolic.png",
+      "bytes": 854,
+      "path": "share/icons/hicolor/48x48/apps/gtk3-demo-symbolic.symbolic.png",
+      "sha256": "f05210c4798e035c70faf2c927f25c03ad4d99899d3445cdf4e45db9dad22fa4"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/48x48/apps/gtk3-demo.png",
+      "bytes": 2640,
+      "path": "share/icons/hicolor/48x48/apps/gtk3-demo.png",
+      "sha256": "f411bf07f86a0721e87a4fa8b19bec50c23d1e9904db99a6a05253f9fff896bd"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/48x48/apps/gtk3-widget-factory-symbolic.symbolic.png",
+      "bytes": 495,
+      "path": "share/icons/hicolor/48x48/apps/gtk3-widget-factory-symbolic.symbolic.png",
+      "sha256": "7c5e5d9eec090969b1dc8643981b93165e3bb39d3e18f03c6a86f5acd367d63d"
+    },
+    {
+      "archivePath": "mingw64/share/icons/hicolor/48x48/apps/gtk3-widget-factory.png",
+      "bytes": 1260,
+      "path": "share/icons/hicolor/48x48/apps/gtk3-widget-factory.png",
+      "sha256": "539cdd2d667c31b5c7e616443d7b66385d733ade01842da55c3310e4ef8d8d3b"
+    },
+    {
+      "archivePath": "mingw64/share/locale/af/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 75965,
+      "path": "share/locale/af/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "2883c49e3ba25d5d2a5282af874d25c43f6aa7a4c34ffbd695d089510a58373a"
+    },
+    {
+      "archivePath": "mingw64/share/locale/af/LC_MESSAGES/gtk30.mo",
+      "bytes": 74735,
+      "path": "share/locale/af/LC_MESSAGES/gtk30.mo",
+      "sha256": "d03d76f56cc4ce833dbebd18b3c3e6013b0b7659b108e6a0c69016ad1c77810f"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ar/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 152742,
+      "path": "share/locale/ar/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "769e8ec5095ce2c7f34549c0b48960d394f068b3984cdb0cc33b287f0fd5e375"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ar/LC_MESSAGES/gtk30.mo",
+      "bytes": 86971,
+      "path": "share/locale/ar/LC_MESSAGES/gtk30.mo",
+      "sha256": "ac97bbde176b66c28045038f1b048a868ce4156d4f5d8a908ba0c88904af2f01"
+    },
+    {
+      "archivePath": "mingw64/share/locale/bn/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 236995,
+      "path": "share/locale/bn/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "df86e522b5fed704c328ce080e7351ad1ee53c18f77ae63c824a8fd75f1aa322"
+    },
+    {
+      "archivePath": "mingw64/share/locale/bn/LC_MESSAGES/gtk30.mo",
+      "bytes": 82289,
+      "path": "share/locale/bn/LC_MESSAGES/gtk30.mo",
+      "sha256": "8737b3c730d94aefbe61c6272d3137c6420963bec237d98329b96ea8f951d66b"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ca/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 213039,
+      "path": "share/locale/ca/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "44692fdd687bb517bec23f91c1b9b6b82b59dd7cddde6774a71606070ca83455"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ca/LC_MESSAGES/gtk30.mo",
+      "bytes": 111300,
+      "path": "share/locale/ca/LC_MESSAGES/gtk30.mo",
+      "sha256": "4b2cb2f579a78fc8ba3dc6814b6efcf74239ec09c1c5c89ffe467ac1b0d4b68c"
+    },
+    {
+      "archivePath": "mingw64/share/locale/cs/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 206944,
+      "path": "share/locale/cs/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "41a0a401c49586cec84e8bb7b892bbbee28114231b2cf5664b93416f2d1cba6f"
+    },
+    {
+      "archivePath": "mingw64/share/locale/cs/LC_MESSAGES/gtk30.mo",
+      "bytes": 110469,
+      "path": "share/locale/cs/LC_MESSAGES/gtk30.mo",
+      "sha256": "c123b27af61e75d5102b40f7487525c52db1a0f9ce0e81b9c24ed4367343eba2"
+    },
+    {
+      "archivePath": "mingw64/share/locale/da/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 200683,
+      "path": "share/locale/da/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "6496c9aed9d78f7bfce93194f2c456c6453d8a58ea1cb0635d36f3a452f32d40"
+    },
+    {
+      "archivePath": "mingw64/share/locale/da/LC_MESSAGES/gtk30.mo",
+      "bytes": 107179,
+      "path": "share/locale/da/LC_MESSAGES/gtk30.mo",
+      "sha256": "2f119ed221634282172b2ee89717c07fb24dd2b578cf672a40bee3ae9996828d"
+    },
+    {
+      "archivePath": "mingw64/share/locale/de/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 211604,
+      "path": "share/locale/de/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "dd0badef60114021ea7082822ecd40b74f79072f9bf6605563e5cb7c74954987"
+    },
+    {
+      "archivePath": "mingw64/share/locale/de/LC_MESSAGES/gtk30.mo",
+      "bytes": 111209,
+      "path": "share/locale/de/LC_MESSAGES/gtk30.mo",
+      "sha256": "f350a66e4faa873899da1a8f0ba62b754bf41c1ccfd4c05123d4127514a351df"
+    },
+    {
+      "archivePath": "mingw64/share/locale/el/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 288222,
+      "path": "share/locale/el/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "9b3039e00a18e6fe05f675078e1e2e4e10a0e3492e5c611894c4762350c27a6c"
+    },
+    {
+      "archivePath": "mingw64/share/locale/el/LC_MESSAGES/gtk30.mo",
+      "bytes": 112274,
+      "path": "share/locale/el/LC_MESSAGES/gtk30.mo",
+      "sha256": "63f77bf2c0a37b119d47a36c909d6d0220e81ad319a7118ef746cdfc13bb3976"
+    },
+    {
+      "archivePath": "mingw64/share/locale/en_GB/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 196126,
+      "path": "share/locale/en_GB/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "fd8115a80113659bf14b746672ce1b740adae8940451a8a910f3f40409a5c7bc"
+    },
+    {
+      "archivePath": "mingw64/share/locale/en_GB/LC_MESSAGES/gtk30.mo",
+      "bytes": 104949,
+      "path": "share/locale/en_GB/LC_MESSAGES/gtk30.mo",
+      "sha256": "9419ebd70da19866d41b8abe701826aa2b427d9dd7352e29be14707416f20b34"
+    },
+    {
+      "archivePath": "mingw64/share/locale/eo/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 199019,
+      "path": "share/locale/eo/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "c38cb79e6af75768f2c209f56df8cc282f0a96c487b8835f5a2da07fa0f16beb"
+    },
+    {
+      "archivePath": "mingw64/share/locale/eo/LC_MESSAGES/gtk30.mo",
+      "bytes": 107428,
+      "path": "share/locale/eo/LC_MESSAGES/gtk30.mo",
+      "sha256": "86e1161ac54dd5781e9f04c015f1d8924b2393b02294834a262114637d641c60"
+    },
+    {
+      "archivePath": "mingw64/share/locale/es/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 214224,
+      "path": "share/locale/es/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "d177a5c407bd163b18053bd6eb7e993c6953fe757f520eea964d429c836dbfbb"
+    },
+    {
+      "archivePath": "mingw64/share/locale/es/LC_MESSAGES/gtk30.mo",
+      "bytes": 111372,
+      "path": "share/locale/es/LC_MESSAGES/gtk30.mo",
+      "sha256": "28f6f78f379d0fa3303dcb8479327e634d3c7cfd59acebfe41e12783485857dd"
+    },
+    {
+      "archivePath": "mingw64/share/locale/eu/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 208501,
+      "path": "share/locale/eu/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "9fa7341232ee7b7be7f9ba9bce2505faa22c02a47e2422c545f86707d297358f"
+    },
+    {
+      "archivePath": "mingw64/share/locale/eu/LC_MESSAGES/gtk30.mo",
+      "bytes": 110697,
+      "path": "share/locale/eu/LC_MESSAGES/gtk30.mo",
+      "sha256": "c0cca43b33b41d569c8a7aab75081477e310d048e1b486e7d2b4fb7b20aa7c5e"
+    },
+    {
+      "archivePath": "mingw64/share/locale/fi/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 144712,
+      "path": "share/locale/fi/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "7fa49eeebaefca4b65e96c3dc186492d4c647924acef176a8ada516448002940"
+    },
+    {
+      "archivePath": "mingw64/share/locale/fi/LC_MESSAGES/gtk30.mo",
+      "bytes": 76925,
+      "path": "share/locale/fi/LC_MESSAGES/gtk30.mo",
+      "sha256": "6e6e9b6dbe326904a0017a387661e223b3573fc5ccb6bac4407eccff978e4e8a"
+    },
+    {
+      "archivePath": "mingw64/share/locale/fr/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 223110,
+      "path": "share/locale/fr/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "a295e7c5dc4039f1f258d479d3dd693cb0f2b85f76cfb3b80f8f6b0c1b0036ff"
+    },
+    {
+      "archivePath": "mingw64/share/locale/fr/LC_MESSAGES/gtk30.mo",
+      "bytes": 113725,
+      "path": "share/locale/fr/LC_MESSAGES/gtk30.mo",
+      "sha256": "b1881e469f668fc735151417b5859ca6174a600e753771033323873307bf9d7b"
+    },
+    {
+      "archivePath": "mingw64/share/locale/gl/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 211289,
+      "path": "share/locale/gl/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "7d1858b6b69181ee3f061653c6cbdc4316d67406a83f151c115724a4e0bb23bb"
+    },
+    {
+      "archivePath": "mingw64/share/locale/gl/LC_MESSAGES/gtk30.mo",
+      "bytes": 111153,
+      "path": "share/locale/gl/LC_MESSAGES/gtk30.mo",
+      "sha256": "afc284441a78e2b4ae4bf31a7b1f92c9eefb47be5a8a08e691c3983f43945cf6"
+    },
+    {
+      "archivePath": "mingw64/share/locale/he/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 195938,
+      "path": "share/locale/he/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "0d023079a2a3ac44eef15d836abf3afbe45670af2666e067d65a4d08c610579e"
+    },
+    {
+      "archivePath": "mingw64/share/locale/he/LC_MESSAGES/gtk30.mo",
+      "bytes": 118186,
+      "path": "share/locale/he/LC_MESSAGES/gtk30.mo",
+      "sha256": "dea1d5c97547458ee08662990bb5cd370a6fab8ae7b678afa8ad7e76c3cfaf3e"
+    },
+    {
+      "archivePath": "mingw64/share/locale/hi/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 304781,
+      "path": "share/locale/hi/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "71e71a87ef499234d0524da9900d65615de1f895e0925fbf24bc8f45a88241ad"
+    },
+    {
+      "archivePath": "mingw64/share/locale/hi/LC_MESSAGES/gtk30.mo",
+      "bytes": 148111,
+      "path": "share/locale/hi/LC_MESSAGES/gtk30.mo",
+      "sha256": "5d581e3baddd5cd6c675da86a3544addac2107dcb6e6eb3b498ea992a2efd4ce"
+    },
+    {
+      "archivePath": "mingw64/share/locale/hu/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 209513,
+      "path": "share/locale/hu/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "140cbf96c9f0a7e0fae7b29347155a14a4fbc672551b4b4d321afc4c197c02eb"
+    },
+    {
+      "archivePath": "mingw64/share/locale/hu/LC_MESSAGES/gtk30.mo",
+      "bytes": 112331,
+      "path": "share/locale/hu/LC_MESSAGES/gtk30.mo",
+      "sha256": "0514e7ccf7fc72de4a467b302ebd242c9652db04e801b8fb0b7584b58e4b4a6b"
+    },
+    {
+      "archivePath": "mingw64/share/locale/id/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 199215,
+      "path": "share/locale/id/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "e8af3585a60a56716f0d3824c33cf25798b1cf088efccef87c6e47c6a003219b"
+    },
+    {
+      "archivePath": "mingw64/share/locale/id/LC_MESSAGES/gtk30.mo",
+      "bytes": 106227,
+      "path": "share/locale/id/LC_MESSAGES/gtk30.mo",
+      "sha256": "eea5b12cb3b75b118398e8f539b461e7873c0928f1bca17629e382a2802019ec"
+    },
+    {
+      "archivePath": "mingw64/share/locale/it/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 213429,
+      "path": "share/locale/it/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "a5b13c3db9124e324d60e856088cbed3274d0c506af76364f8dce72b5fbb126b"
+    },
+    {
+      "archivePath": "mingw64/share/locale/it/LC_MESSAGES/gtk30.mo",
+      "bytes": 110037,
+      "path": "share/locale/it/LC_MESSAGES/gtk30.mo",
+      "sha256": "afe85d0b807530759ce8612c7d7bb5c5581e458d962b2d22f7669487a3c41de5"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ja/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 168739,
+      "path": "share/locale/ja/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "a4e00176909ea65927e3e43e6e0dd24397e2e7f2d6fa63e2e83534a505897e35"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ja/LC_MESSAGES/gtk30.mo",
+      "bytes": 105152,
+      "path": "share/locale/ja/LC_MESSAGES/gtk30.mo",
+      "sha256": "4749ddb1cd44b556f12bbf296de251b80122a06d58f4a0dd712da17406b25eab"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ka/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 333464,
+      "path": "share/locale/ka/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "b3d2301e24db400bfa8152146572344786d8e34321f8fc751c379cdec4d27ad0"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ka/LC_MESSAGES/gtk30.mo",
+      "bytes": 157655,
+      "path": "share/locale/ka/LC_MESSAGES/gtk30.mo",
+      "sha256": "e4c166d3ba4eace71160d7356778fca6aaa7334c099e3ba121ecd69141192fdb"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ko/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 204858,
+      "path": "share/locale/ko/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "7c561b1e09439fddcbd3e73f8a03de73f31320ae69eff9d025c8d7ff36f4cd8d"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ko/LC_MESSAGES/gtk30.mo",
+      "bytes": 113895,
+      "path": "share/locale/ko/LC_MESSAGES/gtk30.mo",
+      "sha256": "14e77a50a5f78b846ff21bd2f246354a85225ddf28f8c7130873d136a2635b95"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ml/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 251904,
+      "path": "share/locale/ml/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "1ac8a29656f2659bfa4cc79d161322f37f8566472e5253dffb30aa5030071827"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ml/LC_MESSAGES/gtk30.mo",
+      "bytes": 100835,
+      "path": "share/locale/ml/LC_MESSAGES/gtk30.mo",
+      "sha256": "f578187604e9a58f14e0ea14b8d4c229620061fbb81e7e649fb26199d0fea7b3"
+    },
+    {
+      "archivePath": "mingw64/share/locale/nl/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 206134,
+      "path": "share/locale/nl/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "652616e12a98de5529165bb98d284eab4a51e6102619bbd4e6632212acdb7543"
+    },
+    {
+      "archivePath": "mingw64/share/locale/nl/LC_MESSAGES/gtk30.mo",
+      "bytes": 109318,
+      "path": "share/locale/nl/LC_MESSAGES/gtk30.mo",
+      "sha256": "4f4e7c1e44c6b68513b723d84c64c3e50c4b8236cf6b9f8880f59001a619051f"
+    },
+    {
+      "archivePath": "mingw64/share/locale/pl/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 213784,
+      "path": "share/locale/pl/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "695131fc2914156ad1438dc5294e3e89d76f6fd745c6ce7b4230efc25e2cbecd"
+    },
+    {
+      "archivePath": "mingw64/share/locale/pl/LC_MESSAGES/gtk30.mo",
+      "bytes": 112269,
+      "path": "share/locale/pl/LC_MESSAGES/gtk30.mo",
+      "sha256": "09d22fdfaa6bf147ce384cf44a7c8c14537807fac2bbfb221ac411ee1ca52508"
+    },
+    {
+      "archivePath": "mingw64/share/locale/pt/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 209226,
+      "path": "share/locale/pt/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "d3ae60339e7c636bde15578bfc730a80dd9e1d78bd7f65e5ebed0a74483b0f98"
+    },
+    {
+      "archivePath": "mingw64/share/locale/pt/LC_MESSAGES/gtk30.mo",
+      "bytes": 109822,
+      "path": "share/locale/pt/LC_MESSAGES/gtk30.mo",
+      "sha256": "dbea6591d8ae9a2c3dfd8648167522fcdc03ea94179bf451133b38186455dd61"
+    },
+    {
+      "archivePath": "mingw64/share/locale/pt_BR/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 208584,
+      "path": "share/locale/pt_BR/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "c7ed019b1891c411dc45e8ae10ee0b480e2c146f5b55783329d91f068324fbde"
+    },
+    {
+      "archivePath": "mingw64/share/locale/pt_BR/LC_MESSAGES/gtk30.mo",
+      "bytes": 110799,
+      "path": "share/locale/pt_BR/LC_MESSAGES/gtk30.mo",
+      "sha256": "b5ae9a4b86eed9197da39c15bab7305e8dbf484ff5b6ca3f0f403957db8df491"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ro/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 211896,
+      "path": "share/locale/ro/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "e2de5c50386b506b1a6b7575f034325b1ba895f267df9ae31693cb00b8b9aa72"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ro/LC_MESSAGES/gtk30.mo",
+      "bytes": 110950,
+      "path": "share/locale/ro/LC_MESSAGES/gtk30.mo",
+      "sha256": "e7f7ad861ccb585c3cd6871623e9ff674f7d9452a9d12e2e3b8e09e65b1acd4a"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ru/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 276732,
+      "path": "share/locale/ru/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "b6f276bc922d396a896f5c0f407387fc0dcad9e2baf414390c35d8f9d88ccb5b"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ru/LC_MESSAGES/gtk30.mo",
+      "bytes": 133871,
+      "path": "share/locale/ru/LC_MESSAGES/gtk30.mo",
+      "sha256": "b3e9ef1ca040de6640b6cfdee6f02cec56a9cf9b39e0c6701787c816bffc76ac"
+    },
+    {
+      "archivePath": "mingw64/share/locale/si/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 33197,
+      "path": "share/locale/si/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "8a4fa92abd5d6322006e831aa2b8da3dc0df1011aad1a084f6fc67b24614c04e"
+    },
+    {
+      "archivePath": "mingw64/share/locale/si/LC_MESSAGES/gtk30.mo",
+      "bytes": 26341,
+      "path": "share/locale/si/LC_MESSAGES/gtk30.mo",
+      "sha256": "c90326d3c9200f99a11664fbc365ef077b88c504e5c5d51cc00ae97579f6ebd3"
+    },
+    {
+      "archivePath": "mingw64/share/locale/sl/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 201983,
+      "path": "share/locale/sl/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "770fadd9b5a93631ed2489a68cf86f9ec6c626a3aa813c28546e97a4ebfb1383"
+    },
+    {
+      "archivePath": "mingw64/share/locale/sl/LC_MESSAGES/gtk30.mo",
+      "bytes": 109211,
+      "path": "share/locale/sl/LC_MESSAGES/gtk30.mo",
+      "sha256": "81cf23b8f8902988bf8b7e91e154d952bcaa0326dc52039981640d41f7418192"
+    },
+    {
+      "archivePath": "mingw64/share/locale/sv/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 203670,
+      "path": "share/locale/sv/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "44caf9c1f520d9e7e203b2ed204fc6d6108efa150bb056fe2ff05784045e0dfd"
+    },
+    {
+      "archivePath": "mingw64/share/locale/sv/LC_MESSAGES/gtk30.mo",
+      "bytes": 108020,
+      "path": "share/locale/sv/LC_MESSAGES/gtk30.mo",
+      "sha256": "8e1c5f5598d3e0e01a80d6062a95d511f58c2692013985b323cf737cba06f72f"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ta/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 302375,
+      "path": "share/locale/ta/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "1b017682676a2f707cf4a895018c73cdb70f954245d995580aa2a1104eb3bd52"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ta/LC_MESSAGES/gtk30.mo",
+      "bytes": 107235,
+      "path": "share/locale/ta/LC_MESSAGES/gtk30.mo",
+      "sha256": "72caec8dbc81852c73f440e445b59007266922ca49f0cd7b7beb370d44313c13"
+    },
+    {
+      "archivePath": "mingw64/share/locale/th/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 326993,
+      "path": "share/locale/th/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "10653f7d81af9f70717b2dfac872559163456e3063950013d334a3d62b87f37a"
+    },
+    {
+      "archivePath": "mingw64/share/locale/th/LC_MESSAGES/gtk30.mo",
+      "bytes": 119899,
+      "path": "share/locale/th/LC_MESSAGES/gtk30.mo",
+      "sha256": "3f8568b05c83a6fff6fdd25935c054d9ca701fc88df4ba0d01ab37389d72b3f7"
+    },
+    {
+      "archivePath": "mingw64/share/locale/tr/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 205786,
+      "path": "share/locale/tr/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "9491ad0a86fd8495a46f569f63fc8f9d6915c597cd22d80c25c96845492408a1"
+    },
+    {
+      "archivePath": "mingw64/share/locale/tr/LC_MESSAGES/gtk30.mo",
+      "bytes": 109137,
+      "path": "share/locale/tr/LC_MESSAGES/gtk30.mo",
+      "sha256": "7b6d5f7d69220efd426c7b29a52bea5892515c2e1225dabeb5be8c3c2c5087e9"
+    },
+    {
+      "archivePath": "mingw64/share/locale/uk/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 268591,
+      "path": "share/locale/uk/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "0d1e29a3929f162a93617ddfce709efa1070d018489aee3096189262788dc8bc"
+    },
+    {
+      "archivePath": "mingw64/share/locale/uk/LC_MESSAGES/gtk30.mo",
+      "bytes": 131822,
+      "path": "share/locale/uk/LC_MESSAGES/gtk30.mo",
+      "sha256": "d9e412472eb3d18d14639da1eb3d284568f8456cf93595f699bfc628dcd446a2"
+    },
+    {
+      "archivePath": "mingw64/share/locale/vi/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 216255,
+      "path": "share/locale/vi/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "16af93c45b95093e90b91809c8877958f3ab11a9cf365a8bfeab28beea96fe61"
+    },
+    {
+      "archivePath": "mingw64/share/locale/vi/LC_MESSAGES/gtk30.mo",
+      "bytes": 89135,
+      "path": "share/locale/vi/LC_MESSAGES/gtk30.mo",
+      "sha256": "9cdd58e76db6ea17da57c8fa318bd248dd8f81e82d4c54b2343462ebffc37f31"
+    },
+    {
+      "archivePath": "mingw64/share/locale/zh_HK/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 173888,
+      "path": "share/locale/zh_HK/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "dceda1a517315c390902fe815b872498c0e7634034e590d75fbec9778cef95fd"
+    },
+    {
+      "archivePath": "mingw64/share/locale/zh_HK/LC_MESSAGES/gtk30.mo",
+      "bytes": 71184,
+      "path": "share/locale/zh_HK/LC_MESSAGES/gtk30.mo",
+      "sha256": "91ed3de43c4c9994dfe844fe940ae3588610d95ec8053f754869cd7b55c574c3"
+    },
+    {
+      "archivePath": "mingw64/share/locale/zh_TW/LC_MESSAGES/gtk30-properties.mo",
+      "bytes": 188162,
+      "path": "share/locale/zh_TW/LC_MESSAGES/gtk30-properties.mo",
+      "sha256": "c667588aa4beaf6fe5a2adbbd37412bbe6874f45051e3de68f221ddac7b95569"
+    },
+    {
+      "archivePath": "mingw64/share/locale/zh_TW/LC_MESSAGES/gtk30.mo",
+      "bytes": 104460,
+      "path": "share/locale/zh_TW/LC_MESSAGES/gtk30.mo",
+      "sha256": "1a26f3d3ac1deafc264c0eeaf2d2cc120bb91a0cc5904f488f71b522027a60e2"
+    }
+  ],
+  "version": "3.24.52-1"
+}

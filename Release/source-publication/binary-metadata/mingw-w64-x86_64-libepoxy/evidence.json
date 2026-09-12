@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libepoxy-1.5.10-7-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libepoxy-1.5.10-7-any.pkg.tar.zst",
+  "bytes": 873709,
+  "licenses": [
+    "spdx:MIT"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6158,
+      "sha256": "17ac5dc5de44a2e8008bc0564ab1dbcd4112bbe409378bc8405c94b02919b738"
+    },
+    ".PKGINFO": {
+      "bytes": 643,
+      "sha256": "65d22d13917458092113507a725ac2b5a8d5d6229c1f08b0763704a5158d976d"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/libepoxy/COPYING",
+      "bytes": 2465,
+      "path": "binary-metadata/mingw-w64-x86_64-libepoxy/original-notices/mingw64/share/licenses/libepoxy/COPYING",
+      "sha256": "8d5144666f9c4df9bbd69b8900086d5979259152a1060421cdcc0fb9061a1c12"
+    }
+  ],
+  "package": "mingw-w64-x86_64-libepoxy",
+  "packager": "CI (msys2/msys2-autobuild/54197e6a/15942439222)",
+  "pkgbase": "mingw-w64-libepoxy",
+  "pkgbuildSha256": "365469de34ead7e168b1594b8c7b974b14bd6243352f1df2649ab33ce45f4a07",
+  "sha256": "a2dca7211c2c6a3bb335c074167db9929f62da55d566df29aea26e5e88f35bfc",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libepoxy-0.dll",
+      "bytes": 1771389,
+      "path": "bin/libepoxy-0.dll",
+      "sha256": "8e7d48294d79eb5b1f44cd7c2a637239d8ddcdabaedea12bf9fb7ca919d1a37a"
+    }
+  ],
+  "version": "1.5.10-7"
+}

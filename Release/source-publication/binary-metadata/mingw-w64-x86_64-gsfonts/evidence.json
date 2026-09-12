@@ -1,0 +1,185 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-gsfonts-20200910-3-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-gsfonts-20200910-3-any.pkg.tar.zst",
+  "bytes": 1673866,
+  "licenses": [
+    "AGPL3"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 5630,
+      "sha256": "13f8728f508e038d2c296d00c7d99945f4f888b5030914ee28a492424aab3906"
+    },
+    ".PKGINFO": {
+      "bytes": 364,
+      "sha256": "6899bd255c82747c5e3a2af5175a6b17053ebfd1972b4a3fa8f81d990a0d4e11"
+    }
+  },
+  "originalNotices": [],
+  "package": "mingw-w64-x86_64-gsfonts",
+  "packager": "CI (msys2/msys2-autobuild/a79a8c4c/6322950309)",
+  "pkgbase": "mingw-w64-gsfonts",
+  "pkgbuildSha256": "e52c7017c8e8bfa6514b96b5fd53299354ac266c841a3254c98a18d224cb3649",
+  "sha256": "d6db3a5a3037e4c12c14c43176037835c6f0a873d1fd2387e02ba2fdfda7638e",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/69-urw-bookman.conf",
+      "bytes": 1021,
+      "path": "etc/fonts/conf.avail/69-urw-bookman.conf",
+      "sha256": "bf4b9e3b9ad7df22d2de13ba3988caa51af77bf1e691c84e6f70b1f3cd90c1f3"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/69-urw-c059.conf",
+      "bytes": 1003,
+      "path": "etc/fonts/conf.avail/69-urw-c059.conf",
+      "sha256": "688de55be61bc1a64d0a4026d2c57bee36d82d6ed588b5a3bb9ce7d5f0cb372c"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/69-urw-d050000l.conf",
+      "bytes": 1022,
+      "path": "etc/fonts/conf.avail/69-urw-d050000l.conf",
+      "sha256": "0b29f90b57e3e65b52e0f43aeed1306d78bc417d2a9d0607f1000b6ab154ce4e"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/69-urw-fallback-backwards.conf",
+      "bytes": 3257,
+      "path": "etc/fonts/conf.avail/69-urw-fallback-backwards.conf",
+      "sha256": "43cc53d3d237db875169473bafb2cdbef749f1374b7619af54889c9e759352ee"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/69-urw-fallback-generics.conf",
+      "bytes": 2727,
+      "path": "etc/fonts/conf.avail/69-urw-fallback-generics.conf",
+      "sha256": "de9e5b2783e2bc00065b7de27ac9efa0a667b996578c5a8926f712d9f67d13b9"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/69-urw-fallback-specifics.conf",
+      "bytes": 3777,
+      "path": "etc/fonts/conf.avail/69-urw-fallback-specifics.conf",
+      "sha256": "6fd09d57ca14374b734ba83f89c501a4a3d5d38bda9ce347c9602cbfd24d7551"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/69-urw-gothic.conf",
+      "bytes": 913,
+      "path": "etc/fonts/conf.avail/69-urw-gothic.conf",
+      "sha256": "bdb22104fb4980a1a2b14e5e9ecdd4f4d8339b42f7164de6afa8b4301f6ad95c"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/69-urw-nimbus-mono-ps.conf",
+      "bytes": 899,
+      "path": "etc/fonts/conf.avail/69-urw-nimbus-mono-ps.conf",
+      "sha256": "40aa886614eea2f019420dc8f1844aaeef553aee30c36c8c468880f11def388f"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/69-urw-nimbus-roman.conf",
+      "bytes": 877,
+      "path": "etc/fonts/conf.avail/69-urw-nimbus-roman.conf",
+      "sha256": "7ce10a11b1385a85540fef15499bf8dd462fe95d773f20329f0c065d168462b7"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/69-urw-nimbus-sans.conf",
+      "bytes": 1572,
+      "path": "etc/fonts/conf.avail/69-urw-nimbus-sans.conf",
+      "sha256": "375ec83653a4dd3f6b088a334600bd3604a925e84e34cb5c5b47bf26b0442623"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/69-urw-p052.conf",
+      "bytes": 975,
+      "path": "etc/fonts/conf.avail/69-urw-p052.conf",
+      "sha256": "6e290be00629b12668baae0c2c620654d1131038d9dc6125bd49bb807b2b7ba6"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/69-urw-standard-symbols-ps.conf",
+      "bytes": 1061,
+      "path": "etc/fonts/conf.avail/69-urw-standard-symbols-ps.conf",
+      "sha256": "5ab1a4f3128046c6273eb29e38f46f4460368b2835ec2daf78ddbc33cf369751"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/69-urw-z003.conf",
+      "bytes": 865,
+      "path": "etc/fonts/conf.avail/69-urw-z003.conf",
+      "sha256": "f432bc765828b4b18e49a9f3d99fcd7af67dff9394a16f4ea2a129fbd53dc364"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/69-urw-bookman.conf",
+      "bytes": 1021,
+      "path": "etc/fonts/conf.d/69-urw-bookman.conf",
+      "sha256": "bf4b9e3b9ad7df22d2de13ba3988caa51af77bf1e691c84e6f70b1f3cd90c1f3"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/69-urw-c059.conf",
+      "bytes": 1003,
+      "path": "etc/fonts/conf.d/69-urw-c059.conf",
+      "sha256": "688de55be61bc1a64d0a4026d2c57bee36d82d6ed588b5a3bb9ce7d5f0cb372c"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/69-urw-d050000l.conf",
+      "bytes": 1022,
+      "path": "etc/fonts/conf.d/69-urw-d050000l.conf",
+      "sha256": "0b29f90b57e3e65b52e0f43aeed1306d78bc417d2a9d0607f1000b6ab154ce4e"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/69-urw-fallback-backwards.conf",
+      "bytes": 3257,
+      "path": "etc/fonts/conf.d/69-urw-fallback-backwards.conf",
+      "sha256": "43cc53d3d237db875169473bafb2cdbef749f1374b7619af54889c9e759352ee"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/69-urw-fallback-generics.conf",
+      "bytes": 2727,
+      "path": "etc/fonts/conf.d/69-urw-fallback-generics.conf",
+      "sha256": "de9e5b2783e2bc00065b7de27ac9efa0a667b996578c5a8926f712d9f67d13b9"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/69-urw-fallback-specifics.conf",
+      "bytes": 3777,
+      "path": "etc/fonts/conf.d/69-urw-fallback-specifics.conf",
+      "sha256": "6fd09d57ca14374b734ba83f89c501a4a3d5d38bda9ce347c9602cbfd24d7551"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/69-urw-gothic.conf",
+      "bytes": 913,
+      "path": "etc/fonts/conf.d/69-urw-gothic.conf",
+      "sha256": "bdb22104fb4980a1a2b14e5e9ecdd4f4d8339b42f7164de6afa8b4301f6ad95c"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/69-urw-nimbus-mono-ps.conf",
+      "bytes": 899,
+      "path": "etc/fonts/conf.d/69-urw-nimbus-mono-ps.conf",
+      "sha256": "40aa886614eea2f019420dc8f1844aaeef553aee30c36c8c468880f11def388f"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/69-urw-nimbus-roman.conf",
+      "bytes": 877,
+      "path": "etc/fonts/conf.d/69-urw-nimbus-roman.conf",
+      "sha256": "7ce10a11b1385a85540fef15499bf8dd462fe95d773f20329f0c065d168462b7"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/69-urw-nimbus-sans.conf",
+      "bytes": 1572,
+      "path": "etc/fonts/conf.d/69-urw-nimbus-sans.conf",
+      "sha256": "375ec83653a4dd3f6b088a334600bd3604a925e84e34cb5c5b47bf26b0442623"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/69-urw-p052.conf",
+      "bytes": 975,
+      "path": "etc/fonts/conf.d/69-urw-p052.conf",
+      "sha256": "6e290be00629b12668baae0c2c620654d1131038d9dc6125bd49bb807b2b7ba6"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/69-urw-standard-symbols-ps.conf",
+      "bytes": 1061,
+      "path": "etc/fonts/conf.d/69-urw-standard-symbols-ps.conf",
+      "sha256": "5ab1a4f3128046c6273eb29e38f46f4460368b2835ec2daf78ddbc33cf369751"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/69-urw-z003.conf",
+      "bytes": 865,
+      "path": "etc/fonts/conf.d/69-urw-z003.conf",
+      "sha256": "f432bc765828b4b18e49a9f3d99fcd7af67dff9394a16f4ea2a129fbd53dc364"
+    }
+  ],
+  "version": "20200910-3"
+}

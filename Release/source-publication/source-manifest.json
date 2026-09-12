@@ -1,0 +1,2516 @@
+{
+  "application": {
+    "repository": "https://github.com/hashfunction/inkquay",
+    "snapshot": "7c84690998c6a1692b61b80902dc68c9f42f650d",
+    "sourceInputsMatched": [
+      {
+        "bytes": 9727,
+        "path": "AUTHORS",
+        "sha256": "99382dc6355226239c262ef992a6f01795bdc39b86871c1baee812701b36162f"
+      },
+      {
+        "bytes": 17360,
+        "path": "CMakeLists.txt",
+        "sha256": "647b02f4fe210ade0c75c9e6ceb862a7d976de35e500aa8502feef66e108a641"
+      },
+      {
+        "bytes": 18091,
+        "path": "LICENSE",
+        "sha256": "f9c375a1be4a41f7b70301dd83c91cb89e41567478859b77eef375a52d782505"
+      },
+      {
+        "bytes": 2194,
+        "path": "Release/THIRD-PARTY-NOTICES.txt",
+        "sha256": "bead107a61d9a0b4510c0119019cb0cb1daebf7158ed23d4d6439d2be58ce8d1"
+      },
+      {
+        "bytes": 1748,
+        "path": "Release/windows-dependencies.json",
+        "sha256": "b64d3ba49d136d2fa56977948167e449b23895ad64fae80cf3a40b151acdfede"
+      },
+      {
+        "bytes": 34647,
+        "path": "copyright.txt",
+        "sha256": "c21020929aec21d765a21ad1bac7f1fa49657b563cd89e7e3e39bb8783119d50"
+      },
+      {
+        "bytes": 1099,
+        "path": "debian/copyright",
+        "sha256": "58a72815cad9b41b767272a6edc0697d6898acd9b0db8e491524ceb9c3872719"
+      },
+      {
+        "bytes": 7034,
+        "path": "script/inventoryWindows.py",
+        "sha256": "34a3bcf5ec97a70650d378d177fa19a14b52edf17e5b08fcf3ad24458366702b"
+      },
+      {
+        "bytes": 101930,
+        "path": "src/core/control/Control.cpp",
+        "sha256": "64dca3401fcdd9061748ef6ca92b3a96bbac19816f87bde2bcdc51afbfeb6be6"
+      },
+      {
+        "bytes": 5467,
+        "path": "ui/pixmaps/com.trieflow.inkquay.png",
+        "sha256": "c9b0991a2de7db3ef6e0f2f4ce5e07a6bb1a86750ba3251463df6e85b0b06ead"
+      },
+      {
+        "bytes": 602,
+        "path": "ui/pixmaps/com.trieflow.inkquay.svg",
+        "sha256": "91cf757dc13bbb233afefa54810499e194360de2c7e6719f8d3bc3ed20073efd"
+      },
+      {
+        "bytes": 4526,
+        "path": "windows-setup/package.sh",
+        "sha256": "02f7964842108a066a036336b33194022839f07133da93ef3b8db2de5b1386a2"
+      }
+    ],
+    "sourceUrl": "https://github.com/hashfunction/inkquay/tree/7c84690998c6a1692b61b80902dc68c9f42f650d",
+    "tree": "4c943846cbb7f220f3cb2e55606a0b612043da5b"
+  },
+  "binaryPackageArchivesIncluded": false,
+  "buildInstructions": "BUILDING-WINDOWS.md",
+  "cargoSourceEvidence": "cargo-inputs/crate-source-evidence.json",
+  "crateAttributions": "cargo-inputs/attributions.json",
+  "gitSourceEvidence": "git-input-verification.json",
+  "licenseConversionApplied": false,
+  "licenseNotes": "SOURCE-AND-NOTICES.md",
+  "nativeBinding": {
+    "nativeInventorySha256": "9de6563f8e9745baa67cf4a29c6e1e0d205ab1a4e7017a6ec3a67fd8ddb88856",
+    "packageRecordSha256": "f72e8244f3952577f9e16eefc3f147ea85454a00ba3917a0648af9e3863075ff",
+    "run": 34641324772,
+    "scope": "Exact source and notices bound to the successful qualification payload; no new Windows execution claim.",
+    "unsignedPackageSha256": "da7a6c2b88088da1d59f5570f46d31190ea4aae192f1103969d8a5f7ad0f227e"
+  },
+  "nativeNoticeSupplement": "notice-supplement.json",
+  "nativeOwners": [
+    {
+      "binaryArchive": "mingw-w64-x86_64-adwaita-icon-theme-50.0-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "ef7e105562edf53e90b0d6286a70ca5c6da73c754b1174443f8cc0790f72bfdc",
+      "binaryRecipeHash": "ef93ec9b5672b4ea2ac42aaf048bcd7379ba2ec8e1ac186e3d990b95bf70b087",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-adwaita-icon-theme/evidence.json",
+      "package": "mingw-w64-x86_64-adwaita-icon-theme",
+      "pkgbase": "mingw-w64-adwaita-icon-theme",
+      "shippedFilesMatched": 800,
+      "sourceArchive": "mingw-w64-adwaita-icon-theme-50.0-1.src.tar.zst",
+      "version": "50.0-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-adwaita-icon-theme-legacy-46.2-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "84a91ad4a93d3969078946fc3032dfbbb1028828de4ffce1a793dda235a9fac1",
+      "binaryRecipeHash": "50606934ec58ed8f9c5fc0103f6ec592a479da5c0d7ffef1a3498aa87fbd53e8",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-adwaita-icon-theme-legacy/evidence.json",
+      "package": "mingw-w64-x86_64-adwaita-icon-theme-legacy",
+      "pkgbase": "mingw-w64-adwaita-icon-theme-legacy",
+      "shippedFilesMatched": 1860,
+      "sourceArchive": "mingw-w64-adwaita-icon-theme-legacy-46.2-1.src.tar.zst",
+      "version": "46.2-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-atk-2.60.6-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "e526ba89d5f6793ee9a23f8960ce35affd1a5ff81b4f396e92889bfaa8a15169",
+      "binaryRecipeHash": "24f027a4fa8eeb1d9961642a23eedc37c12370e95bf7fbb02c2ff006427628d1",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-atk/evidence.json",
+      "package": "mingw-w64-x86_64-atk",
+      "pkgbase": "mingw-w64-at-spi2-core",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-at-spi2-core-2.60.6-1.src.tar.zst",
+      "version": "2.60.6-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-brotli-1.2.0-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "f5f2f7e723a08378241d15f0537386950c1a48e2d82bc47bedd632bd61852aba",
+      "binaryRecipeHash": "894120dac11e7fffd72224148e22d424075fabf23a8cafbf4f2c5390c73755c9",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-brotli/evidence.json",
+      "package": "mingw-w64-x86_64-brotli",
+      "pkgbase": "mingw-w64-brotli",
+      "shippedFilesMatched": 3,
+      "sourceArchive": "mingw-w64-brotli-1.2.0-1.src.tar.zst",
+      "version": "1.2.0-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-bzip2-1.0.8-4-any.pkg.tar.zst",
+      "binaryArchiveSha256": "123768f30ae14ba654a6feb70f8526146a331bc85f831a91a549ffb3f6cbffc7",
+      "binaryRecipeHash": "a82348d211ec09835b8d77de2e98d3153831a9389cdaf6cb8cfadf711096aa24",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-bzip2/evidence.json",
+      "package": "mingw-w64-x86_64-bzip2",
+      "pkgbase": "mingw-w64-bzip2",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-bzip2-1.0.8-4.src.tar.zst",
+      "version": "1.0.8-4"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-cairo-1.18.4-4-any.pkg.tar.zst",
+      "binaryArchiveSha256": "1487120562e42601a8462d9953098f685c513999a2e472a3524fa96434be3290",
+      "binaryRecipeHash": "c6474a55d3fdd53d0fe40aa0d183536d0704abbe3d3a791e98688e588a694ffb",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-cairo/evidence.json",
+      "package": "mingw-w64-x86_64-cairo",
+      "pkgbase": "mingw-w64-cairo",
+      "shippedFilesMatched": 2,
+      "sourceArchive": "mingw-w64-cairo-1.18.4-4.src.tar.zst",
+      "version": "1.18.4-4"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-curl-8.22.0-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "e8fbff7506b9d1ce2d1bbc646dce64005099ce3d2f894bb8e81047200f403277",
+      "binaryRecipeHash": "5391f17e126f937985de781769bc06f4992e5bcb7498f1e0bf9294f74bc7d71b",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-curl/evidence.json",
+      "package": "mingw-w64-x86_64-curl",
+      "pkgbase": "mingw-w64-curl",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-curl-8.22.0-1.src.tar.zst",
+      "version": "8.22.0-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-djvulibre-3.5.30-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "cc9c507ec2c8d40cec4981e31eb458aa139845963e1598b8f1d0220c680af479",
+      "binaryRecipeHash": "7c9d0cdf5f7ca086d68a60920bbe7a14139a081701b0ede9094a6b83aeff8577",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-djvulibre/evidence.json",
+      "package": "mingw-w64-x86_64-djvulibre",
+      "pkgbase": "mingw-w64-djvulibre",
+      "shippedFilesMatched": 12,
+      "sourceArchive": "mingw-w64-djvulibre-3.5.30-1.src.tar.zst",
+      "version": "3.5.30-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-expat-2.8.4-2-any.pkg.tar.zst",
+      "binaryArchiveSha256": "fa4438fbddbf01e517b995df8f9913efc1c74389e3e04fb55714cae3b1633057",
+      "binaryRecipeHash": "126c496ed77fa60cf251d222044604d8f2968393d5fe5444d902092c75086a61",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-expat/evidence.json",
+      "package": "mingw-w64-x86_64-expat",
+      "pkgbase": "mingw-w64-expat",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-expat-2.8.4-2.src.tar.zst",
+      "version": "2.8.4-2"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-fontconfig-2.18.3-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "7cdd32ad27ee9f8d176698744f3efa123feba57cecb833e87c221b50cd7224d1",
+      "binaryRecipeHash": "d4e67fa58f28fdf5fe6600f8fc474a8024e7410258fbd6f607f298ce449159fc",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-fontconfig/evidence.json",
+      "package": "mingw-w64-x86_64-fontconfig",
+      "pkgbase": "mingw-w64-fontconfig",
+      "shippedFilesMatched": 71,
+      "sourceArchive": "mingw-w64-fontconfig-2.18.3-1.src.tar.zst",
+      "version": "2.18.3-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-freetype-2.14.3-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "b3e310f457c90348fd14b8c1085e9c036016d168812a657fec21f496f7e3de99",
+      "binaryRecipeHash": "6b8fb0122bf6adbb608240a000aea22b7fe2c3cf2eba533155b3a9864d1511fd",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-freetype/evidence.json",
+      "package": "mingw-w64-x86_64-freetype",
+      "pkgbase": "mingw-w64-freetype",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-freetype-2.14.3-1.src.tar.zst",
+      "version": "2.14.3-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-fribidi-1.0.16-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "82d4f9e431082d2ac2fa7b9eddd73aa0c073bf8ae66b7d137195797ec543dffa",
+      "binaryRecipeHash": "8b0dfca7f26b9f1b7f32fef6ab348b7c7d07b2c568c1b9d75820346f026316b6",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-fribidi/evidence.json",
+      "package": "mingw-w64-x86_64-fribidi",
+      "pkgbase": "mingw-w64-fribidi",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-fribidi-1.0.16-1.src.tar.zst",
+      "version": "1.0.16-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-gcc-libs-16.2.0-3-any.pkg.tar.zst",
+      "binaryArchiveSha256": "f8e25ea67bb796e7f65550f0dca9fce4cdde8aaa3dadafe4d13c6a8233c8de26",
+      "binaryRecipeHash": "226e4b4d6a5786b66eaf260181b5260934a77ee1d6548ef9d1f735ebaae30f1d",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-gcc-libs/evidence.json",
+      "package": "mingw-w64-x86_64-gcc-libs",
+      "pkgbase": "mingw-w64-gcc",
+      "shippedFilesMatched": 2,
+      "sourceArchive": "mingw-w64-gcc-16.2.0-3.src.tar.zst",
+      "version": "16.2.0-3"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-gdk-pixbuf2-2.44.7-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "8ca07a6ba0abc968597cd2915ac7bfc5d0588af4ad5d52cbeaa86f10a5ab7d23",
+      "binaryRecipeHash": "5fd387a327a8cd73acbd63a96fc5ee133f39df28f3284e8c43132ec480a0011d",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-gdk-pixbuf2/evidence.json",
+      "package": "mingw-w64-x86_64-gdk-pixbuf2",
+      "pkgbase": "mingw-w64-gdk-pixbuf2",
+      "shippedFilesMatched": 67,
+      "sourceArchive": "mingw-w64-gdk-pixbuf2-2.44.7-1.src.tar.zst",
+      "version": "2.44.7-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-gettext-runtime-1.0-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "be68d7f260633284b910c588c6d82ee304a81c8817a686d2cd9df83f872c27af",
+      "binaryRecipeHash": "853ef80a50588f29355722a4513f24cf1a5f8de06e0b5ee326580464db539741",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-gettext-runtime/evidence.json",
+      "package": "mingw-w64-x86_64-gettext-runtime",
+      "pkgbase": "mingw-w64-gettext",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-gettext-1.0-1.src.tar.zst",
+      "version": "1.0-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-glib2-2.90.0-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "34361784125c950f84bfbd137c6056e0023783238b6659ce24b0d5440655fcdf",
+      "binaryRecipeHash": "0ad17a7ab5835acc95990c1eba2d85f351a8df0604e528f23b4212402380430b",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-glib2/evidence.json",
+      "package": "mingw-w64-x86_64-glib2",
+      "pkgbase": "mingw-w64-glib2",
+      "shippedFilesMatched": 62,
+      "sourceArchive": "mingw-w64-glib2-2.90.0-1.src.tar.zst",
+      "version": "2.90.0-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-gmp-6.3.0-2-any.pkg.tar.zst",
+      "binaryArchiveSha256": "8924433974c4add46cb46ea4f6ef283b5c5139d3f552375115b5580f855015cc",
+      "binaryRecipeHash": "b9d3bb2b5b12cb0fc47c4dc17a9a2aa82513236eaefa34c8dfc57dd0d92bc42a",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-gmp/evidence.json",
+      "package": "mingw-w64-x86_64-gmp",
+      "pkgbase": "mingw-w64-gmp",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-gmp-6.3.0-2.src.tar.zst",
+      "version": "6.3.0-2"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-gnutls-3.8.13-3-any.pkg.tar.zst",
+      "binaryArchiveSha256": "0d5a373ac558af20dc0a46d249e99f8a3b3d3562ae013e73f00642dc3bd118cf",
+      "binaryRecipeHash": "0626ac4c78bd79c915b3ea1213b66fa384e3a6eaa392b407eb230a87c9ef83db",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-gnutls/evidence.json",
+      "package": "mingw-w64-x86_64-gnutls",
+      "pkgbase": "mingw-w64-gnutls",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-gnutls-3.8.13-3.src.tar.zst",
+      "version": "3.8.13-3"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-graphite2-1.3.15-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "6ad20d6c16e559f7c4b06fe71248e1201c7edf494d04e5721ed7f9b3f7fd1f74",
+      "binaryRecipeHash": "2fd68eeb0a96760c64f203506004dd0485fc588bdc0fb83684665821493df6d5",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-graphite2/evidence.json",
+      "package": "mingw-w64-x86_64-graphite2",
+      "pkgbase": "mingw-w64-graphite2",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-graphite2-1.3.15-1.src.tar.zst",
+      "version": "1.3.15-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-gsfonts-20200910-3-any.pkg.tar.zst",
+      "binaryArchiveSha256": "d6db3a5a3037e4c12c14c43176037835c6f0a873d1fd2387e02ba2fdfda7638e",
+      "binaryRecipeHash": "e52c7017c8e8bfa6514b96b5fd53299354ac266c841a3254c98a18d224cb3649",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-gsfonts/evidence.json",
+      "package": "mingw-w64-x86_64-gsfonts",
+      "pkgbase": "mingw-w64-gsfonts",
+      "shippedFilesMatched": 26,
+      "sourceArchive": "mingw-w64-gsfonts-20200910-3.src.tar.zst",
+      "version": "20200910-3"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-gtk3-3.24.52-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "3a03940cb82203466d7ebf5f61a00ab51b6ef8d9b6e7bd94a6eaaa46ec6e7aeb",
+      "binaryRecipeHash": "9e3cd207ab5e0dd95ff48dd74e15af0f0328966c118a9006ca57d2049c327577",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-gtk3/evidence.json",
+      "package": "mingw-w64-x86_64-gtk3",
+      "pkgbase": "mingw-w64-gtk3",
+      "shippedFilesMatched": 112,
+      "sourceArchive": "mingw-w64-gtk3-3.24.52-1.src.tar.zst",
+      "version": "3.24.52-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-harfbuzz-14.4.0-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "7343f6aae536e8b0604395a26ecb2666b7bab4936163bdec61e38139169afea0",
+      "binaryRecipeHash": "7cd353a89c156c434b687ca8dda859bd61c6c4e1d3d91966c12f5b5a44d39e7f",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-harfbuzz/evidence.json",
+      "package": "mingw-w64-x86_64-harfbuzz",
+      "pkgbase": "mingw-w64-harfbuzz",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-harfbuzz-14.4.0-1.src.tar.zst",
+      "version": "14.4.0-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-hicolor-icon-theme-0.18-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "8140b5f0f824be2073cc60d40e6977c00ffcfc3c7eeff24bd5dffbe61f4dae75",
+      "binaryRecipeHash": "0ce573c9812269bd3a0f0ed82b5df13664d55e4964c171c3369507540399389f",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-hicolor-icon-theme/evidence.json",
+      "package": "mingw-w64-x86_64-hicolor-icon-theme",
+      "pkgbase": "mingw-w64-hicolor-icon-theme",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-hicolor-icon-theme-0.18-1.src.tar.zst",
+      "version": "0.18-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-jbigkit-2.1-6-any.pkg.tar.zst",
+      "binaryArchiveSha256": "3db9e32abca5d208920a096e5ae01952f2d8a361780428b9646b6da6750f7321",
+      "binaryRecipeHash": "3edad46568e5f76306b4f50ded5c6155967542522beaeda476548b34d340cba7",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-jbigkit/evidence.json",
+      "package": "mingw-w64-x86_64-jbigkit",
+      "pkgbase": "mingw-w64-jbigkit",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-jbigkit-2.1-6.src.tar.zst",
+      "version": "2.1-6"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-lcms2-2.19.1-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "f9858d910df27d3762590e5da75e2589f9f0216ebbf1b6d58bdddbab3d4f35ad",
+      "binaryRecipeHash": "6f39c90313ec3f739b7406d6c7e2eb802c8aa8142323278a36d41083e765350f",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-lcms2/evidence.json",
+      "package": "mingw-w64-x86_64-lcms2",
+      "pkgbase": "mingw-w64-lcms2",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-lcms2-2.19.1-1.src.tar.zst",
+      "version": "2.19.1-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-lerc-4.1.1-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "5bc170650bc02812a7c674a5f7b8ff2781b4bfa259ab2da2264c3008e2a04c72",
+      "binaryRecipeHash": "d477c9d1c50148da657e69bd428783f71515622dea8bf091d7cba93e2a069de7",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-lerc/evidence.json",
+      "package": "mingw-w64-x86_64-lerc",
+      "pkgbase": "mingw-w64-lerc",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-lerc-4.1.1-1.src.tar.zst",
+      "version": "4.1.1-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libdatrie-0.2.14-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "fbbf30e9a911c1139ba5c38c5ae008309dd912f6c6b1e05f4310ec698e1b1339",
+      "binaryRecipeHash": "5b6a0eae66edab8c902ae4668b31859a00ac09d78ff7b9dfe6cb044ea4be5af6",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libdatrie/evidence.json",
+      "package": "mingw-w64-x86_64-libdatrie",
+      "pkgbase": "mingw-w64-libdatrie",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-libdatrie-0.2.14-1.src.tar.zst",
+      "version": "0.2.14-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libdeflate-1.26-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "aa0d9b5e2d0413d5e01745a48ef0c8fa293172d48c13f87b61ada627ab7407ad",
+      "binaryRecipeHash": "832f416248f449419d86cec6b292fe3b1c99e789f5e20b52d24b1d8d654b2a62",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libdeflate/evidence.json",
+      "package": "mingw-w64-x86_64-libdeflate",
+      "pkgbase": "mingw-w64-libdeflate",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-libdeflate-1.26-1.src.tar.zst",
+      "version": "1.26-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libepoxy-1.5.10-7-any.pkg.tar.zst",
+      "binaryArchiveSha256": "a2dca7211c2c6a3bb335c074167db9929f62da55d566df29aea26e5e88f35bfc",
+      "binaryRecipeHash": "365469de34ead7e168b1594b8c7b974b14bd6243352f1df2649ab33ce45f4a07",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libepoxy/evidence.json",
+      "package": "mingw-w64-x86_64-libepoxy",
+      "pkgbase": "mingw-w64-libepoxy",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-libepoxy-1.5.10-7.src.tar.zst",
+      "version": "1.5.10-7"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libffi-3.8.0-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "6dad7f3c6c900d3c64a4fe0c2764b405e678b22df3521d2284ffaeff0198b84b",
+      "binaryRecipeHash": "59e885042758a92aba7a63aade4afe4975b2bf79e7c97e4462bc9ada58b740a6",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libffi/evidence.json",
+      "package": "mingw-w64-x86_64-libffi",
+      "pkgbase": "mingw-w64-libffi",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-libffi-3.8.0-1.src.tar.zst",
+      "version": "3.8.0-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libheif-1.23.4-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "546deb359466335a3cacce5f0fe3beaed5683cf707d4a88fa738c9ae2a115f39",
+      "binaryRecipeHash": "82f4929f881980cfcb580e9634e266cbdaa098b350ec02ddbed5754574e3a218",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libheif/evidence.json",
+      "package": "mingw-w64-x86_64-libheif",
+      "pkgbase": "mingw-w64-libheif",
+      "shippedFilesMatched": 2,
+      "sourceArchive": "mingw-w64-libheif-1.23.4-1.src.tar.zst",
+      "version": "1.23.4-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libiconv-1.19-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "21e334d0911f25de75d3e18e0697648bcecfa9658256d600cad0827d719c2f35",
+      "binaryRecipeHash": "9b3212d06910560fb59e017e0b73a29d392a5082d3a47a613e61509bd7dcd475",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libiconv/evidence.json",
+      "package": "mingw-w64-x86_64-libiconv",
+      "pkgbase": "mingw-w64-libiconv",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-libiconv-1.19-1.src.tar.zst",
+      "version": "1.19-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libidn2-2.3.8-4-any.pkg.tar.zst",
+      "binaryArchiveSha256": "f98a157446f9ac35465022e329cdaf6169b0c9fa19837e9d80aff9d4e5109013",
+      "binaryRecipeHash": "cf6def1817d6a38b49c66fc4cbe36cd56705d9b8952dae13e06d60da703983ff",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libidn2/evidence.json",
+      "package": "mingw-w64-x86_64-libidn2",
+      "pkgbase": "mingw-w64-libidn2",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-libidn2-2.3.8-4.src.tar.zst",
+      "version": "2.3.8-4"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libjpeg-turbo-3.2.0-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "ef3f55cf5238a8045c8f37796d730e4a5ee619d29ca9254aaa62456e5b5b7e51",
+      "binaryRecipeHash": "bd71b8cdb87f4838d9d86475104e7ac926d56a239a1d3947721db1aae0385b92",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libjpeg-turbo/evidence.json",
+      "package": "mingw-w64-x86_64-libjpeg-turbo",
+      "pkgbase": "mingw-w64-libjpeg-turbo",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-libjpeg-turbo-3.2.0-1.src.tar.zst",
+      "version": "3.2.0-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libpng-1.6.58-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "d8ae6066f99b3a04b83b8013b554a26a205d7e68580b80823c173ed045ba76a5",
+      "binaryRecipeHash": "d398f1e6ea9e549a638491308155e47e27a0953781ccce28707243f6eff29c81",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libpng/evidence.json",
+      "package": "mingw-w64-x86_64-libpng",
+      "pkgbase": "mingw-w64-libpng",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-libpng-1.6.58-1.src.tar.zst",
+      "version": "1.6.58-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libpsl-0.21.5-3-any.pkg.tar.zst",
+      "binaryArchiveSha256": "2a86f7ce3cd3fabff7eb8e5c0d3eb1134808881a44c3838e1b518b75cb402e35",
+      "binaryRecipeHash": "84f8e19b62b3037d82f1f20bc041b9c1a83f8d82eeffe158bbf3d7f50df286c3",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libpsl/evidence.json",
+      "package": "mingw-w64-x86_64-libpsl",
+      "pkgbase": "mingw-w64-libpsl",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-libpsl-0.21.5-3.src.tar.zst",
+      "version": "0.21.5-3"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-librsvg-2.63.0-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "8beaa476be731f44d931f334e10be03863005d0825c96a1997f9e35cc6c478d7",
+      "binaryRecipeHash": "b5290d49771497efd8d64afa5db624c2d3f8ddc218e6fafde3be1c4ea6494455",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-librsvg/evidence.json",
+      "package": "mingw-w64-x86_64-librsvg",
+      "pkgbase": "mingw-w64-librsvg",
+      "shippedFilesMatched": 2,
+      "sourceArchive": "mingw-w64-librsvg-2.63.0-1.src.tar.zst",
+      "version": "2.63.0-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libssh2-1.11.1-2-any.pkg.tar.zst",
+      "binaryArchiveSha256": "83d0b99f79e930b30eb642382662686b696d64ceb927c2606debd79cb6ff670a",
+      "binaryRecipeHash": "187ea90e8d6671c06397c56153be4803b0fbecf17f8851c58b97047516b98910",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libssh2/evidence.json",
+      "package": "mingw-w64-x86_64-libssh2",
+      "pkgbase": "mingw-w64-libssh2",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-libssh2-1.11.1-2.src.tar.zst",
+      "version": "1.11.1-2"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libtasn1-4.21.0-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "9f7aa213d14135e5856cc7a1254d871cbed60dee00b40db87a6ca7a4e733d2b2",
+      "binaryRecipeHash": "dd68181f53e6a8481961315b3a6c6caa4370188b1fea219203080b24abd251fe",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libtasn1/evidence.json",
+      "package": "mingw-w64-x86_64-libtasn1",
+      "pkgbase": "mingw-w64-libtasn1",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-libtasn1-4.21.0-1.src.tar.zst",
+      "version": "4.21.0-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libthai-0.1.30-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "e8cfad91934e24e9a88221b66f2d1c5a310c952ef86631107a632d3ff1738211",
+      "binaryRecipeHash": "31627bf6c5f307ece18670b4557f17c2fbfd9225e5395a34ccf1acc96e083501",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libthai/evidence.json",
+      "package": "mingw-w64-x86_64-libthai",
+      "pkgbase": "mingw-w64-libthai",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-libthai-0.1.30-1.src.tar.zst",
+      "version": "0.1.30-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libtiff-4.7.2-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "ebc466fa5664c1528834c59ee7134ba57df6db224e503b690870e2c613f30c3e",
+      "binaryRecipeHash": "2eecac8b6120c97e3b2754098f57c9bd026dcc121f67a9e2f9bf7e1a689e9819",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libtiff/evidence.json",
+      "package": "mingw-w64-x86_64-libtiff",
+      "pkgbase": "mingw-w64-libtiff",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-libtiff-4.7.2-1.src.tar.zst",
+      "version": "4.7.2-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libunistring-1.4.2-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "c940cf52fb2b579baa596d3c1d911f7544cbf90f8bd19c260377aa115c65b059",
+      "binaryRecipeHash": "e612db993601f9daf35d4b527f93aad9792b7886735113ac46393a77c17264d7",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libunistring/evidence.json",
+      "package": "mingw-w64-x86_64-libunistring",
+      "pkgbase": "mingw-w64-libunistring",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-libunistring-1.4.2-1.src.tar.zst",
+      "version": "1.4.2-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libwebp-1.6.0-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "360b1690d41eb497dfe50526460a2424600a6a806cbb76c5b0fec9f14623ac59",
+      "binaryRecipeHash": "d15596f0825cbace1453462ab406b1d1ec6ac12be21d1d5655a17c22656318e1",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libwebp/evidence.json",
+      "package": "mingw-w64-x86_64-libwebp",
+      "pkgbase": "mingw-w64-libwebp",
+      "shippedFilesMatched": 2,
+      "sourceArchive": "mingw-w64-libwebp-1.6.0-1.src.tar.zst",
+      "version": "1.6.0-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libwinpthread-14.0.0.r353.g6df76fa52-2-any.pkg.tar.zst",
+      "binaryArchiveSha256": "e545ccc0416bcc62555da57959598e8559eac6a6cc1e5378bac024844d4ec8eb",
+      "binaryRecipeHash": "21c15283bebaea1732dda66c046cf75ce3763f6b1ba6feb95969182a138687df",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libwinpthread/evidence.json",
+      "package": "mingw-w64-x86_64-libwinpthread",
+      "pkgbase": "mingw-w64-winpthreads",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-winpthreads-14.0.0.r353.g6df76fa52-2.src.tar.zst",
+      "version": "14.0.0.r353.g6df76fa52-2"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libwmf-0.2.16-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "65e4e12b3f6ed085026a9c1b6524e98f032eea7798311ccc246f766d23eaed78",
+      "binaryRecipeHash": "f639e1ef56ed30af2799c8650429d553b790320ea597eb40e60288015147c71a",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libwmf/evidence.json",
+      "package": "mingw-w64-x86_64-libwmf",
+      "pkgbase": "mingw-w64-libwmf",
+      "shippedFilesMatched": 3,
+      "sourceArchive": "mingw-w64-libwmf-0.2.16-1.src.tar.zst",
+      "version": "0.2.16-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libxml2-2.15.4-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "b79dcaea6713e8d09af334de946db364eb501b5be2ec2f75dc7608e61b5d0316",
+      "binaryRecipeHash": "05fa27f6ce261f7c5ca58a57f0f346fd25b45bb97a4e10ffd3d7be2334a9cb09",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libxml2/evidence.json",
+      "package": "mingw-w64-x86_64-libxml2",
+      "pkgbase": "mingw-w64-libxml2",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-libxml2-2.15.4-1.src.tar.zst",
+      "version": "2.15.4-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-libzip-1.11.4-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "88bc2924fd68582da182c8aef9151d31c4ed466b8eca1a80de2fe4ee271bd4fb",
+      "binaryRecipeHash": "a219da0bd5c5021d91b2f1967e514f5811e56b97732a7b0e515cf975aae84d5a",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-libzip/evidence.json",
+      "package": "mingw-w64-x86_64-libzip",
+      "pkgbase": "mingw-w64-libzip",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-libzip-1.11.4-1.src.tar.zst",
+      "version": "1.11.4-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-nettle-4.0-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "505773abfb4f3af514012e2926c11db6365299c7eda141d958a065740740dc86",
+      "binaryRecipeHash": "7d82c0e2504f0dabc0170e7b5790f55c4c25a7be7c7dd973ab5d17ebe04d8ae1",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-nettle/evidence.json",
+      "package": "mingw-w64-x86_64-nettle",
+      "pkgbase": "mingw-w64-nettle",
+      "shippedFilesMatched": 2,
+      "sourceArchive": "mingw-w64-nettle-4.0-1.src.tar.zst",
+      "version": "4.0-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-nghttp2-1.70.0-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "c086d42107f8c142f0f45e32f81665816732f071d9486359875da20df0a7cdd3",
+      "binaryRecipeHash": "27798659ce38e4b5e8ce91354e56acd32a5a9ce1d15a6706b264ca686b427f80",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-nghttp2/evidence.json",
+      "package": "mingw-w64-x86_64-nghttp2",
+      "pkgbase": "mingw-w64-nghttp2",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-nghttp2-1.70.0-1.src.tar.zst",
+      "version": "1.70.0-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-nghttp3-1.18.0-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "00c55f940bb8d2f4b06690858efcaa42158dc33ccb7b7b8412e05659d3e22802",
+      "binaryRecipeHash": "adcd40ca02d70b22eab0be56688af5f4da6f886366821759b4c3954e6d36adf5",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-nghttp3/evidence.json",
+      "package": "mingw-w64-x86_64-nghttp3",
+      "pkgbase": "mingw-w64-nghttp3",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-nghttp3-1.18.0-1.src.tar.zst",
+      "version": "1.18.0-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-ngtcp2-1.25.0-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "e110f5b9a2c783ac437be2b80955e79a72f9d3a329fdb626c41516044aaee47a",
+      "binaryRecipeHash": "a48b3be451b18878579f7d5e29a07a285a325ede1605e6fcb78429a4abdf3315",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-ngtcp2/evidence.json",
+      "package": "mingw-w64-x86_64-ngtcp2",
+      "pkgbase": "mingw-w64-ngtcp2",
+      "shippedFilesMatched": 2,
+      "sourceArchive": "mingw-w64-ngtcp2-1.25.0-1.src.tar.zst",
+      "version": "1.25.0-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-nspr-4.40-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "878d16da36b5a52ed41644a5a4255b5bc9d7bd55be8e2a8bb0a5b58ecacb39d9",
+      "binaryRecipeHash": "b35843f3391b5c8b9e0612391443334ddfa4bcee6702f5f14decf2a368017c18",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-nspr/evidence.json",
+      "package": "mingw-w64-x86_64-nspr",
+      "pkgbase": "mingw-w64-nspr",
+      "shippedFilesMatched": 3,
+      "sourceArchive": "mingw-w64-nspr-4.40-1.src.tar.zst",
+      "version": "4.40-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-nss-3.128-2-any.pkg.tar.zst",
+      "binaryArchiveSha256": "722f0e2510e7a6b152547ec07eb23d23ee9b44307a6b3e17941bce6deb4cf677",
+      "binaryRecipeHash": "d03dc629c2e0c81c20ac5a434fdab795f5dfd7072f37af96cdf2e626a6435861",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-nss/evidence.json",
+      "package": "mingw-w64-x86_64-nss",
+      "pkgbase": "mingw-w64-nss",
+      "shippedFilesMatched": 3,
+      "sourceArchive": "mingw-w64-nss-3.128-2.src.tar.zst",
+      "version": "3.128-2"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-openjpeg2-2.5.4-2-any.pkg.tar.zst",
+      "binaryArchiveSha256": "32f8f5dc7df9f1f2d57157717136fbba431e15bc000420c953c00ffdf76ecde4",
+      "binaryRecipeHash": "8901865f116d6eaa71bb2ff14dcaaa9a301185fd5cf62408d73dcfd2901c8334",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-openjpeg2/evidence.json",
+      "package": "mingw-w64-x86_64-openjpeg2",
+      "pkgbase": "mingw-w64-openjpeg2",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-openjpeg2-2.5.4-2.src.tar.zst",
+      "version": "2.5.4-2"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-openssl-3.6.4-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "d613ab4e1b5af9e95cde16895765e1be53ab05657d8d51ff2707d4e99c29c55b",
+      "binaryRecipeHash": "0f29edf384ee561bfe195608f4dbbb4231695af7958e326292034b264bc5faf1",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-openssl/evidence.json",
+      "package": "mingw-w64-x86_64-openssl",
+      "pkgbase": "mingw-w64-openssl",
+      "shippedFilesMatched": 2,
+      "sourceArchive": "mingw-w64-openssl-3.6.4-1.src.tar.zst",
+      "version": "3.6.4-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-p11-kit-0.26.5-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "171b877586efd64888648007a56c3a263eb2d4abc82594c90d30b1b7e4b9f5eb",
+      "binaryRecipeHash": "98fa23420fa595ea71cf51fdb3f5cc2bcd77a0b996e36549057fe82b8c1e723f",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-p11-kit/evidence.json",
+      "package": "mingw-w64-x86_64-p11-kit",
+      "pkgbase": "mingw-w64-p11-kit",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-p11-kit-0.26.5-1.src.tar.zst",
+      "version": "0.26.5-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-pango-1.58.2-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "6aa68db02f6158dba802da406d25b29650011beb2d5d1b0a0050081e19874e57",
+      "binaryRecipeHash": "7c477eff7aab5a3932203eac21096fc9c70621f51ba223232f334b3e6338dd9b",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-pango/evidence.json",
+      "package": "mingw-w64-x86_64-pango",
+      "pkgbase": "mingw-w64-pango",
+      "shippedFilesMatched": 4,
+      "sourceArchive": "mingw-w64-pango-1.58.2-1.src.tar.zst",
+      "version": "1.58.2-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-pcre2-10.48-3-any.pkg.tar.zst",
+      "binaryArchiveSha256": "c67c23f448693e8c9cc3973872372dabec2abdf6afacb563096f7eb0e6837f57",
+      "binaryRecipeHash": "0b94fbb011bf5f78960beb73e5c8d0fd026bace4bd671ca1ee22a3e373706107",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-pcre2/evidence.json",
+      "package": "mingw-w64-x86_64-pcre2",
+      "pkgbase": "mingw-w64-pcre2",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-pcre2-10.48-3.src.tar.zst",
+      "version": "10.48-3"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-pixman-0.46.4-3-any.pkg.tar.zst",
+      "binaryArchiveSha256": "435715dd1ca4c55873cf3c38d644615196bc2d238e3366f8ff81cc0811260eb2",
+      "binaryRecipeHash": "b1a58a74281f8b2ab72986d745249590238dfeed1dd2fca811b362fa7d582ea4",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-pixman/evidence.json",
+      "package": "mingw-w64-x86_64-pixman",
+      "pkgbase": "mingw-w64-pixman",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-pixman-0.46.4-3.src.tar.zst",
+      "version": "0.46.4-3"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-poppler-26.08.0-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "24f5ae117d6e64351f476d52a01ce87c705662293dda38da572d01e58d09b3cc",
+      "binaryRecipeHash": "417f89e5f35bfaf87c1e8eb2852fffeb23480aa7d1d8e4359d2a6ad5b68a9166",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-poppler/evidence.json",
+      "package": "mingw-w64-x86_64-poppler",
+      "pkgbase": "mingw-w64-poppler",
+      "shippedFilesMatched": 2,
+      "sourceArchive": "mingw-w64-poppler-26.08.0-1.src.tar.zst",
+      "version": "26.08.0-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-poppler-data-0.4.12-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "4fb2a4fde5da5d3c65943330ac5c166f8291de6b2f31f4a9a403ae02fa169c0d",
+      "binaryRecipeHash": "87a6bcc1298c9348822c4b5e15f94d5d8f1597e2605186b8ccc6596acf5be7d8",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-poppler-data/evidence.json",
+      "package": "mingw-w64-x86_64-poppler-data",
+      "pkgbase": "mingw-w64-poppler-data",
+      "shippedFilesMatched": 263,
+      "sourceArchive": "mingw-w64-poppler-data-0.4.12-1.src.tar.zst",
+      "version": "0.4.12-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-qpdf-12.3.2-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "f273dc7f297aa166af40ad90243ed2085f829bae2b421737cd0cbcbf57f0874a",
+      "binaryRecipeHash": "23c216371728cce441379c582bd94508b91e6cf0e65d512382a97b6b3ddcaa7c",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-qpdf/evidence.json",
+      "package": "mingw-w64-x86_64-qpdf",
+      "pkgbase": "mingw-w64-qpdf",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-qpdf-12.3.2-1.src.tar.zst",
+      "version": "12.3.2-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-ttf-dejavu-2.37-4-any.pkg.tar.zst",
+      "binaryArchiveSha256": "e16c9114c6f9c1d8d7b108a906eb1c3a992f8e8969fc4a081ea13e63aa4c1483",
+      "binaryRecipeHash": "545611decacde223728f12cabc2a03e43e854e07f7a15c2f1753edb7376f09d7",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-ttf-dejavu/evidence.json",
+      "package": "mingw-w64-x86_64-ttf-dejavu",
+      "pkgbase": "mingw-w64-ttf-dejavu",
+      "shippedFilesMatched": 12,
+      "sourceArchive": "mingw-w64-ttf-dejavu-2.37-4.src.tar.zst",
+      "version": "2.37-4"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-xz-5.8.4-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "2de0f26da60b7ff7aa192a226330d7de6b1099cb9b9f9de4145affb80146bbc8",
+      "binaryRecipeHash": "b93950051015573095f0d9cd50428ed6dd80d726c2786a2eeef005257888b3ba",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-xz/evidence.json",
+      "package": "mingw-w64-x86_64-xz",
+      "pkgbase": "mingw-w64-xz",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-xz-5.8.4-1.src.tar.zst",
+      "version": "5.8.4-1"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-zlib-1.3.2-2-any.pkg.tar.zst",
+      "binaryArchiveSha256": "9e75842a070ba648e986e12424e1c92c9d7d77200e85f6a34eeb600819f2e694",
+      "binaryRecipeHash": "8a4a54a964eab7efa313e2faa8267052bc237ef61f8adf82a55cc93f4028db8a",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-zlib/evidence.json",
+      "package": "mingw-w64-x86_64-zlib",
+      "pkgbase": "mingw-w64-zlib",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-zlib-1.3.2-2.src.tar.zst",
+      "version": "1.3.2-2"
+    },
+    {
+      "binaryArchive": "mingw-w64-x86_64-zstd-1.5.7-2-any.pkg.tar.zst",
+      "binaryArchiveSha256": "1add6705b344664f6aca108c85f79ab5bdd9e1162662bb06a4cf40a34f6e0907",
+      "binaryRecipeHash": "ef88e168f729b6e57bdccb8d566a1cbc1b0b1fd4ef86b26cc4c441236e496388",
+      "metadataPath": "binary-metadata/mingw-w64-x86_64-zstd/evidence.json",
+      "package": "mingw-w64-x86_64-zstd",
+      "pkgbase": "mingw-w64-zstd",
+      "shippedFilesMatched": 1,
+      "sourceArchive": "mingw-w64-zstd-1.5.7-2.src.tar.zst",
+      "version": "1.5.7-2"
+    }
+  ],
+  "originalNativeNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/adwaita-icon-theme/COPYING",
+      "bytes": 453,
+      "packagePath": "share/inkquay/licenses/msys2/adwaita-icon-theme/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-adwaita-icon-theme/original-notices/mingw64/share/licenses/adwaita-icon-theme/COPYING",
+      "sha256": "51f83b2b4e9ed2beebc9b8eed2ecad29314a58ed8c5184b22ad8f9df703d3ce5"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/adwaita-icon-theme/COPYING_CCBYSA3",
+      "bytes": 409,
+      "packagePath": "share/inkquay/licenses/msys2/adwaita-icon-theme/COPYING_CCBYSA3",
+      "path": "binary-metadata/mingw-w64-x86_64-adwaita-icon-theme/original-notices/mingw64/share/licenses/adwaita-icon-theme/COPYING_CCBYSA3",
+      "sha256": "207fe75c396c0ae197c57d42c727163428b6667d98cef3644e41c6f1afe1895f"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/adwaita-icon-theme/COPYING_LGPL",
+      "bytes": 7651,
+      "packagePath": "share/inkquay/licenses/msys2/adwaita-icon-theme/COPYING_LGPL",
+      "path": "binary-metadata/mingw-w64-x86_64-adwaita-icon-theme/original-notices/mingw64/share/licenses/adwaita-icon-theme/COPYING_LGPL",
+      "sha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/adwaita-icon-theme-legacy/COPYING",
+      "bytes": 453,
+      "packagePath": "share/inkquay/licenses/msys2/adwaita-icon-theme-legacy/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-adwaita-icon-theme-legacy/original-notices/mingw64/share/licenses/adwaita-icon-theme-legacy/COPYING",
+      "sha256": "51f83b2b4e9ed2beebc9b8eed2ecad29314a58ed8c5184b22ad8f9df703d3ce5"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/adwaita-icon-theme-legacy/COPYING_CCBYSA3",
+      "bytes": 409,
+      "packagePath": "share/inkquay/licenses/msys2/adwaita-icon-theme-legacy/COPYING_CCBYSA3",
+      "path": "binary-metadata/mingw-w64-x86_64-adwaita-icon-theme-legacy/original-notices/mingw64/share/licenses/adwaita-icon-theme-legacy/COPYING_CCBYSA3",
+      "sha256": "207fe75c396c0ae197c57d42c727163428b6667d98cef3644e41c6f1afe1895f"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/adwaita-icon-theme-legacy/COPYING_LGPL",
+      "bytes": 7651,
+      "packagePath": "share/inkquay/licenses/msys2/adwaita-icon-theme-legacy/COPYING_LGPL",
+      "path": "binary-metadata/mingw-w64-x86_64-adwaita-icon-theme-legacy/original-notices/mingw64/share/licenses/adwaita-icon-theme-legacy/COPYING_LGPL",
+      "sha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/at-spi2-core/COPYING",
+      "bytes": 26530,
+      "packagePath": "share/inkquay/licenses/msys2/at-spi2-core/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-atk/original-notices/mingw64/share/licenses/at-spi2-core/COPYING",
+      "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/brotli/LICENSE",
+      "bytes": 1084,
+      "packagePath": "share/inkquay/licenses/msys2/brotli/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-brotli/original-notices/mingw64/share/licenses/brotli/LICENSE",
+      "sha256": "3d180008e36922a4e8daec11c34c7af264fed5962d07924aea928c38e8663c94"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/bzip2/LICENSE",
+      "bytes": 1896,
+      "packagePath": "share/inkquay/licenses/msys2/bzip2/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-bzip2/original-notices/mingw64/share/licenses/bzip2/LICENSE",
+      "sha256": "c6dbbf828498be844a89eaa3b84adbab3199e342eb5cb2ed2f0d4ba7ec0f38a3"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/cairo/COPYING",
+      "bytes": 1576,
+      "packagePath": "share/inkquay/licenses/msys2/cairo/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-cairo/original-notices/mingw64/share/licenses/cairo/COPYING",
+      "sha256": "67228a9f7c5f9b67c58f556f1be178f62da4d9e2e6285318d8c74d567255abdf"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/cairo/COPYING-LGPL-2.1",
+      "bytes": 26533,
+      "packagePath": "share/inkquay/licenses/msys2/cairo/COPYING-LGPL-2.1",
+      "path": "binary-metadata/mingw-w64-x86_64-cairo/original-notices/mingw64/share/licenses/cairo/COPYING-LGPL-2.1",
+      "sha256": "9e9e8608c4cdda51a78cc3a385f4ec9a2e4c96d5ecad74ac8bca5fca3e563b7d"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/cairo/COPYING-MPL-1.1",
+      "bytes": 25755,
+      "packagePath": "share/inkquay/licenses/msys2/cairo/COPYING-MPL-1.1",
+      "path": "binary-metadata/mingw-w64-x86_64-cairo/original-notices/mingw64/share/licenses/cairo/COPYING-MPL-1.1",
+      "sha256": "53692a2ed6c6a2c6ec9b32dd0b820dfae91e0a1fcdf625ca9ed0bdf8705fcc4f"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/curl/LICENSE",
+      "bytes": 1088,
+      "packagePath": "share/inkquay/licenses/msys2/curl/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-curl/original-notices/mingw64/share/licenses/curl/LICENSE",
+      "sha256": "82f2f4427d6545ee5aaac4f0b80428da6cc8ba41c2cf5da3a03680ec327b9681"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/expat/COPYING",
+      "bytes": 1144,
+      "packagePath": "share/inkquay/licenses/msys2/expat/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-expat/original-notices/mingw64/share/licenses/expat/COPYING",
+      "sha256": "31b15de82aa19a845156169a17a5488bf597e561b2c318d159ed583139b25e87"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/fontconfig/COPYING",
+      "bytes": 8616,
+      "packagePath": "share/inkquay/licenses/msys2/fontconfig/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-fontconfig/original-notices/mingw64/share/licenses/fontconfig/COPYING",
+      "sha256": "51a51aa9823704fd90bccc616cdd17ebabb5b2b3e9cbde886ca02c7002288067"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/freetype/FTL.TXT",
+      "bytes": 6743,
+      "packagePath": "share/inkquay/licenses/msys2/freetype/FTL.TXT",
+      "path": "binary-metadata/mingw-w64-x86_64-freetype/original-notices/mingw64/share/licenses/freetype/FTL.TXT",
+      "sha256": "5a5ee54c5001bbad1cdc1a57cc3dd4c42199b2da09d39c7ee41fab002d02967f"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/freetype/GPLv2.TXT",
+      "bytes": 17994,
+      "packagePath": "share/inkquay/licenses/msys2/freetype/GPLv2.TXT",
+      "path": "binary-metadata/mingw-w64-x86_64-freetype/original-notices/mingw64/share/licenses/freetype/GPLv2.TXT",
+      "sha256": "c4120c6752c910c299e3bd9cb3a46ff262c268303ca2069b61f92f10a5656c18"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/fribidi/COPYING",
+      "bytes": 26440,
+      "packagePath": "share/inkquay/licenses/msys2/fribidi/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-fribidi/original-notices/mingw64/share/licenses/fribidi/COPYING",
+      "sha256": "32434afcc8666ba060e111d715bfdb6c2d5dd8a35fa4d3ab8ad67d8f850d2f2b"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/gcc-libs/COPYING.LIB",
+      "bytes": 26527,
+      "packagePath": "share/inkquay/licenses/msys2/gcc-libs/COPYING.LIB",
+      "path": "binary-metadata/mingw-w64-x86_64-gcc-libs/original-notices/mingw64/share/licenses/gcc-libs/COPYING.LIB",
+      "sha256": "a9bdde5616ecdd1e980b44f360600ee8783b1f99b8cc83a2beb163a0a390e861"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/gcc-libs/COPYING.RUNTIME",
+      "bytes": 3324,
+      "packagePath": "share/inkquay/licenses/msys2/gcc-libs/COPYING.RUNTIME",
+      "path": "binary-metadata/mingw-w64-x86_64-gcc-libs/original-notices/mingw64/share/licenses/gcc-libs/COPYING.RUNTIME",
+      "sha256": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/gcc-libs/COPYING3",
+      "bytes": 35147,
+      "packagePath": "share/inkquay/licenses/msys2/gcc-libs/COPYING3",
+      "path": "binary-metadata/mingw-w64-x86_64-gcc-libs/original-notices/mingw64/share/licenses/gcc-libs/COPYING3",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/gcc-libs/README",
+      "bytes": 236,
+      "packagePath": "share/inkquay/licenses/msys2/gcc-libs/README",
+      "path": "binary-metadata/mingw-w64-x86_64-gcc-libs/original-notices/mingw64/share/licenses/gcc-libs/README",
+      "sha256": "33400d067fa3e2bd670a0868dcdb60c9486e8f559b675cf9ff1ff55d4e0d06ab"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/gdk-pixbuf2/COPYING",
+      "bytes": 26530,
+      "packagePath": "share/inkquay/licenses/msys2/gdk-pixbuf2/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-gdk-pixbuf2/original-notices/mingw64/share/licenses/gdk-pixbuf2/COPYING",
+      "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/gettext-runtime/COPYING",
+      "bytes": 495,
+      "packagePath": "share/inkquay/licenses/msys2/gettext-runtime/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-gettext-runtime/original-notices/mingw64/share/licenses/gettext-runtime/COPYING",
+      "sha256": "7ef2cdfe58e0c0460657b6598b49af29d4e03c1e41cbaf0e1da1eb8ad74b95d0"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/gettext-runtime/intl/COPYING.LIB",
+      "bytes": 26419,
+      "packagePath": "share/inkquay/licenses/msys2/gettext-runtime/intl/COPYING.LIB",
+      "path": "binary-metadata/mingw-w64-x86_64-gettext-runtime/original-notices/mingw64/share/licenses/gettext-runtime/intl/COPYING.LIB",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/gettext-runtime/libasprintf/COPYING",
+      "bytes": 65,
+      "packagePath": "share/inkquay/licenses/msys2/gettext-runtime/libasprintf/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-gettext-runtime/original-notices/mingw64/share/licenses/gettext-runtime/libasprintf/COPYING",
+      "sha256": "03133addae5b99a6148c538300e6d97074453089be1423b741bd081f18e2b298"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/gettext-runtime/libasprintf/COPYING.LIB",
+      "bytes": 26419,
+      "packagePath": "share/inkquay/licenses/msys2/gettext-runtime/libasprintf/COPYING.LIB",
+      "path": "binary-metadata/mingw-w64-x86_64-gettext-runtime/original-notices/mingw64/share/licenses/gettext-runtime/libasprintf/COPYING.LIB",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/glib2/COPYING",
+      "bytes": 25967,
+      "packagePath": "share/inkquay/licenses/msys2/glib2/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-glib2/original-notices/mingw64/share/licenses/glib2/COPYING",
+      "sha256": "fa6f36630bb1e0c571d34b2bbdf188d08495c9dbf58f28cac112f303fc1f58fb"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/graphite2/COPYING",
+      "bytes": 1235,
+      "packagePath": "share/inkquay/licenses/msys2/graphite2/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-graphite2/original-notices/mingw64/share/licenses/graphite2/COPYING",
+      "sha256": "2c272829ff23f182c8bf7ea12fedea69b0ae148663123ed5240c117cb129c9c1"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/graphite2/LICENSE",
+      "bytes": 29228,
+      "packagePath": "share/inkquay/licenses/msys2/graphite2/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-graphite2/original-notices/mingw64/share/licenses/graphite2/LICENSE",
+      "sha256": "cab46cd45adbfea4b1d0f14b033c70062c73074fa0b56532c2f351576ddf455e"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/gtk3/COPYING",
+      "bytes": 25383,
+      "packagePath": "share/inkquay/licenses/msys2/gtk3/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-gtk3/original-notices/mingw64/share/licenses/gtk3/COPYING",
+      "sha256": "b7993225104d90ddd8024fd838faf300bea5e83d91203eab98e29512acebd69c"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/harfbuzz/COPYING",
+      "bytes": 1971,
+      "packagePath": "share/inkquay/licenses/msys2/harfbuzz/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-harfbuzz/original-notices/mingw64/share/licenses/harfbuzz/COPYING",
+      "sha256": "ba8f810f2455c2f08e2d56bb49b72f37fcf68f1f4fade38977cfd7372050ad64"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/hicolor-icon-theme/COPYING",
+      "bytes": 17992,
+      "packagePath": "share/inkquay/licenses/msys2/hicolor-icon-theme/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-hicolor-icon-theme/original-notices/mingw64/share/licenses/hicolor-icon-theme/COPYING",
+      "sha256": "b0a64377d4ee87b7dbcf418ce4fb33ec3b2d7081b6732890e4af06b8118c4526"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/jbigkit/COPYING",
+      "bytes": 17982,
+      "packagePath": "share/inkquay/licenses/msys2/jbigkit/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-jbigkit/original-notices/mingw64/share/licenses/jbigkit/COPYING",
+      "sha256": "91df39d1816bfb17a4dda2d3d2c83b1f6f2d38d53e53e41e8f97ad5ac46a0cad"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/lcms2/LICENSE",
+      "bytes": 1080,
+      "packagePath": "share/inkquay/licenses/msys2/lcms2/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-lcms2/original-notices/mingw64/share/licenses/lcms2/LICENSE",
+      "sha256": "6dbd60437f8ef91d8de1f08ad75882547fd4931bfcc3566a0735f28db1484d31"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/lcms2/LICENSE-fast_float",
+      "bytes": 35146,
+      "packagePath": "share/inkquay/licenses/msys2/lcms2/LICENSE-fast_float",
+      "path": "binary-metadata/mingw-w64-x86_64-lcms2/original-notices/mingw64/share/licenses/lcms2/LICENSE-fast_float",
+      "sha256": "c53a65c2fd561c87eaabf1072ef5dcab8653042bc15308465f52413585eb6271"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/lerc/LICENSE",
+      "bytes": 9198,
+      "packagePath": "share/inkquay/licenses/msys2/lerc/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-lerc/original-notices/mingw64/share/licenses/lerc/LICENSE",
+      "sha256": "77a8b761727c75e2167b15bfdf61b2c0bcf8792271228bebe80779106ad00671"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libdatrie/COPYING",
+      "bytes": 26527,
+      "packagePath": "share/inkquay/licenses/msys2/libdatrie/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-libdatrie/original-notices/mingw64/share/licenses/libdatrie/COPYING",
+      "sha256": "a9bdde5616ecdd1e980b44f360600ee8783b1f99b8cc83a2beb163a0a390e861"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libdeflate/COPYING",
+      "bytes": 1078,
+      "packagePath": "share/inkquay/licenses/msys2/libdeflate/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-libdeflate/original-notices/mingw64/share/licenses/libdeflate/COPYING",
+      "sha256": "4ad69099cb4374836fd27583d9991e2838cd86b6e4666ab26b2d32582c91e73a"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libepoxy/COPYING",
+      "bytes": 2465,
+      "packagePath": "share/inkquay/licenses/msys2/libepoxy/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-libepoxy/original-notices/mingw64/share/licenses/libepoxy/COPYING",
+      "sha256": "8d5144666f9c4df9bbd69b8900086d5979259152a1060421cdcc0fb9061a1c12"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libffi/LICENSE",
+      "bytes": 1132,
+      "packagePath": "share/inkquay/licenses/msys2/libffi/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-libffi/original-notices/mingw64/share/licenses/libffi/LICENSE",
+      "sha256": "17b64dc60f3b6897a60f971e288b973f655c2edcdf08b25f3c3dd5549857881c"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libheif/COPYING",
+      "bytes": 44366,
+      "packagePath": "share/inkquay/licenses/msys2/libheif/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-libheif/original-notices/mingw64/share/licenses/libheif/COPYING",
+      "sha256": "fa81ce652315b013359d6e8e4744335f31a50c7c192907176d3632f78a3b4596"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libheif/COPYING-examples",
+      "bytes": 1066,
+      "packagePath": "share/inkquay/licenses/msys2/libheif/COPYING-examples",
+      "path": "binary-metadata/mingw-w64-x86_64-libheif/original-notices/mingw64/share/licenses/libheif/COPYING-examples",
+      "sha256": "278ee9bbb13ecb080a131c68927bd589a6a56fd5449ce25e8e594c858864830d"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libiconv/COPYING",
+      "bytes": 35147,
+      "packagePath": "share/inkquay/licenses/msys2/libiconv/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-libiconv/original-notices/mingw64/share/licenses/libiconv/COPYING",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libiconv/COPYING.LIB",
+      "bytes": 26419,
+      "packagePath": "share/inkquay/licenses/msys2/libiconv/COPYING.LIB",
+      "path": "binary-metadata/mingw-w64-x86_64-libiconv/original-notices/mingw64/share/licenses/libiconv/COPYING.LIB",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libiconv/README",
+      "bytes": 5741,
+      "packagePath": "share/inkquay/licenses/msys2/libiconv/README",
+      "path": "binary-metadata/mingw-w64-x86_64-libiconv/original-notices/mingw64/share/licenses/libiconv/README",
+      "sha256": "4ae66e61d1c6593c84c47105b368d579bcee1af566dbb959ec63a0c48425dcf4"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libiconv/libcharset/COPYING.LIB",
+      "bytes": 26419,
+      "packagePath": "share/inkquay/licenses/msys2/libiconv/libcharset/COPYING.LIB",
+      "path": "binary-metadata/mingw-w64-x86_64-libiconv/original-notices/mingw64/share/licenses/libiconv/libcharset/COPYING.LIB",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libjpeg-turbo/LICENSE.md",
+      "bytes": 6077,
+      "packagePath": "share/inkquay/licenses/msys2/libjpeg-turbo/LICENSE.md",
+      "path": "binary-metadata/mingw-w64-x86_64-libjpeg-turbo/original-notices/mingw64/share/licenses/libjpeg-turbo/LICENSE.md",
+      "sha256": "ba6bceebcba0fdd35488477c2cca8c4632ce82c74dbfbc87d886ce6fc4433579"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libjpeg-turbo/README.ijg",
+      "bytes": 12799,
+      "packagePath": "share/inkquay/licenses/msys2/libjpeg-turbo/README.ijg",
+      "path": "binary-metadata/mingw-w64-x86_64-libjpeg-turbo/original-notices/mingw64/share/licenses/libjpeg-turbo/README.ijg",
+      "sha256": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libjpeg-turbo/README.md",
+      "bytes": 17722,
+      "packagePath": "share/inkquay/licenses/msys2/libjpeg-turbo/README.md",
+      "path": "binary-metadata/mingw-w64-x86_64-libjpeg-turbo/original-notices/mingw64/share/licenses/libjpeg-turbo/README.md",
+      "sha256": "a44ba17ac66c57edaf0ea7c6e4b31358f08322c780e4e6af092082abb3e20793"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libjpeg-turbo/simd/jsimdext.inc",
+      "bytes": 15563,
+      "packagePath": "share/inkquay/licenses/msys2/libjpeg-turbo/simd/jsimdext.inc",
+      "path": "binary-metadata/mingw-w64-x86_64-libjpeg-turbo/original-notices/mingw64/share/licenses/libjpeg-turbo/simd/jsimdext.inc",
+      "sha256": "68c5d236785edf75344cebe8b9bec36568bd35c96eb72cc67ffecd66c17dbd74"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libpng/LICENSE",
+      "bytes": 5345,
+      "packagePath": "share/inkquay/licenses/msys2/libpng/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-libpng/original-notices/mingw64/share/licenses/libpng/LICENSE",
+      "sha256": "bdb0a645ea18c60507d0368379b1ac5474b92255fcc2d115e07486a7672ba526"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libpsl/COPYING",
+      "bytes": 1060,
+      "packagePath": "share/inkquay/licenses/msys2/libpsl/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-libpsl/original-notices/mingw64/share/licenses/libpsl/COPYING",
+      "sha256": "322392e6001b2b3b0fca705dc9f11f26e12441188ecde50eb1d22909980b2925"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/librsvg/COPYING.LIB",
+      "bytes": 26530,
+      "packagePath": "share/inkquay/licenses/msys2/librsvg/COPYING.LIB",
+      "path": "binary-metadata/mingw-w64-x86_64-librsvg/original-notices/mingw64/share/licenses/librsvg/COPYING.LIB",
+      "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libssh2/LICENSE",
+      "bytes": 1959,
+      "packagePath": "share/inkquay/licenses/msys2/libssh2/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-libssh2/original-notices/mingw64/share/licenses/libssh2/LICENSE",
+      "sha256": "f7f9633cf9ff2f1333f3d7ce46973a8716a4d2a2815ad56f30d437d5fea7bafe"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libtasn1/COPYING",
+      "bytes": 35149,
+      "packagePath": "share/inkquay/licenses/msys2/libtasn1/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-libtasn1/original-notices/mingw64/share/licenses/libtasn1/COPYING",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libtasn1/COPYING.LESSERv2",
+      "bytes": 26419,
+      "packagePath": "share/inkquay/licenses/msys2/libtasn1/COPYING.LESSERv2",
+      "path": "binary-metadata/mingw-w64-x86_64-libtasn1/original-notices/mingw64/share/licenses/libtasn1/COPYING.LESSERv2",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libthai/COPYING",
+      "bytes": 26419,
+      "packagePath": "share/inkquay/licenses/msys2/libthai/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-libthai/original-notices/mingw64/share/licenses/libthai/COPYING",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libtiff/LICENSE.md",
+      "bytes": 2416,
+      "packagePath": "share/inkquay/licenses/msys2/libtiff/LICENSE.md",
+      "path": "binary-metadata/mingw-w64-x86_64-libtiff/original-notices/mingw64/share/licenses/libtiff/LICENSE.md",
+      "sha256": "0e27c2382d7b8147972bbb746e04059a1152c8d0fda9d03ef1399d1a433c4ade"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libunistring/LICENSE",
+      "bytes": 35149,
+      "packagePath": "share/inkquay/licenses/msys2/libunistring/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-libunistring/original-notices/mingw64/share/licenses/libunistring/LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libunistring/LICENSE.LIB",
+      "bytes": 7639,
+      "packagePath": "share/inkquay/licenses/msys2/libunistring/LICENSE.LIB",
+      "path": "binary-metadata/mingw-w64-x86_64-libunistring/original-notices/mingw64/share/licenses/libunistring/LICENSE.LIB",
+      "sha256": "a853c2ffec17057872340eee242ae4d96cbf2b520ae27d903e1b2fef1a5f9d1c"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libwebp/COPYING",
+      "bytes": 1496,
+      "packagePath": "share/inkquay/licenses/msys2/libwebp/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-libwebp/original-notices/mingw64/share/licenses/libwebp/COPYING",
+      "sha256": "5aec868f669e384a22372a4e8a1a6cd7d44c64cd451f960ca69cc170d1e13acf"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libwinpthread/COPYING",
+      "bytes": 2883,
+      "packagePath": "share/inkquay/licenses/msys2/libwinpthread/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-libwinpthread/original-notices/mingw64/share/licenses/libwinpthread/COPYING",
+      "sha256": "63263614cdd29f2f93cba85e992f041b31f9fc7b4033692f31269489a8a1b177"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libxml2/COPYING",
+      "bytes": 1314,
+      "packagePath": "share/inkquay/licenses/msys2/libxml2/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-libxml2/original-notices/mingw64/share/licenses/libxml2/COPYING",
+      "sha256": "5d4873884a890122a4b9b20ad56ac6f7da1d796a5bfcf04a427970ac96217626"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libzip/LICENSE",
+      "bytes": 1454,
+      "packagePath": "share/inkquay/licenses/msys2/libzip/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-libzip/original-notices/mingw64/share/licenses/libzip/LICENSE",
+      "sha256": "01c022eca6d566e2e8792fd0f091a28653b2a608319922bcd4de91c49d1438e1"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/nghttp2/COPYING",
+      "bytes": 1156,
+      "packagePath": "share/inkquay/licenses/msys2/nghttp2/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-nghttp2/original-notices/mingw64/share/licenses/nghttp2/COPYING",
+      "sha256": "6b94f3abc1aabd0c72a7c7d92a77f79dda7c8a0cb3df839a97890b4116a2de2a"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/nghttp3/COPYING",
+      "bytes": 1081,
+      "packagePath": "share/inkquay/licenses/msys2/nghttp3/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-nghttp3/original-notices/mingw64/share/licenses/nghttp3/COPYING",
+      "sha256": "58cc3fc8c6d6cb2485ab35eb5918e849b5bf1e56522974e106d7a39a88d61dcd"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/ngtcp2/COPYING",
+      "bytes": 1080,
+      "packagePath": "share/inkquay/licenses/msys2/ngtcp2/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-ngtcp2/original-notices/mingw64/share/licenses/ngtcp2/COPYING",
+      "sha256": "542dd526d2ea23565f0571cc68df6f05ed11248a90ff0f32de19d8ba589db513"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/nspr/LICENSE",
+      "bytes": 16726,
+      "packagePath": "share/inkquay/licenses/msys2/nspr/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-nspr/original-notices/mingw64/share/licenses/nspr/LICENSE",
+      "sha256": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/nss/COPYING",
+      "bytes": 18100,
+      "packagePath": "share/inkquay/licenses/msys2/nss/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-nss/original-notices/mingw64/share/licenses/nss/COPYING",
+      "sha256": "a20c1a32d1f8102432360b42e932869f7c11c7cdbacf9cac554c422132af47f4"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/openjpeg/LICENSE",
+      "bytes": 2112,
+      "packagePath": "share/inkquay/licenses/msys2/openjpeg/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-openjpeg2/original-notices/mingw64/share/licenses/openjpeg/LICENSE",
+      "sha256": "a6af136f3e15038a666b61f376612a07d9a4e48cb7c01adbf3e33b3f14ab49b6"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/openssl/LICENSE",
+      "bytes": 10175,
+      "packagePath": "share/inkquay/licenses/msys2/openssl/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-openssl/original-notices/mingw64/share/licenses/openssl/LICENSE",
+      "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/pango/COPYING",
+      "bytes": 25292,
+      "packagePath": "share/inkquay/licenses/msys2/pango/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-pango/original-notices/mingw64/share/licenses/pango/COPYING",
+      "sha256": "d245807f90032872d1438d741ed21e2490e1175dc8aa3afa5ddb6c8e529b58e5"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/pcre2/COPYING",
+      "bytes": 97,
+      "packagePath": "share/inkquay/licenses/msys2/pcre2/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-pcre2/original-notices/mingw64/share/licenses/pcre2/COPYING",
+      "sha256": "99272c55f3dcfa07a8a7e15a5c1a33096e4727de74241d65fa049fccfdd59507"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/pcre2/LICENCE.md",
+      "bytes": 4011,
+      "packagePath": "share/inkquay/licenses/msys2/pcre2/LICENCE.md",
+      "path": "binary-metadata/mingw-w64-x86_64-pcre2/original-notices/mingw64/share/licenses/pcre2/LICENCE.md",
+      "sha256": "197d8a73ffee0d6b09adba2f9c677b5f5aede24edf89258a68e48248d010d811"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/pixman/COPYING",
+      "bytes": 2087,
+      "packagePath": "share/inkquay/licenses/msys2/pixman/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-pixman/original-notices/mingw64/share/licenses/pixman/COPYING",
+      "sha256": "fac9270f0987b96ff4533fca3548c633e02083cbba4a0172a3b149b2e4019793"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/poppler-data/COPYING",
+      "bytes": 1560,
+      "packagePath": "share/inkquay/licenses/msys2/poppler-data/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-poppler-data/original-notices/mingw64/share/licenses/poppler-data/COPYING",
+      "sha256": "36f27791549113cecd00013233101026452c872f79215a93d33a4a9bd0678672"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/poppler-data/COPYING.adobe",
+      "bytes": 1565,
+      "packagePath": "share/inkquay/licenses/msys2/poppler-data/COPYING.adobe",
+      "path": "binary-metadata/mingw-w64-x86_64-poppler-data/original-notices/mingw64/share/licenses/poppler-data/COPYING.adobe",
+      "sha256": "4d367131f33e9f0daa6acf84ccc20e6468aa379bc053f5fa72dab201ec017b39"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/qpdf/LICENSE",
+      "bytes": 11358,
+      "packagePath": "share/inkquay/licenses/msys2/qpdf/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-qpdf/original-notices/mingw64/share/licenses/qpdf/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/ttf-dejavu/LICENSE",
+      "bytes": 8816,
+      "packagePath": "share/inkquay/licenses/msys2/ttf-dejavu/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-ttf-dejavu/original-notices/mingw64/share/licenses/ttf-dejavu/LICENSE",
+      "sha256": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/xz/COPYING",
+      "bytes": 3119,
+      "packagePath": "share/inkquay/licenses/msys2/xz/COPYING",
+      "path": "binary-metadata/mingw-w64-x86_64-xz/original-notices/mingw64/share/licenses/xz/COPYING",
+      "sha256": "616a3ad264ce29b8f1cb97e53037b139d406899ca8d1f799651e17bfa09830b8"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/xz/COPYING.0BSD",
+      "bytes": 607,
+      "packagePath": "share/inkquay/licenses/msys2/xz/COPYING.0BSD",
+      "path": "binary-metadata/mingw-w64-x86_64-xz/original-notices/mingw64/share/licenses/xz/COPYING.0BSD",
+      "sha256": "0b01625d853911cd0e2e088dcfb743261034a091bb379246cb25a14cc4c74bf1"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/xz/COPYING.GPLv2",
+      "bytes": 17984,
+      "packagePath": "share/inkquay/licenses/msys2/xz/COPYING.GPLv2",
+      "path": "binary-metadata/mingw-w64-x86_64-xz/original-notices/mingw64/share/licenses/xz/COPYING.GPLv2",
+      "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/xz/COPYING.GPLv3",
+      "bytes": 35149,
+      "packagePath": "share/inkquay/licenses/msys2/xz/COPYING.GPLv3",
+      "path": "binary-metadata/mingw-w64-x86_64-xz/original-notices/mingw64/share/licenses/xz/COPYING.GPLv3",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/xz/COPYING.LGPLv2.1",
+      "bytes": 26419,
+      "packagePath": "share/inkquay/licenses/msys2/xz/COPYING.LGPLv2.1",
+      "path": "binary-metadata/mingw-w64-x86_64-xz/original-notices/mingw64/share/licenses/xz/COPYING.LGPLv2.1",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/zlib/LICENSE",
+      "bytes": 1002,
+      "packagePath": "share/inkquay/licenses/msys2/zlib/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-zlib/original-notices/mingw64/share/licenses/zlib/LICENSE",
+      "sha256": "e32ff4e00d9d94930537635291da39e7e612703334bf6fde8c7f1686fe8a45a2"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/zstd/LICENSE",
+      "bytes": 1549,
+      "packagePath": "share/inkquay/licenses/msys2/zstd/LICENSE",
+      "path": "binary-metadata/mingw-w64-x86_64-zstd/original-notices/mingw64/share/licenses/zstd/LICENSE",
+      "sha256": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8"
+    }
+  ],
+  "preparedAt": "2026-09-11T20:42:41.926764+00:00",
+  "preparedCargoLock": "cargo-inputs/Cargo.lock.after-recipe",
+  "product": "InkQuay",
+  "publicBinaryIncluded": false,
+  "publicationByThisTask": false,
+  "remainingActions": [
+    "Independent review and source-only publication/access verification by coordinator.",
+    "Copy and bind prepared supplemental notices/source access reference in the eventual binary package.",
+    "Recipient-modified-library native MSIX procedure is documented; this task did not execute that Windows example."
+  ],
+  "rustRuntimeNotices": "rust-runtime-notices/evidence.json",
+  "schemaVersion": 1,
+  "sourceArchives": [
+    {
+      "bytes": 4518801,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-adwaita-icon-theme-50.0-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-adwaita-icon-theme-50.0-1.src.tar.zst",
+      "pkgbase": "mingw-w64-adwaita-icon-theme",
+      "recipeSha256": "ef93ec9b5672b4ea2ac42aaf048bcd7379ba2ec8e1ac186e3d990b95bf70b087",
+      "sha256": "f49cfa253c350e06fec0a9bd7925a89bf21e22089aee2d9d4e5f287d2d0c71f2",
+      "sourceMetadataPath": "source-metadata/mingw-w64-adwaita-icon-theme-50.0-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-adwaita-icon-theme-50.0-1.src.tar.zst",
+      "version": "50.0-1"
+    },
+    {
+      "bytes": 2058430,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-adwaita-icon-theme-legacy-46.2-1.src.tar.zst"
+      },
+      "filename": "mingw-w64-adwaita-icon-theme-legacy-46.2-1.src.tar.zst",
+      "pkgbase": "mingw-w64-adwaita-icon-theme-legacy",
+      "recipeSha256": "50606934ec58ed8f9c5fc0103f6ec592a479da5c0d7ffef1a3498aa87fbd53e8",
+      "sha256": "6e740f5dfaf315db4d7c5871ee1be29aace96eae7bfd5634c02fdac381e80b1b",
+      "sourceMetadataPath": "source-metadata/mingw-w64-adwaita-icon-theme-legacy-46.2-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-adwaita-icon-theme-legacy-46.2-1.src.tar.zst",
+      "version": "46.2-1"
+    },
+    {
+      "bytes": 600744,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-at-spi2-core-2.60.6-1.src.tar.zst"
+      },
+      "filename": "mingw-w64-at-spi2-core-2.60.6-1.src.tar.zst",
+      "pkgbase": "mingw-w64-at-spi2-core",
+      "recipeSha256": "24f027a4fa8eeb1d9961642a23eedc37c12370e95bf7fbb02c2ff006427628d1",
+      "sha256": "2a33b15d3f9ebc81eb03114a3efb9a60937db05c80a43c8168dd39583c36c166",
+      "sourceMetadataPath": "source-metadata/mingw-w64-at-spi2-core-2.60.6-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-at-spi2-core-2.60.6-1.src.tar.zst",
+      "version": "2.60.6-1"
+    },
+    {
+      "bytes": 644113,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-brotli-1.2.0-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-brotli-1.2.0-1.src.tar.zst",
+      "pkgbase": "mingw-w64-brotli",
+      "recipeSha256": "894120dac11e7fffd72224148e22d424075fabf23a8cafbf4f2c5390c73755c9",
+      "sha256": "2f0f93875aac21990d20f1eaf0ad8b970eb6f186c663c77ae47aaaf9e5711fcf",
+      "sourceMetadataPath": "source-metadata/mingw-w64-brotli-1.2.0-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-brotli-1.2.0-1.src.tar.zst",
+      "version": "1.2.0-1"
+    },
+    {
+      "bytes": 818825,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-bzip2-1.0.8-4.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-bzip2-1.0.8-4.src.tar.zst",
+      "pkgbase": "mingw-w64-bzip2",
+      "recipeSha256": "a82348d211ec09835b8d77de2e98d3153831a9389cdaf6cb8cfadf711096aa24",
+      "sha256": "fd9360917314d1cbccb3cb15ed8450d1e56b8a9f733b606504aba52c52159e54",
+      "sourceMetadataPath": "source-metadata/mingw-w64-bzip2-1.0.8-4.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-bzip2-1.0.8-4.src.tar.zst",
+      "version": "1.0.8-4"
+    },
+    {
+      "bytes": 32574040,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-cairo-1.18.4-4.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-cairo-1.18.4-4.src.tar.zst",
+      "pkgbase": "mingw-w64-cairo",
+      "recipeSha256": "c6474a55d3fdd53d0fe40aa0d183536d0704abbe3d3a791e98688e588a694ffb",
+      "sha256": "3a83c94fd2818872441db8ded3e500aa1401e673fa389390b8423be954bafea2",
+      "sourceMetadataPath": "source-metadata/mingw-w64-cairo-1.18.4-4.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-cairo-1.18.4-4.src.tar.zst",
+      "version": "1.18.4-4"
+    },
+    {
+      "bytes": 2962898,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-curl-8.22.0-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-curl-8.22.0-1.src.tar.zst",
+      "pkgbase": "mingw-w64-curl",
+      "recipeSha256": "5391f17e126f937985de781769bc06f4992e5bcb7498f1e0bf9294f74bc7d71b",
+      "sha256": "c5a6b000c2a7514be9e584403e0165a0aa36c8b495c338a836ba3934f7c16719",
+      "sourceMetadataPath": "source-metadata/mingw-w64-curl-8.22.0-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-curl-8.22.0-1.src.tar.zst",
+      "version": "8.22.0-1"
+    },
+    {
+      "bytes": 3719366,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-djvulibre-3.5.30-1.src.tar.zst"
+      },
+      "filename": "mingw-w64-djvulibre-3.5.30-1.src.tar.zst",
+      "pkgbase": "mingw-w64-djvulibre",
+      "recipeSha256": "7c9d0cdf5f7ca086d68a60920bbe7a14139a081701b0ede9094a6b83aeff8577",
+      "sha256": "f72480c4f49a5083632ea4a1ef29bee0f9e99b5258aac144fa7c6a043ce894ce",
+      "sourceMetadataPath": "source-metadata/mingw-w64-djvulibre-3.5.30-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-djvulibre-3.5.30-1.src.tar.zst",
+      "version": "3.5.30-1"
+    },
+    {
+      "bytes": 522308,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-expat-2.8.4-2.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-expat-2.8.4-2.src.tar.zst",
+      "pkgbase": "mingw-w64-expat",
+      "recipeSha256": "126c496ed77fa60cf251d222044604d8f2968393d5fe5444d902092c75086a61",
+      "sha256": "966058864d10c69f87e700e68586a31cacbfe5c2b50e84d62bcea3b05bd1fc16",
+      "sourceMetadataPath": "source-metadata/mingw-w64-expat-2.8.4-2.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-expat-2.8.4-2.src.tar.zst",
+      "version": "2.8.4-2"
+    },
+    {
+      "bytes": 659688,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-fontconfig-2.18.3-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-fontconfig-2.18.3-1.src.tar.zst",
+      "pkgbase": "mingw-w64-fontconfig",
+      "recipeSha256": "d4e67fa58f28fdf5fe6600f8fc474a8024e7410258fbd6f607f298ce449159fc",
+      "sha256": "7df65dbf84397f4f71c6aa0bd39fac93f839d6b87f04a935773b69828740230d",
+      "sourceMetadataPath": "source-metadata/mingw-w64-fontconfig-2.18.3-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-fontconfig-2.18.3-1.src.tar.zst",
+      "version": "2.18.3-1"
+    },
+    {
+      "bytes": 2673693,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-freetype-2.14.3-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-freetype-2.14.3-1.src.tar.zst",
+      "pkgbase": "mingw-w64-freetype",
+      "recipeSha256": "6b8fb0122bf6adbb608240a000aea22b7fe2c3cf2eba533155b3a9864d1511fd",
+      "sha256": "ee8071d0a6e82a274e959902898115f4c9c376a2a8e209d83dfe746c18004ec0",
+      "sourceMetadataPath": "source-metadata/mingw-w64-freetype-2.14.3-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-freetype-2.14.3-1.src.tar.zst",
+      "version": "2.14.3-1"
+    },
+    {
+      "bytes": 1099723,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-fribidi-1.0.16-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-fribidi-1.0.16-1.src.tar.zst",
+      "pkgbase": "mingw-w64-fribidi",
+      "recipeSha256": "8b0dfca7f26b9f1b7f32fef6ab348b7c7d07b2c568c1b9d75820346f026316b6",
+      "sha256": "a496fd3c7973d443e741626e1be7af58d8adcbc1d4a1c056d07a011f0edc6d0b",
+      "sourceMetadataPath": "source-metadata/mingw-w64-fribidi-1.0.16-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-fribidi-1.0.16-1.src.tar.zst",
+      "version": "1.0.16-1"
+    },
+    {
+      "bytes": 107228430,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-gcc-16.2.0-3.src.tar.zst"
+      },
+      "filename": "mingw-w64-gcc-16.2.0-3.src.tar.zst",
+      "pkgbase": "mingw-w64-gcc",
+      "recipeSha256": "226e4b4d6a5786b66eaf260181b5260934a77ee1d6548ef9d1f735ebaae30f1d",
+      "sha256": "eb3479a8b0b23810fbbbc25ef76879e867e88d09960a40145d73f5505fda4da0",
+      "sourceMetadataPath": "source-metadata/mingw-w64-gcc-16.2.0-3.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-gcc-16.2.0-3.src.tar.zst",
+      "version": "16.2.0-3"
+    },
+    {
+      "bytes": 6041891,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-gdk-pixbuf2-2.44.7-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-gdk-pixbuf2-2.44.7-1.src.tar.zst",
+      "pkgbase": "mingw-w64-gdk-pixbuf2",
+      "recipeSha256": "5fd387a327a8cd73acbd63a96fc5ee133f39df28f3284e8c43132ec480a0011d",
+      "sha256": "34986b21db1b40021a37835e90dad04250d1e31dc90da538b9922acd097e0019",
+      "sourceMetadataPath": "source-metadata/mingw-w64-gdk-pixbuf2-2.44.7-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-gdk-pixbuf2-2.44.7-1.src.tar.zst",
+      "version": "2.44.7-1"
+    },
+    {
+      "bytes": 10267655,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-gettext-1.0-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-gettext-1.0-1.src.tar.zst",
+      "pkgbase": "mingw-w64-gettext",
+      "recipeSha256": "853ef80a50588f29355722a4513f24cf1a5f8de06e0b5ee326580464db539741",
+      "sha256": "cca0d0c8f60353faccc5ad40405240014e4a7ccc8b1c6ca9f4626aef3097d26e",
+      "sourceMetadataPath": "source-metadata/mingw-w64-gettext-1.0-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-gettext-1.0-1.src.tar.zst",
+      "version": "1.0-1"
+    },
+    {
+      "bytes": 5835342,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-glib2-2.90.0-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-glib2-2.90.0-1.src.tar.zst",
+      "pkgbase": "mingw-w64-glib2",
+      "recipeSha256": "0ad17a7ab5835acc95990c1eba2d85f351a8df0604e528f23b4212402380430b",
+      "sha256": "580246fb9db6083e0191ac7fd0e44af71df6ec0dc52cfd384b5ae07f8665cc9e",
+      "sourceMetadataPath": "source-metadata/mingw-w64-glib2-2.90.0-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-glib2-2.90.0-1.src.tar.zst",
+      "version": "2.90.0-1"
+    },
+    {
+      "bytes": 2097066,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-gmp-6.3.0-2.src.tar.zst"
+      },
+      "filename": "mingw-w64-gmp-6.3.0-2.src.tar.zst",
+      "pkgbase": "mingw-w64-gmp",
+      "recipeSha256": "b9d3bb2b5b12cb0fc47c4dc17a9a2aa82513236eaefa34c8dfc57dd0d92bc42a",
+      "sha256": "f288f944fd9609db220bcf6a8dd0703a5674eeb906ef35eb8485bb8192135994",
+      "sourceMetadataPath": "source-metadata/mingw-w64-gmp-6.3.0-2.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-gmp-6.3.0-2.src.tar.zst",
+      "version": "6.3.0-2"
+    },
+    {
+      "bytes": 7280076,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-gnutls-3.8.13-3.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-gnutls-3.8.13-3.src.tar.zst",
+      "pkgbase": "mingw-w64-gnutls",
+      "recipeSha256": "0626ac4c78bd79c915b3ea1213b66fa384e3a6eaa392b407eb230a87c9ef83db",
+      "sha256": "7889cd73810d909642c0f122b40cfe0eaec5b0d2985804f145cd90c6a51c0435",
+      "sourceMetadataPath": "source-metadata/mingw-w64-gnutls-3.8.13-3.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-gnutls-3.8.13-3.src.tar.zst",
+      "version": "3.8.13-3"
+    },
+    {
+      "bytes": 13317053,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-graphite2-1.3.15-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-graphite2-1.3.15-1.src.tar.zst",
+      "pkgbase": "mingw-w64-graphite2",
+      "recipeSha256": "2fd68eeb0a96760c64f203506004dd0485fc588bdc0fb83684665821493df6d5",
+      "sha256": "eb76ce274c68ea6bad0883144c21e44a803ec94fed9dc0f6584feb0a8415a1d6",
+      "sourceMetadataPath": "source-metadata/mingw-w64-graphite2-1.3.15-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-graphite2-1.3.15-1.src.tar.zst",
+      "version": "1.3.15-1"
+    },
+    {
+      "bytes": 25113997,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-gsfonts-20200910-3.src.tar.zst"
+      },
+      "filename": "mingw-w64-gsfonts-20200910-3.src.tar.zst",
+      "pkgbase": "mingw-w64-gsfonts",
+      "recipeSha256": "e52c7017c8e8bfa6514b96b5fd53299354ac266c841a3254c98a18d224cb3649",
+      "sha256": "919e9888283afaf48ac690bf0822bbb7b05a377e76131aa08a73da6a26d1c729",
+      "sourceMetadataPath": "source-metadata/mingw-w64-gsfonts-20200910-3.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-gsfonts-20200910-3.src.tar.zst",
+      "version": "20200910-3"
+    },
+    {
+      "bytes": 13583458,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-gtk3-3.24.52-1.src.tar.zst"
+      },
+      "filename": "mingw-w64-gtk3-3.24.52-1.src.tar.zst",
+      "pkgbase": "mingw-w64-gtk3",
+      "recipeSha256": "9e3cd207ab5e0dd95ff48dd74e15af0f0328966c118a9006ca57d2049c327577",
+      "sha256": "b87574f9f86e5afd18dca456e951062f8ade1d2d6b7cd1c0489738b892a24b09",
+      "sourceMetadataPath": "source-metadata/mingw-w64-gtk3-3.24.52-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-gtk3-3.24.52-1.src.tar.zst",
+      "version": "3.24.52-1"
+    },
+    {
+      "bytes": 20111611,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-harfbuzz-14.4.0-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-harfbuzz-14.4.0-1.src.tar.zst",
+      "pkgbase": "mingw-w64-harfbuzz",
+      "recipeSha256": "7cd353a89c156c434b687ca8dda859bd61c6c4e1d3d91966c12f5b5a44d39e7f",
+      "sha256": "02dee132f33459b1a6089c225d70e4dd44f8cc816e78b6cc3a5355214b3ddb76",
+      "sourceMetadataPath": "source-metadata/mingw-w64-harfbuzz-14.4.0-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-harfbuzz-14.4.0-1.src.tar.zst",
+      "version": "14.4.0-1"
+    },
+    {
+      "bytes": 30809,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-hicolor-icon-theme-0.18-1.src.tar.zst"
+      },
+      "filename": "mingw-w64-hicolor-icon-theme-0.18-1.src.tar.zst",
+      "pkgbase": "mingw-w64-hicolor-icon-theme",
+      "recipeSha256": "0ce573c9812269bd3a0f0ed82b5df13664d55e4964c171c3369507540399389f",
+      "sha256": "b7987e4b5420248966a8e57e7d1523624d7483cd945550a40f2bb1a8a7572718",
+      "sourceMetadataPath": "source-metadata/mingw-w64-hicolor-icon-theme-0.18-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-hicolor-icon-theme-0.18-1.src.tar.zst",
+      "version": "0.18-1"
+    },
+    {
+      "bytes": 443470,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-jbigkit-2.1-6.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-jbigkit-2.1-6.src.tar.zst",
+      "pkgbase": "mingw-w64-jbigkit",
+      "recipeSha256": "3edad46568e5f76306b4f50ded5c6155967542522beaeda476548b34d340cba7",
+      "sha256": "64757867df26308c14d22b184aaecb43742c25ee8d24f18da51e3d1e09be8ac2",
+      "sourceMetadataPath": "source-metadata/mingw-w64-jbigkit-2.1-6.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-jbigkit-2.1-6.src.tar.zst",
+      "version": "2.1-6"
+    },
+    {
+      "bytes": 5709029,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-lcms2-2.19.1-1.src.tar.zst"
+      },
+      "filename": "mingw-w64-lcms2-2.19.1-1.src.tar.zst",
+      "pkgbase": "mingw-w64-lcms2",
+      "recipeSha256": "6f39c90313ec3f739b7406d6c7e2eb802c8aa8142323278a36d41083e765350f",
+      "sha256": "83414d0d95c5cb2548d3050670694e9efc64304a52190f42bcad951efa038b41",
+      "sourceMetadataPath": "source-metadata/mingw-w64-lcms2-2.19.1-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-lcms2-2.19.1-1.src.tar.zst",
+      "version": "2.19.1-1"
+    },
+    {
+      "bytes": 4056783,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-lerc-4.1.1-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-lerc-4.1.1-1.src.tar.zst",
+      "pkgbase": "mingw-w64-lerc",
+      "recipeSha256": "d477c9d1c50148da657e69bd428783f71515622dea8bf091d7cba93e2a069de7",
+      "sha256": "697824f8dba0b297949b294d7f850a21dfa817802cf91f3a73b6192a7c234f46",
+      "sourceMetadataPath": "source-metadata/mingw-w64-lerc-4.1.1-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-lerc-4.1.1-1.src.tar.zst",
+      "version": "4.1.1-1"
+    },
+    {
+      "bytes": 327473,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-libdatrie-0.2.14-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-libdatrie-0.2.14-1.src.tar.zst",
+      "pkgbase": "mingw-w64-libdatrie",
+      "recipeSha256": "5b6a0eae66edab8c902ae4668b31859a00ac09d78ff7b9dfe6cb044ea4be5af6",
+      "sha256": "da58ca439051a8cfb1d7f15cdd82af104e1ea1eeefdb090e608d2305a747df7d",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libdatrie-0.2.14-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libdatrie-0.2.14-1.src.tar.zst",
+      "version": "0.2.14-1"
+    },
+    {
+      "bytes": 200156,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-libdeflate-1.26-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-libdeflate-1.26-1.src.tar.zst",
+      "pkgbase": "mingw-w64-libdeflate",
+      "recipeSha256": "832f416248f449419d86cec6b292fe3b1c99e789f5e20b52d24b1d8d654b2a62",
+      "sha256": "8f08ba1c541d7cdffde7113e0796fa3ed5ae494702c57d86b736f82167805ea6",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libdeflate-1.26-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libdeflate-1.26-1.src.tar.zst",
+      "version": "1.26-1"
+    },
+    {
+      "bytes": 334205,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-libepoxy-1.5.10-7.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-libepoxy-1.5.10-7.src.tar.zst",
+      "pkgbase": "mingw-w64-libepoxy",
+      "recipeSha256": "365469de34ead7e168b1594b8c7b974b14bd6243352f1df2649ab33ce45f4a07",
+      "sha256": "b3d06dba3c24d3396a4b0c8b853855b5c0acd3872bb8fa8333d0ce07685197f6",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libepoxy-1.5.10-7.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libepoxy-1.5.10-7.src.tar.zst",
+      "version": "1.5.10-7"
+    },
+    {
+      "bytes": 1582238,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-libffi-3.8.0-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-libffi-3.8.0-1.src.tar.zst",
+      "pkgbase": "mingw-w64-libffi",
+      "recipeSha256": "59e885042758a92aba7a63aade4afe4975b2bf79e7c97e4462bc9ada58b740a6",
+      "sha256": "641ea78ce0333839eab5262656f03fdcfd8496d7388bd7b27e4f0638aeed9adf",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libffi-3.8.0-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libffi-3.8.0-1.src.tar.zst",
+      "version": "3.8.0-1"
+    },
+    {
+      "bytes": 2217031,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-libheif-1.23.4-1.src.tar.zst"
+      },
+      "filename": "mingw-w64-libheif-1.23.4-1.src.tar.zst",
+      "pkgbase": "mingw-w64-libheif",
+      "recipeSha256": "82f4929f881980cfcb580e9634e266cbdaa098b350ec02ddbed5754574e3a218",
+      "sha256": "9dce9b4bdc3228a19ab5e1996225042e5c8fcb99da7ff2830714c540b7e313cf",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libheif-1.23.4-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libheif-1.23.4-1.src.tar.zst",
+      "version": "1.23.4-1"
+    },
+    {
+      "bytes": 5131029,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-libiconv-1.19-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-libiconv-1.19-1.src.tar.zst",
+      "pkgbase": "mingw-w64-libiconv",
+      "recipeSha256": "9b3212d06910560fb59e017e0b73a29d392a5082d3a47a613e61509bd7dcd475",
+      "sha256": "74428280c17094da5b702c29b2e1a0abae59556ea5dfdd65705cc8ccc1e000fb",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libiconv-1.19-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libiconv-1.19-1.src.tar.zst",
+      "version": "1.19-1"
+    },
+    {
+      "bytes": 2147337,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-libidn2-2.3.8-4.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-libidn2-2.3.8-4.src.tar.zst",
+      "pkgbase": "mingw-w64-libidn2",
+      "recipeSha256": "cf6def1817d6a38b49c66fc4cbe36cd56705d9b8952dae13e06d60da703983ff",
+      "sha256": "cd83e8514fbeb6a4499299b88691b9b9ecc3114cca1e2be4f6c54aab6ae9ddd0",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libidn2-2.3.8-4.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libidn2-2.3.8-4.src.tar.zst",
+      "version": "2.3.8-4"
+    },
+    {
+      "bytes": 2536411,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-libjpeg-turbo-3.2.0-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-libjpeg-turbo-3.2.0-1.src.tar.zst",
+      "pkgbase": "mingw-w64-libjpeg-turbo",
+      "recipeSha256": "bd71b8cdb87f4838d9d86475104e7ac926d56a239a1d3947721db1aae0385b92",
+      "sha256": "98bfbef730e79ca74c88842eb27730db11429dbae4d95e0f5d7859e316026a74",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libjpeg-turbo-3.2.0-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libjpeg-turbo-3.2.0-1.src.tar.zst",
+      "version": "3.2.0-1"
+    },
+    {
+      "bytes": 1081411,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-libpng-1.6.58-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-libpng-1.6.58-1.src.tar.zst",
+      "pkgbase": "mingw-w64-libpng",
+      "recipeSha256": "d398f1e6ea9e549a638491308155e47e27a0953781ccce28707243f6eff29c81",
+      "sha256": "9e985fc4cef509ec689f982dc6a948e9a8ee5184db25d65e9dd4c21872092348",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libpng-1.6.58-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libpng-1.6.58-1.src.tar.zst",
+      "version": "1.6.58-1"
+    },
+    {
+      "bytes": 6829368,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-libpsl-0.21.5-3.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-libpsl-0.21.5-3.src.tar.zst",
+      "pkgbase": "mingw-w64-libpsl",
+      "recipeSha256": "84f8e19b62b3037d82f1f20bc041b9c1a83f8d82eeffe158bbf3d7f50df286c3",
+      "sha256": "102b4ab4c60322162e808c5c81f545438c346c659e8fb63e0851066f07a0e76b",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libpsl-0.21.5-3.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libpsl-0.21.5-3.src.tar.zst",
+      "version": "0.21.5-3"
+    },
+    {
+      "bytes": 6769321,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-librsvg-2.63.0-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-librsvg-2.63.0-1.src.tar.zst",
+      "pkgbase": "mingw-w64-librsvg",
+      "recipeSha256": "b5290d49771497efd8d64afa5db624c2d3f8ddc218e6fafde3be1c4ea6494455",
+      "sha256": "5700674001bc530239e42623c5546d96b4935da52a399e98d31593b222117bf6",
+      "sourceMetadataPath": "source-metadata/mingw-w64-librsvg-2.63.0-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-librsvg-2.63.0-1.src.tar.zst",
+      "version": "2.63.0-1"
+    },
+    {
+      "bytes": 1094498,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-libssh2-1.11.1-2.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-libssh2-1.11.1-2.src.tar.zst",
+      "pkgbase": "mingw-w64-libssh2",
+      "recipeSha256": "187ea90e8d6671c06397c56153be4803b0fbecf17f8851c58b97047516b98910",
+      "sha256": "bb78f8354441190221ece18a96c09f631fe02648f5dd7d1e247ae8d00a9fea5f",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libssh2-1.11.1-2.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libssh2-1.11.1-2.src.tar.zst",
+      "version": "1.11.1-2"
+    },
+    {
+      "bytes": 1732161,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-libtasn1-4.21.0-1.src.tar.zst"
+      },
+      "filename": "mingw-w64-libtasn1-4.21.0-1.src.tar.zst",
+      "pkgbase": "mingw-w64-libtasn1",
+      "recipeSha256": "dd68181f53e6a8481961315b3a6c6caa4370188b1fea219203080b24abd251fe",
+      "sha256": "c626129c5131eef0a45c736274f0844747605a105161cc0f7d39f6e1c70ed0ff",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libtasn1-4.21.0-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libtasn1-4.21.0-1.src.tar.zst",
+      "version": "4.21.0-1"
+    },
+    {
+      "bytes": 438909,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-libthai-0.1.30-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-libthai-0.1.30-1.src.tar.zst",
+      "pkgbase": "mingw-w64-libthai",
+      "recipeSha256": "31627bf6c5f307ece18670b4557f17c2fbfd9225e5395a34ccf1acc96e083501",
+      "sha256": "e4f8d840fca132eb47aed311fc2c36dc59604b9ecd0aa310161b9d1e2cee4d03",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libthai-0.1.30-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libthai-0.1.30-1.src.tar.zst",
+      "version": "0.1.30-1"
+    },
+    {
+      "bytes": 4077229,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-libtiff-4.7.2-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-libtiff-4.7.2-1.src.tar.zst",
+      "pkgbase": "mingw-w64-libtiff",
+      "recipeSha256": "2eecac8b6120c97e3b2754098f57c9bd026dcc121f67a9e2f9bf7e1a689e9819",
+      "sha256": "11f3bdc23a154a5cea2f8fffeab3e2a118bd773d2769e1dcea926ff02f2cf3e2",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libtiff-4.7.2-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libtiff-4.7.2-1.src.tar.zst",
+      "version": "4.7.2-1"
+    },
+    {
+      "bytes": 4770800,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-libunistring-1.4.2-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-libunistring-1.4.2-1.src.tar.zst",
+      "pkgbase": "mingw-w64-libunistring",
+      "recipeSha256": "e612db993601f9daf35d4b527f93aad9792b7886735113ac46393a77c17264d7",
+      "sha256": "a5bafb360d5c13c5c52ef071d5a8288ce2345346b902f20ed6e9322766ec60eb",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libunistring-1.4.2-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libunistring-1.4.2-1.src.tar.zst",
+      "version": "1.4.2-1"
+    },
+    {
+      "bytes": 2589761,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-libwebp-1.6.0-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-libwebp-1.6.0-1.src.tar.zst",
+      "pkgbase": "mingw-w64-libwebp",
+      "recipeSha256": "d15596f0825cbace1453462ab406b1d1ec6ac12be21d1d5655a17c22656318e1",
+      "sha256": "c8c63f98e018a7595d22e8a3e65b7caf83345fed666866a6e67d153b16f48141",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libwebp-1.6.0-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libwebp-1.6.0-1.src.tar.zst",
+      "version": "1.6.0-1"
+    },
+    {
+      "bytes": 2687667,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-libwmf-0.2.16-1.src.tar.zst"
+      },
+      "filename": "mingw-w64-libwmf-0.2.16-1.src.tar.zst",
+      "pkgbase": "mingw-w64-libwmf",
+      "recipeSha256": "f639e1ef56ed30af2799c8650429d553b790320ea597eb40e60288015147c71a",
+      "sha256": "10bb0c603160245e6d63cb429ee08bf91dadb8c6c3cce1a96adbc266267a7bd9",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libwmf-0.2.16-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libwmf-0.2.16-1.src.tar.zst",
+      "version": "0.2.16-1"
+    },
+    {
+      "bytes": 3805864,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-libxml2-2.15.4-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-libxml2-2.15.4-1.src.tar.zst",
+      "pkgbase": "mingw-w64-libxml2",
+      "recipeSha256": "05fa27f6ce261f7c5ca58a57f0f346fd25b45bb97a4e10ffd3d7be2334a9cb09",
+      "sha256": "e283bdd176377f82c3af57458d8623afedbba6d504d4480f93f49e39fb0a1417",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libxml2-2.15.4-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libxml2-2.15.4-1.src.tar.zst",
+      "version": "2.15.4-1"
+    },
+    {
+      "bytes": 795458,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-libzip-1.11.4-1.src.tar.zst"
+      },
+      "filename": "mingw-w64-libzip-1.11.4-1.src.tar.zst",
+      "pkgbase": "mingw-w64-libzip",
+      "recipeSha256": "a219da0bd5c5021d91b2f1967e514f5811e56b97732a7b0e515cf975aae84d5a",
+      "sha256": "e4954ab9cffe14befd55fa31eacd2171f5e5df7eba976f02a5f953490c7e6051",
+      "sourceMetadataPath": "source-metadata/mingw-w64-libzip-1.11.4-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-libzip-1.11.4-1.src.tar.zst",
+      "version": "1.11.4-1"
+    },
+    {
+      "bytes": 2630115,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-nettle-4.0-1.src.tar.zst"
+      },
+      "filename": "mingw-w64-nettle-4.0-1.src.tar.zst",
+      "pkgbase": "mingw-w64-nettle",
+      "recipeSha256": "7d82c0e2504f0dabc0170e7b5790f55c4c25a7be7c7dd973ab5d17ebe04d8ae1",
+      "sha256": "453187e86139bce3c5b94542cc709ead7f523f0fc33ce4cc2b8fe9d5a9719cdd",
+      "sourceMetadataPath": "source-metadata/mingw-w64-nettle-4.0-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-nettle-4.0-1.src.tar.zst",
+      "version": "4.0-1"
+    },
+    {
+      "bytes": 2021492,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-nghttp2-1.70.0-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-nghttp2-1.70.0-1.src.tar.zst",
+      "pkgbase": "mingw-w64-nghttp2",
+      "recipeSha256": "27798659ce38e4b5e8ce91354e56acd32a5a9ce1d15a6706b264ca686b427f80",
+      "sha256": "a2159c7fc94daa3dd052919bcb927db5736bbaa99c3753345e0523fcb7c9f384",
+      "sourceMetadataPath": "source-metadata/mingw-w64-nghttp2-1.70.0-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-nghttp2-1.70.0-1.src.tar.zst",
+      "version": "1.70.0-1"
+    },
+    {
+      "bytes": 414019,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-nghttp3-1.18.0-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-nghttp3-1.18.0-1.src.tar.zst",
+      "pkgbase": "mingw-w64-nghttp3",
+      "recipeSha256": "adcd40ca02d70b22eab0be56688af5f4da6f886366821759b4c3954e6d36adf5",
+      "sha256": "917dcba619546caf6b2a48ee05f88c53dc65f13edfe977f34472d38dffaaf99e",
+      "sourceMetadataPath": "source-metadata/mingw-w64-nghttp3-1.18.0-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-nghttp3-1.18.0-1.src.tar.zst",
+      "version": "1.18.0-1"
+    },
+    {
+      "bytes": 712453,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-ngtcp2-1.25.0-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-ngtcp2-1.25.0-1.src.tar.zst",
+      "pkgbase": "mingw-w64-ngtcp2",
+      "recipeSha256": "a48b3be451b18878579f7d5e29a07a285a325ede1605e6fcb78429a4abdf3315",
+      "sha256": "1fca0aa8698895e69afd88cd866e8673bc2ccaff12926dd637dae6536e6013f4",
+      "sourceMetadataPath": "source-metadata/mingw-w64-ngtcp2-1.25.0-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-ngtcp2-1.25.0-1.src.tar.zst",
+      "version": "1.25.0-1"
+    },
+    {
+      "bytes": 1015531,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-nspr-4.40-1.src.tar.zst"
+      },
+      "filename": "mingw-w64-nspr-4.40-1.src.tar.zst",
+      "pkgbase": "mingw-w64-nspr",
+      "recipeSha256": "b35843f3391b5c8b9e0612391443334ddfa4bcee6702f5f14decf2a368017c18",
+      "sha256": "cf186ccfe4581deb2f7159981d3587828a9540011c66e2366f97e4388ae948b2",
+      "sourceMetadataPath": "source-metadata/mingw-w64-nspr-4.40-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-nspr-4.40-1.src.tar.zst",
+      "version": "4.40-1"
+    },
+    {
+      "bytes": 86371353,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-nss-3.128-2.src.tar.zst"
+      },
+      "filename": "mingw-w64-nss-3.128-2.src.tar.zst",
+      "pkgbase": "mingw-w64-nss",
+      "recipeSha256": "d03dc629c2e0c81c20ac5a434fdab795f5dfd7072f37af96cdf2e626a6435861",
+      "sha256": "95229917fe8be68cee0e99841730f7affd7541392aee750f913a63d5619ac8f6",
+      "sourceMetadataPath": "source-metadata/mingw-w64-nss-3.128-2.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-nss-3.128-2.src.tar.zst",
+      "version": "3.128-2"
+    },
+    {
+      "bytes": 2156125,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-openjpeg2-2.5.4-2.src.tar.zst"
+      },
+      "filename": "mingw-w64-openjpeg2-2.5.4-2.src.tar.zst",
+      "pkgbase": "mingw-w64-openjpeg2",
+      "recipeSha256": "8901865f116d6eaa71bb2ff14dcaaa9a301185fd5cf62408d73dcfd2901c8334",
+      "sha256": "88be024421b79a557ea9cc94932806f5daddcae5d917895d81ac974df7f38b24",
+      "sourceMetadataPath": "source-metadata/mingw-w64-openjpeg2-2.5.4-2.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-openjpeg2-2.5.4-2.src.tar.zst",
+      "version": "2.5.4-2"
+    },
+    {
+      "bytes": 54893770,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-openssl-3.6.4-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-openssl-3.6.4-1.src.tar.zst",
+      "pkgbase": "mingw-w64-openssl",
+      "recipeSha256": "0f29edf384ee561bfe195608f4dbbb4231695af7958e326292034b264bc5faf1",
+      "sha256": "b60a8978d0e45f433ee8db7825d9ba90cc38956c89ab52055c05546f421942f9",
+      "sourceMetadataPath": "source-metadata/mingw-w64-openssl-3.6.4-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-openssl-3.6.4-1.src.tar.zst",
+      "version": "3.6.4-1"
+    },
+    {
+      "bytes": 1094024,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-p11-kit-0.26.5-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-p11-kit-0.26.5-1.src.tar.zst",
+      "pkgbase": "mingw-w64-p11-kit",
+      "recipeSha256": "98fa23420fa595ea71cf51fdb3f5cc2bcd77a0b996e36549057fe82b8c1e723f",
+      "sha256": "1665c40c6237bbb9be868ecfc00ab65f9038047e4c608126de575ae4ecb5ca12",
+      "sourceMetadataPath": "source-metadata/mingw-w64-p11-kit-0.26.5-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-p11-kit-0.26.5-1.src.tar.zst",
+      "version": "0.26.5-1"
+    },
+    {
+      "bytes": 1920389,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-pango-1.58.2-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-pango-1.58.2-1.src.tar.zst",
+      "pkgbase": "mingw-w64-pango",
+      "recipeSha256": "7c477eff7aab5a3932203eac21096fc9c70621f51ba223232f334b3e6338dd9b",
+      "sha256": "df981b2c47d9344f3a4869645a8f2392916dac3e470634778453410ec813e390",
+      "sourceMetadataPath": "source-metadata/mingw-w64-pango-1.58.2-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-pango-1.58.2-1.src.tar.zst",
+      "version": "1.58.2-1"
+    },
+    {
+      "bytes": 2212426,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-pcre2-10.48-3.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-pcre2-10.48-3.src.tar.zst",
+      "pkgbase": "mingw-w64-pcre2",
+      "recipeSha256": "0b94fbb011bf5f78960beb73e5c8d0fd026bace4bd671ca1ee22a3e373706107",
+      "sha256": "2d97640064e42c2d800580dc2e622487b6a2d980722380cdab5f5f71d311f39a",
+      "sourceMetadataPath": "source-metadata/mingw-w64-pcre2-10.48-3.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-pcre2-10.48-3.src.tar.zst",
+      "version": "10.48-3"
+    },
+    {
+      "bytes": 662111,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-pixman-0.46.4-3.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-pixman-0.46.4-3.src.tar.zst",
+      "pkgbase": "mingw-w64-pixman",
+      "recipeSha256": "b1a58a74281f8b2ab72986d745249590238dfeed1dd2fca811b362fa7d582ea4",
+      "sha256": "2661cb135a6448f6d594e4642a643b2dec6fa0d773ac046aa786987a719160ed",
+      "sourceMetadataPath": "source-metadata/mingw-w64-pixman-0.46.4-3.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-pixman-0.46.4-3.src.tar.zst",
+      "version": "0.46.4-3"
+    },
+    {
+      "bytes": 7422951,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-poppler-26.08.0-1.src.tar.zst"
+      },
+      "filename": "mingw-w64-poppler-26.08.0-1.src.tar.zst",
+      "pkgbase": "mingw-w64-poppler",
+      "recipeSha256": "417f89e5f35bfaf87c1e8eb2852fffeb23480aa7d1d8e4359d2a6ad5b68a9166",
+      "sha256": "a501685f19b060576132452036102fec18eacb9e4fb065ab756506f88edf62d1",
+      "sourceMetadataPath": "source-metadata/mingw-w64-poppler-26.08.0-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-poppler-26.08.0-1.src.tar.zst",
+      "version": "26.08.0-1"
+    },
+    {
+      "bytes": 4420366,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-poppler-data-0.4.12-1.src.tar.zst"
+      },
+      "filename": "mingw-w64-poppler-data-0.4.12-1.src.tar.zst",
+      "pkgbase": "mingw-w64-poppler-data",
+      "recipeSha256": "87a6bcc1298c9348822c4b5e15f94d5d8f1597e2605186b8ccc6596acf5be7d8",
+      "sha256": "418ee35f92307e4b9b1ae22249bdc4173ed301e4e758813a06ee654b17a9c2cb",
+      "sourceMetadataPath": "source-metadata/mingw-w64-poppler-data-0.4.12-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-poppler-data-0.4.12-1.src.tar.zst",
+      "version": "0.4.12-1"
+    },
+    {
+      "bytes": 19033387,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-qpdf-12.3.2-1.src.tar.zst"
+      },
+      "filename": "mingw-w64-qpdf-12.3.2-1.src.tar.zst",
+      "pkgbase": "mingw-w64-qpdf",
+      "recipeSha256": "23c216371728cce441379c582bd94508b91e6cf0e65d512382a97b6b3ddcaa7c",
+      "sha256": "a05b8ed56bb7d4144edbcc43c41310f343925530df8528c941e4500d19132c05",
+      "sourceMetadataPath": "source-metadata/mingw-w64-qpdf-12.3.2-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-qpdf-12.3.2-1.src.tar.zst",
+      "version": "12.3.2-1"
+    },
+    {
+      "bytes": 5394174,
+      "delivery": {
+        "kind": "included",
+        "path": "sources/mingw-w64-ttf-dejavu-2.37-4.src.tar.zst"
+      },
+      "filename": "mingw-w64-ttf-dejavu-2.37-4.src.tar.zst",
+      "pkgbase": "mingw-w64-ttf-dejavu",
+      "recipeSha256": "545611decacde223728f12cabc2a03e43e854e07f7a15c2f1753edb7376f09d7",
+      "sha256": "a5dec9bd521b9a9d81934d55335aff6d3ace69f7545f53ac667b470e4743722e",
+      "sourceMetadataPath": "source-metadata/mingw-w64-ttf-dejavu-2.37-4.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-ttf-dejavu-2.37-4.src.tar.zst",
+      "version": "2.37-4"
+    },
+    {
+      "bytes": 53936829,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-winpthreads-14.0.0.r353.g6df76fa52-2.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-winpthreads-14.0.0.r353.g6df76fa52-2.src.tar.zst",
+      "pkgbase": "mingw-w64-winpthreads",
+      "recipeSha256": "21c15283bebaea1732dda66c046cf75ce3763f6b1ba6feb95969182a138687df",
+      "sha256": "c7bc64f5f4cbc4beab2546c361d1c9f0e0709619ff6cdc6966cf24de08247e8d",
+      "sourceMetadataPath": "source-metadata/mingw-w64-winpthreads-14.0.0.r353.g6df76fa52-2.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-winpthreads-14.0.0.r353.g6df76fa52-2.src.tar.zst",
+      "version": "14.0.0.r353.g6df76fa52-2"
+    },
+    {
+      "bytes": 1569458,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-xz-5.8.4-1.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-xz-5.8.4-1.src.tar.zst",
+      "pkgbase": "mingw-w64-xz",
+      "recipeSha256": "b93950051015573095f0d9cd50428ed6dd80d726c2786a2eeef005257888b3ba",
+      "sha256": "b8acbc56b2bfe08df7bffff423f3bf07ee85dbec4e07416017ab04c8afb9d13e",
+      "sourceMetadataPath": "source-metadata/mingw-w64-xz-5.8.4-1.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-xz-5.8.4-1.src.tar.zst",
+      "version": "5.8.4-1"
+    },
+    {
+      "bytes": 1326375,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-zlib-1.3.2-2.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-zlib-1.3.2-2.src.tar.zst",
+      "pkgbase": "mingw-w64-zlib",
+      "recipeSha256": "8a4a54a964eab7efa313e2faa8267052bc237ef61f8adf82a55cc93f4028db8a",
+      "sha256": "eef69dea52357e01b272d6fd6dc4d7c0773f71260cb7bcde6047c8c383518db3",
+      "sourceMetadataPath": "source-metadata/mingw-w64-zlib-1.3.2-2.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-zlib-1.3.2-2.src.tar.zst",
+      "version": "1.3.2-2"
+    },
+    {
+      "bytes": 2402010,
+      "delivery": {
+        "collectionBytes": 524318720,
+        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
+        "kind": "existing_source_collection",
+        "member": "sources/mingw-w64-zstd-1.5.7-2.src.tar.zst",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+      },
+      "filename": "mingw-w64-zstd-1.5.7-2.src.tar.zst",
+      "pkgbase": "mingw-w64-zstd",
+      "recipeSha256": "ef88e168f729b6e57bdccb8d566a1cbc1b0b1fd4ef86b26cc4c441236e496388",
+      "sha256": "306797282df799e95d550e6d0bb4b0a7b848027b8e13893a24236e060837c217",
+      "sourceMetadataPath": "source-metadata/mingw-w64-zstd-1.5.7-2.src.tar.zst/evidence.json",
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-zstd-1.5.7-2.src.tar.zst",
+      "version": "1.5.7-2"
+    }
+  ],
+  "status": "source-only delivery prepared for review; not published by this task",
+  "summary": {
+    "actualVendorRegistryCrateVersionsMatched": 186,
+    "additionalNativeNoticeAndDataFiles": 46,
+    "all66BinaryHashesMatched": true,
+    "all66RecipeHashesMatched": true,
+    "crateSourceArchives": 359,
+    "crateSourceBytes": 45329141,
+    "nativeOwners": 66,
+    "nativeSourceArchiveBytes": 576726984,
+    "newSourceArchiveBytes": 296017648,
+    "newSourceArchives": 21,
+    "offlineFrozenCargoSourceResolution": true,
+    "originalCrateNoticeFiles": 643,
+    "packagedOriginalNativeNoticesMatched": 87,
+    "reusedSourceArchives": 45,
+    "shippedOwnerFilesMatched": 3361,
+    "sourceArchives": 66
+  }
+}

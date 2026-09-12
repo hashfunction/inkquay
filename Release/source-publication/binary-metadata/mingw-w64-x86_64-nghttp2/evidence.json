@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-nghttp2-1.70.0-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-nghttp2-1.70.0-1-any.pkg.tar.zst",
+  "bytes": 205498,
+  "licenses": [
+    "spdx:MIT"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6733,
+      "sha256": "1deb6d55b2d6ece3db40883e9205bf4bc345d8b869c32bbdc63f9561d9d0e7bd"
+    },
+    ".PKGINFO": {
+      "bytes": 549,
+      "sha256": "405e9a1d6678fafc834587da24269faacc7f0ff080fd7a5564a803e41078955c"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/nghttp2/COPYING",
+      "bytes": 1156,
+      "path": "binary-metadata/mingw-w64-x86_64-nghttp2/original-notices/mingw64/share/licenses/nghttp2/COPYING",
+      "sha256": "6b94f3abc1aabd0c72a7c7d92a77f79dda7c8a0cb3df839a97890b4116a2de2a"
+    }
+  ],
+  "package": "mingw-w64-x86_64-nghttp2",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/30521106257/job/90801477821)",
+  "pkgbase": "mingw-w64-nghttp2",
+  "pkgbuildSha256": "27798659ce38e4b5e8ce91354e56acd32a5a9ce1d15a6706b264ca686b427f80",
+  "sha256": "c086d42107f8c142f0f45e32f81665816732f071d9486359875da20df0a7cdd3",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libnghttp2-14.dll",
+      "bytes": 215032,
+      "path": "bin/libnghttp2-14.dll",
+      "sha256": "25e6516899fd5021df8c67b92e9f7246249fb03bb7bdf56a08260a8dded06b00"
+    }
+  ],
+  "version": "1.70.0-1"
+}

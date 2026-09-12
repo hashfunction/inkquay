@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libxml2-2.15.4-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libxml2-2.15.4-1-any.pkg.tar.zst",
+  "bytes": 1008040,
+  "licenses": [
+    "spdx:MIT"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 7299,
+      "sha256": "aab55ad9b7c1d178d3ccf8f09ce6135e33ba2607aa92d5ac276b1a2c3dda952c"
+    },
+    ".PKGINFO": {
+      "bytes": 793,
+      "sha256": "0daeb7df236b047226bf42d39597baf6e7976cdb94c67f951b122fdbc526e912"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/libxml2/COPYING",
+      "bytes": 1314,
+      "path": "binary-metadata/mingw-w64-x86_64-libxml2/original-notices/mingw64/share/licenses/libxml2/COPYING",
+      "sha256": "5d4873884a890122a4b9b20ad56ac6f7da1d796a5bfcf04a427970ac96217626"
+    }
+  ],
+  "package": "mingw-w64-x86_64-libxml2",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/34035995336/job/101494049342)",
+  "pkgbase": "mingw-w64-libxml2",
+  "pkgbuildSha256": "05fa27f6ce261f7c5ca58a57f0f346fd25b45bb97a4e10ffd3d7be2334a9cb09",
+  "sha256": "b79dcaea6713e8d09af334de946db364eb501b5be2ec2f75dc7608e61b5d0316",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libxml2-16.dll",
+      "bytes": 1255475,
+      "path": "bin/libxml2-16.dll",
+      "sha256": "81e97f59e486f95de3b8b12973860102cddebbaaeedbbc22786aaec0728b2c68"
+    }
+  ],
+  "version": "2.15.4-1"
+}

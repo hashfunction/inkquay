@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-pixman-0.46.4-3-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-pixman-0.46.4-3-any.pkg.tar.zst",
+  "bytes": 358460,
+  "licenses": [
+    "spdx:MIT"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6113,
+      "sha256": "9e3f717491bb4ed40dc49dbf7ff7e1dc5092b7daf5b5b036c6d45d332a5253ba"
+    },
+    ".PKGINFO": {
+      "bytes": 609,
+      "sha256": "fa830ef873ec1ae198990e4206ea4020ea39f5408e7d48ed0a7d4cd6aca45891"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/pixman/COPYING",
+      "bytes": 2087,
+      "path": "binary-metadata/mingw-w64-x86_64-pixman/original-notices/mingw64/share/licenses/pixman/COPYING",
+      "sha256": "fac9270f0987b96ff4533fca3548c633e02083cbba4a0172a3b149b2e4019793"
+    }
+  ],
+  "package": "mingw-w64-x86_64-pixman",
+  "packager": "CI (msys2/msys2-autobuild/actions/runs/25604436836/job/75163795674)",
+  "pkgbase": "mingw-w64-pixman",
+  "pkgbuildSha256": "b1a58a74281f8b2ab72986d745249590238dfeed1dd2fca811b362fa7d582ea4",
+  "sha256": "435715dd1ca4c55873cf3c38d644615196bc2d238e3366f8ff81cc0811260eb2",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libpixman-1-0.dll",
+      "bytes": 740378,
+      "path": "bin/libpixman-1-0.dll",
+      "sha256": "55ce45825eb8e825c635416171be4736147a6b0b690469f545d8c4ae8e85b4a3"
+    }
+  ],
+  "version": "0.46.4-3"
+}

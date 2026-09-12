@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libssh2-1.11.1-2-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libssh2-1.11.1-2-any.pkg.tar.zst",
+  "bytes": 318627,
+  "licenses": [
+    "spdx:BSD-3-Clause"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6042,
+      "sha256": "fe8bfeaf4fe96fe2965af2b0f76aa39df62583fa22ed98f417ec8afd2e4265b4"
+    },
+    ".PKGINFO": {
+      "bytes": 678,
+      "sha256": "1c71d82d79e6d6fa4cc992a93d91ec2eddf0959cfc3b951953025438459e4cba"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/libssh2/LICENSE",
+      "bytes": 1959,
+      "path": "binary-metadata/mingw-w64-x86_64-libssh2/original-notices/mingw64/share/licenses/libssh2/LICENSE",
+      "sha256": "f7f9633cf9ff2f1333f3d7ce46973a8716a4d2a2815ad56f30d437d5fea7bafe"
+    }
+  ],
+  "package": "mingw-w64-x86_64-libssh2",
+  "packager": "CI (msys2/msys2-autobuild/59a03c95/21477774111)",
+  "pkgbase": "mingw-w64-libssh2",
+  "pkgbuildSha256": "187ea90e8d6671c06397c56153be4803b0fbecf17f8851c58b97047516b98910",
+  "sha256": "83d0b99f79e930b30eb642382662686b696d64ceb927c2606debd79cb6ff670a",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libssh2-1.dll",
+      "bytes": 312147,
+      "path": "bin/libssh2-1.dll",
+      "sha256": "a8e1cc06bfff6be779066c5dc34ce740ed0226dcb6f75f46d9c915aee19a21b1"
+    }
+  ],
+  "version": "1.11.1-2"
+}

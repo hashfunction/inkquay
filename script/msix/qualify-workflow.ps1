@@ -18,6 +18,10 @@ function Select-InkWorkflowWindow($Windows,[int]$ProcessId,[long]$MainHandle,[st
 }
 function Get-InkWorkflowContract([string]$Source) {
     [xml]$menus=Get-Content (Join-Path $Source 'ui/mainmenubar.xml') -Raw -Encoding utf8
+    $file=@($menus.interface.menu.submenu | Where-Object { @($_.attribute | Where-Object name -eq 'label').'#text' -ceq '_File' })
+    if($file.Count -ne 1){throw 'Exact File menu mnemonic source contract changed.'}
+    $export=@($file[0].SelectNodes('section/item') | Where-Object { @($_.attribute | Where-Object name -eq 'action').'#text' -ceq 'win.export-as-pdf' })
+    if($export.Count -ne 1 -or @($export[0].attribute | Where-Object name -eq 'label').'#text' -cne '_Export as PDF') { throw 'Exact Export as PDF mnemonic source contract changed.' }
     $journal=@($menus.interface.menu.submenu | Where-Object { @($_.attribute | Where-Object name -eq 'label').'#text' -ceq '_Journal' })
     $items=@($journal[0].section[0].item)
     $index=-1
@@ -31,8 +35,85 @@ function Get-InkWorkflowContract([string]$Source) {
     [xml]$ui=Get-Content (Join-Path $Source 'ui/pageTemplate.glade') -Raw -Encoding utf8
     $title=[string]$ui.SelectSingleNode("//object[@id='templateDialog']/property[@name='title']").InnerText
     if($title -cne 'Configure new page template'){throw 'Template dialog title changed.'}
-    return @{configureMenuDown=$index;cornellIndex=$preset;cornellConfig='iq=2,m1=166,r1=24';templateTitle=$title}
+    return @{configureMenuDown=$index;cornellIndex=$preset;cornellConfig='iq=2,m1=166,r1=24';templateTitle=$title;fileMnemonic='%f';exportMnemonic='e'}
 }
+function Invoke-InkExportMenuSequence([ValidateSet('first','reopened')][string]$Name,$Contract,[scriptblock]$Observe,[scriptblock]$Send,[scriptblock]$DiagnosticError) {
+    try {
+        & $Observe 'before-file'
+        & $Send $Contract.fileMnemonic ('open-export-menu-'+$Name+'.pdf')
+        & $Observe 'after-file'
+        & $Observe 'before-export'
+        & $Send $Contract.exportMnemonic ('export-'+$Name+'.pdf')
+        & $Observe 'after-export'
+    } catch {
+        $original=$_
+        try { & $Observe 'input-failure' } catch {
+            # Even failure to retain a secondary diagnostic must not replace the
+            # original input/observation exception or cause another input send.
+            try { & $DiagnosticError $_.Exception.ToString() } catch {}
+        }
+        throw $original
+    }
+}
+
+function Get-InkExportMenuAccessibility($NativeState) {
+    $controls=[Collections.Generic.List[object]]::new();$errors=[Collections.Generic.List[string]]::new()
+    try {
+        Add-Type -AssemblyName UIAutomationClient
+        Add-Type -AssemblyName UIAutomationTypes
+        $surfaces=@($NativeState.Windows | Where-Object { $_.Handle -eq $NativeState.MainHandle -or ($_.Handle -eq $NativeState.ForegroundHandle -and $_.ClassName -ceq 'gdkWindowTemp') })
+        if($surfaces.Count -gt 2){throw 'Owned menu observation exceeds two-surface bound.'}
+        foreach($window in $surfaces) {
+            try {
+                $root=[Windows.Automation.AutomationElement]::FromHandle([IntPtr]$window.Handle)
+                if(-not $root -or $root.Current.ProcessId -ne $NativeState.ProcessId){throw 'Observed menu UIA root is unavailable or not owned.'}
+                $elements=$root.FindAll([Windows.Automation.TreeScope]::Subtree,[Windows.Automation.Condition]::TrueCondition)
+                if($elements.Count -gt 256){throw 'Owned menu accessibility tree exceeds 256-element observation bound.'}
+                for($index=0;$index -lt $elements.Count;$index++) {
+                    $current=$elements.Item($index).Current
+                    if($current.ProcessId -ne $NativeState.ProcessId){continue}
+                    $type=$current.ControlType
+                    if($type -and $type.ProgrammaticName -cin @('ControlType.Menu','ControlType.MenuItem')) {
+                        if($controls.Count -ge 128){throw 'Owned menu controls exceed observation bound.'}
+                        $name=[string]$current.Name
+                        if($name.Length -gt 512){throw 'Owned menu control name exceeds observation bound.'}
+                        $controls.Add(@{name=$name;control_type=$type.ProgrammaticName;enabled=[bool]$current.IsEnabled;offscreen=[bool]$current.IsOffscreen;
+                            process_id=$current.ProcessId;root_handle=$window.Handle;native_handle=$current.NativeWindowHandle})
+                    }
+                }
+            } catch {if($errors.Count -lt 16){$message=$_.Exception.Message;$errors.Add($message.Substring(0,[Math]::Min(1024,$message.Length)))}}
+        }
+    } catch {$message=$_.Exception.Message;$errors.Add($message.Substring(0,[Math]::Min(1024,$message.Length)))}
+    # GTK may supply no menu provider. This is observation only, never readiness.
+    return @{menu_controls=@($controls);errors=@($errors)}
+}
+
+function Write-InkExportMenuObservation($State,[long]$MainHandle,[string]$Evidence,[string]$Name,[string]$Phase) {
+    $native=[InkQuayWorkflow.Native]::InspectInput([IntPtr]$MainHandle,$State.process.Id)
+    $observation=[ordered]@{schema_version=1;export=$Name;phase=$Phase;at_utc=[DateTime]::UtcNow.ToString('o');
+        native=$native;accessibility=(Get-InkExportMenuAccessibility $native);screenshot=$null;screenshot_sha256=$null;screenshot_error=$null}
+    $stem=$Name+'-menu-'+$Phase
+    try {
+        # Read actual pixels without ShowWindow/SetForegroundWindow: changing focus
+        # here could dismiss the very popup this diagnostic needs to observe.
+        $main=@($native.Windows | Where-Object Handle -eq $MainHandle)
+        if($main.Count -ne 1 -or $main[0].ProcessId -ne $State.process.Id -or -not $main[0].Visible){throw 'Observed main window is not uniquely owned and visible.'}
+        $window=$main[0];$rect=[Drawing.Rectangle]::new($window.X,$window.Y,$window.Width,$window.Height)
+        if(-not [Windows.Forms.SystemInformation]::VirtualScreen.Contains($rect)){throw 'Menu diagnostic window is outside the actual desktop.'}
+        $bitmap=[Drawing.Bitmap]::new($window.Width,$window.Height);$graphics=[Drawing.Graphics]::FromImage($bitmap)
+        try {
+            $graphics.CopyFromScreen($window.X,$window.Y,0,0,$bitmap.Size)
+            $path=Join-Path $Evidence ($stem+'.png')
+            if(Test-Path -LiteralPath $path){throw 'Menu diagnostic screenshot exists; preserving it.'}
+            $bitmap.Save($path,[Drawing.Imaging.ImageFormat]::Png)
+            $observation.screenshot=[IO.Path]::GetFileName($path)
+            $observation.screenshot_sha256=(Get-FileHash -LiteralPath $path).Hash.ToLowerInvariant()
+        } finally {$graphics.Dispose();$bitmap.Dispose()}
+    } catch {$message=$_.Exception.Message;$observation.screenshot_error=$message.Substring(0,[Math]::Min(2048,$message.Length))}
+    $path=Join-Path $Evidence ($stem+'.json');Write-NewUtf8Json $path $observation
+    return @{export=$Name;phase=$Phase;file=[IO.Path]::GetFileName($path);sha256=(Get-FileHash -LiteralPath $path).Hash.ToLowerInvariant()}
+}
+
 function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
     Add-InkWorkflowTypes
     Add-Type -AssemblyName System.Windows.Forms
@@ -47,10 +128,10 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
     $python=$env:INKQUAY_QUALIFICATION_PYTHON
     $tools=Split-Path $python
     $originalManifestHash=$null
-    $result=[ordered]@{schema_version=1;source_commit=$env:GITHUB_SHA;process_id=$State.process.Id;
+    $result=[ordered]@{schema_version=1;source_commit=$env:GITHUB_SHA;workflow_run_id=$env:GITHUB_RUN_ID;workflow_run_attempt=$env:GITHUB_RUN_ATTEMPT;process_id=$State.process.Id;
         package_full_name=$State.ownedPackageFullName;originals=$null;first=$null;reopened=$null;events=$events;
         passed=$false;error=$null;diagnostic_errors=@();gtk_keyboard_workflow=$true;diagnostic_observer=[bool]$State.observerRequested;
-        active_operation=$null;failed_operation=$null;crash_diagnostics=$null}
+        active_operation=$null;failed_operation=$null;crash_diagnostics=$null;export_menu_observations=[Collections.Generic.List[object]]::new();export_menu_diagnostic_errors=[Collections.Generic.List[string]]::new()}
     function Assert-Live {
         $State.process.Refresh()
         if(-not $State.processOwned -or $State.processHandle.IsClosed -or $State.processHandle.IsInvalid -or $State.process.HasExited){throw 'Retained owned process is unavailable.'}
@@ -69,10 +150,13 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
         }while([DateTime]::UtcNow -lt $deadline)
         throw $last
     }
-    function Keys($Window,[string]$Keys,[string]$Action) {
+    function Keys($Window,[string]$Keys,[string]$Action,[switch]$PreserveMenuFocus) {
         $result.active_operation=@{kind='input';action=$Action;title=$Window.Title;at_utc=[DateTime]::UtcNow.ToString('o')}
         Assert-Live
-        [InkQuayWorkflow.Native]::Focus([IntPtr]$Window.Handle,$State.process.Id)
+        if($PreserveMenuFocus) {
+            $fresh=[InkQuayWorkflow.Native]::InspectInput([IntPtr]$Window.Handle,$State.process.Id)
+            [InkQuayWorkflow.Native]::AssertExportInput($fresh,$Window.Title)
+        } else {[InkQuayWorkflow.Native]::Focus([IntPtr]$Window.Handle,$State.process.Id)}
         [Windows.Forms.SendKeys]::SendWait($Keys)
         $events.Add([ordered]@{action=$Action;title=$Window.Title;handle=$Window.Handle;process_id=$State.process.Id;at_utc=[DateTime]::UtcNow.ToString('o')})
         Start-Sleep -Milliseconds 250
@@ -122,7 +206,18 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
     function Export([string]$Title,[string]$Mode) {
         $name=$Mode+'.pdf'
         if(Test-Path (Join-Path $root $name)){throw 'Export destination already exists.'}
-        Keys (Observe $Title) '%fe' ('export-'+$name)
+        $exportWindow=Observe $Title
+        Assert-Live
+        [InkQuayWorkflow.Native]::Focus([IntPtr]$exportWindow.Handle,$State.process.Id)
+        $menuObserve={param($Phase)
+            if($Phase -cne 'input-failure'){$result.active_operation=@{kind='menu-observation';export=$Mode;phase=$Phase;at_utc=[DateTime]::UtcNow.ToString('o')}}
+            Assert-Live
+            $item=Write-InkExportMenuObservation $State $main $evidence $Mode $Phase
+            $result.export_menu_observations.Add($item)
+        }
+        $menuSend={param($Mnemonic,$Action) Keys $exportWindow $Mnemonic $Action -PreserveMenuFocus}
+        $menuError={param($ErrorText) $result.export_menu_diagnostic_errors.Add($ErrorText.Substring(0,[Math]::Min(2048,$ErrorText.Length)))}
+        Invoke-InkExportMenuSequence $Mode $contract $menuObserve $menuSend $menuError
         Choose 'Export File' (Join-Path $root $name)
         $deadline=[DateTime]::UtcNow.AddSeconds(30)
         do { Assert-Live; $reports=@(Get-ChildItem -LiteralPath $root -Filter ($name+'.*.inkquay-report.json'));if($reports.Count){break};Start-Sleep -Milliseconds 200 }while([DateTime]::UtcNow -lt $deadline)

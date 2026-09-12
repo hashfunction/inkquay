@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libzip-1.11.4-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libzip-1.11.4-1-any.pkg.tar.zst",
+  "bytes": 327988,
+  "licenses": [
+    "spdx:BSD-3-Clause"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6661,
+      "sha256": "7d9e3896b68cefe253189eecdace0828e9728b7b5c48f811c6ad018e5bf857b3"
+    },
+    ".PKGINFO": {
+      "bytes": 687,
+      "sha256": "a4b599b63e632cd3bad8107d5486041cbaa2815f92016de3c9ec9c031fcf675a"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/libzip/LICENSE",
+      "bytes": 1454,
+      "path": "binary-metadata/mingw-w64-x86_64-libzip/original-notices/mingw64/share/licenses/libzip/LICENSE",
+      "sha256": "01c022eca6d566e2e8792fd0f091a28653b2a608319922bcd4de91c49d1438e1"
+    }
+  ],
+  "package": "mingw-w64-x86_64-libzip",
+  "packager": "CI (msys2/msys2-autobuild/776a26e0/15257110335)",
+  "pkgbase": "mingw-w64-libzip",
+  "pkgbuildSha256": "a219da0bd5c5021d91b2f1967e514f5811e56b97732a7b0e515cf975aae84d5a",
+  "sha256": "88bc2924fd68582da182c8aef9151d31c4ed466b8eca1a80de2fe4ee271bd4fb",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libzip.dll",
+      "bytes": 168384,
+      "path": "bin/libzip.dll",
+      "sha256": "67c521647ba161a42325e92cb949ec5913463386d722d97f8ac347349b1837af"
+    }
+  ],
+  "version": "1.11.4-1"
+}

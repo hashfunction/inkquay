@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-qpdf-12.3.2-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-qpdf-12.3.2-1-any.pkg.tar.zst",
+  "bytes": 1234412,
+  "licenses": [
+    "spdx:Apache-2.0"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 8580,
+      "sha256": "31499da385dd5a6df1b8904b43fe7bff36409b754f3f0a863345850a81ead0d6"
+    },
+    ".PKGINFO": {
+      "bytes": 649,
+      "sha256": "956083cca86bdcffbbf95f81cd2606bfe7dc270e80ce630bd652196028a8c070"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/qpdf/LICENSE",
+      "bytes": 11358,
+      "path": "binary-metadata/mingw-w64-x86_64-qpdf/original-notices/mingw64/share/licenses/qpdf/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    }
+  ],
+  "package": "mingw-w64-x86_64-qpdf",
+  "packager": "CI (msys2/msys2-autobuild/59a03c95/21553613242)",
+  "pkgbase": "mingw-w64-qpdf",
+  "pkgbuildSha256": "23c216371728cce441379c582bd94508b91e6cf0e65d512382a97b6b3ddcaa7c",
+  "sha256": "f273dc7f297aa166af40ad90243ed2085f829bae2b421737cd0cbcbf57f0874a",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libqpdf30.dll",
+      "bytes": 3245117,
+      "path": "bin/libqpdf30.dll",
+      "sha256": "91f34afc15ae915956e47c22d4c1b866b439baf44ec9143f73d24bcf1755905e"
+    }
+  ],
+  "version": "12.3.2-1"
+}

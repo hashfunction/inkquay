@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libffi-3.8.0-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libffi-3.8.0-1-any.pkg.tar.zst",
+  "bytes": 51683,
+  "licenses": [
+    "spdx:MIT"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 5979,
+      "sha256": "6b4ee997f0816cf2a86c20d8c8dd338555fdca66daba49fa4f0eea62748f6bfd"
+    },
+    ".PKGINFO": {
+      "bytes": 499,
+      "sha256": "c5e6129c42ed0e8f0f78f9055e4ab2157be4e538cca7b685dd0009ad7add2596"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/libffi/LICENSE",
+      "bytes": 1132,
+      "path": "binary-metadata/mingw-w64-x86_64-libffi/original-notices/mingw64/share/licenses/libffi/LICENSE",
+      "sha256": "17b64dc60f3b6897a60f971e288b973f655c2edcdf08b25f3c3dd5549857881c"
+    }
+  ],
+  "package": "mingw-w64-x86_64-libffi",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/31526379481/job/93895626042)",
+  "pkgbase": "mingw-w64-libffi",
+  "pkgbuildSha256": "59e885042758a92aba7a63aade4afe4975b2bf79e7c97e4462bc9ada58b740a6",
+  "sha256": "6dad7f3c6c900d3c64a4fe0c2764b405e678b22df3521d2284ffaeff0198b84b",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libffi-8.dll",
+      "bytes": 39699,
+      "path": "bin/libffi-8.dll",
+      "sha256": "b649c515907436a3299326f83aea0e8d75c61853eb1609602603bbcb9b00b4db"
+    }
+  ],
+  "version": "3.8.0-1"
+}

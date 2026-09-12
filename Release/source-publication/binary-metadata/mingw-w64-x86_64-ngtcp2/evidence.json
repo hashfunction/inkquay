@@ -1,0 +1,48 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-ngtcp2-1.25.0-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-ngtcp2-1.25.0-1-any.pkg.tar.zst",
+  "bytes": 316799,
+  "licenses": [
+    "spdx:MIT"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6731,
+      "sha256": "1466ee975bb213a157f969aa53fe5da17f88861a1e9d1420e7b6ea36c85ff6e6"
+    },
+    ".PKGINFO": {
+      "bytes": 564,
+      "sha256": "46f0c3c5808863e7589076ad64cfb8bac8bba346c974ae6801fdcc8b3ad38d9e"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/ngtcp2/COPYING",
+      "bytes": 1080,
+      "path": "binary-metadata/mingw-w64-x86_64-ngtcp2/original-notices/mingw64/share/licenses/ngtcp2/COPYING",
+      "sha256": "542dd526d2ea23565f0571cc68df6f05ed11248a90ff0f32de19d8ba589db513"
+    }
+  ],
+  "package": "mingw-w64-x86_64-ngtcp2",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/30367193913/job/90301383461)",
+  "pkgbase": "mingw-w64-ngtcp2",
+  "pkgbuildSha256": "a48b3be451b18878579f7d5e29a07a285a325ede1605e6fcb78429a4abdf3315",
+  "sha256": "e110f5b9a2c783ac437be2b80955e79a72f9d3a329fdb626c41516044aaee47a",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libngtcp2-16.dll",
+      "bytes": 393683,
+      "path": "bin/libngtcp2-16.dll",
+      "sha256": "5df6354a4efbd5e797dc9ec3e0f38892a2ee89d759d781e91a0f14a70344a8f5"
+    },
+    {
+      "archivePath": "mingw64/bin/libngtcp2_crypto_ossl-0.dll",
+      "bytes": 54255,
+      "path": "bin/libngtcp2_crypto_ossl-0.dll",
+      "sha256": "6fe49128e600120ef04937b69e6f9a2447f1293697d4b8aa4c239d7549bc913a"
+    }
+  ],
+  "version": "1.25.0-1"
+}

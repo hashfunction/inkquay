@@ -1,0 +1,48 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libwebp-1.6.0-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libwebp-1.6.0-1-any.pkg.tar.zst",
+  "bytes": 627180,
+  "licenses": [
+    "spdx:BSD-3-Clause"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 7189,
+      "sha256": "4d968afe4d1f3b312939d3e693342b37369f398595e0334ba8b447220a2acc50"
+    },
+    ".PKGINFO": {
+      "bytes": 673,
+      "sha256": "81aa44a468591c24ee467fa3aa40adbb47ef4cdc433a7f5b540f4da45d197222"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/libwebp/COPYING",
+      "bytes": 1496,
+      "path": "binary-metadata/mingw-w64-x86_64-libwebp/original-notices/mingw64/share/licenses/libwebp/COPYING",
+      "sha256": "5aec868f669e384a22372a4e8a1a6cd7d44c64cd451f960ca69cc170d1e13acf"
+    }
+  ],
+  "package": "mingw-w64-x86_64-libwebp",
+  "packager": "CI (msys2/msys2-autobuild/70dec0bd/16203711503)",
+  "pkgbase": "mingw-w64-libwebp",
+  "pkgbuildSha256": "d15596f0825cbace1453462ab406b1d1ec6ac12be21d1d5655a17c22656318e1",
+  "sha256": "360b1690d41eb497dfe50526460a2424600a6a806cbb76c5b0fec9f14623ac59",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libsharpyuv-0.dll",
+      "bytes": 53757,
+      "path": "bin/libsharpyuv-0.dll",
+      "sha256": "ab0c9f61dc69b6bcdff1011e215f8d5fd6e5096aba9be3386ab87f217fbbeffe"
+    },
+    {
+      "archivePath": "mingw64/bin/libwebp-7.dll",
+      "bytes": 749724,
+      "path": "bin/libwebp-7.dll",
+      "sha256": "c6c21a10f8cfe13270832e64640b82709e1d87b956b5f15af435a6c25acd6bbf"
+    }
+  ],
+  "version": "1.6.0-1"
+}

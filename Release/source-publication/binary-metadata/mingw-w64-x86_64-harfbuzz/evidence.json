@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-harfbuzz-14.4.0-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-harfbuzz-14.4.0-1-any.pkg.tar.zst",
+  "bytes": 2346947,
+  "licenses": [
+    "spdx:MIT"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 8596,
+      "sha256": "0e7930234534dec30b635782fd223925fdfe9b179a83653a4b7cd5f327fd8c0b"
+    },
+    ".PKGINFO": {
+      "bytes": 1060,
+      "sha256": "9545f5fff4436898078168a2822fc14fb2f3b5683f2cff00ad02bde0b2ac3384"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/harfbuzz/COPYING",
+      "bytes": 1971,
+      "path": "binary-metadata/mingw-w64-x86_64-harfbuzz/original-notices/mingw64/share/licenses/harfbuzz/COPYING",
+      "sha256": "ba8f810f2455c2f08e2d56bb49b72f37fcf68f1f4fade38977cfd7372050ad64"
+    }
+  ],
+  "package": "mingw-w64-x86_64-harfbuzz",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/33158441702/job/98806780391)",
+  "pkgbase": "mingw-w64-harfbuzz",
+  "pkgbuildSha256": "7cd353a89c156c434b687ca8dda859bd61c6c4e1d3d91966c12f5b5a44d39e7f",
+  "sha256": "7343f6aae536e8b0604395a26ecb2666b7bab4936163bdec61e38139169afea0",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libharfbuzz-0.dll",
+      "bytes": 1563763,
+      "path": "bin/libharfbuzz-0.dll",
+      "sha256": "d132f28331767af741e75684fdeb48a91c9be88285020afb7ba8bf0d80f7a3b5"
+    }
+  ],
+  "version": "14.4.0-1"
+}

@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libdeflate-1.26-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libdeflate-1.26-1-any.pkg.tar.zst",
+  "bytes": 93177,
+  "licenses": [
+    "spdx:MIT"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6650,
+      "sha256": "23a580fb21a12597d473c2d467643e586d2520ee5d06b3f0f2511ea0a8ed6a18"
+    },
+    ".PKGINFO": {
+      "bytes": 549,
+      "sha256": "cdc382d1ab3388590a3417403a472a48c512c4c80d207ac3480cda89a6d93bc1"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/libdeflate/COPYING",
+      "bytes": 1078,
+      "path": "binary-metadata/mingw-w64-x86_64-libdeflate/original-notices/mingw64/share/licenses/libdeflate/COPYING",
+      "sha256": "4ad69099cb4374836fd27583d9991e2838cd86b6e4666ab26b2d32582c91e73a"
+    }
+  ],
+  "package": "mingw-w64-x86_64-libdeflate",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/32642142081/job/97200764995)",
+  "pkgbase": "mingw-w64-libdeflate",
+  "pkgbuildSha256": "832f416248f449419d86cec6b292fe3b1c99e789f5e20b52d24b1d8d654b2a62",
+  "sha256": "aa0d9b5e2d0413d5e01745a48ef0c8fa293172d48c13f87b61ada627ab7407ad",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libdeflate.dll",
+      "bytes": 95902,
+      "path": "bin/libdeflate.dll",
+      "sha256": "4be2ffe36137f533825a853642051f2c1f6ddd2f6515e33c2c32712bc9a6d214"
+    }
+  ],
+  "version": "1.26-1"
+}

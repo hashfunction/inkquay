@@ -1,0 +1,54 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libheif-1.23.4-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libheif-1.23.4-1-any.pkg.tar.zst",
+  "bytes": 1111705,
+  "licenses": [
+    "spdx:LGPL-3.0 AND MIT"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 8340,
+      "sha256": "ed670a66e632db02578280228ae863e3f9a2701bf209699a6a773e9072a33fde"
+    },
+    ".PKGINFO": {
+      "bytes": 1209,
+      "sha256": "e80ff88e6e97271b07e209ded6fd6c9df91f36f2bdd58b7f3776718c6f2cf43b"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/libheif/COPYING",
+      "bytes": 44366,
+      "path": "binary-metadata/mingw-w64-x86_64-libheif/original-notices/mingw64/share/licenses/libheif/COPYING",
+      "sha256": "fa81ce652315b013359d6e8e4744335f31a50c7c192907176d3632f78a3b4596"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libheif/COPYING-examples",
+      "bytes": 1066,
+      "path": "binary-metadata/mingw-w64-x86_64-libheif/original-notices/mingw64/share/licenses/libheif/COPYING-examples",
+      "sha256": "278ee9bbb13ecb080a131c68927bd589a6a56fd5449ce25e8e594c858864830d"
+    }
+  ],
+  "package": "mingw-w64-x86_64-libheif",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/34071060957/job/101588372092)",
+  "pkgbase": "mingw-w64-libheif",
+  "pkgbuildSha256": "82f4929f881980cfcb580e9634e266cbdaa098b350ec02ddbed5754574e3a218",
+  "sha256": "546deb359466335a3cacce5f0fe3beaed5683cf707d4a88fa738c9ae2a115f39",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libheif.dll",
+      "bytes": 2410650,
+      "path": "bin/libheif.dll",
+      "sha256": "a7c3a7918cf724846bdd60dceae07a902b5a19ac26fb12a73dc3596b9634734f"
+    },
+    {
+      "archivePath": "mingw64/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-heif.dll",
+      "bytes": 17075,
+      "path": "lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-heif.dll",
+      "sha256": "7dec3434326d250fe00aec0635a9278cab04a5d90f620c13d99bed21fd5928cd"
+    }
+  ],
+  "version": "1.23.4-1"
+}

@@ -71,7 +71,7 @@ jobs:
       - name: Verify isolated packaged main window
         shell: pwsh
         run: ./script/test-packaged-startup.ps1
-      - name: Qualify temporary MSIX installation and owned cleanup
+      - name: Qualify both fixed MSIX identities, actual workflow and owned cleanup
         shell: pwsh
         env:
           INKQUAY_CAPTURE_CRASH_STACK: ${{ inputs.capture_crash_stack == true && 'true' || 'false' }}
@@ -90,7 +90,22 @@ jobs:
             build-evidence/msix-install/*.txt
             build-evidence/msix-install/workflow/*.json
             build-evidence/msix-install/workflow/*.png
+            build-evidence/msix-store-install/*.json
+            build-evidence/msix-store-install/*.png
+            build-evidence/msix-store-install/*.txt
+            build-evidence/msix-store-install/workflow/*.json
+            build-evidence/msix-store-install/workflow/*.png
             build/Testing/Temporary/LastTest.log
             build/Testing/Temporary/LastTestsFailed.log
           retention-days: 14
           if-no-files-found: error
+      - name: Retain exact unsigned Store package and readiness receipt
+        if: ${{ success() && inputs.capture_crash_stack != true }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: Scriblark-Store-unsigned
+          path: |
+            build-evidence/store-ready/Scriblark_1.0.1.0_x64.msix
+            build-evidence/store-ready/release-ready.json
+          if-no-files-found: error
+          retention-days: 14

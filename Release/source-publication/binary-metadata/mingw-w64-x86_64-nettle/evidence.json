@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-nettle-4.0-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-nettle-4.0-1-any.pkg.tar.zst",
+  "bytes": 577414,
+  "licenses": [
+    "spdx:GPL-2.0-or-later",
+    "spdx:LGPL-3.0-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6050,
+      "sha256": "178eaccf140d68ee167382b196a58ae30d125dd8cdfc5f3318555b78cb0ed52e"
+    },
+    ".PKGINFO": {
+      "bytes": 577,
+      "sha256": "73c0c2ef9f021466de698f64bd3daabe2edefda52925ebde5343edb43ca8697d"
+    }
+  },
+  "originalNotices": [],
+  "package": "mingw-w64-x86_64-nettle",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/28774032409/job/85313814973)",
+  "pkgbase": "mingw-w64-nettle",
+  "pkgbuildSha256": "7d82c0e2504f0dabc0170e7b5790f55c4c25a7be7c7dd973ab5d17ebe04d8ae1",
+  "sha256": "505773abfb4f3af514012e2926c11db6365299c7eda141d958a065740740dc86",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libhogweed-7.dll",
+      "bytes": 275389,
+      "path": "bin/libhogweed-7.dll",
+      "sha256": "8a4785b98e5418c32035f570904f65360c89825358702954b53c77ee2df8c97d"
+    },
+    {
+      "archivePath": "mingw64/bin/libnettle-9.dll",
+      "bytes": 360977,
+      "path": "bin/libnettle-9.dll",
+      "sha256": "208002d990684946c7923a87022bedea588fef8e31286598c08805e37be2a95a"
+    }
+  ],
+  "version": "4.0-1"
+}

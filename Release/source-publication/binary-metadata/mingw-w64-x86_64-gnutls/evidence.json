@@ -1,0 +1,36 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-gnutls-3.8.13-3-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-gnutls-3.8.13-3-any.pkg.tar.zst",
+  "bytes": 2402607,
+  "licenses": [
+    "spdx:GPL-3.0-or-later",
+    "spdx:LGPL-2.1-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 7436,
+      "sha256": "4a9e94edbd715dbec115f91ee48322a50e4e491493c81b6472cca6580b2214b4"
+    },
+    ".PKGINFO": {
+      "bytes": 1036,
+      "sha256": "f8d01a70291af9dee9aae189733d243568b3bbefd2b44cc367999dd699a60f89"
+    }
+  },
+  "originalNotices": [],
+  "package": "mingw-w64-x86_64-gnutls",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/28774032409/job/85313814973)",
+  "pkgbase": "mingw-w64-gnutls",
+  "pkgbuildSha256": "0626ac4c78bd79c915b3ea1213b66fa384e3a6eaa392b407eb230a87c9ef83db",
+  "sha256": "0d5a373ac558af20dc0a46d249e99f8a3b3d3562ae013e73f00642dc3bd118cf",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libgnutls-30.dll",
+      "bytes": 2316158,
+      "path": "bin/libgnutls-30.dll",
+      "sha256": "aca67ef2c8429557e9ac3a02ad313e9fdad35a1416972a248f0a205f83d39fbd"
+    }
+  ],
+  "version": "3.8.13-3"
+}

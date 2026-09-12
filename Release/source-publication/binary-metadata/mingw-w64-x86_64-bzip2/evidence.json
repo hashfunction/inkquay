@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-bzip2-1.0.8-4-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-bzip2-1.0.8-4-any.pkg.tar.zst",
+  "bytes": 95428,
+  "licenses": [
+    "custom"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 5977,
+      "sha256": "f59c5f3f96f6bdfcdc246ca5eb8d6b6d89119ba7077830b80af1224930bb0841"
+    },
+    ".PKGINFO": {
+      "bytes": 459,
+      "sha256": "e674e27fdc9da000afd9784007f73a1b4bf3597c45a0da01d5eb67b6e519c12e"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/bzip2/LICENSE",
+      "bytes": 1896,
+      "path": "binary-metadata/mingw-w64-x86_64-bzip2/original-notices/mingw64/share/licenses/bzip2/LICENSE",
+      "sha256": "c6dbbf828498be844a89eaa3b84adbab3199e342eb5cb2ed2f0d4ba7ec0f38a3"
+    }
+  ],
+  "package": "mingw-w64-x86_64-bzip2",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/31803563300/job/94776980328)",
+  "pkgbase": "mingw-w64-bzip2",
+  "pkgbuildSha256": "a82348d211ec09835b8d77de2e98d3153831a9389cdaf6cb8cfadf711096aa24",
+  "sha256": "123768f30ae14ba654a6feb70f8526146a331bc85f831a91a549ffb3f6cbffc7",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libbz2-1.dll",
+      "bytes": 108633,
+      "path": "bin/libbz2-1.dll",
+      "sha256": "a4fbb97c26662d2b8a80bf4597ed3effb69b12048b0cb1eef2c3f211e2e66673"
+    }
+  ],
+  "version": "1.0.8-4"
+}

@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-hicolor-icon-theme-0.18-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-hicolor-icon-theme-0.18-1-any.pkg.tar.zst",
+  "bytes": 20043,
+  "licenses": [
+    "spdx:GPL-2.0-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 5527,
+      "sha256": "6bc1ce14d62d98690d3af08be3dd99e72f1fd2a118332f294ba53a2097a66e7c"
+    },
+    ".PKGINFO": {
+      "bytes": 476,
+      "sha256": "1159ff275237dd7f609184c9c953fb57e25e500e3948118ea6b11996d2270ef5"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/hicolor-icon-theme/COPYING",
+      "bytes": 17992,
+      "path": "binary-metadata/mingw-w64-x86_64-hicolor-icon-theme/original-notices/mingw64/share/licenses/hicolor-icon-theme/COPYING",
+      "sha256": "b0a64377d4ee87b7dbcf418ce4fb33ec3b2d7081b6732890e4af06b8118c4526"
+    }
+  ],
+  "package": "mingw-w64-x86_64-hicolor-icon-theme",
+  "packager": "CI (msys2/msys2-autobuild/59bb7f6f/9275941382)",
+  "pkgbase": "mingw-w64-hicolor-icon-theme",
+  "pkgbuildSha256": "0ce573c9812269bd3a0f0ed82b5df13664d55e4964c171c3369507540399389f",
+  "sha256": "8140b5f0f824be2073cc60d40e6977c00ffcfc3c7eeff24bd5dffbe61f4dae75",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/share/icons/hicolor/index.theme",
+      "bytes": 55507,
+      "path": "share/icons/hicolor/index.theme",
+      "sha256": "a02db5e1b203d981701481bbef8b6fae1c576baf34927eecbc0feae0d2cb9bc5"
+    }
+  ],
+  "version": "0.18-1"
+}

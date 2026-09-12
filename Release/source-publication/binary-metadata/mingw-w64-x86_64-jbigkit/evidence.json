@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-jbigkit-2.1-6-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-jbigkit-2.1-6-any.pkg.tar.zst",
+  "bytes": 107793,
+  "licenses": [
+    "spdx:GPL-2.0"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 5189,
+      "sha256": "c755e58bbdbb5ca83c018d104e3866909a05f11faf11a171564c0dfb41a2e6a1"
+    },
+    ".PKGINFO": {
+      "bytes": 507,
+      "sha256": "3b741836115a012ab00ee01810545f72779fdf0f280b1ecd3c40709126ac6d08"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/jbigkit/COPYING",
+      "bytes": 17982,
+      "path": "binary-metadata/mingw-w64-x86_64-jbigkit/original-notices/mingw64/share/licenses/jbigkit/COPYING",
+      "sha256": "91df39d1816bfb17a4dda2d3d2c83b1f6f2d38d53e53e41e8f97ad5ac46a0cad"
+    }
+  ],
+  "package": "mingw-w64-x86_64-jbigkit",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/31803563300/job/94776980328)",
+  "pkgbase": "mingw-w64-jbigkit",
+  "pkgbuildSha256": "3edad46568e5f76306b4f50ded5c6155967542522beaeda476548b34d340cba7",
+  "sha256": "3db9e32abca5d208920a096e5ae01952f2d8a361780428b9646b6da6750f7321",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libjbig-0.dll",
+      "bytes": 60973,
+      "path": "bin/libjbig-0.dll",
+      "sha256": "9286b1f637ff4a249d81238ea9c9ebf4fb083727dfc4235c750bf749606d85f0"
+    }
+  ],
+  "version": "2.1-6"
+}

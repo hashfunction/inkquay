@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-expat-2.8.4-2-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-expat-2.8.4-2-any.pkg.tar.zst",
+  "bytes": 194814,
+  "licenses": [
+    "spdx:MIT"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6642,
+      "sha256": "7ad157885c5c14185df4e70f7f2de7d007f7baf4f7bf375cc429fa16def1c608"
+    },
+    ".PKGINFO": {
+      "bytes": 474,
+      "sha256": "d1de0c4fc0c39e4d0bfb758e2a8c8506278058720803fef524a32f4ed731c3e3"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/expat/COPYING",
+      "bytes": 1144,
+      "path": "binary-metadata/mingw-w64-x86_64-expat/original-notices/mingw64/share/licenses/expat/COPYING",
+      "sha256": "31b15de82aa19a845156169a17a5488bf597e561b2c318d159ed583139b25e87"
+    }
+  ],
+  "package": "mingw-w64-x86_64-expat",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/33660834535/job/100350682500)",
+  "pkgbase": "mingw-w64-expat",
+  "pkgbuildSha256": "126c496ed77fa60cf251d222044604d8f2968393d5fe5444d902092c75086a61",
+  "sha256": "fa4438fbddbf01e517b995df8f9913efc1c74389e3e04fb55714cae3b1633057",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libexpat-1.dll",
+      "bytes": 237501,
+      "path": "bin/libexpat-1.dll",
+      "sha256": "fe72e241d004d8704208abe02cb2c8340d442c06f5c27dd2627a075beb1885e0"
+    }
+  ],
+  "version": "2.8.4-2"
+}

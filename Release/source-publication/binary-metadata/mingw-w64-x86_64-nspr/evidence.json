@@ -1,0 +1,54 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-nspr-4.40-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-nspr-4.40-1-any.pkg.tar.zst",
+  "bytes": 342836,
+  "licenses": [
+    "spdx:MPL-2.0"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6039,
+      "sha256": "0dbdd0fe7895df5b2931fe2827eb7cb157f9c5a7a0cd03051a10e764e8d6720e"
+    },
+    ".PKGINFO": {
+      "bytes": 522,
+      "sha256": "78152348155d735586fb6179e3680a07f3e4ef7546051d003a6d340c6ca18b15"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/nspr/LICENSE",
+      "bytes": 16726,
+      "path": "binary-metadata/mingw-w64-x86_64-nspr/original-notices/mingw64/share/licenses/nspr/LICENSE",
+      "sha256": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85"
+    }
+  ],
+  "package": "mingw-w64-x86_64-nspr",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/31203153642/job/92947745365)",
+  "pkgbase": "mingw-w64-nspr",
+  "pkgbuildSha256": "b35843f3391b5c8b9e0612391443334ddfa4bcee6702f5f14decf2a368017c18",
+  "sha256": "878d16da36b5a52ed41644a5a4255b5bc9d7bd55be8e2a8bb0a5b58ecacb39d9",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libnspr4.dll",
+      "bytes": 335552,
+      "path": "bin/libnspr4.dll",
+      "sha256": "bbdb3f57a653a6614e9fe6e9510179e478f66649c6526f76bb0cb6b43d49fba0"
+    },
+    {
+      "archivePath": "mingw64/bin/libplc4.dll",
+      "bytes": 22514,
+      "path": "bin/libplc4.dll",
+      "sha256": "014449ff3f1ba191f9879b2db9ec93915d198a65e159cfffdaa9d78d8c5560e9"
+    },
+    {
+      "archivePath": "mingw64/bin/libplds4.dll",
+      "bytes": 19281,
+      "path": "bin/libplds4.dll",
+      "sha256": "8ee6e210d94e9bfc95a30fb8bafa15be6b6b16c5b220db8816b7b5e056e97cdb"
+    }
+  ],
+  "version": "4.40-1"
+}

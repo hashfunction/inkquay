@@ -1,0 +1,48 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-openssl-3.6.4-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-openssl-3.6.4-1-any.pkg.tar.zst",
+  "bytes": 8280825,
+  "licenses": [
+    "spdx:Apache-2.0"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 5951,
+      "sha256": "0a8c9a7574e7428be75410ce61e331f6ee0f96ef18fc421dbbac4285aa7502bc"
+    },
+    ".PKGINFO": {
+      "bytes": 555,
+      "sha256": "d241c802d91a8604874a21914efb0a1191bdf7ea18cf7d77d9e93ba39cc485a6"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/openssl/LICENSE",
+      "bytes": 10175,
+      "path": "binary-metadata/mingw-w64-x86_64-openssl/original-notices/mingw64/share/licenses/openssl/LICENSE",
+      "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a"
+    }
+  ],
+  "package": "mingw-w64-x86_64-openssl",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/32897969658/job/97964892398)",
+  "pkgbase": "mingw-w64-openssl",
+  "pkgbuildSha256": "0f29edf384ee561bfe195608f4dbbb4231695af7958e326292034b264bc5faf1",
+  "sha256": "d613ab4e1b5af9e95cde16895765e1be53ab05657d8d51ff2707d4e99c29c55b",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libcrypto-3-x64.dll",
+      "bytes": 5495630,
+      "path": "bin/libcrypto-3-x64.dll",
+      "sha256": "ad397e1391ae38100fa1043d69a3495efa73fd9c2784de0ffc3ede3df1fd092e"
+    },
+    {
+      "archivePath": "mingw64/bin/libssl-3-x64.dll",
+      "bytes": 992184,
+      "path": "bin/libssl-3-x64.dll",
+      "sha256": "910b31e8f975658a934e726b92c90f71f66d20bc87d8bc758b1b4354e6cb8aa6"
+    }
+  ],
+  "version": "3.6.4-1"
+}

@@ -1,0 +1,60 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-cairo-1.18.4-4-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-cairo-1.18.4-4-any.pkg.tar.zst",
+  "bytes": 897625,
+  "licenses": [
+    "spdx:LGPL-2.1-or-later OR MPL-1.1"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6883,
+      "sha256": "70628f806bd2f3473ebcf90423d0949505d657f3c0576a9f092537991429455d"
+    },
+    ".PKGINFO": {
+      "bytes": 942,
+      "sha256": "400cab69c408c8817ad5eb079aef84b587c5b4c3ff147f3409e6a0c4d5f9bd22"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/cairo/COPYING",
+      "bytes": 1576,
+      "path": "binary-metadata/mingw-w64-x86_64-cairo/original-notices/mingw64/share/licenses/cairo/COPYING",
+      "sha256": "67228a9f7c5f9b67c58f556f1be178f62da4d9e2e6285318d8c74d567255abdf"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/cairo/COPYING-LGPL-2.1",
+      "bytes": 26533,
+      "path": "binary-metadata/mingw-w64-x86_64-cairo/original-notices/mingw64/share/licenses/cairo/COPYING-LGPL-2.1",
+      "sha256": "9e9e8608c4cdda51a78cc3a385f4ec9a2e4c96d5ecad74ac8bca5fca3e563b7d"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/cairo/COPYING-MPL-1.1",
+      "bytes": 25755,
+      "path": "binary-metadata/mingw-w64-x86_64-cairo/original-notices/mingw64/share/licenses/cairo/COPYING-MPL-1.1",
+      "sha256": "53692a2ed6c6a2c6ec9b32dd0b820dfae91e0a1fcdf625ca9ed0bdf8705fcc4f"
+    }
+  ],
+  "package": "mingw-w64-x86_64-cairo",
+  "packager": "CI (msys2/msys2-autobuild/c6213b4d/18248100699)",
+  "pkgbase": "mingw-w64-cairo",
+  "pkgbuildSha256": "c6474a55d3fdd53d0fe40aa0d183536d0704abbe3d3a791e98688e588a694ffb",
+  "sha256": "1487120562e42601a8462d9953098f685c513999a2e472a3524fa96434be3290",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libcairo-2.dll",
+      "bytes": 1247164,
+      "path": "bin/libcairo-2.dll",
+      "sha256": "c474166543aed18b389b20122ca2741189504994dafd86cd5ed121e95bd82ce4"
+    },
+    {
+      "archivePath": "mingw64/bin/libcairo-gobject-2.dll",
+      "bytes": 35639,
+      "path": "bin/libcairo-gobject-2.dll",
+      "sha256": "faf68e5929b89461ad58c5d26c549cde07bc06b368fb89ace82923df645c9bd5"
+    }
+  ],
+  "version": "1.18.4-4"
+}

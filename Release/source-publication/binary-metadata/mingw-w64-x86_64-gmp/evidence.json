@@ -1,0 +1,36 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-gmp-6.3.0-2-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-gmp-6.3.0-2-any.pkg.tar.zst",
+  "bytes": 591674,
+  "licenses": [
+    "LGPL3",
+    "GPL"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 5872,
+      "sha256": "7706d45b71c6724d650df62b8704a27214900e31158992f0f8ee0841fe240d20"
+    },
+    ".PKGINFO": {
+      "bytes": 409,
+      "sha256": "a634764d261125634b4d693c498dd8261596cbb6cc0a1fa07b770b83f14255cc"
+    }
+  },
+  "originalNotices": [],
+  "package": "mingw-w64-x86_64-gmp",
+  "packager": "CI (msys2/msys2-autobuild/0852421d/6195286796)",
+  "pkgbase": "mingw-w64-gmp",
+  "pkgbuildSha256": "b9d3bb2b5b12cb0fc47c4dc17a9a2aa82513236eaefa34c8dfc57dd0d92bc42a",
+  "sha256": "8924433974c4add46cb46ea4f6ef283b5c5139d3f552375115b5580f855015cc",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libgmp-10.dll",
+      "bytes": 679747,
+      "path": "bin/libgmp-10.dll",
+      "sha256": "37248cda33845e7c5c35a574e57da762dd0a8268f0270d179f30a33746809681"
+    }
+  ],
+  "version": "6.3.0-2"
+}

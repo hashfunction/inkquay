@@ -1,0 +1,47 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libwmf-0.2.16-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libwmf-0.2.16-1-any.pkg.tar.zst",
+  "bytes": 1981462,
+  "licenses": [
+    "spdx:LGPL-2.0-or-later AND GPL-2.0-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 7526,
+      "sha256": "88a6708272ea8d2210466ce6c1c2cc4382e4a4632cfd7a0c50d234abea4b711c"
+    },
+    ".PKGINFO": {
+      "bytes": 738,
+      "sha256": "69283a907d2a49fcd6ac59a890e809e63231933252eacded035192afe9dcb92c"
+    }
+  },
+  "originalNotices": [],
+  "package": "mingw-w64-x86_64-libwmf",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/34330915550/job/102399032543)",
+  "pkgbase": "mingw-w64-libwmf",
+  "pkgbuildSha256": "f639e1ef56ed30af2799c8650429d553b790320ea597eb40e60288015147c71a",
+  "sha256": "65e4e12b3f6ed085026a9c1b6524e98f032eea7798311ccc246f766d23eaed78",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libwmf-0-2-7.dll",
+      "bytes": 385190,
+      "path": "bin/libwmf-0-2-7.dll",
+      "sha256": "6672f6dfb11d5d490e998518d823a5151e61cd263395cffbac18ce5f01ff3817"
+    },
+    {
+      "archivePath": "mingw64/bin/libwmflite-0-2-7.dll",
+      "bytes": 191386,
+      "path": "bin/libwmflite-0-2-7.dll",
+      "sha256": "c40be5e6ff4d0b47da23e30d681c70bf962885fef8dca6cf17347ccb84eb4ded"
+    },
+    {
+      "archivePath": "mingw64/lib/gdk-pixbuf-2.0/2.10.0/loaders/io-wmf.dll",
+      "bytes": 16542,
+      "path": "lib/gdk-pixbuf-2.0/2.10.0/loaders/io-wmf.dll",
+      "sha256": "d62c3ac1c224d40e51711518109f63825c5eebe69994d831070ffb19db9110f2"
+    }
+  ],
+  "version": "0.2.16-1"
+}

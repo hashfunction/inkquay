@@ -1,0 +1,36 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libidn2-2.3.8-4-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libidn2-2.3.8-4-any.pkg.tar.zst",
+  "bytes": 175756,
+  "licenses": [
+    "spdx:GPL-2.0-or-later",
+    "spdx:LGPL-3.0-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 7184,
+      "sha256": "d13ef86293cdf2712c9201c20f3630a018c343bba902fb503b1ae2460a2cd18d"
+    },
+    ".PKGINFO": {
+      "bytes": 712,
+      "sha256": "8b883dcda35b62c1537a0d6bfca8bdb46600cf8d317156c350d41cd2ac447591"
+    }
+  },
+  "originalNotices": [],
+  "package": "mingw-w64-x86_64-libidn2",
+  "packager": "CI (msys2/msys2-autobuild/c6213b4d/18246305820)",
+  "pkgbase": "mingw-w64-libidn2",
+  "pkgbuildSha256": "cf6def1817d6a38b49c66fc4cbe36cd56705d9b8952dae13e06d60da703983ff",
+  "sha256": "f98a157446f9ac35465022e329cdaf6169b0c9fa19837e9d80aff9d4e5109013",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libidn2-0.dll",
+      "bytes": 247081,
+      "path": "bin/libidn2-0.dll",
+      "sha256": "9880b52651a0247640a2531d777380f7c35fac7efa7e3979b265ddcb78db8642"
+    }
+  ],
+  "version": "2.3.8-4"
+}

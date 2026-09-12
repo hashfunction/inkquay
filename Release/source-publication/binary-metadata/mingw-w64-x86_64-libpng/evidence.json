@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libpng-1.6.58-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libpng-1.6.58-1-any.pkg.tar.zst",
+  "bytes": 409510,
+  "licenses": [
+    "custom"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6017,
+      "sha256": "fef0a487ac1cb8ef622e43e23bb68dc6253361600b025ce3403517162925bc3f"
+    },
+    ".PKGINFO": {
+      "bytes": 521,
+      "sha256": "f6541a41e4ba805c22118b2839dd8271d719db43fb5c56750297e90eb9de45c6"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/libpng/LICENSE",
+      "bytes": 5345,
+      "path": "binary-metadata/mingw-w64-x86_64-libpng/original-notices/mingw64/share/licenses/libpng/LICENSE",
+      "sha256": "bdb0a645ea18c60507d0368379b1ac5474b92255fcc2d115e07486a7672ba526"
+    }
+  ],
+  "package": "mingw-w64-x86_64-libpng",
+  "packager": "CI (msys2/msys2-autobuild/3e3ad5a1/24570439897)",
+  "pkgbase": "mingw-w64-libpng",
+  "pkgbuildSha256": "d398f1e6ea9e549a638491308155e47e27a0953781ccce28707243f6eff29c81",
+  "sha256": "d8ae6066f99b3a04b83b8013b554a26a205d7e68580b80823c173ed045ba76a5",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libpng16-16.dll",
+      "bytes": 264269,
+      "path": "bin/libpng16-16.dll",
+      "sha256": "3737838ee8d6b893df7bdabf7439775371a57dce7e17ee6b35586023c64bd9ab"
+    }
+  ],
+  "version": "1.6.58-1"
+}

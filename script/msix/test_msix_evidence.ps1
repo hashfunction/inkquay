@@ -3,7 +3,12 @@
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'qualify-msix-install.ps1') -LibraryOnly
-foreach ($scenario in @('missing','changed','changed-after-success','success','write-failure','observer-success','observer-failure')) {
+$script:ActualHelperEvidence=${function:Get-InkQuayHelperEvidence}
+function Get-InkQuayHelperEvidence {
+    if($scenario -ceq 'helper-failure'){throw 'owned helper metadata unavailable'}
+    return & $script:ActualHelperEvidence
+}
+foreach ($scenario in @('helper-failure','missing','changed','changed-after-success','success','write-failure','observer-success','observer-failure')) {
     $probeRoot = Join-Path ([IO.Path]::GetTempPath()) ('inkquay-evidence-test-' + [guid]::NewGuid().ToString('N'))
     New-Item -ItemType Directory -Path $probeRoot | Out-Null
     try {
@@ -45,6 +50,12 @@ foreach ($scenario in @('missing','changed','changed-after-success','success','w
                 $evidence.cleanup_errors[0] -cne 'original uninstall failure') { throw 'Observer diagnostics displaced primary/cleanup failures.' }
             continue
         }
+        if ($scenario -ceq 'helper-failure') {
+            if(-not $failure -or $evidence.installation_qualification_passed -or -not $evidence.unsigned_package_unchanged -or $null -ne $evidence.qualification_helpers -or
+                $evidence.evidence_errors.Count -ne 1 -or $evidence.evidence_errors[0] -notmatch 'owned helper metadata unavailable' -or
+                $evidence.primary_error -cne 'original activation failure' -or $evidence.cleanup_errors[0] -cne 'original uninstall failure'){throw 'Helper evidence failure displaced primary/cleanup evidence.'}
+            continue
+        }
         if ($scenario -eq 'success') {
             if ($failure -or -not $evidence.installation_qualification_passed -or -not $evidence.unsigned_package_unchanged -or $evidence.evidence_errors.Count) { throw 'Unchanged success control did not pass.' }
         } else {
@@ -53,4 +64,4 @@ foreach ($scenario in @('missing','changed','changed-after-success','success','w
         }
     } finally { Remove-Item -LiteralPath $probeRoot -Recurse -Force }
 }
-Write-Output 'PASS: five real final-hash and exclusive-evidence reporting scenarios.'
+Write-Output 'PASS: eight final-hash, helper-error, diagnostic and exclusive-evidence reporting scenarios.'

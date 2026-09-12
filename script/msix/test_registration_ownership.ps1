@@ -1,14 +1,16 @@
 # Copyright 2026 Trieflow LLC. MIT.
 # Exercise real Install and RemoveOwnedPackage closures and outer failure evidence;
 # only Appx cmdlets and unrelated Windows/UI operations are replaced.
+param([ValidateSet('qualification','store')][string]$IdentityMode='qualification')
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'qualify-msix-install.ps1') -LibraryOnly
+$script:ExpectedIdentity=Get-InkQuayIdentity $IdentityMode
 $script:ActualCore = ${function:Invoke-InkQuayQualificationCore}
 $global:RegistrationFixture = $null
 function global:Get-AppxPackage {
     [CmdletBinding()] param([string]$Name)
-    if ($Name -cne 'Trieflow.InkQuay.Qualification') { throw 'Unscoped package query' }
+    if ($Name -cne $script:ExpectedIdentity.packageName) { throw 'Unscoped package query' }
     $fixture = $global:RegistrationFixture
     if ($fixture.observationFailure) { $fixture.observationFailure=$false; throw 'registration observation failed' }
     return @($fixture.registrations)
@@ -46,7 +48,7 @@ function Invoke-InkQuayQualificationCore([Collections.IDictionary]$Operations) {
     $state.record=[pscustomobject]@{sourceCommit=('a'*40);payload=[pscustomobject]@{}}
     # Native preflight is unavailable locally. Capture the empty preflight view;
     # actual Add/Get/Remove production closures run through the controlled adapter.
-    $Operations.Preflight={ if (@(Get-AppxPackage -Name 'Trieflow.InkQuay.Qualification').Count) { throw 'Fixture must start empty' } }
+    $Operations.Preflight={ if (@(Get-AppxPackage -Name $script:ExpectedIdentity.packageName).Count) { throw 'Fixture must start empty' } }
     foreach ($name in @('PrepareSignedCopy','VerifyInstalledMedia','CaptureInstalledStderr','ActivateAndVerify','UninstallAndVerify','StopOwnedProcess','RemoveTrustedCertificate','RemovePersonalCertificate','RemoveTemporaryFiles')) {
         if ($name -eq 'UninstallAndVerify' -and $fixture.scenario -in @('normal-owned','normal-with-foreign')) { continue }
         $Operations[$name]={}
@@ -60,14 +62,14 @@ foreach ($scenario in @('failed-add-race','ambiguous-add','wrong-architecture','
     $temporary=Join-Path ([IO.Path]::GetTempPath()) ('inkquay-registration-test-'+[guid]::NewGuid().ToString('N'))
     New-Item -ItemType Directory $temporary | Out-Null
     try {
-        $owned=[pscustomobject]@{Name='Trieflow.InkQuay.Qualification';Publisher='CN=InkQuay-CI-Qualification';Version='1.0.1.0';Architecture='X64';PackageFullName='Trieflow.InkQuay.Qualification_1.0.1.0_x64__fixture';PackageFamilyName='Trieflow.InkQuay.Qualification_fixture';InstallLocation=$temporary}
-        $foreign=[pscustomobject]@{Name=$owned.Name;Publisher=$owned.Publisher;Version=$owned.Version;Architecture='Arm64';PackageFullName='Trieflow.InkQuay.Qualification_1.0.1.0_arm64__fixture';PackageFamilyName=$owned.PackageFamilyName;InstallLocation=$temporary}
+        $owned=[pscustomobject]@{Name=$script:ExpectedIdentity.packageName;Publisher=$script:ExpectedIdentity.publisher;Version='1.0.1.0';Architecture='X64';PackageFullName=($script:ExpectedIdentity.packageName+'_1.0.1.0_x64__fixture');PackageFamilyName=($script:ExpectedIdentity.packageName+'_fixture');InstallLocation=$temporary}
+        $foreign=[pscustomobject]@{Name=$owned.Name;Publisher=$owned.Publisher;Version=$owned.Version;Architecture='Arm64';PackageFullName=($script:ExpectedIdentity.packageName+'_1.0.1.0_arm64__fixture');PackageFamilyName=$owned.PackageFamilyName;InstallLocation=$temporary}
         # The racing registration has the exact expected x64 full name; a name/
         # architecture match still cannot establish ownership after our Add failed.
         $raced=$owned.PSObject.Copy()
         $global:RegistrationFixture=[ordered]@{scenario=$scenario;directory=$temporary;owned=$owned;foreign=$foreign;raced=$raced;registrations=@();removed=[Collections.Generic.List[string]]::new();observationFailure=$false}
         $failure=$null
-        try { Invoke-InkQuayInstallQualification unused unused unused $temporary | Out-Null } catch { $failure=$_.Exception.Message }
+        try { Invoke-InkQuayInstallQualification unused unused unused $temporary -IdentityMode $IdentityMode | Out-Null } catch { $failure=$_.Exception.Message }
         $fixture=$global:RegistrationFixture
         $evidence=Get-Content (Join-Path $temporary 'installation-qualification.json') -Raw | ConvertFrom-Json
         if ($scenario -eq 'observation-empty') {

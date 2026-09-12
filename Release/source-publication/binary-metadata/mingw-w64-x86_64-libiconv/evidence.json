@@ -1,0 +1,61 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libiconv-1.19-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libiconv-1.19-1-any.pkg.tar.zst",
+  "bytes": 745957,
+  "licenses": [
+    "spdx:LGPL-2.1-or-later",
+    "documentation:spdx:GPL-3.0-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6033,
+      "sha256": "ccd20bd631186cd36d3a8615de2602d6c672f619846603a44360d0d726cef026"
+    },
+    ".PKGINFO": {
+      "bytes": 577,
+      "sha256": "23ed1c7e836c2923e16081289d0b479690c0a28684ab1804bbed8e423f308d91"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/libiconv/COPYING",
+      "bytes": 35147,
+      "path": "binary-metadata/mingw-w64-x86_64-libiconv/original-notices/mingw64/share/licenses/libiconv/COPYING",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libiconv/COPYING.LIB",
+      "bytes": 26419,
+      "path": "binary-metadata/mingw-w64-x86_64-libiconv/original-notices/mingw64/share/licenses/libiconv/COPYING.LIB",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libiconv/README",
+      "bytes": 5741,
+      "path": "binary-metadata/mingw-w64-x86_64-libiconv/original-notices/mingw64/share/licenses/libiconv/README",
+      "sha256": "4ae66e61d1c6593c84c47105b368d579bcee1af566dbb959ec63a0c48425dcf4"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libiconv/libcharset/COPYING.LIB",
+      "bytes": 26419,
+      "path": "binary-metadata/mingw-w64-x86_64-libiconv/original-notices/mingw64/share/licenses/libiconv/libcharset/COPYING.LIB",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    }
+  ],
+  "package": "mingw-w64-x86_64-libiconv",
+  "packager": "CI (msys2/msys2-autobuild/5e407709/23084514348)",
+  "pkgbase": "mingw-w64-libiconv",
+  "pkgbuildSha256": "9b3212d06910560fb59e017e0b73a29d392a5082d3a47a613e61509bd7dcd475",
+  "sha256": "21e334d0911f25de75d3e18e0697648bcecfa9658256d600cad0827d719c2f35",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libiconv-2.dll",
+      "bytes": 1143148,
+      "path": "bin/libiconv-2.dll",
+      "sha256": "7a282a854e01be726c6cccfe46f548c716aa45b3014818468253aaa4efbcd067"
+    }
+  ],
+  "version": "1.19-1"
+}

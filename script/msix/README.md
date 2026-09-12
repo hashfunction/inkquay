@@ -1,14 +1,25 @@
-# InkQuay temporary MSIX qualification
+# Scriblark Windows qualification and unsigned Store export
 
-This pipeline packages the unchanged native `build/dist` stage with a disposable
-`Trieflow.InkQuay.Qualification` identity. It does not reserve a Store name, use a
-production certificate, publish native binaries or establish license clearance.
+Normal runs package the same native `build/dist` stage twice: first the disposable
+`Trieflow.InkQuay.Qualification` identity, then the assigned Store identity
+`1659hashfunction.InkQuay`. Store mode retains ApplicationId `InkQuay`, publisher
+`CN=B6A2631A-FD32-45CC-AE12-82466975F528`, PublisherDisplayName `hashfunction`,
+version `1.0.1.0`, and executable `bin/Scriblark.exe`. The default API identity
+remains disposable; arbitrary identities are not accepted.
+
+Each identity runs the complete installed template/save/PDF export/reopen/export
+workflow in a separate PowerShell process and owned temporary tree, using a
+nonexportable ephemeral certificate. Only after both normal runs pass does the
+exporter retain exactly `Scriblark_1.0.1.0_x64.msix` and `release-ready.json`.
+The package is unsigned; temporary certificates and signed copies are never
+included. Store submission, certification and general license clearance are
+separate and remain false in the readiness receipt.
 
 The stage receipt binds all files to the same-run MINGW64 provenance inventory,
 both compiled executable hashes, exact installed package owner versions and the
 source commit. Original source notices and PNG/SVG artwork are byte matched.
 Unowned non-executable resources remain explicit audit inputs. Package startup
-must identify the actual `Unsaved Document - InkQuay` window and bind the complete
+must identify the actual `Unsaved Document - Scriblark` window and bind the complete
 stage receipt. The icon passed to packaging must equal the source-bound PNG.
 
 The pinned Windows SDK 10.0.26100.0 packs and unpacks the full stage; independent
@@ -29,9 +40,26 @@ A normal window close must lead to an observed zero exit. Cleanup removes only
 registrations, certificates and temporary directories owned by this invocation;
 primary, cleanup and evidence failures remain separate in the final report.
 
-This does not exercise PDF import/export, templates or a physical pen tablet.
-Those workflows, upgrade, WACK, production identity and complete corresponding
-source/license obligations remain release gates.
+The independent exporter rederives both exact payloads from current source,
+release files, original notices, generated manifests and artwork; checks complete
+standalone/embedded workflow equality, all 25 actual input events, eight real
+captures, both original application reports, unchanged protected inputs and note,
+independent Poppler observations, both loaded-module sets, and normal exit and
+owned cleanup. It records current run/attempt and helper hashes. Physical tablet,
+upgrade and WACK coverage are not claimed.
+
+Current owned files must match the retained binary/source/recipe proofs for all
+66 native owners. The original publication metadata and separate current
+winpthread supplement remain distinct in `Release/source-publication`; all 359
+resolved Cargo source archives and 735 indexed original files are checked against
+the original collection. Anonymous current release asset digests and the public
+application commit/tree must match before unsigned retention. The exporter does
+not claim dependency binary reproduction or rewrite historical clearance flags.
+
+`capture_crash_stack=true` remains diagnostic only: it runs the disposable
+identity and cannot enter the Store build/export branch. Fresh actual Windows
+qualification remains required for every changed source, including this new dual
+identity path.
 
 ## Local verification (2026-09-11)
 

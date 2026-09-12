@@ -1,0 +1,66 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-gcc-libs-16.2.0-3-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-gcc-libs-16.2.0-3-any.pkg.tar.zst",
+  "bytes": 1149664,
+  "licenses": [
+    "spdx:GPL-3.0-or-later WITH GCC-exception-3.1 AND LGPL-2.1-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6938,
+      "sha256": "a2e19e0ced7e738c76431880cb56dcca014ab5a4d79782fb45a6c2517cfc3679"
+    },
+    ".PKGINFO": {
+      "bytes": 1257,
+      "sha256": "207052b5cb9d78dbfca30ab49a453b20a41fbbc40360ff52732f14bd2359fac1"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/gcc-libs/COPYING.LIB",
+      "bytes": 26527,
+      "path": "binary-metadata/mingw-w64-x86_64-gcc-libs/original-notices/mingw64/share/licenses/gcc-libs/COPYING.LIB",
+      "sha256": "a9bdde5616ecdd1e980b44f360600ee8783b1f99b8cc83a2beb163a0a390e861"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/gcc-libs/COPYING.RUNTIME",
+      "bytes": 3324,
+      "path": "binary-metadata/mingw-w64-x86_64-gcc-libs/original-notices/mingw64/share/licenses/gcc-libs/COPYING.RUNTIME",
+      "sha256": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/gcc-libs/COPYING3",
+      "bytes": 35147,
+      "path": "binary-metadata/mingw-w64-x86_64-gcc-libs/original-notices/mingw64/share/licenses/gcc-libs/COPYING3",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/gcc-libs/README",
+      "bytes": 236,
+      "path": "binary-metadata/mingw-w64-x86_64-gcc-libs/original-notices/mingw64/share/licenses/gcc-libs/README",
+      "sha256": "33400d067fa3e2bd670a0868dcdb60c9486e8f559b675cf9ff1ff55d4e0d06ab"
+    }
+  ],
+  "package": "mingw-w64-x86_64-gcc-libs",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/31295760804/job/93200480425)",
+  "pkgbase": "mingw-w64-gcc",
+  "pkgbuildSha256": "226e4b4d6a5786b66eaf260181b5260934a77ee1d6548ef9d1f735ebaae30f1d",
+  "sha256": "f8e25ea67bb796e7f65550f0dca9fce4cdde8aaa3dadafe4d13c6a8233c8de26",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libgcc_s_seh-1.dll",
+      "bytes": 150998,
+      "path": "bin/libgcc_s_seh-1.dll",
+      "sha256": "b37c1770c8ca092700875845b34918803ee6311573eba1c32ff4b1166e4a0e1e"
+    },
+    {
+      "archivePath": "mingw64/bin/libstdc++-6.dll",
+      "bytes": 2661299,
+      "path": "bin/libstdc++-6.dll",
+      "sha256": "887c21dbe2a211ac4d1a790e4f608b7dee27fae12352856963004e7a715d2e6c"
+    }
+  ],
+  "version": "16.2.0-3"
+}

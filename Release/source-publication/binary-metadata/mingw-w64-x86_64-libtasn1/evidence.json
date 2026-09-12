@@ -1,0 +1,48 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libtasn1-4.21.0-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libtasn1-4.21.0-1-any.pkg.tar.zst",
+  "bytes": 203869,
+  "licenses": [
+    "GPL3, LGPL"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 7080,
+      "sha256": "603153ff95cbd6e4ec57b4302dd673112cd524420013b31aa2224f850c4a59fa"
+    },
+    ".PKGINFO": {
+      "bytes": 573,
+      "sha256": "2eba73e5ca058b38987f1765001fdc30f9a2ee5f150ecf78c0c7d04d4197bb19"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/libtasn1/COPYING",
+      "bytes": 35149,
+      "path": "binary-metadata/mingw-w64-x86_64-libtasn1/original-notices/mingw64/share/licenses/libtasn1/COPYING",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libtasn1/COPYING.LESSERv2",
+      "bytes": 26419,
+      "path": "binary-metadata/mingw-w64-x86_64-libtasn1/original-notices/mingw64/share/licenses/libtasn1/COPYING.LESSERv2",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    }
+  ],
+  "package": "mingw-w64-x86_64-libtasn1",
+  "packager": "CI (msys2/msys2-autobuild/a72b8c90/20896962743)",
+  "pkgbase": "mingw-w64-libtasn1",
+  "pkgbuildSha256": "dd68181f53e6a8481961315b3a6c6caa4370188b1fea219203080b24abd251fe",
+  "sha256": "9f7aa213d14135e5856cc7a1254d871cbed60dee00b40db87a6ca7a4e733d2b2",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libtasn1-6.dll",
+      "bytes": 113467,
+      "path": "bin/libtasn1-6.dll",
+      "sha256": "95821132a7d4ea90f7c37540118ad1459809ff23162d6dc3d5600b15755a644b"
+    }
+  ],
+  "version": "4.21.0-1"
+}

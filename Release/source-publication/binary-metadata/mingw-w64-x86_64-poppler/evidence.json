@@ -1,0 +1,41 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-poppler-26.08.0-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-poppler-26.08.0-1-any.pkg.tar.zst",
+  "bytes": 2015249,
+  "licenses": [
+    "spdx:GPL-2.0-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 10477,
+      "sha256": "5f473a44f4340ed967ba259031d149b847d3c5bdc24976ec5bac7f2f37c4af91"
+    },
+    ".PKGINFO": {
+      "bytes": 1237,
+      "sha256": "282a0af5a5f58e1807c277eee087e9506c5ec5a3657930862087f3ce1b026c0f"
+    }
+  },
+  "originalNotices": [],
+  "package": "mingw-w64-x86_64-poppler",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/32501463721/job/96831874031)",
+  "pkgbase": "mingw-w64-poppler",
+  "pkgbuildSha256": "417f89e5f35bfaf87c1e8eb2852fffeb23480aa7d1d8e4359d2a6ad5b68a9166",
+  "sha256": "24f5ae117d6e64351f476d52a01ce87c705662293dda38da572d01e58d09b3cc",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libpoppler-163.dll",
+      "bytes": 3917720,
+      "path": "bin/libpoppler-163.dll",
+      "sha256": "ac7de557e48769ad754d94a80bcd3dc1a72f9c05123bb87ddf106bcd19deff39"
+    },
+    {
+      "archivePath": "mingw64/bin/libpoppler-glib-8.dll",
+      "bytes": 536830,
+      "path": "bin/libpoppler-glib-8.dll",
+      "sha256": "98f14d037936179d0124e5abb6af33ac1a011c3a261bda36543ce7d252cf176e"
+    }
+  ],
+  "version": "26.08.0-1"
+}

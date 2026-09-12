@@ -1,0 +1,60 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-gettext-runtime-1.0-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-gettext-runtime-1.0-1-any.pkg.tar.zst",
+  "bytes": 427276,
+  "licenses": [
+    "spdx:GPL-3.0-or-later AND LGPL-2.1-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6180,
+      "sha256": "098abf252a0b9f82c57d2812fdb6f6f42d047bafa7c16d850e2c1d15956fbe3b"
+    },
+    ".PKGINFO": {
+      "bytes": 690,
+      "sha256": "7ecd86325ab8577ef74b9c18be402eb84d1f8f1f2e8864d7a4dc56dde98399ee"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/gettext-runtime/COPYING",
+      "bytes": 495,
+      "path": "binary-metadata/mingw-w64-x86_64-gettext-runtime/original-notices/mingw64/share/licenses/gettext-runtime/COPYING",
+      "sha256": "7ef2cdfe58e0c0460657b6598b49af29d4e03c1e41cbaf0e1da1eb8ad74b95d0"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/gettext-runtime/intl/COPYING.LIB",
+      "bytes": 26419,
+      "path": "binary-metadata/mingw-w64-x86_64-gettext-runtime/original-notices/mingw64/share/licenses/gettext-runtime/intl/COPYING.LIB",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/gettext-runtime/libasprintf/COPYING",
+      "bytes": 65,
+      "path": "binary-metadata/mingw-w64-x86_64-gettext-runtime/original-notices/mingw64/share/licenses/gettext-runtime/libasprintf/COPYING",
+      "sha256": "03133addae5b99a6148c538300e6d97074453089be1423b741bd081f18e2b298"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/gettext-runtime/libasprintf/COPYING.LIB",
+      "bytes": 26419,
+      "path": "binary-metadata/mingw-w64-x86_64-gettext-runtime/original-notices/mingw64/share/licenses/gettext-runtime/libasprintf/COPYING.LIB",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    }
+  ],
+  "package": "mingw-w64-x86_64-gettext-runtime",
+  "packager": "CI (msys2/msys2-autobuild/59a03c95/21544284235)",
+  "pkgbase": "mingw-w64-gettext",
+  "pkgbuildSha256": "853ef80a50588f29355722a4513f24cf1a5f8de06e0b5ee326580464db539741",
+  "sha256": "be68d7f260633284b910c588c6d82ee304a81c8817a686d2cd9df83f872c27af",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libintl-8.dll",
+      "bytes": 298731,
+      "path": "bin/libintl-8.dll",
+      "sha256": "0537c3dd2378218508ebe3cc416d72a99ee2d24ae1c5525e23458f32544ef861"
+    }
+  ],
+  "version": "1.0-1"
+}

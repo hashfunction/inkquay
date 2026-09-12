@@ -1,0 +1,60 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libjpeg-turbo-3.2.0-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libjpeg-turbo-3.2.0-1-any.pkg.tar.zst",
+  "bytes": 792181,
+  "licenses": [
+    "custom:BSD-like"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6795,
+      "sha256": "9a12cae8b10c57d8bae7c1f08b63cea20f472d59a2c0e141780e40bf9a70b716"
+    },
+    ".PKGINFO": {
+      "bytes": 734,
+      "sha256": "c5a2a8c5a2a5d0598fb72c084b505c659700f06a2b5b11df6ee57bfff97c7e3a"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/libjpeg-turbo/LICENSE.md",
+      "bytes": 6077,
+      "path": "binary-metadata/mingw-w64-x86_64-libjpeg-turbo/original-notices/mingw64/share/licenses/libjpeg-turbo/LICENSE.md",
+      "sha256": "ba6bceebcba0fdd35488477c2cca8c4632ce82c74dbfbc87d886ce6fc4433579"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libjpeg-turbo/README.ijg",
+      "bytes": 12799,
+      "path": "binary-metadata/mingw-w64-x86_64-libjpeg-turbo/original-notices/mingw64/share/licenses/libjpeg-turbo/README.ijg",
+      "sha256": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libjpeg-turbo/README.md",
+      "bytes": 17722,
+      "path": "binary-metadata/mingw-w64-x86_64-libjpeg-turbo/original-notices/mingw64/share/licenses/libjpeg-turbo/README.md",
+      "sha256": "a44ba17ac66c57edaf0ea7c6e4b31358f08322c780e4e6af092082abb3e20793"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/libjpeg-turbo/simd/jsimdext.inc",
+      "bytes": 15563,
+      "path": "binary-metadata/mingw-w64-x86_64-libjpeg-turbo/original-notices/mingw64/share/licenses/libjpeg-turbo/simd/jsimdext.inc",
+      "sha256": "68c5d236785edf75344cebe8b9bec36568bd35c96eb72cc67ffecd66c17dbd74"
+    }
+  ],
+  "package": "mingw-w64-x86_64-libjpeg-turbo",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/28514970812/job/84524349260)",
+  "pkgbase": "mingw-w64-libjpeg-turbo",
+  "pkgbuildSha256": "bd71b8cdb87f4838d9d86475104e7ac926d56a239a1d3947721db1aae0385b92",
+  "sha256": "ef3f55cf5238a8045c8f37796d730e4a5ee619d29ca9254aaa62456e5b5b7e51",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libjpeg-8.dll",
+      "bytes": 967968,
+      "path": "bin/libjpeg-8.dll",
+      "sha256": "b564d34adaca83e73af0e2231719dd0198ea6cd074c64b2ba85bfd7182f27db7"
+    }
+  ],
+  "version": "3.2.0-1"
+}

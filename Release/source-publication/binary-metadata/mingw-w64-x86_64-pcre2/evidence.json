@@ -1,0 +1,48 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-pcre2-10.48-3-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-pcre2-10.48-3-any.pkg.tar.zst",
+  "bytes": 1446595,
+  "licenses": [
+    "spdx:BSD-3-Clause"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6048,
+      "sha256": "29bc9ba2a4e82ced8e19de16ae4ae7d01cb42fc25ba76e2bcec9402cb4ca65bf"
+    },
+    ".PKGINFO": {
+      "bytes": 580,
+      "sha256": "64b49c289452de23dfeb554c06248f7552470e990e4a32cf76c7fc31ef7af920"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/pcre2/COPYING",
+      "bytes": 97,
+      "path": "binary-metadata/mingw-w64-x86_64-pcre2/original-notices/mingw64/share/licenses/pcre2/COPYING",
+      "sha256": "99272c55f3dcfa07a8a7e15a5c1a33096e4727de74241d65fa049fccfdd59507"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/pcre2/LICENCE.md",
+      "bytes": 4011,
+      "path": "binary-metadata/mingw-w64-x86_64-pcre2/original-notices/mingw64/share/licenses/pcre2/LICENCE.md",
+      "sha256": "197d8a73ffee0d6b09adba2f9c677b5f5aede24edf89258a68e48248d010d811"
+    }
+  ],
+  "package": "mingw-w64-x86_64-pcre2",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/33657832114/job/100340723447)",
+  "pkgbase": "mingw-w64-pcre2",
+  "pkgbuildSha256": "0b94fbb011bf5f78960beb73e5c8d0fd026bace4bd671ca1ee22a3e373706107",
+  "sha256": "c67c23f448693e8c9cc3973872372dabec2abdf6afacb563096f7eb0e6837f57",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libpcre2-8-0.dll",
+      "bytes": 707427,
+      "path": "bin/libpcre2-8-0.dll",
+      "sha256": "ed6f43f96b0891a5b470e724f727bb4c12255354e609b40bd81fd5be6c0b56ac"
+    }
+  ],
+  "version": "10.48-3"
+}

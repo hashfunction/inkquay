@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libtiff-4.7.2-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libtiff-4.7.2-1-any.pkg.tar.zst",
+  "bytes": 721600,
+  "licenses": [
+    "spdx:MIT"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 8649,
+      "sha256": "c209e9f59036b66a73413917418d26f5a7db72c0e458fafb0478eb54edaf1e07"
+    },
+    ".PKGINFO": {
+      "bytes": 818,
+      "sha256": "0a62d78e78bceb0e8a231e007dec222c8257647c38db2056068c9fad78988f25"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/libtiff/LICENSE.md",
+      "bytes": 2416,
+      "path": "binary-metadata/mingw-w64-x86_64-libtiff/original-notices/mingw64/share/licenses/libtiff/LICENSE.md",
+      "sha256": "0e27c2382d7b8147972bbb746e04059a1152c8d0fda9d03ef1399d1a433c4ade"
+    }
+  ],
+  "package": "mingw-w64-x86_64-libtiff",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/28661920870/job/85004365524)",
+  "pkgbase": "mingw-w64-libtiff",
+  "pkgbuildSha256": "2eecac8b6120c97e3b2754098f57c9bd026dcc121f67a9e2f9bf7e1a689e9819",
+  "sha256": "ebc466fa5664c1528834c59ee7134ba57df6db224e503b690870e2c613f30c3e",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libtiff-6.dll",
+      "bytes": 625178,
+      "path": "bin/libtiff-6.dll",
+      "sha256": "47fe69165bf8e211aaa84224f51f145dc894e330fe7ca167f7c99419e0c8c894"
+    }
+  ],
+  "version": "4.7.2-1"
+}

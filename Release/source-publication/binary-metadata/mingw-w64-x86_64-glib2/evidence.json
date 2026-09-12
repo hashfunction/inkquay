@@ -1,0 +1,408 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-glib2-2.90.0-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-glib2-2.90.0-1-any.pkg.tar.zst",
+  "bytes": 5440909,
+  "licenses": [
+    "spdx:LGPL-2.1-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6620,
+      "sha256": "90f40b656e8970e63a0eee657677fe0a876962521fa143d2b3a301d4b2e6cd3e"
+    },
+    ".PKGINFO": {
+      "bytes": 931,
+      "sha256": "27848944b2142595900a2e803dca7ae64edfdb33513582aaa8c2b9b1a566bf14"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/glib2/COPYING",
+      "bytes": 25967,
+      "path": "binary-metadata/mingw-w64-x86_64-glib2/original-notices/mingw64/share/licenses/glib2/COPYING",
+      "sha256": "fa6f36630bb1e0c571d34b2bbdf188d08495c9dbf58f28cac112f303fc1f58fb"
+    }
+  ],
+  "package": "mingw-w64-x86_64-glib2",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/34389532584/job/102594147019)",
+  "pkgbase": "mingw-w64-glib2",
+  "pkgbuildSha256": "0ad17a7ab5835acc95990c1eba2d85f351a8df0604e528f23b4212402380430b",
+  "sha256": "34361784125c950f84bfbd137c6056e0023783238b6659ce24b0d5440655fcdf",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/gdbus.exe",
+      "bytes": 54925,
+      "path": "bin/gdbus.exe",
+      "sha256": "ea4205e85754df47c625d8d6fe92157a6d0e2c3b1fd66f69b40b9026a234e1ae"
+    },
+    {
+      "archivePath": "mingw64/bin/gspawn-win64-helper-console.exe",
+      "bytes": 22287,
+      "path": "bin/gspawn-win64-helper-console.exe",
+      "sha256": "7b6ce596bd74fe16a93d73508f48efc8cdcc299c69b432cad9e24b5825a191c0"
+    },
+    {
+      "archivePath": "mingw64/bin/gspawn-win64-helper.exe",
+      "bytes": 23934,
+      "path": "bin/gspawn-win64-helper.exe",
+      "sha256": "d295306f77f398095d32c8348f4c831fce155c64407b5d2d3089604c1054e132"
+    },
+    {
+      "archivePath": "mingw64/bin/libgio-2.0-0.dll",
+      "bytes": 1918835,
+      "path": "bin/libgio-2.0-0.dll",
+      "sha256": "1404c1bf2ce190032ab6a50ed8afa09d52e9e85fe806a20ae10019a04ec72c2e"
+    },
+    {
+      "archivePath": "mingw64/bin/libglib-2.0-0.dll",
+      "bytes": 1571222,
+      "path": "bin/libglib-2.0-0.dll",
+      "sha256": "9778ba7e7a3a3e92e7c1802a45cd9350a905ff3fbff193566630b6c47a3e7b9c"
+    },
+    {
+      "archivePath": "mingw64/bin/libgmodule-2.0-0.dll",
+      "bytes": 23387,
+      "path": "bin/libgmodule-2.0-0.dll",
+      "sha256": "20d170ae2d89710376bdd64638399de48a417281769ccb6930927aa28a26d704"
+    },
+    {
+      "archivePath": "mingw64/bin/libgobject-2.0-0.dll",
+      "bytes": 357682,
+      "path": "bin/libgobject-2.0-0.dll",
+      "sha256": "2ea01b58d9a0972c34eed00f012c0fb5cb4178267c4181296e84c50647062000"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/codegen/__init__.py",
+      "bytes": 1045,
+      "path": "share/glib-2.0/codegen/__init__.py",
+      "sha256": "ce5847073d50383ca7b126d46a0a4461fd76f5fd3d8b1716d35ed14a3f6f3f31"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/codegen/codegen.py",
+      "bytes": 242412,
+      "path": "share/glib-2.0/codegen/codegen.py",
+      "sha256": "7b9e31be7fcc987bc3d5e07865cc30f3b79c57914c20e382c27a722ca42d6f4c"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/codegen/codegen_docbook.py",
+      "bytes": 18862,
+      "path": "share/glib-2.0/codegen/codegen_docbook.py",
+      "sha256": "90474d4c922d1ad663cd908eaf6787a9cb05f8e70a615fc29583b2b8a93e4ee0"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/codegen/codegen_main.py",
+      "bytes": 18550,
+      "path": "share/glib-2.0/codegen/codegen_main.py",
+      "sha256": "ac2b07f6fde8a6e409cfac4cb005f1fe601ec243332825a3d72b55014f7798ac"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/codegen/codegen_md.py",
+      "bytes": 9807,
+      "path": "share/glib-2.0/codegen/codegen_md.py",
+      "sha256": "e8b5f67868f6422bdfb72ff9fbd3f87fa5fb66bb5c85281fe125ffa6974243a5"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/codegen/codegen_rst.py",
+      "bytes": 10905,
+      "path": "share/glib-2.0/codegen/codegen_rst.py",
+      "sha256": "e03785277b5ed0be2b687461151d9d7fc042e45e5ff50cddf5cff6003f15696c"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/codegen/config.py",
+      "bytes": 903,
+      "path": "share/glib-2.0/codegen/config.py",
+      "sha256": "49ea3126c15e425caa027dae4a9be8deb41a5a070dcf1cab6cb9ec49af10a542"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/codegen/dbustypes.py",
+      "bytes": 28935,
+      "path": "share/glib-2.0/codegen/dbustypes.py",
+      "sha256": "7e772c7b5f03ef4d999d41623517110b869c9da0e07b22d204b534ac6008a7d4"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/codegen/parser.py",
+      "bytes": 12946,
+      "path": "share/glib-2.0/codegen/parser.py",
+      "sha256": "7e7d66969012cd9ee8bd861a70a8b4c198c8153d25e2b3dfd6c28b29d04ed937"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/codegen/utils.py",
+      "bytes": 4915,
+      "path": "share/glib-2.0/codegen/utils.py",
+      "sha256": "2289b840d82b18e8dfd9623ceff731f20389af2fb85e5c14514c73596c8ab814"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/dtds/gresource.dtd",
+      "bytes": 480,
+      "path": "share/glib-2.0/dtds/gresource.dtd",
+      "sha256": "e1af831202208f57db6d4ded1ae65e9fc9586b20675db80969e57fd2a5206d70"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/gdb/glib_gdb.py",
+      "bytes": 8657,
+      "path": "share/glib-2.0/gdb/glib_gdb.py",
+      "sha256": "9fef0682237f5bfe77d3ecb36e62b6234a29ade54fb05b32b1b069fac1926026"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/gdb/gobject_gdb.py",
+      "bytes": 10292,
+      "path": "share/glib-2.0/gdb/gobject_gdb.py",
+      "sha256": "86768cf4105108c30d88443de8dfb2249fd9638c0955218a675413f9eb138043"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/gettext/po/Makefile.in.in",
+      "bytes": 7964,
+      "path": "share/glib-2.0/gettext/po/Makefile.in.in",
+      "sha256": "c75706eb9fa20a8c62ecff68bc169e115e992ba33654be582934e14df48a25cc"
+    },
+    {
+      "archivePath": "mingw64/share/glib-2.0/schemas/gschema.dtd",
+      "bytes": 2917,
+      "path": "share/glib-2.0/schemas/gschema.dtd",
+      "sha256": "44a12f339042a3f5568a9cc86bb617fabaf4a25836b8c9510aa9de22431930c6"
+    },
+    {
+      "archivePath": "mingw64/share/locale/af/LC_MESSAGES/glib20.mo",
+      "bytes": 9368,
+      "path": "share/locale/af/LC_MESSAGES/glib20.mo",
+      "sha256": "0f7273b298bed1875b571f36be52802fca6a7aac10fd5ad86c87ccdd7740ff9e"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ar/LC_MESSAGES/glib20.mo",
+      "bytes": 48379,
+      "path": "share/locale/ar/LC_MESSAGES/glib20.mo",
+      "sha256": "3c45065c3b2d8877de674eafcb378e26b376706568654fa5ed6748c2de180b64"
+    },
+    {
+      "archivePath": "mingw64/share/locale/bn/LC_MESSAGES/glib20.mo",
+      "bytes": 72564,
+      "path": "share/locale/bn/LC_MESSAGES/glib20.mo",
+      "sha256": "231f29eb92d40c768a74f97a6802cebb2c52c30277446ba5d287d3822950fd80"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ca/LC_MESSAGES/glib20.mo",
+      "bytes": 149318,
+      "path": "share/locale/ca/LC_MESSAGES/glib20.mo",
+      "sha256": "46415cc00bbda5eeadbc1ef4c38d18d66141b4e20923558f25df72fb9828ee0f"
+    },
+    {
+      "archivePath": "mingw64/share/locale/cs/LC_MESSAGES/glib20.mo",
+      "bytes": 143137,
+      "path": "share/locale/cs/LC_MESSAGES/glib20.mo",
+      "sha256": "a786ba9462f831e35581b7bcc0ef335dacd34f53c575c7809aff6391e0e88488"
+    },
+    {
+      "archivePath": "mingw64/share/locale/da/LC_MESSAGES/glib20.mo",
+      "bytes": 139396,
+      "path": "share/locale/da/LC_MESSAGES/glib20.mo",
+      "sha256": "d699b80b9cbf48375f30d52225a2d6d483db0e12cf8b8a03fd4e2993b65798a2"
+    },
+    {
+      "archivePath": "mingw64/share/locale/de/LC_MESSAGES/glib20.mo",
+      "bytes": 145091,
+      "path": "share/locale/de/LC_MESSAGES/glib20.mo",
+      "sha256": "b3e73f47634a5b70a846ab8f663b604af124c6ef0fc1e5b95323f2047022a1cd"
+    },
+    {
+      "archivePath": "mingw64/share/locale/el/LC_MESSAGES/glib20.mo",
+      "bytes": 114228,
+      "path": "share/locale/el/LC_MESSAGES/glib20.mo",
+      "sha256": "50a50c477f9efe19ca752948b9b655f3a2b064ce0bfeb36db3a0e843ae11b639"
+    },
+    {
+      "archivePath": "mingw64/share/locale/en_GB/LC_MESSAGES/glib20.mo",
+      "bytes": 133813,
+      "path": "share/locale/en_GB/LC_MESSAGES/glib20.mo",
+      "sha256": "1892788864a3c1351f38192348d3a426d87c7e1656729188dc501f54a2f9176f"
+    },
+    {
+      "archivePath": "mingw64/share/locale/eo/LC_MESSAGES/glib20.mo",
+      "bytes": 136515,
+      "path": "share/locale/eo/LC_MESSAGES/glib20.mo",
+      "sha256": "d1240e725080327616cc2571e90e2012f11e76b510c9e7c10e199ad4e85a644c"
+    },
+    {
+      "archivePath": "mingw64/share/locale/es/LC_MESSAGES/glib20.mo",
+      "bytes": 144281,
+      "path": "share/locale/es/LC_MESSAGES/glib20.mo",
+      "sha256": "d60fa4de3725ac08dba2486befb6cd26cdc7e9f71ea24ed74254b330093bda86"
+    },
+    {
+      "archivePath": "mingw64/share/locale/eu/LC_MESSAGES/glib20.mo",
+      "bytes": 144352,
+      "path": "share/locale/eu/LC_MESSAGES/glib20.mo",
+      "sha256": "ade60a71cb97237ed48f5c16c64f901da2f80f938c939e51fd552579b910e2be"
+    },
+    {
+      "archivePath": "mingw64/share/locale/fi/LC_MESSAGES/glib20.mo",
+      "bytes": 54693,
+      "path": "share/locale/fi/LC_MESSAGES/glib20.mo",
+      "sha256": "81336ad87bcda81a2f5392cbfe80e59724790b9b7272fb41edac77ee2a0c3706"
+    },
+    {
+      "archivePath": "mingw64/share/locale/fr/LC_MESSAGES/glib20.mo",
+      "bytes": 153917,
+      "path": "share/locale/fr/LC_MESSAGES/glib20.mo",
+      "sha256": "d661b692b078116afea9f953776c5d10f22f661d8655a688491cfddaae81ada5"
+    },
+    {
+      "archivePath": "mingw64/share/locale/gl/LC_MESSAGES/glib20.mo",
+      "bytes": 146364,
+      "path": "share/locale/gl/LC_MESSAGES/glib20.mo",
+      "sha256": "d3d44a56eba7a6566259870316a88199f1da256bcc6bd029e4ff5e65499078ce"
+    },
+    {
+      "archivePath": "mingw64/share/locale/he/LC_MESSAGES/glib20.mo",
+      "bytes": 138752,
+      "path": "share/locale/he/LC_MESSAGES/glib20.mo",
+      "sha256": "068e136dc2a12cee27a544b8b0a5b78a39f777107f5eec35a163dc0214d072e4"
+    },
+    {
+      "archivePath": "mingw64/share/locale/hi/LC_MESSAGES/glib20.mo",
+      "bytes": 209905,
+      "path": "share/locale/hi/LC_MESSAGES/glib20.mo",
+      "sha256": "8dc2677c8c567c1449cf8e507f2c646052ba842b7c922792d62e43c6217daa01"
+    },
+    {
+      "archivePath": "mingw64/share/locale/hu/LC_MESSAGES/glib20.mo",
+      "bytes": 147822,
+      "path": "share/locale/hu/LC_MESSAGES/glib20.mo",
+      "sha256": "b479cbf1e56a31b402510fb276d45103c92422a735f3bb964de4667dabddd67b"
+    },
+    {
+      "archivePath": "mingw64/share/locale/id/LC_MESSAGES/glib20.mo",
+      "bytes": 135882,
+      "path": "share/locale/id/LC_MESSAGES/glib20.mo",
+      "sha256": "4fa0c46bdf577d6ac22e31df631613e3581ffbf9a3db0edb50e36850389f3452"
+    },
+    {
+      "archivePath": "mingw64/share/locale/it/LC_MESSAGES/glib20.mo",
+      "bytes": 142375,
+      "path": "share/locale/it/LC_MESSAGES/glib20.mo",
+      "sha256": "7495849918f7f18a7dcce0fed94bda9354073c040e8cad6c06cb6c272bb40583"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ja/LC_MESSAGES/glib20.mo",
+      "bytes": 161612,
+      "path": "share/locale/ja/LC_MESSAGES/glib20.mo",
+      "sha256": "5cd224a6a2aacbaa2e2e40928f341cb217d4d441f10c57f1cd6c06f92a1ccdf4"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ka/LC_MESSAGES/glib20.mo",
+      "bytes": 225338,
+      "path": "share/locale/ka/LC_MESSAGES/glib20.mo",
+      "sha256": "2a47345c44a94a03e01bb235b81e54a26b68c527682ca493079854d81787c2e7"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ko/LC_MESSAGES/glib20.mo",
+      "bytes": 152120,
+      "path": "share/locale/ko/LC_MESSAGES/glib20.mo",
+      "sha256": "dc44876795022d3bde0e0b7a01645b90ff4649a865a1d310e660ed52a31ef0b3"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ml/LC_MESSAGES/glib20.mo",
+      "bytes": 98667,
+      "path": "share/locale/ml/LC_MESSAGES/glib20.mo",
+      "sha256": "a68aa650cc0a28e6802e9a560cf12cdded6dc2159bcf5e3af88040dc942f0bca"
+    },
+    {
+      "archivePath": "mingw64/share/locale/nl/LC_MESSAGES/glib20.mo",
+      "bytes": 89995,
+      "path": "share/locale/nl/LC_MESSAGES/glib20.mo",
+      "sha256": "93186543527048bfe6e660ffe8beb034b02d46550154e408e20170e9043c65a4"
+    },
+    {
+      "archivePath": "mingw64/share/locale/pl/LC_MESSAGES/glib20.mo",
+      "bytes": 148460,
+      "path": "share/locale/pl/LC_MESSAGES/glib20.mo",
+      "sha256": "8cbecb7cbbfbe51020d3b51ffc990dae8733f98d6f23298c1ecc98a3363ef278"
+    },
+    {
+      "archivePath": "mingw64/share/locale/pt/LC_MESSAGES/glib20.mo",
+      "bytes": 142868,
+      "path": "share/locale/pt/LC_MESSAGES/glib20.mo",
+      "sha256": "cc6387620c4c2dd4844db7be07f1b977357773e8b7ba142c84cc01543a8bf24d"
+    },
+    {
+      "archivePath": "mingw64/share/locale/pt_BR/LC_MESSAGES/glib20.mo",
+      "bytes": 143945,
+      "path": "share/locale/pt_BR/LC_MESSAGES/glib20.mo",
+      "sha256": "c4b6cca9e60abeb4b962bc72e648f451404e92caea27d864be8a5eb806b0886c"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ro/LC_MESSAGES/glib20.mo",
+      "bytes": 146647,
+      "path": "share/locale/ro/LC_MESSAGES/glib20.mo",
+      "sha256": "6c39cd527fe43acc8ef1bb9c89cfabe5567781aba9e39dfb57246e22612ce2ff"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ru/LC_MESSAGES/glib20.mo",
+      "bytes": 187696,
+      "path": "share/locale/ru/LC_MESSAGES/glib20.mo",
+      "sha256": "21d263f318315cbdc23e0295bf153ceaf0f83b9d53248a71b50a656f514cc9f2"
+    },
+    {
+      "archivePath": "mingw64/share/locale/si/LC_MESSAGES/glib20.mo",
+      "bytes": 11379,
+      "path": "share/locale/si/LC_MESSAGES/glib20.mo",
+      "sha256": "270e449c45b102b289228fe9bb37c0133c58ab4504b3d2cf5556a48b881f0ab1"
+    },
+    {
+      "archivePath": "mingw64/share/locale/sl/LC_MESSAGES/glib20.mo",
+      "bytes": 140740,
+      "path": "share/locale/sl/LC_MESSAGES/glib20.mo",
+      "sha256": "7a31ac9c7f09e262b060985c61b2c481f0960013330d098641b6486e63b97972"
+    },
+    {
+      "archivePath": "mingw64/share/locale/sv/LC_MESSAGES/glib20.mo",
+      "bytes": 139847,
+      "path": "share/locale/sv/LC_MESSAGES/glib20.mo",
+      "sha256": "88da919d388c775d4b9fa57146b58f7aecbfcade0a65cb2ce495ee75c1cfad48"
+    },
+    {
+      "archivePath": "mingw64/share/locale/ta/LC_MESSAGES/glib20.mo",
+      "bytes": 161163,
+      "path": "share/locale/ta/LC_MESSAGES/glib20.mo",
+      "sha256": "38ebf11f4fe243895659488eaccc1e6bd7f95dc5d58bcefb6f353a1aa442168c"
+    },
+    {
+      "archivePath": "mingw64/share/locale/th/LC_MESSAGES/glib20.mo",
+      "bytes": 174848,
+      "path": "share/locale/th/LC_MESSAGES/glib20.mo",
+      "sha256": "bbc51283591d5410987b93a882b5153b0eac544965bcabbfd657dfa767725b87"
+    },
+    {
+      "archivePath": "mingw64/share/locale/tr/LC_MESSAGES/glib20.mo",
+      "bytes": 141490,
+      "path": "share/locale/tr/LC_MESSAGES/glib20.mo",
+      "sha256": "42b06c98f744882c1c55a70a6b0265b0d82c2cb4d049c66309b01838e67230d8"
+    },
+    {
+      "archivePath": "mingw64/share/locale/uk/LC_MESSAGES/glib20.mo",
+      "bytes": 186132,
+      "path": "share/locale/uk/LC_MESSAGES/glib20.mo",
+      "sha256": "54f5f9db0374513534b95f1fc3c3e14bf407c55fd055a1634172239787fe9290"
+    },
+    {
+      "archivePath": "mingw64/share/locale/vi/LC_MESSAGES/glib20.mo",
+      "bytes": 109755,
+      "path": "share/locale/vi/LC_MESSAGES/glib20.mo",
+      "sha256": "0dac862e110ebb74f31a9b3674f7108da81349a7bc1ba9917b477eb6b7ed73cd"
+    },
+    {
+      "archivePath": "mingw64/share/locale/zh_HK/LC_MESSAGES/glib20.mo",
+      "bytes": 94873,
+      "path": "share/locale/zh_HK/LC_MESSAGES/glib20.mo",
+      "sha256": "85e128e819f82b6eadf1f0798b1603e653f97b1f2ff071df30fd70c458505b71"
+    },
+    {
+      "archivePath": "mingw64/share/locale/zh_TW/LC_MESSAGES/glib20.mo",
+      "bytes": 123273,
+      "path": "share/locale/zh_TW/LC_MESSAGES/glib20.mo",
+      "sha256": "d88503b1499413686f865337800ccce0a81acfaa2fabad075673eeaf96855ce4"
+    }
+  ],
+  "version": "2.90.0-1"
+}

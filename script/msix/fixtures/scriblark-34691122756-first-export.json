@@ -1,0 +1,82 @@
+{
+  "provenance": {
+    "run_id": "34691122756",
+    "source_commit": "a56efe8f3e43b162a3911f43de43db2d81c6aa9c",
+    "scope": "Original first export/input facts only; second export and installed qualification failed."
+  },
+  "originals": {
+    "source.xopp": {
+      "bytes": 380,
+      "sha256": "fbe56d2c377d2fc7c3b4283c52b556a52ffda2287cb2e9405b3435f038ecc991"
+    },
+    "background.pdf": {
+      "bytes": 651,
+      "sha256": "0bfa99f4997ecf58d2cf15781d1ea8fce8f8ce1281640305a801fb4550e7bb54"
+    }
+  },
+  "first": {
+    "output": "first.pdf",
+    "bytes": 24219,
+    "sha256": "e15a70ddf769d32938c67a95345843c177cbe697053a99cfa12005c904ecb6b7",
+    "pages": 2,
+    "text_markers_verified": true,
+    "template_dark_pixels": 12603,
+    "template_divider_pixels": 536,
+    "report_name": "first.pdf.db9817fe-e828-44d0-bde1-f9473b036c29.inkquay-report.json",
+    "report": {
+      "bytes": 826,
+      "sha256": "43e24d0b4700df365b5ccc305f435fe9d31941c6f2fd23c84cc8e5022eab6822"
+    },
+    "application_report": {
+      "version": 1,
+      "status": "passed",
+      "output": "D:\\a\\_temp\\.inkquay-install-334896578d414e6ea48fde586e796fa6\\consumer-files\\first.pdf",
+      "expectedPages": 2,
+      "actualPages": 2,
+      "outputBytes": 24219,
+      "error": "",
+      "warnings": [
+        "Checks cover PDF structure, page count, positive page sizes and unchanged protected files; visual fidelity and accessibility were not checked."
+      ],
+      "protectedFiles": [
+        {
+          "path": "D:/a/_temp/.inkquay-install-334896578d414e6ea48fde586e796fa6/consumer-files/background.pdf",
+          "sha256Before": "0bfa99f4997ecf58d2cf15781d1ea8fce8f8ce1281640305a801fb4550e7bb54"
+        },
+        {
+          "path": "D:\\a\\_temp\\.inkquay-install-334896578d414e6ea48fde586e796fa6\\consumer-files\\saved.xopp",
+          "sha256Before": "6a84b081744b3427306395e5f36bb3a8ee936e8d3ea16e9732b74c7f0f5660c1"
+        }
+      ],
+      "recoveryFiles": [],
+      "published": true
+    },
+    "saved_note": {
+      "bytes": 1343,
+      "sha256": "6a84b081744b3427306395e5f36bb3a8ee936e8d3ea16e9732b74c7f0f5660c1"
+    },
+    "tools": {
+      "pdfinfo": {
+        "path": "D:/a/_temp/msys64/mingw64/bin/pdfinfo.exe",
+        "bytes": 120973,
+        "sha256": "c2d6280a74f2445696834b333233f5ff0601a21fe9274ecec3b08eabde3525fe",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      "pdftotext": {
+        "path": "D:/a/_temp/msys64/mingw64/bin/pdftotext.exe",
+        "bytes": 107827,
+        "sha256": "9f12094fbab3c2eaa4e44669b24f1a1023b5d87def9ce08bfce6a3b9f35f6638",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      "pdftoppm": {
+        "path": "D:/a/_temp/msys64/mingw64/bin/pdftoppm.exe",
+        "bytes": 76314,
+        "sha256": "7089cece40519a26f3c435e24152871eaed6bff3ba73766ad9c768962d1bb54c",
+        "exit_code": 0,
+        "stderr": ""
+      }
+    }
+  }
+}

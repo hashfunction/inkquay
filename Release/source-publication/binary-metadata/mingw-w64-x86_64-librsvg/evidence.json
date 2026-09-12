@@ -1,0 +1,48 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-librsvg-2.63.0-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-librsvg-2.63.0-1-any.pkg.tar.zst",
+  "bytes": 21470477,
+  "licenses": [
+    "spdx:LGPL-2.1-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 11047,
+      "sha256": "132485862a443e8355e1746c8014f504507387e53d60e7e053064cffcf2b5af7"
+    },
+    ".PKGINFO": {
+      "bytes": 1025,
+      "sha256": "daac8cfff3a63423b982d77304adcd1137a5e1e87d5c44b9998394ea64301663"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/librsvg/COPYING.LIB",
+      "bytes": 26530,
+      "path": "binary-metadata/mingw-w64-x86_64-librsvg/original-notices/mingw64/share/licenses/librsvg/COPYING.LIB",
+      "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
+    }
+  ],
+  "package": "mingw-w64-x86_64-librsvg",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/34389532584/job/102594147019)",
+  "pkgbase": "mingw-w64-librsvg",
+  "pkgbuildSha256": "b5290d49771497efd8d64afa5db624c2d3f8ddc218e6fafde3be1c4ea6494455",
+  "sha256": "8beaa476be731f44d931f334e10be03863005d0825c96a1997f9e35cc6c478d7",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/librsvg-2-2.dll",
+      "bytes": 11828159,
+      "path": "bin/librsvg-2-2.dll",
+      "sha256": "1cda9fdb27a1422e6373f6934f97d3808a049ec4005e98d12c804608d524e964"
+    },
+    {
+      "archivePath": "mingw64/lib/gdk-pixbuf-2.0/2.10.0/loaders/pixbufloader_svg.dll",
+      "bytes": 1797552,
+      "path": "lib/gdk-pixbuf-2.0/2.10.0/loaders/pixbufloader_svg.dll",
+      "sha256": "25dd20e0e369f86d79a1493c1c12a6dc95237e2043489d41563525b84e601569"
+    }
+  ],
+  "version": "2.63.0-1"
+}

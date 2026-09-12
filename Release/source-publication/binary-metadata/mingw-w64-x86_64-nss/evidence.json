@@ -1,0 +1,54 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-nss-3.128-2-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-nss-3.128-2-any.pkg.tar.zst",
+  "bytes": 2382364,
+  "licenses": [
+    "spdx:MPL-2.0"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 5360,
+      "sha256": "0380f13feaeac8a3c4793b4e1c6d545ef451dcb9e60e42cf96438593c2da0f75"
+    },
+    ".PKGINFO": {
+      "bytes": 661,
+      "sha256": "e84a51f69516c5d6b47fb5c34e25fbfd60d851ca9eeba0d2f17bcf9d81c7d496"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/nss/COPYING",
+      "bytes": 18100,
+      "path": "binary-metadata/mingw-w64-x86_64-nss/original-notices/mingw64/share/licenses/nss/COPYING",
+      "sha256": "a20c1a32d1f8102432360b42e932869f7c11c7cdbacf9cac554c422132af47f4"
+    }
+  ],
+  "package": "mingw-w64-x86_64-nss",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/33656119631/job/100334982444)",
+  "pkgbase": "mingw-w64-nss",
+  "pkgbuildSha256": "d03dc629c2e0c81c20ac5a434fdab795f5dfd7072f37af96cdf2e626a6435861",
+  "sha256": "722f0e2510e7a6b152547ec07eb23d23ee9b44307a6b3e17941bce6deb4cf677",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/nss3.dll",
+      "bytes": 1406574,
+      "path": "bin/nss3.dll",
+      "sha256": "d7f5460621bde65eb09f9e46bed910139de4c829bbad7b5ce044e9b8bab7395d"
+    },
+    {
+      "archivePath": "mingw64/bin/nssutil3.dll",
+      "bytes": 169851,
+      "path": "bin/nssutil3.dll",
+      "sha256": "b2298180fcf4f69348edeb11927a60ea02e092a452981b62fd0e3bc09b04d1aa"
+    },
+    {
+      "archivePath": "mingw64/bin/smime3.dll",
+      "bytes": 182119,
+      "path": "bin/smime3.dll",
+      "sha256": "43e2e8b36199d4f14b808fffdf92b013b9eaf1f8a399900c1f31258c0259d61e"
+    }
+  ],
+  "version": "3.128-2"
+}

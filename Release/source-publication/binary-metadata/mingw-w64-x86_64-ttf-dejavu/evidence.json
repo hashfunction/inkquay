@@ -1,0 +1,108 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-ttf-dejavu-2.37-4-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-ttf-dejavu-2.37-4-any.pkg.tar.zst",
+  "bytes": 2726494,
+  "licenses": [
+    "custom"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 5854,
+      "sha256": "e642183bb6e8c14bb60df67436943d2ba811dabbd829519c5a14362278e2fbcc"
+    },
+    ".PKGINFO": {
+      "bytes": 415,
+      "sha256": "0324afb436f792e4f18a609b8377846a49fc346232e070bef26af6be2c19f77a"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/ttf-dejavu/LICENSE",
+      "bytes": 8816,
+      "path": "binary-metadata/mingw-w64-x86_64-ttf-dejavu/original-notices/mingw64/share/licenses/ttf-dejavu/LICENSE",
+      "sha256": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93"
+    }
+  ],
+  "package": "mingw-w64-x86_64-ttf-dejavu",
+  "packager": "CI (msys2/msys2-autobuild/a79a8c4c/6325606292)",
+  "pkgbase": "mingw-w64-ttf-dejavu",
+  "pkgbuildSha256": "545611decacde223728f12cabc2a03e43e854e07f7a15c2f1753edb7376f09d7",
+  "sha256": "e16c9114c6f9c1d8d7b108a906eb1c3a992f8e8969fc4a081ea13e63aa4c1483",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/20-unhint-small-dejavu-sans-mono.conf",
+      "bytes": 866,
+      "path": "etc/fonts/conf.avail/20-unhint-small-dejavu-sans-mono.conf",
+      "sha256": "3e90c9c36beef46f10d1529251f8683b9c4ac900695adbb4a23a4b6036f938a5"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/20-unhint-small-dejavu-sans.conf",
+      "bytes": 856,
+      "path": "etc/fonts/conf.avail/20-unhint-small-dejavu-sans.conf",
+      "sha256": "0d9c177b6a85daa9957ed6750d4eb26122604da18d340e7ba31e6f4d24f963ed"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/20-unhint-small-dejavu-serif.conf",
+      "bytes": 858,
+      "path": "etc/fonts/conf.avail/20-unhint-small-dejavu-serif.conf",
+      "sha256": "68777b1705ec7a05a86430def4be093668e84e305cc7e11291df52403a7318cc"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/57-dejavu-sans-mono.conf",
+      "bytes": 1201,
+      "path": "etc/fonts/conf.avail/57-dejavu-sans-mono.conf",
+      "sha256": "1f2ead86f8203d809abfc9d88d92b04316edd67b6291795ea74ea8a0c3c2e04d"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/57-dejavu-sans.conf",
+      "bytes": 1711,
+      "path": "etc/fonts/conf.avail/57-dejavu-sans.conf",
+      "sha256": "f6285e2d336f93086acfa2ac7895ef75ef5ff34f833ba5a63c09fb2841aedc27"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.avail/57-dejavu-serif.conf",
+      "bytes": 1357,
+      "path": "etc/fonts/conf.avail/57-dejavu-serif.conf",
+      "sha256": "7c596f7e202090ded38fded904c4a17d5a189b6c9cc914a2e88554116f6474ca"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/20-unhint-small-dejavu-sans-mono.conf",
+      "bytes": 866,
+      "path": "etc/fonts/conf.d/20-unhint-small-dejavu-sans-mono.conf",
+      "sha256": "3e90c9c36beef46f10d1529251f8683b9c4ac900695adbb4a23a4b6036f938a5"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/20-unhint-small-dejavu-sans.conf",
+      "bytes": 856,
+      "path": "etc/fonts/conf.d/20-unhint-small-dejavu-sans.conf",
+      "sha256": "0d9c177b6a85daa9957ed6750d4eb26122604da18d340e7ba31e6f4d24f963ed"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/20-unhint-small-dejavu-serif.conf",
+      "bytes": 858,
+      "path": "etc/fonts/conf.d/20-unhint-small-dejavu-serif.conf",
+      "sha256": "68777b1705ec7a05a86430def4be093668e84e305cc7e11291df52403a7318cc"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/57-dejavu-sans-mono.conf",
+      "bytes": 1201,
+      "path": "etc/fonts/conf.d/57-dejavu-sans-mono.conf",
+      "sha256": "1f2ead86f8203d809abfc9d88d92b04316edd67b6291795ea74ea8a0c3c2e04d"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/57-dejavu-sans.conf",
+      "bytes": 1711,
+      "path": "etc/fonts/conf.d/57-dejavu-sans.conf",
+      "sha256": "f6285e2d336f93086acfa2ac7895ef75ef5ff34f833ba5a63c09fb2841aedc27"
+    },
+    {
+      "archivePath": "mingw64/etc/fonts/conf.d/57-dejavu-serif.conf",
+      "bytes": 1357,
+      "path": "etc/fonts/conf.d/57-dejavu-serif.conf",
+      "sha256": "7c596f7e202090ded38fded904c4a17d5a189b6c9cc914a2e88554116f6474ca"
+    }
+  ],
+  "version": "2.37-4"
+}

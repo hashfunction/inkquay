@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libpsl-0.21.5-3-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libpsl-0.21.5-3-any.pkg.tar.zst",
+  "bytes": 96690,
+  "licenses": [
+    "spdx:MIT"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6197,
+      "sha256": "0b0fbe872b75dd16b98ad81e4e9919173eb6829cccad61a4445c52195d93d01d"
+    },
+    ".PKGINFO": {
+      "bytes": 720,
+      "sha256": "69d77870ca57915e0f1ae633671540e8c5cab6a098eb551a27fcaa6062dc54c4"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/libpsl/COPYING",
+      "bytes": 1060,
+      "path": "binary-metadata/mingw-w64-x86_64-libpsl/original-notices/mingw64/share/licenses/libpsl/COPYING",
+      "sha256": "322392e6001b2b3b0fca705dc9f11f26e12441188ecde50eb1d22909980b2925"
+    }
+  ],
+  "package": "mingw-w64-x86_64-libpsl",
+  "packager": "CI (msys2/msys2-autobuild/a6b3079a/12073274117)",
+  "pkgbase": "mingw-w64-libpsl",
+  "pkgbuildSha256": "84f8e19b62b3037d82f1f20bc041b9c1a83f8d82eeffe158bbf3d7f50df286c3",
+  "sha256": "2a86f7ce3cd3fabff7eb8e5c0d3eb1134808881a44c3838e1b518b75cb402e35",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libpsl-5.dll",
+      "bytes": 105304,
+      "path": "bin/libpsl-5.dll",
+      "sha256": "b31fc70eda598a39b65fe2736d815518db0652d641346f75eac40c2a0499b058"
+    }
+  ],
+  "version": "0.21.5-3"
+}

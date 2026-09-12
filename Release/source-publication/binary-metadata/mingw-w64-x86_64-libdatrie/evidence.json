@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libdatrie-0.2.14-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libdatrie-0.2.14-1-any.pkg.tar.zst",
+  "bytes": 81638,
+  "licenses": [
+    "LGPL"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6647,
+      "sha256": "4b659adac942e8c2aa9b70b1ced2ca561900f7338aaedbfca050c138e3ed12b7"
+    },
+    ".PKGINFO": {
+      "bytes": 622,
+      "sha256": "5136cccb83290c119b8e8983996a0685f6ebec542bf9cf93b4c514b03312c78b"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/libdatrie/COPYING",
+      "bytes": 26527,
+      "path": "binary-metadata/mingw-w64-x86_64-libdatrie/original-notices/mingw64/share/licenses/libdatrie/COPYING",
+      "sha256": "a9bdde5616ecdd1e980b44f360600ee8783b1f99b8cc83a2beb163a0a390e861"
+    }
+  ],
+  "package": "mingw-w64-x86_64-libdatrie",
+  "packager": "CI (msys2/msys2-autobuild/8cbb808c/19771093658)",
+  "pkgbase": "mingw-w64-libdatrie",
+  "pkgbuildSha256": "5b6a0eae66edab8c902ae4668b31859a00ac09d78ff7b9dfe6cb044ea4be5af6",
+  "sha256": "fbbf30e9a911c1139ba5c38c5ae008309dd912f6c6b1e05f4310ec698e1b1339",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libdatrie-1.dll",
+      "bytes": 35033,
+      "path": "bin/libdatrie-1.dll",
+      "sha256": "2f784872e6404e57847201fe1e7e591bd5b5be4a319ef38ebcb36014ac7f385d"
+    }
+  ],
+  "version": "0.2.14-1"
+}

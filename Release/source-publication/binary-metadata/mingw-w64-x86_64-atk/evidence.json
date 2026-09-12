@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-atk-2.60.6-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-atk-2.60.6-1-any.pkg.tar.zst",
+  "bytes": 421380,
+  "licenses": [
+    "spdx:LGPL-2.1-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6647,
+      "sha256": "4709b5585c11e252b75736bc4294a07405c0b6bf5abe98636044bf8e2353535d"
+    },
+    ".PKGINFO": {
+      "bytes": 799,
+      "sha256": "87d392a2c678055e80fc4889d4fe174d0d879334f3c38186f762a624f0a536ea"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/at-spi2-core/COPYING",
+      "bytes": 26530,
+      "path": "binary-metadata/mingw-w64-x86_64-atk/original-notices/mingw64/share/licenses/at-spi2-core/COPYING",
+      "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
+    }
+  ],
+  "package": "mingw-w64-x86_64-atk",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/30886209487/job/91917880664)",
+  "pkgbase": "mingw-w64-at-spi2-core",
+  "pkgbuildSha256": "24f027a4fa8eeb1d9961642a23eedc37c12370e95bf7fbb02c2ff006427628d1",
+  "sha256": "e526ba89d5f6793ee9a23f8960ce35affd1a5ff81b4f396e92889bfaa8a15169",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libatk-1.0-0.dll",
+      "bytes": 159478,
+      "path": "bin/libatk-1.0-0.dll",
+      "sha256": "e705edd64fc3ba7da51b942e0331d55ebaeebad467d782be6b218be349384ee2"
+    }
+  ],
+  "version": "2.60.6-1"
+}

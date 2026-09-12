@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-openjpeg2-2.5.4-2-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-openjpeg2-2.5.4-2-any.pkg.tar.zst",
+  "bytes": 454547,
+  "licenses": [
+    "spdx:BSD-2-Clause"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 7244,
+      "sha256": "8bd08ec23cdba378f20d0750ae95e92648c06bff2105f782aad8f921bbff95c9"
+    },
+    ".PKGINFO": {
+      "bytes": 623,
+      "sha256": "a124ef0f13a2448ea5041e9cfa25d410e6ca70c06b7346ea9ae35d09ca13d42b"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/openjpeg/LICENSE",
+      "bytes": 2112,
+      "path": "binary-metadata/mingw-w64-x86_64-openjpeg2/original-notices/mingw64/share/licenses/openjpeg/LICENSE",
+      "sha256": "a6af136f3e15038a666b61f376612a07d9a4e48cb7c01adbf3e33b3f14ab49b6"
+    }
+  ],
+  "package": "mingw-w64-x86_64-openjpeg2",
+  "packager": "CI (msys2/msys2-autobuild/ecd1d51f/18039013654)",
+  "pkgbase": "mingw-w64-openjpeg2",
+  "pkgbuildSha256": "8901865f116d6eaa71bb2ff14dcaaa9a301185fd5cf62408d73dcfd2901c8334",
+  "sha256": "32f8f5dc7df9f1f2d57157717136fbba431e15bc000420c953c00ffdf76ecde4",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libopenjp2-7.dll",
+      "bytes": 519082,
+      "path": "bin/libopenjp2-7.dll",
+      "sha256": "123587086cb1a25d2a338fb9b7c1d6bda10bf9062625b4f08c6a92b3d9cafe47"
+    }
+  ],
+  "version": "2.5.4-2"
+}

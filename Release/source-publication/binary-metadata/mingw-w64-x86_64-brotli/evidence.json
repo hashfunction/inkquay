@@ -1,0 +1,54 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-brotli-1.2.0-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-brotli-1.2.0-1-any.pkg.tar.zst",
+  "bytes": 455164,
+  "licenses": [
+    "spdx:MIT"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6798,
+      "sha256": "0e79b529733a6dd1e180c43f2acb0d7a81892564492d3c1de22ce04a1b4d230a"
+    },
+    ".PKGINFO": {
+      "bytes": 449,
+      "sha256": "90a3d61300e9e6c7457eac613d3fbed2a7fbad7d0d19960c626c5206ccec0043"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/brotli/LICENSE",
+      "bytes": 1084,
+      "path": "binary-metadata/mingw-w64-x86_64-brotli/original-notices/mingw64/share/licenses/brotli/LICENSE",
+      "sha256": "3d180008e36922a4e8daec11c34c7af264fed5962d07924aea928c38e8663c94"
+    }
+  ],
+  "package": "mingw-w64-x86_64-brotli",
+  "packager": "CI (msys2/msys2-autobuild/db1199d2/19124245426)",
+  "pkgbase": "mingw-w64-brotli",
+  "pkgbuildSha256": "894120dac11e7fffd72224148e22d424075fabf23a8cafbf4f2c5390c73755c9",
+  "sha256": "f5f2f7e723a08378241d15f0537386950c1a48e2d82bc47bedd632bd61852aba",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libbrotlicommon.dll",
+      "bytes": 143429,
+      "path": "bin/libbrotlicommon.dll",
+      "sha256": "ca7bc06ead80259971badf2cd0bfc688db9154dad65f139f49a38b4be9976f97"
+    },
+    {
+      "archivePath": "mingw64/bin/libbrotlidec.dll",
+      "bytes": 62461,
+      "path": "bin/libbrotlidec.dll",
+      "sha256": "a142dc6cfa77cb907028aa9426f486f3d8de37855e8db2ae2894147908121881"
+    },
+    {
+      "archivePath": "mingw64/bin/libbrotlienc.dll",
+      "bytes": 788364,
+      "path": "bin/libbrotlienc.dll",
+      "sha256": "50c3aca8abcf0d5576f0b62dbd608be285246f8fd1b48ef87d58fa6b8b744e5f"
+    }
+  ],
+  "version": "1.2.0-1"
+}

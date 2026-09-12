@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-zstd-1.5.7-2-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-zstd-1.5.7-2-any.pkg.tar.zst",
+  "bytes": 669879,
+  "licenses": [
+    "spdx:BSD-3-Clause OR GPL-2.0-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6714,
+      "sha256": "1abd12ff8df7b1d53dc651e7abc719b7479affb01cd2ba9e4cc5b6d5e0ff4e7e"
+    },
+    ".PKGINFO": {
+      "bytes": 548,
+      "sha256": "e64d3022df101f60218ed83e46367b39cf3900d6dc7cc7d723411d73a3f74ff0"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/zstd/LICENSE",
+      "bytes": 1549,
+      "path": "binary-metadata/mingw-w64-x86_64-zstd/original-notices/mingw64/share/licenses/zstd/LICENSE",
+      "sha256": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8"
+    }
+  ],
+  "package": "mingw-w64-x86_64-zstd",
+  "packager": "CI (msys2/msys2-autobuild/actions/runs/25228967898/job/73979493998)",
+  "pkgbase": "mingw-w64-zstd",
+  "pkgbuildSha256": "ef88e168f729b6e57bdccb8d566a1cbc1b0b1fd4ef86b26cc4c441236e496388",
+  "sha256": "1add6705b344664f6aca108c85f79ab5bdd9e1162662bb06a4cf40a34f6e0907",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libzstd.dll",
+      "bytes": 1218273,
+      "path": "bin/libzstd.dll",
+      "sha256": "b95c223a9548a9ecf51377c962e0bc8f0c51eb0c6f67a296dbc885996f0dd40d"
+    }
+  ],
+  "version": "1.5.7-2"
+}

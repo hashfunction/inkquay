@@ -1,0 +1,48 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-lcms2-2.19.1-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-lcms2-2.19.1-1-any.pkg.tar.zst",
+  "bytes": 404793,
+  "licenses": [
+    "spdx:MIT AND GPL-3.0-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6458,
+      "sha256": "ade85c2ffc7459fb130da7fe17275c61827597a8fec3bc90d2c96869470635fd"
+    },
+    ".PKGINFO": {
+      "bytes": 630,
+      "sha256": "72c638554b6009cfb7665f72bfe88a7713f766c2eab17216ca9e08831e41ff12"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/lcms2/LICENSE",
+      "bytes": 1080,
+      "path": "binary-metadata/mingw-w64-x86_64-lcms2/original-notices/mingw64/share/licenses/lcms2/LICENSE",
+      "sha256": "6dbd60437f8ef91d8de1f08ad75882547fd4931bfcc3566a0735f28db1484d31"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/lcms2/LICENSE-fast_float",
+      "bytes": 35146,
+      "path": "binary-metadata/mingw-w64-x86_64-lcms2/original-notices/mingw64/share/licenses/lcms2/LICENSE-fast_float",
+      "sha256": "c53a65c2fd561c87eaabf1072ef5dcab8653042bc15308465f52413585eb6271"
+    }
+  ],
+  "package": "mingw-w64-x86_64-lcms2",
+  "packager": "CI (msys2/msys2-autobuild/actions/runs/25445834131/job/74649571831)",
+  "pkgbase": "mingw-w64-lcms2",
+  "pkgbuildSha256": "6f39c90313ec3f739b7406d6c7e2eb802c8aa8142323278a36d41083e765350f",
+  "sha256": "f9858d910df27d3762590e5da75e2589f9f0216ebbf1b6d58bdddbab3d4f35ad",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/liblcms2-2.dll",
+      "bytes": 456345,
+      "path": "bin/liblcms2-2.dll",
+      "sha256": "dc241cbdf2d295846ec564c1eb3c01639d43c0d72415a8758e65d71df31cc0ba"
+    }
+  ],
+  "version": "2.19.1-1"
+}

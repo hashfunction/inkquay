@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-fribidi-1.0.16-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-fribidi-1.0.16-1-any.pkg.tar.zst",
+  "bytes": 84338,
+  "licenses": [
+    "spdx:LGPL-2.1-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6089,
+      "sha256": "7c35ec9db5512449518b71898387032409f6cc65bdf5d96962b84d7fa7c57122"
+    },
+    ".PKGINFO": {
+      "bytes": 538,
+      "sha256": "acd78220ad4128c6e84b1ae8ba7547e23b0d2356993d94f3e3d59e6d6c9d7ab8"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/fribidi/COPYING",
+      "bytes": 26440,
+      "path": "binary-metadata/mingw-w64-x86_64-fribidi/original-notices/mingw64/share/licenses/fribidi/COPYING",
+      "sha256": "32434afcc8666ba060e111d715bfdb6c2d5dd8a35fa4d3ab8ad67d8f850d2f2b"
+    }
+  ],
+  "package": "mingw-w64-x86_64-fribidi",
+  "packager": "CI (msys2/msys2-autobuild/cfdccd0a/11067093021)",
+  "pkgbase": "mingw-w64-fribidi",
+  "pkgbuildSha256": "8b0dfca7f26b9f1b7f32fef6ab348b7c7d07b2c568c1b9d75820346f026316b6",
+  "sha256": "82d4f9e431082d2ac2fa7b9eddd73aa0c073bf8ae66b7d137195797ec543dffa",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libfribidi-0.dll",
+      "bytes": 156403,
+      "path": "bin/libfribidi-0.dll",
+      "sha256": "84930fd86a3b46b62794a3bbaff21fbbaeaade5ff7cdc70be7f717ad29af87ed"
+    }
+  ],
+  "version": "1.0.16-1"
+}

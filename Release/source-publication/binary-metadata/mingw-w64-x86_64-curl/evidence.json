@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-curl-8.22.0-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-curl-8.22.0-1-any.pkg.tar.zst",
+  "bytes": 1770065,
+  "licenses": [
+    "spdx:MIT"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6641,
+      "sha256": "dee01201f1518b2033c61a9ec675678772a2a00205f125a58f7dcf538e6e4a42"
+    },
+    ".PKGINFO": {
+      "bytes": 1512,
+      "sha256": "4b356d90cf64a93bac57b99271547a60e8f6726fcfc78018ad5e517a53720867"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/curl/LICENSE",
+      "bytes": 1088,
+      "path": "binary-metadata/mingw-w64-x86_64-curl/original-notices/mingw64/share/licenses/curl/LICENSE",
+      "sha256": "82f2f4427d6545ee5aaac4f0b80428da6cc8ba41c2cf5da3a03680ec327b9681"
+    }
+  ],
+  "package": "mingw-w64-x86_64-curl",
+  "packager": "CI (https://github.com/msys2/msys2-autobuild/actions/runs/33660834535/job/100350682500)",
+  "pkgbase": "mingw-w64-curl",
+  "pkgbuildSha256": "5391f17e126f937985de781769bc06f4992e5bcb7498f1e0bf9294f74bc7d71b",
+  "sha256": "e8fbff7506b9d1ce2d1bbc646dce64005099ce3d2f894bb8e81047200f403277",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libcurl-4.dll",
+      "bytes": 1427585,
+      "path": "bin/libcurl-4.dll",
+      "sha256": "61fbeddfa74a7a0a68db0d9a494bbe11502759e57a6eb31256d1ad6566ce0194"
+    }
+  ],
+  "version": "8.22.0-1"
+}

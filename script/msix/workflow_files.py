@@ -126,26 +126,21 @@ def make_pdf(streams):
     )
 
 
-def prepare(root):
-    root = Path(root).absolute()
-    for parent in (root.parent, *root.parent.parents):
-        st = parent.lstat()
-        if not stat.S_ISDIR(st.st_mode) or getattr(st, "st_file_attributes", 0) & 0x400:
-            raise ValueError("Fixture parent is not a non-link directory")
-    root.mkdir()  # Existing path never conveys ownership or authorizes overwrite.
-    pdf = root / "background.pdf"
-    write_new(
-        pdf,
-        make_pdf(
-            [
-                "BT /F1 18 Tf 50 760 Td (Scriblark qualification source) Tj ET 1 0 0 RG 3 w 50 650 160 50 re S"
-            ]
-        ),
+def original_files(background_path):
+    """Deterministic owned inputs; also rederived by the independent exporter."""
+    doc = ET.Element(
+        "xournal", creator="Scriblark owned qualification fixture", fileversion="4"
     )
-    doc = ET.Element("xournal", creator="Scriblark owned qualification fixture", fileversion="4")
     ET.SubElement(doc, "title").text = "Synthetic owned Scriblark note"
     page = ET.SubElement(doc, "page", width="595.275591", height="841.889764")
-    ET.SubElement(page, "background", type="pdf", domain="absolute", filename=str(pdf), pageno="1")
+    ET.SubElement(
+        page,
+        "background",
+        type="pdf",
+        domain="absolute",
+        filename=background_path,
+        pageno="1",
+    )
     layer = ET.SubElement(page, "layer")
     ET.SubElement(
         layer, "text", font="Arial", size="18", x="50", y="150", color="#000000ff"
@@ -153,11 +148,30 @@ def prepare(root):
     ET.SubElement(layer, "stroke", tool="pen", color="#0066ffff", width="3").text = (
         "50 210 90 220 130 210"
     )
-    write_new(
-        root / "source.xopp",
-        gzip.compress(ET.tostring(doc, encoding="utf-8", xml_declaration=True), mtime=0),
-    )
-    originals = {name: fingerprint(root / name) for name in ("source.xopp", "background.pdf")}
+    return {
+        "background.pdf": make_pdf(
+            [
+                "BT /F1 18 Tf 50 760 Td (Scriblark qualification source) Tj ET 1 0 0 RG 3 w 50 650 160 50 re S"
+            ]
+        ),
+        "source.xopp": gzip.compress(
+            ET.tostring(doc, encoding="utf-8", xml_declaration=True), mtime=0
+        ),
+    }
+
+
+def prepare(root):
+    root = Path(root).absolute()
+    for parent in (root.parent, *root.parent.parents):
+        st = parent.lstat()
+        if not stat.S_ISDIR(st.st_mode) or getattr(st, "st_file_attributes", 0) & 0x400:
+            raise ValueError("Fixture parent is not a non-link directory")
+    root.mkdir()  # Existing path never conveys ownership or authorizes overwrite.
+    for name, data in original_files(str(root / "background.pdf")).items():
+        write_new(root / name, data)
+    originals = {
+        name: fingerprint(root / name) for name in ("source.xopp", "background.pdf")
+    }
     write_new(root / "originals.json", json.dumps(originals, indent=2).encode())
     return originals
 
@@ -332,6 +346,8 @@ def verify_export(root, name, protected, tools):
         **before,
         pages=2,
         text_markers_verified=True,
+        template_raster_width=width,
+        template_raster_height=height,
         template_dark_pixels=dark,
         template_divider_pixels=divider,
         report_name=reports[0].name,

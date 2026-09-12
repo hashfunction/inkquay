@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "product": "TintFable",
+  "original_windows_run": "34684998708",
+  "original_source_commit": "8556eb5e329d6fd857d13d1bfb561429f756a824",
+  "native_inventory_sha256": "5781b9740eb74415101693528fc092c7161bbd36f1460ee8e0f8b428ebe79803",
+  "binary_archive_hash_evidence_sha256": "e831e503039859ad70a5e92e19e904ff5d4f046e034b9d88ba6cdf3b7901b2bd",
+  "scope": "Exact two newer source inputs supplement the unchanged 63-archive original collection. Preferred-form inputs, declared checksums and copied original notices verified; no rebuild-parity claim.",
+  "executed_pkgbuild": false,
+  "imported_repository_configuration": false,
+  "imported_hooks": false,
+  "checked_out_source": false,
+  "supplements": [
+    {
+      "package": "mingw-w64-clang-x86_64-gtk4",
+      "version": "4.24.0-1",
+      "base": "mingw-w64-gtk4",
+      "package_archive": "mingw-w64-clang-x86_64-gtk4-4.24.0-1-any.pkg.tar.zst",
+      "package_sha256": "3ad7a1f648e5dbceac6cc63150d0e2bfcd0d21047b4fb9a242643c5856ad9b3b",
+      "filename": "mingw-w64-gtk4-4.24.0-1.src.tar.zst",
+      "url": "https://mirror.msys2.org/mingw/sources/mingw-w64-gtk4-4.24.0-1.src.tar.zst",
+      "bytes": 17262450,
+      "sha256": "9092701eae0abf0410e5709779613b3485a4849874294830d889ef86aa9268fb",
+      "declared_licenses": [
+        "spdx:LGPL-2.1-or-later"
+      ],
+      "original_notice": {
+        "bytes": 25383,
+        "sha256": "b7993225104d90ddd8024fd838faf300bea5e83d91203eab98e29512acebd69c"
+      },
+      "installed_notice": {
+        "sourcePath": "clang64/share/licenses/gtk4/COPYING",
+        "path": "licenses/native/mingw-w64-clang-x86_64-gtk4/clang64/share/licenses/gtk4/COPYING",
+        "size": 25383,
+        "sha256": "b7993225104d90ddd8024fd838faf300bea5e83d91203eab98e29512acebd69c"
+      },
+      "native_modules": [
+        {
+          "path": "bin/gtk4-query-settings.exe",
+          "bytes": 43008,
+          "sha256": "9fdc19afbe9606e9a3c8cc7ce84a22b4488e09aa0e46a2a2c412f871779a7180"
+        },
+        {
+          "path": "bin/gtk4-update-icon-cache.exe",
+          "bytes": 45568,
+          "sha256": "9b1c6774e90464824cbd27a68bc8ed851c6dda1054759fdeb389829051e1ec2b"
+        },
+        {
+          "path": "bin/libgtk-4-1.dll",
+          "bytes": 12960256,
+          "sha256": "654fda2f5440be82824adb489953d198eaa50a7155a701c0f382b9ee39fa2b72"
+        }
+      ],
+      "source_inputs": [
+        {
+          "declaration": "https://download.gnome.org/sources/gtk/4.24/gtk-4.24.0.tar.xz",
+          "bytes": 17652716,
+          "sha256": "28ba4ac1c04f86eac09b79a163cb163a4c2b54442d9f7eccc04679062a581044"
+        },
+        {
+          "declaration": "001-fix-font-rendering.patch",
+          "bytes": 597,
+          "sha256": "ebac78616a7668edbfdd77b9959ad63239aa59ed12b995a9663bf2df7158be26"
+        }
+      ],
+      "git_source": null,
+      "recipe_sha256": "bd670f54a65b447552645316796861cfaaf52b2d6111190d3e9563c5b0f80ecc",
+      "srcinfo_sha256": "167f7e9687a496fe7acef553e667504bca52d2ee9fb4125711fa6e1d197cf78d"
+    },
+    {
+      "package": "mingw-w64-clang-x86_64-libwinpthread",
+      "version": "14.0.0.r375.g9c1abbbf5-1",
+      "base": "mingw-w64-winpthreads",
+      "package_archive": "mingw-w64-clang-x86_64-libwinpthread-14.0.0.r375.g9c1abbbf5-1-any.pkg.tar.zst",
+      "package_sha256": "e5bff76975f2609fe1007e525625e9308609b0ffe1d506b0445fc8044c9bb218",
+      "filename": "mingw-w64-winpthreads-14.0.0.r375.g9c1abbbf5-1.src.tar.zst",
+      "url": "https://mirror.msys2.org/mingw/sources/mingw-w64-winpthreads-14.0.0.r375.g9c1abbbf5-1.src.tar.zst",
+      "bytes": 54173752,
+      "sha256": "7bf513784ae0bc4f1a413e1f787f7a3ba2bd7ec0503980ea4d17ddf0e4796c87",
+      "declared_licenses": [
+        "spdx:MIT AND BSD-3-Clause-Clear"
+      ],
+      "original_notice": {
+        "bytes": 2883,
+        "sha256": "63263614cdd29f2f93cba85e992f041b31f9fc7b4033692f31269489a8a1b177"
+      },
+      "installed_notice": {
+        "sourcePath": "clang64/share/licenses/libwinpthread/COPYING",
+        "path": "licenses/native/mingw-w64-clang-x86_64-libwinpthread/clang64/share/licenses/libwinpthread/COPYING",
+        "size": 2883,
+        "sha256": "63263614cdd29f2f93cba85e992f041b31f9fc7b4033692f31269489a8a1b177"
+      },
+      "native_modules": [
+        {
+          "path": "bin/libwinpthread-1.dll",
+          "bytes": 68608,
+          "sha256": "bb95eb1eca20a5f824c5a0dc744d06b2b813ddd7a0188de3a037b36cc8f5554d"
+        }
+      ],
+      "source_inputs": [
+        {
+          "declaration": "0001-Define-__-de-register_frame_info-in-fake-libgcc_s.patch",
+          "bytes": 1789,
+          "sha256": "2e779bcc60a1422b23e0cfdb5c0f6851f2382592bb4675d08a6bdef78d5e5c10"
+        }
+      ],
+      "git_source": {
+        "notice": {
+          "bytes": 2883,
+          "sha256": "63263614cdd29f2f93cba85e992f041b31f9fc7b4033692f31269489a8a1b177"
+        },
+        "packageBase": "mingw-w64-winpthreads",
+        "archive": "/private/tmp/tintfable-native-source-supplements/mingw-w64-winpthreads-14.0.0.r375.g9c1abbbf5-1.src.tar.zst",
+        "archiveSha256": "7bf513784ae0bc4f1a413e1f787f7a3ba2bd7ec0503980ea4d17ddf0e4796c87",
+        "sourceDeclaration": "mingw-w64::git+https://git.code.sf.net/p/mingw-w64/mingw-w64#commit=9c1abbbf55a3de2febee4d1f685b1bda20774c5e",
+        "requestedRef": "9c1abbbf55a3de2febee4d1f685b1bda20774c5e",
+        "resolvedCommit": "9c1abbbf55a3de2febee4d1f685b1bda20774c5e",
+        "declaredSha256": "eca113e8ecc9e907065b285036ebfcb09d97084f457098d198149cb43e393066",
+        "exportChecks": [
+          {
+            "bytes": 140011520,
+            "sha256": "eca113e8ecc9e907065b285036ebfcb09d97084f457098d198149cb43e393066"
+          },
+          {
+            "bytes": 140011520,
+            "sha256": "eca113e8ecc9e907065b285036ebfcb09d97084f457098d198149cb43e393066"
+          }
+        ],
+        "status": "requested_ref_and_deterministic_export_sha256_verified",
+        "materializedInputs": [
+          {
+            "path": "packed-refs",
+            "bytes": 7465,
+            "sha256": "d5760b133b79976361c4c8a597baf3a21ce4951e4286b5efcd541fe540079eae"
+          },
+          {
+            "path": "objects/pack/pack-5b521a74bd69ed218796ed850c9232ff80c8745c.idx",
+            "bytes": 2745828,
+            "sha256": "5bc26ef56d360b2601940f04e32b42591efb99277289b7333d11fd089ac5fbee"
+          },
+          {
+            "path": "objects/pack/pack-5b521a74bd69ed218796ed850c9232ff80c8745c.pack",
+            "bytes": 54161812,
+            "sha256": "dd10f35f840800772be3d5cbe1a799d21639cadea65cc34882b6080959fb5851"
+          }
+        ]
+      },
+      "recipe_sha256": "7e5cec4463bd044cddeeb584dc6aab3e91dee5afd088d382e90c6232d0dd4e17",
+      "srcinfo_sha256": "7c7488d882e286b56785565ba11d2982092bb62e96008e2ee535e94f0b1174c1"
+    }
+  ]
+}

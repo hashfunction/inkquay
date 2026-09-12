@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-zlib-1.3.2-2-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-zlib-1.3.2-2-any.pkg.tar.zst",
+  "bytes": 112476,
+  "licenses": [
+    "spdx:Zlib"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6028,
+      "sha256": "99413465765a90ed47a85e270f2d1cab936963decde935647bfca2c8ff5244d9"
+    },
+    ".PKGINFO": {
+      "bytes": 499,
+      "sha256": "9dc22d54bc2e29324c7925cdea7e627f896b55674f7b626f52e756aadfc100c3"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/zlib/LICENSE",
+      "bytes": 1002,
+      "path": "binary-metadata/mingw-w64-x86_64-zlib/original-notices/mingw64/share/licenses/zlib/LICENSE",
+      "sha256": "e32ff4e00d9d94930537635291da39e7e612703334bf6fde8c7f1686fe8a45a2"
+    }
+  ],
+  "package": "mingw-w64-x86_64-zlib",
+  "packager": "CI (msys2/msys2-autobuild/ad23bc5d/22710411548)",
+  "pkgbase": "mingw-w64-zlib",
+  "pkgbuildSha256": "8a4a54a964eab7efa313e2faa8267052bc237ef61f8adf82a55cc93f4028db8a",
+  "sha256": "9e75842a070ba648e986e12424e1c92c9d7d77200e85f6a34eeb600819f2e694",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/zlib1.dll",
+      "bytes": 128488,
+      "path": "bin/zlib1.dll",
+      "sha256": "93e9243a44c29200eeacaf9658efe2558581770e4b11ca4b500e18e424a6e3b5"
+    }
+  ],
+  "version": "1.3.2-2"
+}

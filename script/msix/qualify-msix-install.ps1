@@ -9,6 +9,7 @@ param(
     [Parameter()][string]$SignTool,
     [Parameter()][string]$Output,
     [Parameter()][switch]$CaptureCrashStack,
+    [Parameter()][ValidateSet('qualification','store')][string]$IdentityMode='qualification',
     [Parameter()][switch]$LibraryOnly
 )
 
@@ -330,7 +331,43 @@ function Write-NewUtf8Json([string]$Path, [object]$Value) {
     }
 }
 
-function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$RecordPath, [string]$SignToolPath, [string]$OutputPath, [switch]$CaptureCrashStack) {
+function Get-InkQuayHelperEvidence {
+    $result=[ordered]@{}
+    foreach($name in @('qualify-msix-install.ps1','qualify-workflow.ps1','WorkflowNative.cs','workflow_files.py')) {
+        $path=Join-Path $PSScriptRoot $name
+        Assert-NoReparsePath $path
+        $result[$name]=@{bytes=(Get-Item -LiteralPath $path).Length;sha256=(Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant()}
+    }
+    return $result
+}
+
+function Get-InkQuayIdentity([ValidateSet('qualification','store')][string]$Mode='qualification') {
+    $identity = [ordered]@{
+        packageName='Trieflow.InkQuay.Qualification'; publisher='CN=InkQuay-CI-Qualification'; version='1.0.1.0'
+        architecture='x64'; applicationId='InkQuay'; executable='bin/Scriblark.exe'
+        deviceFamily='Windows.Desktop'; minVersion='10.0.19041.0'; maxVersionTested='10.0.26100.0'; capability='runFullTrust'
+    }
+    if ($Mode -ceq 'store') {
+        $identity.packageName='1659hashfunction.InkQuay'
+        $identity.publisher='CN=B6A2631A-FD32-45CC-AE12-82466975F528'
+    }
+    return $identity
+}
+function Assert-InkQuayRecordIdentity($Record,[ValidateSet('qualification','store')][string]$Mode='qualification') {
+    $expected=Get-InkQuayIdentity $Mode
+    if ($Record.schemaVersion -cne 1 -or $Record.identityMode -cne $Mode -or
+        $Record.qualificationIdentityOnly -isnot [bool] -or $Record.qualificationIdentityOnly -ne ($Mode -ceq 'qualification') -or
+        $Record.storeIdentityUsed -isnot [bool] -or $Record.storeIdentityUsed -ne ($Mode -ceq 'store')) { throw 'Package identity mode/flags mismatch.' }
+    foreach($field in @('signed','publicRelease','licenseClearanceClaimed','installationQualificationPassed')) {
+        if($Record.$field -isnot [bool] -or $Record.$field -ne $false){throw "Unsigned unreleased package record required: $field"}
+    }
+    if (@($Record.identity.PSObject.Properties).Count -ne $expected.Count) { throw 'Unexpected identity fields.' }
+    foreach($field in $expected.Keys) {
+        if ($Record.identity.$field -isnot [string] -or $Record.identity.$field -cne $expected[$field]) { throw "Selected identity mismatch: $field" }
+    }
+}
+
+function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$RecordPath, [string]$SignToolPath, [string]$OutputPath, [switch]$CaptureCrashStack, [ValidateSet('qualification','store')][string]$IdentityMode='qualification') {
     $state = [ordered]@{
         package = $null; record = $null; output = $null; temporary = $null; signedCopy = $null
         publicCertificate = $null; certificate = $null; trustedCertificate = $null; trustAttempted = $false
@@ -345,11 +382,7 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         observerNonce = $null; observerTarget = $null; observerStopped = $false; observerEvidence = $null
         observerErrors = [Collections.Generic.List[string]]::new()
     }
-    $expectedIdentity = [ordered]@{
-        packageName='Trieflow.InkQuay.Qualification'; publisher='CN=InkQuay-CI-Qualification'; version='1.0.1.0'
-        architecture='x64'; applicationId='InkQuay'; executable='bin/Scriblark.exe'
-        deviceFamily='Windows.Desktop'; minVersion='10.0.19041.0'; maxVersionTested='10.0.26100.0'; capability='runFullTrust'
-    }
+    $expectedIdentity = Get-InkQuayIdentity $IdentityMode
 
     $operations = [ordered]@{}
     $operations.Preflight = {
@@ -368,13 +401,8 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         $state.record = Get-Content -LiteralPath $recordFile -Raw -Encoding utf8 | ConvertFrom-Json
         if ($state.record.sourceCommit -cne $env:GITHUB_SHA) { throw 'Package source differs from this qualification run.' }
         Invoke-CheckedNative $env:INKQUAY_QUALIFICATION_PYTHON @(
-            (Join-Path $PSScriptRoot 'verify_record.py'),'--record',$recordFile,'--package',$state.package,'--source-commit',$env:GITHUB_SHA)
-        if ($state.record.schemaVersion -ne 1 -or -not $state.record.qualificationIdentityOnly -or $state.record.signed -or $state.record.publicRelease -or $state.record.licenseClearanceClaimed -or $state.record.installationQualificationPassed) {
-            throw 'Package record is not an unsigned qualification-only record.'
-        }
-        foreach ($field in $expectedIdentity.Keys) {
-            if ([string]$state.record.identity.$field -cne [string]$expectedIdentity[$field]) { throw "Qualification identity mismatch: $field" }
-        }
+            (Join-Path $PSScriptRoot 'verify_record.py'),'--record',$recordFile,'--package',$state.package,'--source-commit',$env:GITHUB_SHA,'--identity-mode',$IdentityMode)
+        Assert-InkQuayRecordIdentity $state.record $IdentityMode
         $state.unsignedPackageSha256 = (Get-FileHash -LiteralPath $state.package -Algorithm SHA256).Hash.ToLowerInvariant()
         if ($state.unsignedPackageSha256 -ne ([string]$state.record.containerVerification.package.sha256).ToLowerInvariant()) { throw 'Unsigned package hash differs from verified package record.' }
         $sdkVersion = [regex]::Escape([string]$state.record.makeAppx.sdkVersion)
@@ -462,7 +490,7 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
     $operations.ActivateAndVerify = {
         Invoke-CheckedNative $env:INKQUAY_QUALIFICATION_PYTHON @(
             (Join-Path $PSScriptRoot 'verify_record.py'),'--record',$RecordPath,'--package',$state.package,
-            '--source-commit',$env:GITHUB_SHA,'--installed-root',$state.installed.InstallLocation)
+            '--source-commit',$env:GITHUB_SHA,'--identity-mode',$IdentityMode,'--installed-root',$state.installed.InstallLocation)
         Add-InkQuayActivationTypes
         $state.activatedAtUtc = [DateTime]::UtcNow
         $processId = [InkQuayQualification.ActivationBroker]::Activate($state.aumid)
@@ -635,13 +663,20 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
     } elseif ($result.installation_qualification_passed) {
         $evidenceErrors.Add('Successful core qualification did not retain the unsigned package identity.')
     }
+    $helperEvidence=$null
+    try { $helperEvidence=Get-InkQuayHelperEvidence }
+    catch { $evidenceErrors.Add('Qualification helper observation failed: ' + $_.Exception.Message) }
     $coreCompleted = $result.installation_qualification_passed -and $unsignedUnchanged -and $evidenceErrors.Count -eq 0
     $qualificationPassed = $coreCompleted -and -not $state.observerRequested
     $evidence = [ordered]@{
         schema_version = 1
         generated_at_utc = [DateTime]::UtcNow.ToString('o')
         source_commit = if ($state.record) { [string]$state.record.sourceCommit } else { $null }
-        qualification_identity_only = $true
+        identity_mode = $IdentityMode
+        workflow_run_id = $env:GITHUB_RUN_ID
+        workflow_run_attempt = $env:GITHUB_RUN_ATTEMPT
+        qualification_helpers = $helperEvidence
+        qualification_identity_only = ($IdentityMode -ceq 'qualification')
         identity = $expectedIdentity
         aumid = $state.aumid
         package_full_name = if ($state.installed) { [string]$state.installed.PackageFullName } else { $null }
@@ -677,7 +712,7 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         physical_tablet_tested = $false
         upgrade_tested = $false
         wack_tested = $false
-        store_identity_used = $false
+        store_identity_used = ($IdentityMode -ceq 'store')
         public_release = $false
         primary_error = $result.primary_error
         cleanup_errors = @($result.cleanup_errors)
@@ -697,7 +732,7 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
 
 if (-not $LibraryOnly) {
     try {
-        Invoke-InkQuayInstallQualification -PackagePath $Package -RecordPath $PackageRecord -SignToolPath $SignTool -OutputPath $Output -CaptureCrashStack:$CaptureCrashStack
+        Invoke-InkQuayInstallQualification -PackagePath $Package -RecordPath $PackageRecord -SignToolPath $SignTool -OutputPath $Output -CaptureCrashStack:$CaptureCrashStack -IdentityMode $IdentityMode
     } catch {
         Write-Error $_
         exit 1

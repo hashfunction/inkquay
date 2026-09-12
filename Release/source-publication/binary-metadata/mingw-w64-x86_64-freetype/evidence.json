@@ -1,0 +1,48 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-freetype-2.14.3-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-freetype-2.14.3-1-any.pkg.tar.zst",
+  "bytes": 630015,
+  "licenses": [
+    "spdx:GPL-2.0-or-later OR FTL"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6411,
+      "sha256": "02fbd6075a03a96e0e58c498b436384a256716bd3d6d741643fe0ae7d53febd0"
+    },
+    ".PKGINFO": {
+      "bytes": 706,
+      "sha256": "03b675986c1fe75ad848a893a183245a8e4427635f87b65c3b6927eca7f5d94a"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/freetype/FTL.TXT",
+      "bytes": 6743,
+      "path": "binary-metadata/mingw-w64-x86_64-freetype/original-notices/mingw64/share/licenses/freetype/FTL.TXT",
+      "sha256": "5a5ee54c5001bbad1cdc1a57cc3dd4c42199b2da09d39c7ee41fab002d02967f"
+    },
+    {
+      "archivePath": "mingw64/share/licenses/freetype/GPLv2.TXT",
+      "bytes": 17994,
+      "path": "binary-metadata/mingw-w64-x86_64-freetype/original-notices/mingw64/share/licenses/freetype/GPLv2.TXT",
+      "sha256": "c4120c6752c910c299e3bd9cb3a46ff262c268303ca2069b61f92f10a5656c18"
+    }
+  ],
+  "package": "mingw-w64-x86_64-freetype",
+  "packager": "CI (msys2/msys2-autobuild/b28ef76c/23594182417)",
+  "pkgbase": "mingw-w64-freetype",
+  "pkgbuildSha256": "6b8fb0122bf6adbb608240a000aea22b7fe2c3cf2eba533155b3a9864d1511fd",
+  "sha256": "b3e310f457c90348fd14b8c1085e9c036016d168812a657fec21f496f7e3de99",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libfreetype-6.dll",
+      "bytes": 790651,
+      "path": "bin/libfreetype-6.dll",
+      "sha256": "bbb3e6390ee229c867ef31f10e42a49a61a92e434a11d40c6139a2608ebc6194"
+    }
+  ],
+  "version": "2.14.3-1"
+}

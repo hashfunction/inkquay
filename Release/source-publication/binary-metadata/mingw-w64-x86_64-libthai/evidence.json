@@ -1,0 +1,42 @@
+{
+  "binaryArchive": "mingw-w64-x86_64-libthai-0.1.30-1-any.pkg.tar.zst",
+  "binaryHashMatchesNativeRun": true,
+  "binaryRetainedInDelivery": false,
+  "binaryUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libthai-0.1.30-1-any.pkg.tar.zst",
+  "bytes": 214891,
+  "licenses": [
+    "spdx:LGPL-2.1-or-later"
+  ],
+  "metadata": {
+    ".BUILDINFO": {
+      "bytes": 6644,
+      "sha256": "30ad69a76b70d69a9453d891bf19459e4396a6fc4083983c8736c35f2f3a95fd"
+    },
+    ".PKGINFO": {
+      "bytes": 605,
+      "sha256": "939c1943af92122b4e4ec58ab719cc9592160d075b06c20361e522c332b70d5d"
+    }
+  },
+  "originalNotices": [
+    {
+      "archivePath": "mingw64/share/licenses/libthai/COPYING",
+      "bytes": 26419,
+      "path": "binary-metadata/mingw-w64-x86_64-libthai/original-notices/mingw64/share/licenses/libthai/COPYING",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    }
+  ],
+  "package": "mingw-w64-x86_64-libthai",
+  "packager": "CI (msys2/msys2-autobuild/a72b8c90/20901862482)",
+  "pkgbase": "mingw-w64-libthai",
+  "pkgbuildSha256": "31627bf6c5f307ece18670b4557f17c2fbfd9225e5395a34ccf1acc96e083501",
+  "sha256": "e8cfad91934e24e9a88221b66f2d1c5a310c952ef86631107a632d3ff1738211",
+  "shippedFiles": [
+    {
+      "archivePath": "mingw64/bin/libthai-0.dll",
+      "bytes": 72294,
+      "path": "bin/libthai-0.dll",
+      "sha256": "5d741974fdec19e0f6cddbcdb539428af0c7392740a056634714c2884157fdb9"
+    }
+  ],
+  "version": "0.1.30-1"
+}
