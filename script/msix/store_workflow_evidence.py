@@ -82,7 +82,9 @@ def winpath(path):
         "Expected absolute native path",
     )
     require(".." not in PureWindowsPath(path).parts, "Noncanonical native path")
-    return str(PureWindowsPath(path)).casefold()
+    # CPython-MINGW uses '/' even for PureWindowsPath string rendering.
+    # Keep the evidence comparison representation independent of that runtime.
+    return PureWindowsPath(path).as_posix().replace("/", "\\").casefold()
 
 
 def inside(path, root):
@@ -306,9 +308,9 @@ def _validate_installation(folder, record, source, context, mode, tool_directory
     require(
         sign["sdk_version"] == "10.0.26100.0"
         and winpath(sign["path"])
-        == str(
+        == winpath(str(
             PureWindowsPath(record["makeAppx"]["path"]).with_name("signtool.exe")
-        ).casefold(),
+        )),
         "Signing tool SDK identity differs",
     )
     window = load(folder / "window-observation.json")

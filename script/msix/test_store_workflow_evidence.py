@@ -5,14 +5,26 @@ These are parser tests, never evidence of Windows execution.
 import copy
 import hashlib
 import json
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 import tempfile
 import struct
 import zlib
 import unittest
+from unittest.mock import patch
 import msix_qualification as msix
 import store_workflow_evidence as policy
 from source_publication import fingerprint
+
+
+class MinGWRenderedWindowsPath(PureWindowsPath):
+    """Replay CPython-MINGW 3.14.7's sys._use_alt_sep rendering on any host.
+
+    Parsing remains Windows parsing; only the documented fork's string
+    separator differs. This is a parser fixture, not native execution.
+    """
+
+    def __str__(self):
+        return super().__str__().replace("\\", "/")
 
 
 class WorkflowTests(unittest.TestCase):
@@ -373,6 +385,22 @@ class WorkflowTests(unittest.TestCase):
 
     def test_complete_independent_replay(self):
         self.assertEqual(self.check()["input_events"], 27)
+
+    def test_mingw_path_rendering_preserves_complete_receipt_and_refusals(self):
+        with patch.object(policy, "PureWindowsPath", MinGWRenderedWindowsPath):
+            self.assertEqual(
+                policy.winpath(r"C:\Program Files\WindowsApps\Package\bin\App.exe"),
+                r"c:\program files\windowsapps\package\bin\app.exe",
+            )
+            self.assertEqual(self.check()["input_events"], 27)
+            rows = json.loads((self.folder / "loaded-modules.json").read_text())
+            for origin in ("WindowsAppsBackup", "foreign"):
+                changed = copy.deepcopy(rows)
+                changed[0]["path"] = changed[0]["path"].replace("WindowsApps", origin)
+                with self.assertRaisesRegex(ValueError, "Package module path/identity"):
+                    policy.modules(changed, self.record, self.full)
+            with self.assertRaisesRegex(ValueError, "Noncanonical"):
+                policy.winpath(r"C:\owned\..\foreign\App.exe")
 
     def test_export_menu_inputs_are_exact_one_shot_pairs(self):
         self.assertEqual(
