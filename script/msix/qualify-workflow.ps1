@@ -49,7 +49,7 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
     $originalManifestHash=$null
     $result=[ordered]@{schema_version=1;source_commit=$env:GITHUB_SHA;process_id=$State.process.Id;
         package_full_name=$State.ownedPackageFullName;originals=$null;first=$null;reopened=$null;events=$events;
-        passed=$false;error=$null;diagnostic_errors=@();gtk_keyboard_workflow=$true;
+        passed=$false;error=$null;diagnostic_errors=@();gtk_keyboard_workflow=$true;diagnostic_observer=[bool]$State.observerRequested;
         active_operation=$null;failed_operation=$null;crash_diagnostics=$null}
     function Assert-Live {
         $State.process.Refresh()

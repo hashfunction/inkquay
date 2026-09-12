@@ -1,4 +1,6 @@
 # Copyright 2026 Trieflow LLC. MIT. Disposable package qualification only.
+[CmdletBinding()]
+param([switch]$CaptureCrashStack)
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version Latest
 if (-not $IsWindows -or $env:CI -ne 'true' -or $PSVersionTable.PSVersion.Major -lt 7) { throw 'Requires disposable Windows CI and PowerShell 7.' }
@@ -14,11 +16,18 @@ $env:LANG='C'; $env:LANGUAGE='C'
 $powerShell=(Get-Process -Id $PID).Path
 Invoke-Checked $python @('script/msix/test_msix_qualification.py','-v')
 Invoke-Checked $python @('script/msix/test_workflow_files.py','-v')
-foreach ($fixture in @('test_qualify_msix_install.ps1','test_msix_evidence.ps1','test_registration_ownership.ps1','test_process_observation.ps1','test_module_collection.ps1','test_window_evidence.ps1','test_defender_module.ps1','test_temporary_ownership.ps1','test_workflow_helpers.ps1','test_workflow_crash.ps1')) {
+Invoke-Checked $python @('script/msix/test_gdb_observer.py','-v')
+foreach ($fixture in @('test_qualify_msix_install.ps1','test_msix_evidence.ps1','test_registration_ownership.ps1','test_process_observation.ps1','test_module_collection.ps1','test_window_evidence.ps1','test_defender_module.ps1','test_temporary_ownership.ps1','test_workflow_helpers.ps1','test_workflow_crash.ps1','test_crash_observer.ps1')) {
     Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File',(Join-Path $PSScriptRoot $fixture))
 }
 $sourceCommit=(git rev-parse HEAD).Trim()
 if ($LASTEXITCODE -ne 0 -or $sourceCommit -cne $env:GITHUB_SHA) { throw 'Source differs from this qualification run.' }
+if ($CaptureCrashStack) {
+    # Failure is recorded and prohibits production attachment. It never replaces
+    # a later consumer failure, or permits debugger-only consumer acceptance.
+    & $python script/msix/test_gdb_observer_windows.py --output build-evidence/crash-observer-preflight.json
+    if ($LASTEXITCODE -ne 0) { Write-Host 'Diagnostic observer preflight failed; actual consumer workflow will retain that secondary failure.' }
+}
 $sdkVersion='10.0.26100.0'
 $sdkDirectory=Join-Path ${env:ProgramFiles(x86)} "Windows Kits/10/bin/$sdkVersion/x64"
 $packageOutput=Join-Path $env:RUNNER_TEMP ('inkquay-msix-'+[guid]::NewGuid().ToString('N'))
@@ -28,7 +37,9 @@ Invoke-Checked $python @('script/msix/msix_qualification.py','--release','build/
     '--makeappx',(Join-Path $sdkDirectory 'makeappx.exe'),'--sdk-version',$sdkVersion,'--output',$packageOutput)
 # Upload only the metadata copy. Unsigned/signed MSIX and certificates never enter artifact globs.
 [IO.File]::Copy((Join-Path $packageOutput 'package-record.json'),(Join-Path (Get-Location) 'build-evidence/msix-package-record.json'),$false)
-Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','script/msix/qualify-msix-install.ps1',
+$installArguments=@('-NoLogo','-NoProfile','-File','script/msix/qualify-msix-install.ps1',
     '-Package',(Join-Path $packageOutput 'InkQuay.Qualification_1.0.0.0_x64.msix'),
     '-PackageRecord',(Join-Path $packageOutput 'package-record.json'),
     '-SignTool',(Join-Path $sdkDirectory 'signtool.exe'),'-Output','build-evidence/msix-install')
+if ($CaptureCrashStack) { $installArguments+='-CaptureCrashStack' }
+Invoke-Checked $powerShell $installArguments

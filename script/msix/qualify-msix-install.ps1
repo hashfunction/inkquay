@@ -8,6 +8,7 @@ param(
     [Parameter()][string]$PackageRecord,
     [Parameter()][string]$SignTool,
     [Parameter()][string]$Output,
+    [Parameter()][switch]$CaptureCrashStack,
     [Parameter()][switch]$LibraryOnly
 )
 
@@ -329,7 +330,7 @@ function Write-NewUtf8Json([string]$Path, [object]$Value) {
     }
 }
 
-function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$RecordPath, [string]$SignToolPath, [string]$OutputPath) {
+function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$RecordPath, [string]$SignToolPath, [string]$OutputPath, [switch]$CaptureCrashStack) {
     $state = [ordered]@{
         package = $null; record = $null; output = $null; temporary = $null; signedCopy = $null
         publicCertificate = $null; certificate = $null; trustedCertificate = $null; trustAttempted = $false
@@ -340,6 +341,9 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         aumid = $null; processPackageFullName = $null; modules = @(); window = $null; workflow = $null
         executableSha256 = $null
         cleanClose = $false; uninstallVerified = $false
+        observerRequested = [bool]$CaptureCrashStack; observerProcess = $null; observerDebugger = $null; observerAttached = $false
+        observerNonce = $null; observerTarget = $null; observerStopped = $false; observerEvidence = $null
+        observerErrors = [Collections.Generic.List[string]]::new()
     }
     $expectedIdentity = [ordered]@{
         packageName='Trieflow.InkQuay.Qualification'; publisher='CN=InkQuay-CI-Qualification'; version='1.0.0.0'
@@ -523,8 +527,15 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         }
         & $collectModules 'loaded-modules.json'
         $state.window = Get-WindowQualification $state.process $state.output
+        . (Join-Path $PSScriptRoot 'crash_observer.ps1')
+        try { Start-InkCrashObserver $state (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path }
+        catch { Add-InkObserverError $state ('Unexpected observer start: '+$_.Exception.Message) }
         . (Join-Path $PSScriptRoot 'qualify-workflow.ps1')
-        $state.workflow = Invoke-InkQuayWorkflow $state (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+        try { $state.workflow = Invoke-InkQuayWorkflow $state (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path }
+        finally {
+            try { Stop-InkCrashObserver $state }
+            catch { Add-InkObserverError $state ('Unexpected observer stop: '+$_.Exception.Message) }
+        }
         if ($state.workflow.passed -ne $true) { throw 'Installed template/PDF consumer workflow did not pass.' }
         & $collectModules 'workflow-loaded-modules.json'
         $state.process.Refresh()
@@ -549,6 +560,11 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         # Retain and use the original attached Process/OS handle, never reacquire
         # a potentially recycled PID during cleanup.
         try {
+            if ($state.observerRequested -and -not $state.observerStopped) {
+                . (Join-Path $PSScriptRoot 'crash_observer.ps1')
+                try { Stop-InkCrashObserver $state }
+                catch { Add-InkObserverError $state ('Unexpected observer cleanup: '+$_.Exception.Message) }
+            }
             if ($state.processOwned -and $state.process -and $state.processHandle) {
                 if (-not $state.process.HasExited) { $state.process.Kill() }
                 $state.cleanupProcessExit = Get-InkQuayProcessExitEvidence $state.process 10000
@@ -619,7 +635,8 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
     } elseif ($result.installation_qualification_passed) {
         $evidenceErrors.Add('Successful core qualification did not retain the unsigned package identity.')
     }
-    $qualificationPassed = $result.installation_qualification_passed -and $unsignedUnchanged -and $evidenceErrors.Count -eq 0
+    $coreCompleted = $result.installation_qualification_passed -and $unsignedUnchanged -and $evidenceErrors.Count -eq 0
+    $qualificationPassed = $coreCompleted -and -not $state.observerRequested
     $evidence = [ordered]@{
         schema_version = 1
         generated_at_utc = [DateTime]::UtcNow.ToString('o')
@@ -648,6 +665,11 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         clean_close_verified = $state.cleanClose
         uninstall_verified = $state.uninstallVerified
         installation_qualification_passed = $qualificationPassed
+        diagnostic_observer_requested = $state.observerRequested
+        diagnostic_observer_attached = $state.observerAttached
+        diagnostic_run_completed = ($state.observerRequested -and $coreCompleted)
+        diagnostic_observer = $state.observerEvidence
+        observer_diagnostic_errors = @($state.observerErrors)
         workflow = $state.workflow
         workflow_acceptance = ($qualificationPassed -and $null -ne $state.workflow -and $state.workflow.passed -eq $true)
         template_pdf_workflow_tested = ($qualificationPassed -and $null -ne $state.workflow -and $state.workflow.passed -eq $true)
@@ -666,15 +688,16 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
     } catch {
         throw "Could not preserve qualification JSON: $($_.Exception.Message). Primary: $($result.primary_error); cleanup: $($result.cleanup_errors -join '; '); evidence: $($evidenceErrors -join '; ')"
     }
-    if (-not $qualificationPassed) {
+    if (-not $coreCompleted) {
         throw "InkQuay installation qualification failed. Primary: $($result.primary_error); cleanup: $($result.cleanup_errors -join '; '); evidence: $($evidenceErrors -join '; ')"
     }
-    Write-Output 'PASS: broker-activated exact package, verified owned modules/window/close, uninstalled, and cleaned certificate state.'
+    if ($state.observerRequested) { Write-Output 'DIAGNOSTIC ONLY: observer run completed; consumer acceptance remains false and requires an uninstrumented run.' }
+    else { Write-Output 'PASS: broker-activated exact package, verified owned modules/window/close, uninstalled, and cleaned certificate state.' }
 }
 
 if (-not $LibraryOnly) {
     try {
-        Invoke-InkQuayInstallQualification -PackagePath $Package -RecordPath $PackageRecord -SignToolPath $SignTool -OutputPath $Output
+        Invoke-InkQuayInstallQualification -PackagePath $Package -RecordPath $PackageRecord -SignToolPath $SignTool -OutputPath $Output -CaptureCrashStack:$CaptureCrashStack
     } catch {
         Write-Error $_
         exit 1

@@ -1,6 +1,12 @@
 name: InkQuay Windows qualification
 on:
   workflow_dispatch:
+    inputs:
+      capture_crash_stack:
+        description: 'Diagnostic observer only; cannot confer consumer acceptance'
+        type: boolean
+        required: false
+        default: false
   push:
     branches: [codex/inkquay]
 permissions:
@@ -62,7 +68,9 @@ jobs:
         run: ./script/test-packaged-startup.ps1
       - name: Qualify temporary MSIX installation and owned cleanup
         shell: pwsh
-        run: ./script/msix/qualify-msix.ps1
+        env:
+          INKQUAY_CAPTURE_CRASH_STACK: ${{ inputs.capture_crash_stack == true && 'true' || 'false' }}
+        run: ./script/msix/qualify-msix.ps1 -CaptureCrashStack:($env:INKQUAY_CAPTURE_CRASH_STACK -ceq 'true')
       - name: Preserve metadata only
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
