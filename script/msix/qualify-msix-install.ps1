@@ -322,7 +322,7 @@ function Get-WindowQualification([Diagnostics.Process]$Process, [string]$OutputD
 }
 
 function Write-NewUtf8Json([string]$Path, [object]$Value) {
-    $bytes = [Text.UTF8Encoding]::new($false).GetBytes(($Value | ConvertTo-Json -Depth 20) + [Environment]::NewLine)
+    $bytes = [Text.UTF8Encoding]::new($false).GetBytes((ConvertTo-Json -InputObject $Value -Depth 20) + [Environment]::NewLine)
     $stream = [IO.FileStream]::new($Path, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::None)
     try {
         $stream.Write($bytes, 0, $bytes.Length)

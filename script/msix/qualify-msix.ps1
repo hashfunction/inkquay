@@ -30,7 +30,7 @@ Invoke-Checked $python @('script/msix/test_gdb_observer.py','-v')
 Invoke-Checked $python @('script/msix/test_observer_gdb_build.py','-v')
 Invoke-Checked $python @('script/msix/test_gdb_preflight_reporting.py','-v')
 foreach($fixture in @('test_store_identity.py','test_source_publication.py','test_store_workflow_evidence.py','test_store_export.py')) { Invoke-Checked $python @((Join-Path $PSScriptRoot $fixture),'-v') }
-foreach ($fixture in @('test_qualify_msix_install.ps1','test_msix_evidence.ps1','test_registration_ownership.ps1','test_process_observation.ps1','test_module_collection.ps1','test_window_evidence.ps1','test_defender_module.ps1','test_temporary_ownership.ps1','test_workflow_helpers.ps1','test_export_menu_observation.ps1','test_workflow_crash.ps1','test_crash_observer.ps1','test_store_identity.ps1','test_store_orchestration.ps1','test_input_diagnostics.ps1')) {
+foreach ($fixture in @('test_qualify_msix_install.ps1','test_msix_evidence.ps1','test_registration_ownership.ps1','test_process_observation.ps1','test_module_collection.ps1','test_window_evidence.ps1','test_json_writer.ps1','test_defender_module.ps1','test_temporary_ownership.ps1','test_workflow_helpers.ps1','test_export_menu_observation.ps1','test_workflow_crash.ps1','test_crash_observer.ps1','test_store_identity.ps1','test_store_orchestration.ps1','test_input_diagnostics.ps1')) {
     Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File',(Join-Path $PSScriptRoot $fixture))
 }
 Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File',(Join-Path $PSScriptRoot 'test_pdf_shortcut.ps1'))
