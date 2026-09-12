@@ -124,7 +124,7 @@ void xoj::SaveExportDialog::confirmDestination(ExportDestination destination) {
     const auto utf8 = destination.path.u8string();
     const auto message = std::string(utf8.begin(), utf8.end()) + "\n" +
                          _("The existing file will be retained in a recovery folder. If it changes before export, "
-                           "InkQuay will stop and preserve the files.");
+                           "Scriblark will stop and preserve the files.");
     XojMsgBox::askQuestion(window.get(), _("Replace the selected file?"), message,
                            {{_("Cancel"), GTK_RESPONSE_CANCEL}, {_("Replace"), GTK_RESPONSE_OK}},
                            [state = inspection, destination = std::move(destination)](int response) mutable {

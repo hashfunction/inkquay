@@ -9,7 +9,7 @@ function Reject($Action,[string]$Pattern) {
     Check ($failure -match $Pattern) "Expected $Pattern, observed $failure"
 }
 $script:now=[DateTime]::UtcNow
-$script:identity=@{process_id=42;executable=[IO.Path]::GetFullPath('owned/inkquay.exe');package_full_name='owned-package';activation_utc=$script:now.AddMinutes(-1)}
+$script:identity=@{process_id=42;executable=[IO.Path]::GetFullPath('owned/Scriblark.exe');package_full_name='owned-package';activation_utc=$script:now.AddMinutes(-1)}
 function Event($Changes=@{}) {
     $fields=[ordered]@{AppPath=$script:identity.executable;ProcessId=('0x{0:x}' -f $script:identity.process_id);ModuleName='libgtk-3-0.dll';ModulePath='C:\owned\libgtk-3-0.dll';ExceptionCode='c0000005';FaultingOffset='0000000000012345';PackageFullName='owned-package'}
     foreach ($key in $Changes.Keys) { if ($fields.Contains($key)) { $fields[$key]=$Changes[$key] } }

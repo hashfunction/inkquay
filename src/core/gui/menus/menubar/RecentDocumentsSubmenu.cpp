@@ -179,7 +179,7 @@ void RecentDocumentsSubmenu::updateMenu() {
             g_menu_append_section(removeSubmenu,
                                   C_("In the submenu for removing recent documents, this will display on top of the "
                                      "list xournal++ files to separate them from PDF files",
-                                     "InkQuay Files"),
+                                     "Scriblark Files"),
                                   G_MENU_MODEL(removeXoppMenu.get()));
         }
 

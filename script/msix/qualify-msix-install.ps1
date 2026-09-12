@@ -1,4 +1,4 @@
-# Disposable Windows CI installation qualification for InkQuay.
+# Disposable Windows CI installation qualification for Scriblark.
 # Copyright 2026 Trieflow LLC. MIT licensed.
 # Installation-flow structure adapted from ReticleQuay's MIT helper; the full
 # retained notice is in RETICLEQUAY-MIT.txt.
@@ -207,15 +207,15 @@ namespace InkQuayQualification {
 }
 
 function Assert-InkQuayWindowEvidence($Snapshot) {
-    if ($Snapshot.title -cne 'Unsaved Document - InkQuay' -or -not $Snapshot.visible -or $Snapshot.process_id -le 0 -or
+    if ($Snapshot.title -cne 'Unsaved Document - Scriblark' -or -not $Snapshot.visible -or $Snapshot.process_id -le 0 -or
         $Snapshot.width -lt 400 -or $Snapshot.height -lt 300 -or -not $Snapshot.screenshot_captured -or
         $Snapshot.screenshot_sha256 -cnotmatch '^[0-9a-f]{64}$' -or $Snapshot.sampled_colors -lt 16) {
-        throw 'Missing exact rendered InkQuay window/screenshot evidence.'
+        throw 'Missing exact rendered Scriblark window/screenshot evidence.'
     }
     # GTK may expose only its genuine root window. Record that limitation;
     # never claim a template/PDF interaction from a title or screenshot alone.
     $roots = @($Snapshot.controls | Where-Object {
-        $_.name -ceq 'Unsaved Document - InkQuay' -and $_.control_type -ceq 'ControlType.Window' -and
+        $_.name -ceq 'Unsaved Document - Scriblark' -and $_.control_type -ceq 'ControlType.Window' -and
         -not $_.offscreen -and $_.process_id -eq $Snapshot.process_id
     })
     if ($roots.Count -ne 1) { throw 'Expected one successfully observed owned GTK root window.' }
@@ -228,7 +228,7 @@ function Get-WindowQualification([Diagnostics.Process]$Process, [string]$OutputD
     $root = [Windows.Automation.AutomationElement]::FromHandle($Process.MainWindowHandle)
     if (-not $root) { throw 'UI Automation could not bind the activated main window.' }
     $rootBounds = $root.Current.BoundingRectangle
-    if ($root.Current.Name -cne 'Unsaved Document - InkQuay' -or $root.Current.ProcessId -ne $Process.Id) { throw 'UIA root is not the exact owned InkQuay window.' }
+    if ($root.Current.Name -cne 'Unsaved Document - Scriblark' -or $root.Current.ProcessId -ne $Process.Id) { throw 'UIA root is not the exact owned Scriblark window.' }
     if ($root.Current.IsOffscreen -or $rootBounds.Width -le 0 -or $rootBounds.Height -le 0) { throw 'Activated main window is not visibly rendered.' }
     $topLevelWindows = [Collections.Generic.List[object]]::new()
     $processCondition = [Windows.Automation.PropertyCondition]::new([Windows.Automation.AutomationElement]::ProcessIdProperty, $Process.Id)
@@ -346,8 +346,8 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         observerErrors = [Collections.Generic.List[string]]::new()
     }
     $expectedIdentity = [ordered]@{
-        packageName='Trieflow.InkQuay.Qualification'; publisher='CN=InkQuay-CI-Qualification'; version='1.0.0.0'
-        architecture='x64'; applicationId='InkQuay'; executable='bin/inkquay.exe'
+        packageName='Trieflow.InkQuay.Qualification'; publisher='CN=InkQuay-CI-Qualification'; version='1.0.1.0'
+        architecture='x64'; applicationId='InkQuay'; executable='bin/Scriblark.exe'
         deviceFamily='Windows.Desktop'; minVersion='10.0.19041.0'; maxVersionTested='10.0.26100.0'; capability='runFullTrust'
     }
 
@@ -390,7 +390,7 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         }
         $existing = @(Get-AppxPackage -Name $expectedIdentity.packageName -ErrorAction Stop)
         $state.preflightPackageFullNames = @($existing | ForEach-Object { [string]$_.PackageFullName })
-        if ($existing.Count -gt 0) { throw 'A matching InkQuay qualification package is already installed; refusing to replace or remove it.' }
+        if ($existing.Count -gt 0) { throw 'A matching Scriblark qualification package is already installed; refusing to replace or remove it.' }
     }.GetNewClosure()
 
     $operations.PrepareSignedCopy = {
@@ -398,12 +398,12 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         $temporaryCandidate = Join-Path $runnerTemp ('.inkquay-install-' + [guid]::NewGuid().ToString('N'))
         New-Item -ItemType Directory -Path $temporaryCandidate -ErrorAction Stop | Out-Null
         $state.temporary = $temporaryCandidate
-        $state.signedCopy = Join-Path $state.temporary 'InkQuay.Qualification.signed.msix'
+        $state.signedCopy = Join-Path $state.temporary 'Scriblark.Qualification.signed.msix'
         [IO.File]::Copy($state.package, $state.signedCopy, $false)
-        $state.publicCertificate = Join-Path $state.temporary 'InkQuay.Qualification.public.cer'
+        $state.publicCertificate = Join-Path $state.temporary 'Scriblark.Qualification.public.cer'
         $state.certificate = New-SelfSignedCertificate -Type Custom -KeyUsage DigitalSignature -KeyExportPolicy NonExportable -KeySpec Signature `
             -CertStoreLocation 'Cert:\CurrentUser\My' -TextExtension @('2.5.29.37={text}1.3.6.1.5.5.7.3.3','2.5.29.19={text}') `
-            -Subject $expectedIdentity.publisher -FriendlyName 'InkQuay ephemeral CI qualification' -NotAfter (Get-Date).AddHours(12)
+            -Subject $expectedIdentity.publisher -FriendlyName 'Scriblark ephemeral CI qualification' -NotAfter (Get-Date).AddHours(12)
         Export-Certificate -Cert $state.certificate -FilePath $state.publicCertificate -Force | Out-Null
         $state.trustAttempted = $true
         $state.trustedCertificate = Import-Certificate -FilePath $state.publicCertificate -CertStoreLocation 'Cert:\LocalMachine\TrustedPeople'
@@ -454,7 +454,7 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
             $relative = $entry.Name
             $expected = Get-RecordPayloadEntry $state.record $relative
             $hash = Assert-FileMatchesRecord (Join-Path $state.installed.InstallLocation ($relative -replace '/', [IO.Path]::DirectorySeparatorChar)) $expected $relative
-            if ($relative -eq 'bin/inkquay.exe') { $state.executableSha256 = $hash }
+            if ($relative -eq 'bin/Scriblark.exe') { $state.executableSha256 = $hash }
 
         }
     }.GetNewClosure()
@@ -470,26 +470,26 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         $state.process = [Diagnostics.Process]::GetProcessById([int]$processId)
         $state.processHandle = $state.process.SafeHandle
         if ($state.processHandle.IsInvalid -or $state.processHandle.IsClosed) { throw 'Cannot retain the live broker-activated process handle.' }
-        $expectedExecutable = Get-CanonicalPath (Join-Path $state.installed.InstallLocation 'bin/inkquay.exe')
+        $expectedExecutable = Get-CanonicalPath (Join-Path $state.installed.InstallLocation 'bin/Scriblark.exe')
         if ((Get-CanonicalPath $state.process.MainModule.FileName) -ine $expectedExecutable) { throw 'Broker returned an executable outside the owned installed path.' }
         $state.processPackageFullName = [InkQuayQualification.NativePackageProbe]::GetFullName($state.process.Handle)
         if ($state.processPackageFullName -cne $state.ownedPackageFullName) { throw 'Broker process does not have the exact owned package identity.' }
-        Assert-FileMatchesRecord $expectedExecutable (Get-RecordPayloadEntry $state.record 'bin/inkquay.exe') 'Activated executable' | Out-Null
+        Assert-FileMatchesRecord $expectedExecutable (Get-RecordPayloadEntry $state.record 'bin/Scriblark.exe') 'Activated executable' | Out-Null
         $state.processOwned = $true
         $state.verifiedExecutablePath = $expectedExecutable
         $deadline = [DateTime]::UtcNow.AddSeconds(30)
         do {
             Start-Sleep -Milliseconds 250
             $state.process.Refresh()
-            if ($state.process.HasExited) { throw "Activated InkQuay exited during startup: $($state.process.ExitCode)" }
+            if ($state.process.HasExited) { throw "Activated Scriblark exited during startup: $($state.process.ExitCode)" }
         } until ($state.process.MainWindowHandle -ne 0 -or [DateTime]::UtcNow -ge $deadline)
-        if ($state.process.MainWindowHandle -eq 0) { throw 'Activated InkQuay did not create a main window.' }
-        if ($state.process.MainWindowTitle -cne 'Unsaved Document - InkQuay') { throw "Unexpected activated main-window title: $($state.process.MainWindowTitle)" }
+        if ($state.process.MainWindowHandle -eq 0) { throw 'Activated Scriblark did not create a main window.' }
+        if ($state.process.MainWindowTitle -cne 'Unsaved Document - Scriblark') { throw "Unexpected activated main-window title: $($state.process.MainWindowTitle)" }
         $state.processPackageFullName = [InkQuayQualification.NativePackageProbe]::GetFullName($state.process.Handle)
         if ($state.processPackageFullName -cne [string]$state.installed.PackageFullName) { throw 'Activated process does not own the exact installed package full name.' }
         Start-Sleep -Seconds 3
         $state.process.Refresh()
-        if ($state.process.HasExited -or $state.process.MainWindowHandle -eq 0 -or $state.process.MainWindowTitle -cne 'Unsaved Document - InkQuay') { throw 'Activated InkQuay did not survive the stable-window interval.' }
+        if ($state.process.HasExited -or $state.process.MainWindowHandle -eq 0 -or $state.process.MainWindowTitle -cne 'Unsaved Document - Scriblark') { throw 'Activated Scriblark did not survive the stable-window interval.' }
         # Keep this block in the activation operation's captured state scope.
         # GetNewClosure here creates another module and loses the inherited state.
         $collectModules = { param([string]$EvidenceName)
@@ -539,13 +539,13 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         if ($state.workflow.passed -ne $true) { throw 'Installed template/PDF consumer workflow did not pass.' }
         & $collectModules 'workflow-loaded-modules.json'
         $state.process.Refresh()
-        if ($state.process.HasExited -or $state.process.MainWindowHandle -eq 0) { throw 'Activated InkQuay did not survive the stable-window interval.' }
+        if ($state.process.HasExited -or $state.process.MainWindowHandle -eq 0) { throw 'Activated Scriblark did not survive the stable-window interval.' }
     }.GetNewClosure()
 
     $operations.CloseCleanly = {
-        if (-not $state.process.CloseMainWindow()) { throw 'Activated InkQuay refused a normal main-window close request.' }
+        if (-not $state.process.CloseMainWindow()) { throw 'Activated Scriblark refused a normal main-window close request.' }
         $state.processExit = Get-InkQuayProcessExitEvidence $state.process 15000
-        if (-not $state.processExit.normal_exit) { throw ('Activated InkQuay normal-close observation failed: ' + ($state.processExit | ConvertTo-Json -Compress)) }
+        if (-not $state.processExit.normal_exit) { throw ('Activated Scriblark normal-close observation failed: ' + ($state.processExit | ConvertTo-Json -Compress)) }
         $state.cleanClose = $true
     }.GetNewClosure()
 
@@ -689,7 +689,7 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         throw "Could not preserve qualification JSON: $($_.Exception.Message). Primary: $($result.primary_error); cleanup: $($result.cleanup_errors -join '; '); evidence: $($evidenceErrors -join '; ')"
     }
     if (-not $coreCompleted) {
-        throw "InkQuay installation qualification failed. Primary: $($result.primary_error); cleanup: $($result.cleanup_errors -join '; '); evidence: $($evidenceErrors -join '; ')"
+        throw "Scriblark installation qualification failed. Primary: $($result.primary_error); cleanup: $($result.cleanup_errors -join '; '); evidence: $($evidenceErrors -join '; ')"
     }
     if ($state.observerRequested) { Write-Output 'DIAGNOSTIC ONLY: observer run completed; consumer acceptance remains false and requires an uninstrumented run.' }
     else { Write-Output 'PASS: broker-activated exact package, verified owned modules/window/close, uninstalled, and cleaned certificate state.' }

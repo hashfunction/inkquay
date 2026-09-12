@@ -46,4 +46,4 @@ if (EXISTS "${PROJECT_SOURCE_DIR}/.git" AND PATH_GIT)
   endif ()
 endif ()
 
-set (PROJECT_CRASHREPORT "https://inkquay.trieflow.com/support")
+set (PROJECT_CRASHREPORT "https://scriblark.trieflow.com/support")

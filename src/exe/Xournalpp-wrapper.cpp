@@ -121,7 +121,7 @@ auto main(int argc, char* argv[]) -> int {
         std::vector<const char*> subargv;
         std::cout << Util::getExePath() << std::endl;
 
-        const std::u8string path = (Util::getExePath() / "inkquay").u8string();
+        const std::u8string path = (Util::getExePath() / "Scriblark").u8string();
         subargv.emplace_back(char_cast(path.c_str()));  // Data is owned by `path` - Do not delete it
         errorlog << "Executing \"" << char_cast(path);
 
@@ -187,8 +187,8 @@ auto main(int argc, char* argv[]) -> int {
         xoj::util::OwnedCString stderrBuffer;
 #endif
 
-        std::cout << "InkQuay started with PID: " << g_subprocess_get_identifier(p.get()) << std::endl;
-        errorlog << "InkQuay started with PID: " << g_subprocess_get_identifier(p.get()) << std::endl;
+        std::cout << "Scriblark started with PID: " << g_subprocess_get_identifier(p.get()) << std::endl;
+        errorlog << "Scriblark started with PID: " << g_subprocess_get_identifier(p.get()) << std::endl;
 
         g_subprocess_communicate_utf8(p.get(), nullptr, nullptr, stdoutBuffer.contentReplacer(),
 #ifdef _WIN32  // On Windows, STDERR_MERGE does not work. See https://gitlab.gnome.org/GNOME/glib/-/issues/3723

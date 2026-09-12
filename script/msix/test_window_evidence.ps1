@@ -1,6 +1,6 @@
 $ErrorActionPreference='Stop'
 . (Join-Path $PSScriptRoot 'qualify-msix-install.ps1') -LibraryOnly
-$fixture=[ordered]@{title='Unsaved Document - InkQuay';visible=$true;process_id=123;width=800;height=600;screenshot_captured=$true;screenshot_sha256=('a'*64);sampled_colors=30;controls=@([pscustomobject]@{name='Unsaved Document - InkQuay';control_type='ControlType.Window';offscreen=$false;process_id=123})}
+$fixture=[ordered]@{title='Unsaved Document - Scriblark';visible=$true;process_id=123;width=800;height=600;screenshot_captured=$true;screenshot_sha256=('a'*64);sampled_colors=30;controls=@([pscustomobject]@{name='Unsaved Document - Scriblark';control_type='ControlType.Window';offscreen=$false;process_id=123})}
 Assert-InkQuayWindowEvidence $fixture
 foreach($kind in @('title','screenshot','offscreen','wrong-process','missing-root','error-only')) {
  $candidate=[ordered]@{}+$fixture

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2026 Trieflow LLC; metadata licensed CC0-1.0. -->
 <component type="desktop-application">
- <id>com.trieflow.inkquay</id><name>InkQuay</name><summary>Pen notes, page templates and checked PDF exports</summary>
+ <id>com.trieflow.inkquay</id><name>Scriblark</name><summary>Pen notes, page templates and checked PDF exports</summary>
  <metadata_license>CC0-1.0</metadata_license><project_license>GPL-2.0-or-later</project_license>
  <developer id="com.trieflow"><name>Trieflow LLC</name></developer>
  <description><p>Write and annotate PDFs locally, reuse named paper templates and verify exported PDF page counts. Based on Xournal++; upstream copyrights and source rights are preserved.</p></description>
- <url type="homepage">https://inkquay.trieflow.com</url><url type="bugtracker">https://inkquay.trieflow.com/support</url>
- <url type="help">https://inkquay.trieflow.com/support</url><url type="vcs-browser">https://inkquay.trieflow.com/source</url>
+ <url type="homepage">https://scriblark.trieflow.com</url><url type="bugtracker">https://scriblark.trieflow.com/support</url>
+ <url type="help">https://scriblark.trieflow.com/support</url><url type="vcs-browser">https://scriblark.trieflow.com/source</url>
  <launchable type="desktop-id">com.trieflow.inkquay.desktop</launchable><provides><binary>inkquay</binary></provides>
  <content_rating type="oars-1.1"/>
 </component>

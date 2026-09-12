@@ -53,7 +53,7 @@ class NativeInventoryTests(unittest.TestCase):
     def test_only_exact_built_application_is_exempt_from_package_ownership(self):
         owners = {'/mingw64/bin/libfontconfig-1.dll': {'alpha'}}
         files = [{'path': name, 'sourcePath': name, 'package': 'alpha'} for name in inventory.REQUIRED_PACKAGE_FILES]
-        application = {'path': 'bin/inkquay.exe', 'sha256': 'a' * 64}
+        application = {'path': 'bin/Scriblark.exe', 'sha256': 'a' * 64}
         with self.assertRaises(ValueError):
             inventory.validate_provenance(files, '/mingw64', owners, 'a' * 64)
         with self.assertRaises(ValueError):
@@ -79,7 +79,7 @@ class NativeInventoryTests(unittest.TestCase):
                     path.parent.mkdir(parents=True, exist_ok=True)
                     path.write_bytes(b'package bytes')
             owners = {'/mingw64/' + name: {'alpha'} for name in inventory.REQUIRED_PACKAGE_FILES}
-            app, wrapper = stage / 'bin/inkquay.exe', stage / 'bin/inkquay-wrapper.exe'
+            app, wrapper = stage / 'bin/Scriblark.exe', stage / 'bin/Scriblark-wrapper.exe'
             app.write_bytes(b'actual main build')
             wrapper.write_bytes(b'actual wrapper build')
             app_hash, wrapper_hash = inventory.digest(app), inventory.digest(wrapper)

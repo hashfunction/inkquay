@@ -1,4 +1,4 @@
-# Failure-path tests for the real InkQuay qualification orchestration.
+# Failure-path tests for the real Scriblark qualification orchestration.
 # Copyright 2026 Trieflow LLC. MIT licensed.
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
@@ -65,12 +65,12 @@ Assert-True ($result[0].primary_error -eq 'primary:ActivateAndVerify') 'native s
 Assert-True ($result[0].cleanup_errors.Count -eq 1) 'native stdout must not erase cleanup failure'
 
 $packageRoot = Join-Path ([IO.Path]::GetTempPath()) 'package'
-$insidePackage = Test-PathInside -Candidate (Join-Path $packageRoot 'InkQuay.exe') -Root $packageRoot
+$insidePackage = Test-PathInside -Candidate (Join-Path $packageRoot 'Scriblark.exe') -Root $packageRoot
 $siblingPackage = Test-PathInside -Candidate (Join-Path ([IO.Path]::GetTempPath()) 'package-other/foreign.dll') -Root $packageRoot
 Assert-True $insidePackage 'exact package descendant must be accepted'
 Assert-True (-not $siblingPackage) 'textual sibling prefix must not count as package path'
-$recordFixture = [pscustomobject]@{ payload = [pscustomobject]@{ 'InkQuay.exe' = [pscustomobject]@{ bytes=1; sha256=('a' * 64) } } }
-Assert-True ((Get-RecordPayloadEntry $recordFixture 'InkQuay.exe').bytes -eq 1) 'slash-qualified payload property must resolve exactly'
+$recordFixture = [pscustomobject]@{ payload = [pscustomobject]@{ 'Scriblark.exe' = [pscustomobject]@{ bytes=1; sha256=('a' * 64) } } }
+Assert-True ((Get-RecordPayloadEntry $recordFixture 'Scriblark.exe').bytes -eq 1) 'slash-qualified payload property must resolve exactly'
 $exclusiveDirectory = Join-Path ([IO.Path]::GetTempPath()) ('inkquay-ps-test-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $exclusiveDirectory | Out-Null
 try {

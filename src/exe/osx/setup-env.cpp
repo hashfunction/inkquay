@@ -50,7 +50,7 @@ void setupEnvironment() {
     bool underJHBuild = g_strcmp0(g_getenv("UNDER_JHBUILD"), "true") == 0;
 
     if (isAppBundle) {
-        base = base / "Resources";  // Now base is InkQuay.app/Contents/Resources
+        base = base / "Resources";  // Now base is Scriblark.app/Contents/Resources
     }
 
     auto libPath = base / "lib";

@@ -5,15 +5,15 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleSignature</key>
-    <string>InkQuay</string>
+    <string>Scriblark</string>
     <key>LSApplicationCategoryType</key>
     <string>public.app-category.business</string>
     <key>CFBundleIdentifier</key>
     <string>com.trieflow.inkquay</string>
     <key>CFBundleName</key>
-    <string>InkQuay</string>
+    <string>Scriblark</string>
     <key>CFBundleDisplayName</key>
-    <string>InkQuay</string>
+    <string>Scriblark</string>
 
     <key>CFBundleShortVersionString</key>
     <string>1.3.7</string>
@@ -36,7 +36,7 @@
     <true />
 
     <key>CFBundleExecutable</key>
-    <string>inkquay-wrapper</string>
+    <string>Scriblark-wrapper</string>
     <key>LSArchitecturePriority</key>
     <array>
       <string>x86_64</string>
@@ -65,7 +65,7 @@
         <key>CFBundleTypeIconFile</key>
 	        <string>xournalpp.icns</string>
         <key>CFBundleTypeName</key>
-        <string>InkQuay Document</string>
+        <string>Scriblark Document</string>
         <key>CFBundleTypeMIMETypes</key>
         <array>
           <string>application/x-xopp</string>
@@ -81,7 +81,7 @@
         <key>CFBundleTypeIconFile</key>
 	        <string>xournalpp.icns</string>
         <key>CFBundleTypeName</key>
-        <string>InkQuay Template</string>
+        <string>Scriblark Template</string>
         <key>CFBundleTypeMIMETypes</key>
         <array>
           <string>application/x-xopt</string>
@@ -118,7 +118,7 @@
           <string>org.gnu.gnu-zip-archive</string>
         </array>
         <key>UTTypeDescription</key>
-        <string>InkQuay Document</string>
+        <string>Scriblark Document</string>
         <key>UTTypeTagSpecification</key>
         <dict>
           <key>public.mime-type</key>
@@ -140,7 +140,7 @@
           <string>public.text</string>
         </array>
         <key>UTTypeDescription</key>
-        <string>InkQuay Template</string>
+        <string>Scriblark Template</string>
         <key>UTTypeTagSpecification</key>
         <dict>
           <key>public.mime-type</key>
@@ -185,7 +185,7 @@
     <key>LSEnvironment</key>
     <dict>
         <key>DYLD_LIBRARY_PATH</key>
-        <string>/Applications/InkQuay.app/Contents/Resources/lib</string>
+        <string>/Applications/Scriblark.app/Contents/Resources/lib</string>
     </dict>
 
     <key>NSHighResolutionCapable</key>

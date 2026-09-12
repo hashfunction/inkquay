@@ -123,7 +123,7 @@ def extract_source(archive,destination):
 
 
 def prepare():
-    require(sys.platform=='win32' and os.environ.get('CI')=='true' and os.environ.get('GITHUB_REPOSITORY')=='hashfunction/inkquay','Diagnostic build requires isolated InkQuay Windows CI')
+    require(sys.platform=='win32' and os.environ.get('CI')=='true' and os.environ.get('GITHUB_REPOSITORY')=='hashfunction/inkquay','Diagnostic build requires isolated Scriblark Windows CI')
     require(subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()==os.environ['GITHUB_SHA'],'Diagnostic build source differs')
     _reject_link(ROOT);BUILD.mkdir();(BUILD/'build').mkdir();(BUILD/'source').mkdir()
     initial={'schema_version':1,'built':False,'diagnostic_only':True,'consumer_acceptance':False,

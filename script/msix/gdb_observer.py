@@ -1,8 +1,8 @@
-"""Opt-in, bounded GDB observer for an already owned installed InkQuay process.
+"""Opt-in, bounded GDB observer for an already owned installed Scriblark process.
 
 This is diagnostic evidence only. It never starts the consumer, writes its memory,
 swallows its fault, or confers consumer acceptance. Live Windows fixture evidence
-must pass for this exact debugger/helper before the CLI can attach to InkQuay.
+must pass for this exact debugger/helper before the CLI can attach to Scriblark.
 """
 # Copyright 2026 Trieflow LLC. MIT.
 import argparse
@@ -25,7 +25,7 @@ import time
 from msix_qualification import _regular_stream, _reject_link
 from observer_gdb_build import verified_debugger,RECORD as TOOL_RECORD
 
-PACKAGE = 'Trieflow.InkQuay.Qualification_1.0.0.0_x64__fjvr7t994vwc4'
+PACKAGE = 'Trieflow.InkQuay.Qualification_1.0.1.0_x64__fjvr7t994vwc4'
 MAX_BYTES = 1024 * 1024
 MAX_LINE = 65536
 FAULTS = ('SIGSEGV', 'SIGILL', 'SIGFPE', 'SIGABRT')
@@ -333,7 +333,7 @@ def main(request_path, request_hash):
     require(request['target']['package_full_name'] == PACKAGE and type(request['target']['process_id']) is int
         and request['target']['process_id'] > 0 and type(request['target']['start_filetime']) is int, 'Invalid owned package target')
     executable = Path(request['target']['executable'])
-    require(executable.is_absolute() and executable.name.lower() == 'inkquay.exe' and executable.parent.name.lower() == 'bin'
+    require(executable.is_absolute() and executable.name.lower() == 'scriblark.exe' and executable.parent.name.lower() == 'bin'
         and executable.parent.parent.name.lower() == PACKAGE.lower(), 'Observer target is outside the exact installed package')
     gdb = verified_debugger()
     preflight = read_json(request['preflight'])

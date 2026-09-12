@@ -81,7 +81,7 @@ void initCAndCoutLocales() {
 }
 
 auto migrateSettings() -> MigrateResult {
-    // InkQuay owns its configuration. Upstream user data is never imported or modified implicitly.
+    // Scriblark owns its configuration. Upstream user data is never imported or modified implicitly.
     return {MigrateStatus::NotNeeded, ""};
 }
 
@@ -103,7 +103,7 @@ void checkForEmergencySave(Control* control) {
         return;
     }
 
-    const std::string msg = _("InkQuay crashed last time. Would you like to restore the last edited file?");
+    const std::string msg = _("Scriblark crashed last time. Would you like to restore the last edited file?");
     enum { DELETE_FILE = 1, RESTORE_FILE };
     XojMsgBox::askQuestion(
             control->getGtkWindow(), _("Recovery file detected"), msg,
@@ -368,7 +368,7 @@ void on_open_files(GApplication* application, gpointer f, gint numFiles, gchar* 
     }
     auto* files = (GFile**)f;
     if (numFiles != 1) {
-        const std::string msg = _("Sorry, InkQuay can only open one file at once.\n"
+        const std::string msg = _("Sorry, Scriblark can only open one file at once.\n"
                                   "Others are ignored.");
         XojMsgBox::showErrorToUser(GTK_WINDOW(app_data->win->getWindow()), msg);
     }
@@ -384,7 +384,7 @@ void on_open_files(GApplication* application, gpointer f, gint numFiles, gchar* 
         }
     } catch (const fs::filesystem_error& e) {
         const std::string msg = FS(_F("Filesystem error: {1}\n"
-                                      "Sorry, InkQuay cannot open the file: {2}\n"
+                                      "Sorry, Scriblark cannot open the file: {2}\n"
                                       "Consider copying the file to a local directory.") %
                                    e.what() % p.u8string());
         XojMsgBox::showErrorToUser(GTK_WINDOW(app_data->win->getWindow()), msg);
@@ -429,7 +429,7 @@ void on_startup(GApplication* application, XMPtr app_data) {
     fs::path p;
     if (app_data->optFilename) {
         if (g_strv_length(app_data->optFilename) != 1) {
-            const std::string msg = _("Sorry, InkQuay can only open one file at once.\n"
+            const std::string msg = _("Sorry, Scriblark can only open one file at once.\n"
                                       "Others are ignored.");
             XojMsgBox::showErrorToUser(GTK_WINDOW(app_data->win->getWindow()), msg);
         }

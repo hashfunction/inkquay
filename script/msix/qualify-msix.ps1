@@ -40,7 +40,7 @@ Invoke-Checked $python @('script/msix/msix_qualification.py','--release','build/
 # Upload only the metadata copy. Unsigned/signed MSIX and certificates never enter artifact globs.
 [IO.File]::Copy((Join-Path $packageOutput 'package-record.json'),(Join-Path (Get-Location) 'build-evidence/msix-package-record.json'),$false)
 $installArguments=@('-NoLogo','-NoProfile','-File','script/msix/qualify-msix-install.ps1',
-    '-Package',(Join-Path $packageOutput 'InkQuay.Qualification_1.0.0.0_x64.msix'),
+    '-Package',(Join-Path $packageOutput 'Scriblark.Qualification_1.0.1.0_x64.msix'),
     '-PackageRecord',(Join-Path $packageOutput 'package-record.json'),
     '-SignTool',(Join-Path $sdkDirectory 'signtool.exe'),'-Output','build-evidence/msix-install')
 if ($CaptureCrashStack) { $installArguments+='-CaptureCrashStack' }

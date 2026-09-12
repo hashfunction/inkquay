@@ -24,7 +24,7 @@ def validate_provenance(files, msys_prefix, owners, built_application_sha256=Non
     if not any(path.startswith(msys_prefix + '/') for path in owners):
         raise ValueError('No installed files match the package ownership prefix: ' + msys_prefix)
     rows = {row['path']: row for row in files}
-    built_outputs = {'bin/inkquay.exe': built_application_sha256, 'bin/inkquay-wrapper.exe': built_wrapper_sha256}
+    built_outputs = {'bin/Scriblark.exe': built_application_sha256, 'bin/Scriblark-wrapper.exe': built_wrapper_sha256}
     for path, expected in built_outputs.items():
         if expected is not None and rows.get(path, {}).get('sha256') != expected:
             raise ValueError('Staged executable is missing or differs from the exact application build: ' + path)
@@ -93,13 +93,13 @@ def main():
     if sys.platform != 'win32' or not os.environ.get('MSYSTEM'):
         raise SystemExit('Run this inventory with native Python inside the Windows MSYS2 build environment.')
     stage, prefix, report, built_application = map(Path, sys.argv[1:])
-    if built_application.name != 'inkquay.exe' or not built_application.is_file():
-        raise ValueError('The exact built InkQuay executable is required for application provenance')
+    if built_application.name != 'Scriblark.exe' or not built_application.is_file():
+        raise ValueError('The exact built Scriblark executable is required for application provenance')
     # src/CMakeLists.txt builds and installs both targets from the same build
     # directory. The crash wrapper is application source, not an MSYS2 package.
-    built_wrapper = built_application.with_name('inkquay-wrapper.exe')
+    built_wrapper = built_application.with_name('Scriblark-wrapper.exe')
     if not built_wrapper.is_file():
-        raise ValueError('The exact built InkQuay crash wrapper is required for application provenance')
+        raise ValueError('The exact built Scriblark crash wrapper is required for application provenance')
     built_application_sha256 = digest(built_application)
     built_wrapper_sha256 = digest(built_wrapper)
     source_commit = subprocess.check_output(['git', '-C', str(Path(__file__).resolve().parents[1]), 'rev-parse', 'HEAD'], text=True).strip()

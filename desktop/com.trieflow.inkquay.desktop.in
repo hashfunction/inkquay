@@ -1,12 +1,12 @@
 [Desktop Entry]
 Type=Application
 
-Name=InkQuay
+Name=Scriblark
 GenericName=Note-taking application
 Comment=Take handwritten notes
 Keywords=tablet;Wacom;pen input;PDF Annotation;markup
 
-Exec=inkquay-wrapper %f
+Exec=Scriblark-wrapper %f
 SingleMainWindow=false
 StartupWMClass=com.trieflow.inkquay
 Terminal=false

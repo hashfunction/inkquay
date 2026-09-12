@@ -54,7 +54,7 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
     function Assert-Live {
         $State.process.Refresh()
         if(-not $State.processOwned -or $State.processHandle.IsClosed -or $State.processHandle.IsInvalid -or $State.process.HasExited){throw 'Retained owned process is unavailable.'}
-        if((Get-CanonicalPath $State.process.MainModule.FileName) -ine (Get-CanonicalPath (Join-Path $State.installed.InstallLocation 'bin/inkquay.exe')) -or
+        if((Get-CanonicalPath $State.process.MainModule.FileName) -ine (Get-CanonicalPath (Join-Path $State.installed.InstallLocation 'bin/Scriblark.exe')) -or
             [InkQuayQualification.NativePackageProbe]::GetFullName($State.process.Handle) -cne $State.ownedPackageFullName){throw 'Workflow process executable/package identity changed.'}
     }
     function Observe([string]$Title,[bool]$Dialog=$false) {
@@ -113,7 +113,7 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
     function Open([string]$Title,[string]$Name) {
         Keys (Observe $Title) '^o' ('open-'+$Name)
         Choose 'Open file' (Join-Path $root $Name)
-        return Observe ($Name+' - InkQuay')
+        return Observe ($Name+' - Scriblark')
     }
     function Template([string]$Title) {
         Keys (Observe $Title) ('%j{HOME}{DOWN '+$contract.configureMenuDown+'}{ENTER}') 'configure-template'
@@ -133,7 +133,7 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
         do {
             Assert-Live
             $windows=@([InkQuayWorkflow.Native]::Windows($State.process.Id))
-            $dialogs=@($windows|Where-Object {$_.Handle -ne $main -and $_.ClassName -ceq 'gdkWindowToplevel' -and $_.Owner -eq $main -and $_.Enabled -and $_.Title -cin @('','InkQuay')})
+            $dialogs=@($windows|Where-Object {$_.Handle -ne $main -and $_.ClassName -ceq 'gdkWindowToplevel' -and $_.Owner -eq $main -and $_.Enabled -and $_.Title -cin @('','Scriblark')})
             if($dialogs.Count -eq 1){break};Start-Sleep -Milliseconds 150
         }while([DateTime]::UtcNow -lt $deadline)
         if($dialogs.Count -ne 1){throw 'Expected the owned GTK checked-export result dialog.'}
@@ -148,28 +148,28 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
     try {
         $result.originals=Files 'prepare'
         $originalManifestHash=(Get-FileHash (Join-Path $root 'originals.json')).Hash
-        [void](Open 'Unsaved Document - InkQuay' 'source.xopp')
-        $dialog=Template 'source.xopp - InkQuay'
-        Keys $dialog ('%t{HOME}{DOWN '+$contract.cornellIndex+'}{TAB}^aInkQuay CI Cornell') 'select-and-name-cornell-preset'
+        [void](Open 'Unsaved Document - Scriblark' 'source.xopp')
+        $dialog=Template 'source.xopp - Scriblark'
+        Keys $dialog ('%t{HOME}{DOWN '+$contract.cornellIndex+'}{TAB}^aScriblark CI Cornell') 'select-and-name-cornell-preset'
         Keys $dialog '%s' 'save-named-preset'
         Capture $dialog 'saved-template'
         # Cancel defaults, reopen the real library, select its sole new final user
         # entry, then Shift-Tab wraps from first selector to the final Ok button.
         Keys $dialog '{ESC}' 'cancel-template-defaults'
-        $dialog=Template 'source.xopp - InkQuay'
+        $dialog=Template 'source.xopp - Scriblark'
         Keys $dialog '%t{END}' 'reload-saved-preset'
         Capture $dialog 'reloaded-template'
         Keys $dialog '%t+{TAB}{ENTER}' 'apply-saved-template'
-        Keys (Observe 'source.xopp - InkQuay') '^d' 'insert-template-page'
+        Keys (Observe 'source.xopp - Scriblark') '^d' 'insert-template-page'
         if(Test-Path (Join-Path $root 'saved.xopp')){throw 'Save As destination already exists.'}
-        Keys (Observe '*source.xopp - InkQuay') '^+s' 'save-new-note'
+        Keys (Observe '*source.xopp - Scriblark') '^+s' 'save-new-note'
         Choose 'Save File' (Join-Path $root 'saved.xopp')
-        Capture (Observe 'saved.xopp - InkQuay') 'saved-two-page-note'
+        Capture (Observe 'saved.xopp - Scriblark') 'saved-two-page-note'
         $saved=Files 'note'
-        $result.first=Export 'saved.xopp - InkQuay' 'first'
-        [void](Open 'saved.xopp - InkQuay' 'first.pdf')
-        Capture (Observe 'first.pdf - InkQuay') 'reopened-export'
-        $result.reopened=Export 'first.pdf - InkQuay' 'reopened'
+        $result.first=Export 'saved.xopp - Scriblark' 'first'
+        [void](Open 'saved.xopp - Scriblark' 'first.pdf')
+        Capture (Observe 'first.pdf - Scriblark') 'reopened-export'
+        $result.reopened=Export 'first.pdf - Scriblark' 'reopened'
         if((Get-FileHash (Join-Path $root 'first.pdf')).Hash.ToLowerInvariant() -cne $result.first.sha256 -or
             (Get-FileHash (Join-Path $root 'saved.xopp')).Hash.ToLowerInvariant() -cne $saved.sha256){throw 'Earlier output/note changed during PDF reopen/export.'}
         [void](Files 'note')

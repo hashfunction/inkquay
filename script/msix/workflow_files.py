@@ -138,18 +138,18 @@ def prepare(root):
         pdf,
         make_pdf(
             [
-                "BT /F1 18 Tf 50 760 Td (InkQuay qualification source) Tj ET 1 0 0 RG 3 w 50 650 160 50 re S"
+                "BT /F1 18 Tf 50 760 Td (Scriblark qualification source) Tj ET 1 0 0 RG 3 w 50 650 160 50 re S"
             ]
         ),
     )
-    doc = ET.Element("xournal", creator="InkQuay owned qualification fixture", fileversion="4")
-    ET.SubElement(doc, "title").text = "Synthetic owned InkQuay note"
+    doc = ET.Element("xournal", creator="Scriblark owned qualification fixture", fileversion="4")
+    ET.SubElement(doc, "title").text = "Synthetic owned Scriblark note"
     page = ET.SubElement(doc, "page", width="595.275591", height="841.889764")
     ET.SubElement(page, "background", type="pdf", domain="absolute", filename=str(pdf), pageno="1")
     layer = ET.SubElement(page, "layer")
     ET.SubElement(
         layer, "text", font="Arial", size="18", x="50", y="150", color="#000000ff"
-    ).text = "InkQuay owned note"
+    ).text = "Scriblark owned note"
     ET.SubElement(layer, "stroke", tool="pen", color="#0066ffff", width="3").text = (
         "50 210 90 220 130 210"
     )
@@ -185,7 +185,7 @@ def verify_note(root):
     pages = doc.findall("page")
     if len(pages) != 2:
         raise ValueError("Expected two saved note pages")
-    if "InkQuay owned note" not in "".join(pages[0].itertext()) or not pages[0].findall(
+    if "Scriblark owned note" not in "".join(pages[0].itertext()) or not pages[0].findall(
         "./layer/stroke"
     ):
         raise ValueError("Original note content missing")
@@ -293,7 +293,7 @@ def verify_export(root, name, protected, tools):
     if not re.search(r"^Pages:\s+2\s*$", info, re.M):
         raise ValueError("Independent PDF page count differs")
     text = run("pdftotext", [output, "-"]).decode("utf-8", "replace")
-    if any(token not in text for token in ("InkQuay qualification source", "InkQuay owned note")):
+    if any(token not in text for token in ("Scriblark qualification source", "Scriblark owned note")):
         raise ValueError("Independent PDF source/note text is missing")
     page_text = text.split("\f")
     if len(page_text) < 2 or any(

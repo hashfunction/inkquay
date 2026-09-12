@@ -14,8 +14,8 @@ class GladeSearchpath;
 
 constexpr auto UI_FILE = "about.glade";
 constexpr auto UI_DIALOG_NAME = "aboutDialog";
-constexpr auto GIT_REPO = "https://inkquay.trieflow.com/source";
-constexpr auto WEBSITE = "https://inkquay.trieflow.com";
+constexpr auto GIT_REPO = "https://scriblark.trieflow.com/source";
+constexpr auto WEBSITE = "https://scriblark.trieflow.com";
 constexpr auto AUTHORS_LINK = "https://raw.githubusercontent.com/xournalpp/xournalpp/master/AUTHORS";
 constexpr auto LICENCE_LINK = "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html";
 

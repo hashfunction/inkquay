@@ -21,9 +21,9 @@ endif()
 ## Project related Variables
 ## Also update changelog in debian folder!
 project(inkquay
-        VERSION 1.0.0
-        DESCRIPTION "InkQuay - Pen notes and checked PDF exports"
-        HOMEPAGE_URL "https://inkquay.trieflow.com"
+        VERSION 1.0.1
+        DESCRIPTION "Scriblark - Pen notes and checked PDF exports"
+        HOMEPAGE_URL "https://scriblark.trieflow.com"
         LANGUAGES CXX C)
 # according to https://cmake.org/cmake/help/latest/command/project.html we must fix the suffix:
 # And https://gitlab.kitware.com/cmake/cmake/-/issues/16716 is still open:
@@ -31,7 +31,7 @@ set(VERSION_SUFFIX "")
 set(PROJECT_VERSION "${PROJECT_VERSION}${VERSION_SUFFIX}")
 set(xournalpp_VERSION ${PROJECT_VERSION})
 set(CMAKE_PROJECT_VERSION ${PROJECT_VERSION})
-set(PROJECT_CONTACT "https://inkquay.trieflow.com/support")
+set(PROJECT_CONTACT "https://scriblark.trieflow.com/support")
 
 ## CMAKE_Variables
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/find" "${PROJECT_SOURCE_DIR}/cmake/include")
@@ -356,7 +356,7 @@ install(DIRECTORY ui
         COMPONENT xournalpp
         )
 if(ENABLE_PLUGINS)
-    message(FATAL_ERROR "InkQuay release builds omit unqualified Lua plugins. Set ENABLE_PLUGINS=OFF.")
+    message(FATAL_ERROR "Scriblark release builds omit unqualified Lua plugins. Set ENABLE_PLUGINS=OFF.")
 endif()
 install(DIRECTORY resources
         DESTINATION "share/inkquay"

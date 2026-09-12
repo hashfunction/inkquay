@@ -30,8 +30,8 @@ void addFilterSupported(GtkFileChooser* fc) {
 
 void addFilterPdf(GtkFileChooser* fc) { addMimeTypeFilter(fc, _("PDF files"), "application/pdf"); }
 void addFilterXoj(GtkFileChooser* fc) { addMimeTypeFilter(fc, _("Xournal files"), "application/x-xojpp"); }
-void addFilterXopp(GtkFileChooser* fc) { addMimeTypeFilter(fc, _("InkQuay files"), "application/x-xopp"); }
-void addFilterXopt(GtkFileChooser* fc) { addMimeTypeFilter(fc, _("InkQuay template"), "application/x-xopt"); }
+void addFilterXopp(GtkFileChooser* fc) { addMimeTypeFilter(fc, _("Scriblark files"), "application/x-xopp"); }
+void addFilterXopt(GtkFileChooser* fc) { addMimeTypeFilter(fc, _("Scriblark template"), "application/x-xopt"); }
 void addFilterSvg(GtkFileChooser* fc) { addMimeTypeFilter(fc, _("SVG graphics"), "image/svg+xml"); }
 void addFilterPng(GtkFileChooser* fc) { addMimeTypeFilter(fc, _("PNG graphics"), "image/png"); }
 

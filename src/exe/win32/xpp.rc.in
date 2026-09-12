@@ -14,10 +14,10 @@ BEGIN
 		BLOCK "040904E4"
 		BEGIN
 			VALUE "CompanyName", "Trieflow LLC\0"
-			VALUE "FileDescription", "InkQuay\0"
+			VALUE "FileDescription", "Scriblark\0"
 			VALUE "FileVersion", "${PROJECT_VERSION}\0"
 			VALUE "ProductVersion", "${PROJECT_VERSION}\0"
-			VALUE "ProductName", "InkQuay\0"
+			VALUE "ProductName", "Scriblark\0"
 			VALUE "LegalCopyright", "Copyright 2026 Trieflow LLC; portions copyright Xournal++ contributors\0"
 			VALUE "LegalTrademarks", "\0"
 			VALUE "Comments", "\0"

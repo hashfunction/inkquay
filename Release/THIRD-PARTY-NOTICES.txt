@@ -1,4 +1,4 @@
-InkQuay — Trieflow LLC
+Scriblark — Trieflow LLC
 Copyright 2026 Trieflow LLC. Modifications are licensed GPL-2.0-or-later.
 
 Based on Xournal++ v1.3.7, commit 104f89826a9b1e2d0c098cea58639d6686f78526.
@@ -8,7 +8,7 @@ are preserved. The package includes copyright.txt with the detailed upstream
 author and asset attributions; copyright retains the Debian packaging summary.
 The application is independent of and is not endorsed by the Xournal++ project.
 
-Original InkQuay application/file marks and four vector page layouts:
+Original Scriblark application/file marks and four vector page layouts:
 Copyright 2026 Trieflow LLC, GPL-2.0-or-later. App metadata is CC0-1.0.
 Functional upstream icons remain under their respective notices. In particular,
 copyright.txt identifies GPLv3+ color icons, ISC Lucide icons, CC BY-SA 4.0
@@ -24,7 +24,7 @@ package notices and script/inventoryWindows.py records actual packages/files.
 A package notice or top-level GPL file alone does not clear the whole stage.
 
 LuaGObject, Lua plugins, audio and GTKSourceView resources are omitted from the
-InkQuay release configuration. GoogleTest is build/test-only, BSD-3-Clause;
+Scriblark release configuration. GoogleTest is build/test-only, BSD-3-Clause;
 release builds require a system package and never silently download it.
 
 Original native, Cargo and Rust notice supplements are under
@@ -34,7 +34,7 @@ identifies the exact retained native recipes and Cargo source archives; not ever
 platform/dev/build dependency is linked into the application.
 
 Modified application source, native corresponding source, original notices and
-build/relink/repackage instructions: https://inkquay.trieflow.com/source
+build/relink/repackage instructions: https://scriblark.trieflow.com/source
 The package's supplement/SOURCE-INPUTS.json identifies the matching source inputs.
 
 The current MINGW64 libwinpthread 14.0.0.r375.g9c1abbbf5-1 input is bound to a

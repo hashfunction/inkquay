@@ -2,12 +2,12 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 if (-not $IsWindows -or $env:CI -ne 'true') { throw 'Requires an isolated Windows CI runner.' }
 Set-Location (Resolve-Path (Join-Path $PSScriptRoot '..'))
-$executable = (Resolve-Path 'build/dist/bin/inkquay.exe').Path
+$executable = (Resolve-Path 'build/dist/bin/Scriblark.exe').Path
 $inventoryPath = (Resolve-Path 'build-evidence/package-inventory.json').Path
 $inventoryHash = (Get-FileHash $inventoryPath -Algorithm SHA256).Hash.ToLowerInvariant()
 $inventory = Get-Content -LiteralPath $inventoryPath -Raw | ConvertFrom-Json
 $executableHash = (Get-FileHash $executable -Algorithm SHA256).Hash.ToLowerInvariant()
-if ($inventory.sourceCommit -cne $env:GITHUB_SHA -or $inventory.files.'bin/inkquay.exe'.sha256 -cne $executableHash) {
+if ($inventory.sourceCommit -cne $env:GITHUB_SHA -or $inventory.files.'bin/Scriblark.exe'.sha256 -cne $executableHash) {
   throw 'Same-run package inventory does not bind the source and executable.'
 }
 $env:APPDATA = Join-Path (Get-Location).Path 'build-evidence/runtime-profile'
@@ -24,14 +24,14 @@ try {
   do {
     Start-Sleep -Milliseconds 500
     $process.Refresh()
-    if ($process.HasExited) { throw "InkQuay exited during startup: $($process.ExitCode)" }
+    if ($process.HasExited) { throw "Scriblark exited during startup: $($process.ExitCode)" }
   } until ($process.MainWindowHandle -ne 0 -or (Get-Date) -gt $deadline)
-  if ($process.MainWindowHandle -eq 0 -or $process.MainWindowTitle -cne 'Unsaved Document - InkQuay') {
-    throw "Expected the native InkQuay main window, got: $($process.MainWindowTitle)"
+  if ($process.MainWindowHandle -eq 0 -or $process.MainWindowTitle -cne 'Unsaved Document - Scriblark') {
+    throw "Expected the native Scriblark main window, got: $($process.MainWindowTitle)"
   }
   Start-Sleep -Seconds 3
   $process.Refresh()
-  if ($process.HasExited -or $process.MainWindowTitle -cne 'Unsaved Document - InkQuay') { throw 'InkQuay did not retain its actual empty-document window.' }
+  if ($process.HasExited -or $process.MainWindowTitle -cne 'Unsaved Document - Scriblark') { throw 'Scriblark did not retain its actual empty-document window.' }
   if ((Get-Content 'build-evidence/startup-error.txt' -Raw) -match 'Fontconfig error:') { throw 'The staged app reported a Fontconfig configuration error.' }
   if ((Get-FileHash $inventoryPath -Algorithm SHA256).Hash.ToLowerInvariant() -cne $inventoryHash -or
       (Get-FileHash $executable -Algorithm SHA256).Hash.ToLowerInvariant() -cne $executableHash) {

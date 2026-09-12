@@ -1,4 +1,4 @@
-"""InkQuay package boundaries with real files and ZIPs; no Windows claim."""
+"""Scriblark package boundaries with real files and ZIPs; no Windows claim."""
 
 import copy
 import hashlib
@@ -24,7 +24,7 @@ def digest(data):
 
 class PackageTests(unittest.TestCase):
     def setUp(self):
-        self.assertIsNotNone(msix, "InkQuay MSIX qualification is not implemented")
+        self.assertIsNotNone(msix, "Scriblark MSIX qualification is not implemented")
         tmp = tempfile.TemporaryDirectory()
         self.addCleanup(tmp.cleanup)
         self.root = Path(tmp.name).resolve()
@@ -70,7 +70,7 @@ class PackageTests(unittest.TestCase):
             for name, record in files.items()
         ]
         for row in rows:
-            if row["path"] in ("bin/inkquay.exe", "bin/inkquay-wrapper.exe"):
+            if row["path"] in ("bin/Scriblark.exe", "bin/Scriblark-wrapper.exe"):
                 del row["package"]
                 del row["packageVersion"]
         self.native.write_text(
@@ -82,9 +82,9 @@ class PackageTests(unittest.TestCase):
                     "msystem": "MINGW64",
                     "packages": {self.owner: self.owner_version},
                     "files": rows,
-                    "builtApplication": {"sha256": files["bin/inkquay.exe"]["sha256"]},
+                    "builtApplication": {"sha256": files["bin/Scriblark.exe"]["sha256"]},
                     "builtWrapper": {
-                        "sha256": files["bin/inkquay-wrapper.exe"]["sha256"]
+                        "sha256": files["bin/Scriblark-wrapper.exe"]["sha256"]
                     },
                     "licenseAuditComplete": False,
                 }
@@ -100,8 +100,8 @@ class PackageTests(unittest.TestCase):
                 {
                     "source_commit": self.commit,
                     "windows_native_startup": True,
-                    "window_title": "Unsaved Document - InkQuay",
-                    "executable_sha256": d["files"]["bin/inkquay.exe"]["sha256"],
+                    "window_title": "Unsaved Document - Scriblark",
+                    "executable_sha256": d["files"]["bin/Scriblark.exe"]["sha256"],
                     "package_inventory_sha256": digest(self.inventory.read_bytes())[
                         "sha256"
                     ],
@@ -124,7 +124,7 @@ class PackageTests(unittest.TestCase):
         d = self.stage()
         self.assertEqual(d["releaseInput"], msix.inventory_tree(self.release))
         self.assertEqual(d["payload"], msix.inventory_tree(self.root / "stage"))
-        self.assertEqual(d["identity"]["executable"], "bin/inkquay.exe")
+        self.assertEqual(d["identity"]["executable"], "bin/Scriblark.exe")
         self.assertFalse(d["publicRelease"])
         self.assertFalse(d["licenseClearanceClaimed"])
         self.assertEqual(d["runtime"]["gtk"], "bin/libgtk-3-0.dll")
@@ -247,7 +247,7 @@ class PackageTests(unittest.TestCase):
         empty = copied / "originals/notice-supplement/mingw-w64-djvulibre/djvulibre-3.5.30/AUTHORS"
         self.assertEqual(empty.read_bytes(), b"")
         source_index = json.loads((copied / "SOURCE-INPUTS.json").read_text())
-        self.assertEqual(source_index["sourceUrl"], "https://inkquay.trieflow.com/source")
+        self.assertEqual(source_index["sourceUrl"], "https://scriblark.trieflow.com/source")
         self.assertEqual(len(source_index["nativeOwners"]), 66)
         self.assertEqual(len(source_index["cargo"]["sources"]), 359)
         rerun = subprocess.run(command, capture_output=True, text=True)
@@ -490,7 +490,7 @@ class PackageTests(unittest.TestCase):
         msix.validate_manifest(data)
         for old, new in [
             (b"CN=InkQuay-CI-Qualification", b"CN=Other"),
-            (b"bin/inkquay.exe", b"bin/other.exe"),
+            (b"bin/Scriblark.exe", b"bin/other.exe"),
             (b"runFullTrust", b"internetClient"),
         ]:
             self.assertIn(old, data)
@@ -671,7 +671,7 @@ class PackageTests(unittest.TestCase):
         package, record = self.package()
         for before, after in [
             (b"runFullTrust", b"internetClient"),
-            (b"bin/inkquay.exe", b"other.exe"),
+            (b"bin/Scriblark.exe", b"other.exe"),
             (b"CN=InkQuay-CI-Qualification", b"CN=foreign"),
         ]:
             data = (

@@ -1,10 +1,10 @@
-# InkQuay
+# Scriblark
 
-InkQuay by Trieflow LLC is a GPL-2.0-or-later fork of Xournal++ v1.3.7 (commit 104f89826a9b1e2d0c098cea58639d6686f78526), with a named page-template library, four original vector layouts and checked PDF exports. Product: https://inkquay.trieflow.com · Privacy: https://inkquay.trieflow.com/privacy · Support: https://inkquay.trieflow.com/support.
+Scriblark by Trieflow LLC is a GPL-2.0-or-later fork of Xournal++ v1.3.7 (commit 104f89826a9b1e2d0c098cea58639d6686f78526), with a named page-template library, four original vector layouts and checked PDF exports. Product: https://scriblark.trieflow.com · Privacy: https://scriblark.trieflow.com/privacy · Support: https://scriblark.trieflow.com/support.
 
 The source retains upstream history, copyright and license notices. See `Release/IMPLEMENTATION.md` for actual build/test evidence and remaining release gates. Windows, pen and Store acceptance are separate from local compilation. Audio and Lua plugins are omitted from this release build. No handwriting-to-text recognition or cloud service is provided.
 
-The following upstream documentation is retained for source attribution and file-format reference; upstream distribution links are not InkQuay releases.
+The following upstream documentation is retained for source attribution and file-format reference; upstream distribution links are not Scriblark releases.
 
 # Xournal++
 

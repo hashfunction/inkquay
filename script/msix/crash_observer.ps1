@@ -12,7 +12,7 @@ function Start-InkCrashObserver($State,[string]$SourceRoot) {
         }
         if ([InkQuayQualification.NativePackageProbe]::GetFullName($State.process.Handle) -cne $State.ownedPackageFullName -or
             (Get-CanonicalPath $State.process.MainModule.FileName) -ine $State.verifiedExecutablePath) { throw 'Observer target identity changed.' }
-        $hash=Assert-FileMatchesRecord $State.verifiedExecutablePath (Get-RecordPayloadEntry $State.record 'bin/inkquay.exe') 'Observer target'
+        $hash=Assert-FileMatchesRecord $State.verifiedExecutablePath (Get-RecordPayloadEntry $State.record 'bin/Scriblark.exe') 'Observer target'
         $preflight=Join-Path $SourceRoot 'build-evidence/crash-observer-preflight.json'
         Assert-NoReparsePath $preflight
         if ((Get-Item $preflight).Length -gt 1048576 -or (Get-Content $preflight -Raw|ConvertFrom-Json).passed -ne $true) {

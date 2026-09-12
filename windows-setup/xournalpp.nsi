@@ -1,6 +1,6 @@
-; InkQuay NSIS installation script for Windows
+; Scriblark NSIS installation script for Windows
 ; Author: The Xournal++ Team
-; InkQuay changes copyright 2026 Trieflow LLC.
+; Scriblark changes copyright 2026 Trieflow LLC.
 
 ;--------------------------------
 ; NSIS setup
@@ -35,7 +35,7 @@ Function .onInit
 		SetRegView 64
 	${Else}
 		# 32 bit code
-		MessageBox MB_OK "InkQuay requires 64-bit Windows. Sorry!"
+		MessageBox MB_OK "Scriblark requires 64-bit Windows. Sorry!"
 		Abort
 	${EndIf}
 
@@ -48,7 +48,7 @@ Function un.onInit
 		SetRegView 64
 	${Else}
 		# 32 bit code
-		MessageBox MB_OK "InkQuay requires 64-bit Windows. Sorry!"
+		MessageBox MB_OK "Scriblark requires 64-bit Windows. Sorry!"
 		Abort
 	${EndIf}
 
@@ -56,7 +56,7 @@ Function un.onInit
 FunctionEnd
 
 ; Name and file
-Name "InkQuay ${XOURNALPP_VERSION}"
+Name "Scriblark ${XOURNALPP_VERSION}"
 OutFile "${OUTPUT_INSTALLER_FILE}"
 
 ;--------------------------------
@@ -81,7 +81,7 @@ Var StartMenuFolder
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT "SHCTX"
 !define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\InkQuay"
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "StartMenuEntry"
-!define MUI_STARTMENUPAGE_DEFAULTFOLDER "InkQuay"
+!define MUI_STARTMENUPAGE_DEFAULTFOLDER "Scriblark"
 
 !insertmacro MUI_PAGE_STARTMENU Application $StartMenuFolder
 
@@ -157,7 +157,7 @@ SectionEnd
 	WriteRegStr SHCTX "Software\Classes\${PROGID}\DefaultIcon" "" '"${CMD}",0'
 	WriteRegStr SHCTX "Software\Classes\${PROGID}\shell" "" "open"
 	WriteRegStr SHCTX "Software\Classes\${PROGID}\shell\open\command" "" '"${CMD}" "%1"'
-	WriteRegStr SHCTX "Software\Classes\${PROGID}\shell\edit" "" "Edit with InkQuay"
+	WriteRegStr SHCTX "Software\Classes\${PROGID}\shell\edit" "" "Edit with Scriblark"
 	WriteRegStr SHCTX "Software\Classes\${PROGID}\shell\edit\command" "" '"${CMD}" "%1"'
 !macroend
 
@@ -187,19 +187,19 @@ SectionEnd
 ;-------------------------------
 ; Installer Sections
 
-Section /o "Associate .xopp files with InkQuay" SecFileXopp
+Section /o "Associate .xopp files with Scriblark" SecFileXopp
 	!insertmacro SetDefaultExt ".xopp" "InkQuay.File"
 SectionEnd
 
-Section /o "Associate .xopt files with InkQuay" SecFileXopt
+Section /o "Associate .xopt files with Scriblark" SecFileXopt
 	!insertmacro SetDefaultExt ".xopt" "InkQuay.Template"
 SectionEnd
 
-Section /o "Associate .xoj files with InkQuay" SecFileXoj
+Section /o "Associate .xoj files with Scriblark" SecFileXoj
 	!insertmacro SetDefaultExt ".xoj" "InkQuay.Xournal"
 SectionEnd
 
-Section "InkQuay" SecXournalpp
+Section "Scriblark" SecXournalpp
 	; Required
 	SectionIn RO
 
@@ -212,10 +212,10 @@ Section "InkQuay" SecXournalpp
 	WriteRegStr SHCTX "Software\InkQuay" "" '"$INSTDIR"'
 
 	; Set program information
-	WriteRegStr SHCTX "Software\Classes\Applications\inkquay.exe" "" '"$INSTDIR\bin\inkquay-wrapper.exe"'
-	WriteRegStr SHCTX "Software\Classes\Applications\inkquay.exe" "FriendlyAppName" "InkQuay"
-	WriteRegExpandStr SHCTX "Software\Classes\Applications\inkquay.exe" "DefaultIcon" '"$INSTDIR\bin\inkquay-wrapper.exe",0'
-	WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\App Paths\inkquay.exe" "" '"$INSTDIR\bin\inkquay-wrapper.exe"'
+	WriteRegStr SHCTX "Software\Classes\Applications\inkquay.exe" "" '"$INSTDIR\bin\Scriblark-wrapper.exe"'
+	WriteRegStr SHCTX "Software\Classes\Applications\inkquay.exe" "FriendlyAppName" "Scriblark"
+	WriteRegExpandStr SHCTX "Software\Classes\Applications\inkquay.exe" "DefaultIcon" '"$INSTDIR\bin\Scriblark-wrapper.exe",0'
+	WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\App Paths\inkquay.exe" "" '"$INSTDIR\bin\Scriblark-wrapper.exe"'
 
 	; Add file type information
 	!insertmacro RegisterExt ".xopp" "InkQuay.File"
@@ -223,9 +223,9 @@ Section "InkQuay" SecXournalpp
 	!insertmacro RegisterExt ".xoj" "InkQuay.Xournal"
 	!insertmacro RegisterExt ".pdf" "InkQuay.AnnotatePdf"
 	push $R0
-	StrCpy $R0 "$INSTDIR\bin\inkquay-wrapper.exe"
-	!insertmacro AddProgId "InkQuay.File" "$R0" "InkQuay file"
-	!insertmacro AddProgId "InkQuay.Template" "$R0" "InkQuay template file"
+	StrCpy $R0 "$INSTDIR\bin\Scriblark-wrapper.exe"
+	!insertmacro AddProgId "InkQuay.File" "$R0" "Scriblark file"
+	!insertmacro AddProgId "InkQuay.Template" "$R0" "Scriblark template file"
 	!insertmacro AddProgId "InkQuay.Xournal" "$R0" "Xournal file"
 	!insertmacro AddProgId "InkQuay.AnnotatePdf" "$R0" "PDF file"
 	pop $R0
@@ -233,11 +233,11 @@ Section "InkQuay" SecXournalpp
 	; Create uninstaller
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
 	; Add uninstall entry. See https://docs.microsoft.com/en-us/windows/win32/msi/uninstall-registry-key
-	WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\InkQuay" "DisplayIcon" '"$INSTDIR\bin\inkquay-wrapper.exe"'
-	WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\InkQuay" "DisplayName" "InkQuay"
+	WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\InkQuay" "DisplayIcon" '"$INSTDIR\bin\Scriblark-wrapper.exe"'
+	WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\InkQuay" "DisplayName" "Scriblark"
 	WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\InkQuay" "DisplayVersion" "${XOURNALPP_VERSION}"
 	WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\InkQuay" "Publisher" "Trieflow LLC"
-	WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\InkQuay" "URLInfoAbout" "https://inkquay.trieflow.com"
+	WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\InkQuay" "URLInfoAbout" "https://scriblark.trieflow.com"
 	WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\InkQuay" "InstallLocation" '"$INSTDIR"'
 	WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\InkQuay" "UninstallString" '"$INSTDIR\Uninstall.exe"'
 	WriteRegDWORD SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\InkQuay" "NoModify" 1
@@ -246,10 +246,10 @@ Section "InkQuay" SecXournalpp
 	!insertmacro MUI_STARTMENU_WRITE_BEGIN Application
 		;Create shortcuts
 		CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
-		CreateShortcut "$SMPROGRAMS\$StartMenuFolder\InkQuay.lnk" '"$INSTDIR\bin\inkquay-wrapper.exe"'
+		CreateShortcut "$SMPROGRAMS\$StartMenuFolder\Scriblark.lnk" '"$INSTDIR\bin\Scriblark-wrapper.exe"'
 		CreateShortcut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" '"$INSTDIR\Uninstall.exe"'
 
-		!insertmacro RefreshShellIconCreate "$SMPROGRAMS\$StartMenuFolder\InkQuay.lnk"
+		!insertmacro RefreshShellIconCreate "$SMPROGRAMS\$StartMenuFolder\Scriblark.lnk"
 	!insertmacro MUI_STARTMENU_WRITE_END
 
 	!insertmacro RefreshShellIcons
@@ -259,10 +259,10 @@ SectionEnd
 ; Descriptions
 
 ; Language strings
-LangString DESC_SecXournalpp ${LANG_ENGLISH} "InkQuay executable"
-LangString DESC_SecFileXopp ${LANG_ENGLISH} "Open .xopp files with InkQuay"
-LangString DESC_SecFileXopt ${LANG_ENGLISH} "Open .xopt files with InkQuay"
-LangString DESC_SecFileXoj ${LANG_ENGLISH} "Open .xoj files with InkQuay"
+LangString DESC_SecXournalpp ${LANG_ENGLISH} "Scriblark executable"
+LangString DESC_SecFileXopp ${LANG_ENGLISH} "Open .xopp files with Scriblark"
+LangString DESC_SecFileXopt ${LANG_ENGLISH} "Open .xopt files with Scriblark"
+LangString DESC_SecFileXoj ${LANG_ENGLISH} "Open .xoj files with Scriblark"
 
 ; Assign language strings to sections
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
@@ -300,7 +300,7 @@ Section "Uninstall"
 
 	; Clean up start menu
 	!insertmacro MUI_STARTMENU_GETFOLDER Application $StartMenuFolder
-	Delete "$SMPROGRAMS\$StartMenuFolder\InkQuay.lnk"
+	Delete "$SMPROGRAMS\$StartMenuFolder\Scriblark.lnk"
 	Delete "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk"
 	RMDir "$SMPROGRAMS\$StartMenuFolder"
 
@@ -312,6 +312,6 @@ Section "Uninstall"
 	Delete "$INSTDIR\Uninstall.exe"
 	RMDir "$INSTDIR"
 
-	!insertmacro RefreshShellIconDelete "$SMPROGRAMS\$StartMenuFolder\InkQuay.lnk"
+	!insertmacro RefreshShellIconDelete "$SMPROGRAMS\$StartMenuFolder\Scriblark.lnk"
 	!insertmacro RefreshShellIcons
 SectionEnd

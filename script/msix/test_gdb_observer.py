@@ -12,8 +12,8 @@ import gdb_observer as observer
 
 class ObserverTests(unittest.TestCase):
     def test_exact_inferior_identity_excludes_unrelated_or_multiple_targets(self):
-        expected = {'process_id':42, 'executable':r'C:\owned\inkquay.exe'}
-        valid = '7^done,groups=[{id="i1",type="process",pid="42",executable="C:\\\\owned\\\\inkquay.exe"}]'
+        expected = {'process_id':42, 'executable':r'C:\owned\Scriblark.exe'}
+        valid = '7^done,groups=[{id="i1",type="process",pid="42",executable="C:\\\\owned\\\\Scriblark.exe"}]'
         observer.check_inferior(valid, expected)
         for value in [valid.replace('pid="42"','pid="43"'), valid.replace('owned','other'),
                 valid.replace('}]','},{id="i2",pid="99"}]')]:

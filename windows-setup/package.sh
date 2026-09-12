@@ -12,7 +12,7 @@ else
     build_dir="$(cd "$1"; pwd)"
 fi
 setup_dir_name="dist"  # Same as in xournalpp.nsis
-installer_name="InkQuay-setup.exe"  # Same as in xournalpp.nsis
+installer_name="Scriblark-setup.exe"  # Same as in xournalpp.nsis
 setup_dir="$build_dir/$setup_dir_name"
 script_dir=$(dirname $(readlink -f "$0"))
 echo "Installing to $setup_dir and making installer $build_dir/$installer_name"
@@ -21,7 +21,7 @@ prefix=${MSYSTEM_PREFIX:-/mingw64}
 echo "Set prefix to ${prefix}"
 
 # Only replace the build-owned staging tree, never arbitrary user directories.
-[[ -f "$build_dir/CMakeCache.txt" && -f "$build_dir/inkquay.exe" ]] || { echo "Expected an InkQuay Windows build directory" >&2; exit 1; }
+[[ -f "$build_dir/CMakeCache.txt" && -f "$build_dir/Scriblark.exe" ]] || { echo "Expected an Scriblark Windows build directory" >&2; exit 1; }
 # delete old setup, if there
 echo "clean dist folder"
 rm -rf "$setup_dir"
@@ -34,7 +34,7 @@ echo "copy installed files"
 (cd "$build_dir" && cmake --install . --prefix "$setup_dir")
 
 echo "copy libraries"
-ldd "$build_dir/inkquay.exe" | grep "${prefix}.*\.dll" -o | sort -u | xargs -I{} cp "{}" "$setup_dir"/bin/
+ldd "$build_dir/Scriblark.exe" | grep "${prefix}.*\.dll" -o | sort -u | xargs -I{} cp "{}" "$setup_dir"/bin/
 echo "Installing GTK/Glib translations"
 # Copy system locale files
 for trans in "$build_dir"/po/*.gmo; do
@@ -97,11 +97,11 @@ cp "$script_dir/../LICENSE" "$script_dir/../AUTHORS" "$script_dir/../debian/copy
 # Include package-provided notice directories; the final distribution inventory remains a release gate.
 if [[ -d "$prefix/share/licenses" ]]; then cp -r "$prefix/share/licenses" "$setup_dir/share/inkquay/licenses/msys2"; fi
 python "$script_dir/../script/msix/copy_notice_supplement.py" "$script_dir/.." "$setup_dir"
-python "$script_dir/../script/inventoryWindows.py" "$setup_dir" "$prefix" "$build_dir/inkquay-windows-inventory.json" "$build_dir/inkquay.exe"
+python "$script_dir/../script/inventoryWindows.py" "$setup_dir" "$prefix" "$build_dir/inkquay-windows-inventory.json" "$build_dir/Scriblark.exe"
 
 # Root's MSIX pipeline consumes dist. NSIS is an explicit local packaging option.
 if [[ "${INKQUAY_BUILD_NSIS:-0}" == 1 ]]; then
     version=$(sed -n '1p' "$build_dir/VERSION")
     "/c/Program Files (x86)/NSIS/Bin/makensis.exe" -NOCD -DXOURNALPP_VERSION="$version" -DSETUP_DIR="$setup_dir" -DOUTPUT_INSTALLER_FILE="$build_dir/$installer_name" -DSCRIPT_DIR="$script_dir" "$script_dir/xournalpp.nsi"
 fi
-echo "InkQuay Windows stage ready for independent runtime and package qualification"
+echo "Scriblark Windows stage ready for independent runtime and package qualification"

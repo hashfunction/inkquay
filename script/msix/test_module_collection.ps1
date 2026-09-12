@@ -32,7 +32,7 @@ try {
         $env:SystemRoot=$windowsRoot
         $payload=[pscustomobject]@{}
         $modules=[Collections.Generic.List[object]]::new()
-        foreach ($relative in @('bin/inkquay.exe','bin/libgtk-3-0.dll','bin/libpoppler-glib-8.dll')) {
+        foreach ($relative in @('bin/Scriblark.exe','bin/libgtk-3-0.dll','bin/libpoppler-glib-8.dll')) {
             $path=Join-Path $packageRoot $relative
             [IO.File]::WriteAllText($path,'fixture bytes for '+$relative)
             $payload | Add-Member -NotePropertyName $relative -NotePropertyValue ([pscustomobject]@{
@@ -65,7 +65,7 @@ try {
                 $linked=Join-Path $directory 'linked-package'
                 $linkType=if ($IsWindows) { 'Junction' } else { 'SymbolicLink' }
                 New-Item -ItemType $linkType -Path $linked -Target $packageRoot | Out-Null
-                $modules[0]=[pscustomobject]@{FileName=(Join-Path $linked 'bin/inkquay.exe');ModuleName='inkquay.exe'}
+                $modules[0]=[pscustomobject]@{FileName=(Join-Path $linked 'bin/Scriblark.exe');ModuleName='Scriblark.exe'}
             }
         }
         $fixtureState=[ordered]@{

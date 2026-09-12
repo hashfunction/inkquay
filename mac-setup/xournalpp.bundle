@@ -19,10 +19,10 @@
 
   <plist>${project}/Info.plist</plist>
 
-  <main-binary>${prefix}/bin/inkquay-wrapper</main-binary>
+  <main-binary>${prefix}/bin/Scriblark-wrapper</main-binary>
 
   <binary dest="${bundle}/Contents/MacOS">
-    ${prefix}/bin/inkquay
+    ${prefix}/bin/Scriblark
   </binary>
 
 

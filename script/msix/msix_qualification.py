@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build and independently verify a disposable InkQuay qualification MSIX.
+"""Build and independently verify a disposable Scriblark qualification MSIX.
 
 Copyright 2026 Trieflow LLC. MIT licensed. Derived from TwinQuay qualification
 source 1ee1e1849ad2aad030717b7ba56254197436ea4e, PixelQuay and ReticleQuay;
@@ -35,10 +35,10 @@ ET.register_namespace("rescap", RESCAP_NS)
 QUALIFICATION_IDENTITY = {
     "packageName": "Trieflow.InkQuay.Qualification",
     "publisher": "CN=InkQuay-CI-Qualification",
-    "version": "1.0.0.0",
+    "version": "1.0.1.0",
     "architecture": "x64",
     "applicationId": "InkQuay",
-    "executable": "bin/inkquay.exe",
+    "executable": "bin/Scriblark.exe",
     "deviceFamily": "Windows.Desktop",
     "minVersion": "10.0.19041.0",
     "maxVersionTested": "10.0.26100.0",
@@ -73,7 +73,7 @@ SOURCE_FILES = tuple(SOURCE_COPIES.values()) + (
     "CMakeLists.txt",
 )
 RUNTIME = {
-    "executable": "bin/inkquay.exe",
+    "executable": "bin/Scriblark.exe",
     "gtk": "bin/libgtk-3-0.dll",
     "gio": "bin/libgio-2.0-0.dll",
     "gobject": "bin/libgobject-2.0-0.dll",
@@ -85,7 +85,7 @@ REQUIRED_RELEASE_FILES = (
     tuple(SOURCE_COPIES)
     + tuple(RUNTIME.values())
     + (
-        "bin/inkquay-wrapper.exe",
+        "bin/Scriblark-wrapper.exe",
         "bin/gdbus.exe",
         "bin/libqpdf30.dll",
         "bin/libpoppler-163.dll",
@@ -283,10 +283,10 @@ def source_inputs(source_root):
     if (
         not title
         or 'title = _("Unsaved Document");' not in title[0]
-        or 'title += " - InkQuay";' not in title[0]
+        or 'title += " - Scriblark";' not in title[0]
     ):
         raise ValueError(
-            "Actual application title differs from exact InkQuay qualification title"
+            "Actual application title differs from exact Scriblark qualification title"
         )
     names = tuple(SOURCE_FILES) + tuple(notice_sources(source_root).values())
     return {name: file_record(source_root / name) for name in names}
@@ -322,7 +322,7 @@ def create_input_inventory(release, source_root, source_commit):
         raise ValueError("Missing complete native inventory files/packages")
     source_index = _load_json(source_root / NOTICE_SOURCE / "SOURCE-INPUTS.json", "retained source-input index")
     if (source_index.get("schemaVersion") != 1
-            or source_index.get("sourceUrl") != "https://inkquay.trieflow.com/source"
+            or source_index.get("sourceUrl") != "https://scriblark.trieflow.com/source"
             or not isinstance(source_index.get("nativeOwners"), list)):
         raise ValueError("Invalid retained source-input index")
     source_versions = {}
@@ -333,8 +333,8 @@ def create_input_inventory(release, source_root, source_commit):
             raise ValueError("Invalid or duplicate retained source owner")
         source_versions[owner["package"]] = owner["version"]
     built = {
-        "bin/inkquay.exe": native.get("builtApplication", {}).get("sha256"),
-        "bin/inkquay-wrapper.exe": native.get("builtWrapper", {}).get("sha256"),
+        "bin/Scriblark.exe": native.get("builtApplication", {}).get("sha256"),
+        "bin/Scriblark-wrapper.exe": native.get("builtWrapper", {}).get("sha256"),
     }
     if any(files[name]["sha256"] != sha for name, sha in built.items()):
         raise ValueError("Native inventory does not bind both exact built executables")
@@ -401,9 +401,9 @@ def validate_input_evidence(release, inventory, startup, source_root, source_com
     if (
         receipt.get("source_commit") != source_commit
         or receipt.get("windows_native_startup") is not True
-        or receipt.get("window_title") != "Unsaved Document - InkQuay"
+        or receipt.get("window_title") != "Unsaved Document - Scriblark"
         or str(receipt.get("executable_sha256", "")).lower()
-        != measured["files"]["bin/inkquay.exe"]["sha256"]
+        != measured["files"]["bin/Scriblark.exe"]["sha256"]
         or receipt.get("package_inventory_sha256") != file_record(inventory)["sha256"]
     ):
         raise ValueError(
@@ -427,9 +427,9 @@ def create_manifest():
     )
     properties = ET.SubElement(package, f"{{{APPX_NS}}}Properties")
     for name, value in (
-        ("DisplayName", "InkQuay"),
+        ("DisplayName", "Scriblark"),
         ("PublisherDisplayName", "Trieflow LLC"),
-        ("Description", "InkQuay qualification package"),
+        ("Description", "Scriblark qualification package"),
         ("Logo", r"Assets\StoreLogo.png"),
     ):
         ET.SubElement(properties, f"{{{APPX_NS}}}{name}").text = value
@@ -459,8 +459,8 @@ def create_manifest():
         application,
         f"{{{UAP_NS}}}VisualElements",
         {
-            "DisplayName": "InkQuay",
-            "Description": "InkQuay qualification package",
+            "DisplayName": "Scriblark",
+            "Description": "Scriblark qualification package",
             "BackgroundColor": "#142e38",
             "Square150x150Logo": r"Assets\Square150x150Logo.png",
             "Square44x44Logo": r"Assets\Square44x44Logo.png",
@@ -511,9 +511,9 @@ def validate_manifest(data):
         raise ValueError("Unexpected qualification identity")
     properties = _one(root, f"{{{APPX_NS}}}Properties", "properties")
     expected_properties = {
-        "DisplayName": "InkQuay",
+        "DisplayName": "Scriblark",
         "PublisherDisplayName": "Trieflow LLC",
-        "Description": "InkQuay qualification package",
+        "Description": "Scriblark qualification package",
         "Logo": r"Assets\StoreLogo.png",
     }
     if (
@@ -555,8 +555,8 @@ def validate_manifest(data):
         len(application) != 1
         or visual.attrib
         != {
-            "DisplayName": "InkQuay",
-            "Description": "InkQuay qualification package",
+            "DisplayName": "Scriblark",
+            "Description": "Scriblark qualification package",
             "BackgroundColor": "#142e38",
             "Square150x150Logo": r"Assets\Square150x150Logo.png",
             "Square44x44Logo": r"Assets\Square44x44Logo.png",
@@ -987,7 +987,7 @@ def build_qualification(
         record = stage_release(
             release, artwork, stage, source_commit, inventory, startup, source_root
         )
-        package = temporary / "InkQuay.Qualification_1.0.0.0_x64.msix"
+        package = temporary / "Scriblark.Qualification_1.0.1.0_x64.msix"
         unpacked = temporary / "unpacked"
         commands = [
             [

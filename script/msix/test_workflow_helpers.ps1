@@ -7,14 +7,14 @@ if (-not (Test-Path $helper)) { throw 'Installed consumer workflow driver is mis
 function Check($value,$message) { if (-not $value) { throw $message } }
 function Reject($action) { try { & $action; throw 'accepted invalid fixture' } catch { if ($_.Exception.Message -eq 'accepted invalid fixture') { throw } } }
 function Window($id,$handle,$title,$owner=0) { [pscustomobject]@{ProcessId=$id;Handle=$handle;Title=$title;Owner=$owner;Visible=$true;Enabled=$true;ClassName='gdkWindowToplevel';Width=600;Height=500} }
-$main=Window 44 100 'source.xopp - InkQuay'
+$main=Window 44 100 'source.xopp - Scriblark'
 $dialog=Window 44 101 'Configure new page template' 100
 Check ((Select-InkWorkflowWindow @($main,$dialog) 44 100 'Configure new page template' $true).Handle -eq 101) 'owned dialog omitted'
 Reject { Select-InkWorkflowWindow @($main,(Window 45 102 'Configure new page template' 100)) 44 100 'Configure new page template' $true }
 Reject { Select-InkWorkflowWindow @($main,(Window 44 102 'Configure new page template' 999)) 44 100 'Configure new page template' $true }
 Reject { Select-InkWorkflowWindow @($main,$dialog,$dialog) 44 100 'Configure new page template' $true }
 Reject { Select-InkWorkflowWindow @($main,(Window 44 0 'Configure new page template' 100)) 44 100 'Configure new page template' $true }
-Reject { Select-InkWorkflowWindow @($main,(Window 44 102 'Error' 100)) 44 100 'source.xopp - InkQuay' $false }
+Reject { Select-InkWorkflowWindow @($main,(Window 44 102 'Error' 100)) 44 100 'source.xopp - Scriblark' $false }
 $contract=Get-InkWorkflowContract (Resolve-Path (Join-Path $PSScriptRoot '../..'))
 Check ($contract.configureMenuDown -eq 5) 'source journal menu operation differs'
 Check ($contract.cornellConfig -ceq 'iq=2,m1=166,r1=24') 'source Cornell configuration differs'
@@ -22,7 +22,7 @@ Check ($contract.templateTitle -ceq 'Configure new page template') 'source dialo
 Add-InkWorkflowTypes
 if ($IsWindows) {
     Add-Type -AssemblyName System.Windows.Forms
-    $form=[Windows.Forms.Form]::new();$form.Text='InkQuay qualification native fixture';$form.Width=600;$form.Height=500
+    $form=[Windows.Forms.Form]::new();$form.Text='Scriblark qualification native fixture';$form.Width=600;$form.Height=500
     try {
         $form.Show();[Windows.Forms.Application]::DoEvents()
         $items=@([InkQuayWorkflow.Native]::Windows($PID))

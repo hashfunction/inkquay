@@ -92,7 +92,7 @@ auto ToolbarModel::existsId(const std::string& id) const -> bool {
 }
 
 const char* TOOLBAR_INI_HEADER =
-        "# InkQuay Toolbar configuration\n"
+        "# Scriblark Toolbar configuration\n"
         "# Here you can customize the Toolbars\n"
         " Delete this file to generate a new config file with default values\n"
         "\n"

@@ -56,7 +56,7 @@ class WorkflowFilesTests(unittest.TestCase):
         # Standalone oracle fixtures: independently generated PDF is explicitly not UI output.
         data = self.w.make_pdf(
             [
-                "BT /F1 18 Tf 50 740 Td (InkQuay qualification source) Tj 0 -30 Td (InkQuay owned note) Tj ET",
+                "BT /F1 18 Tf 50 740 Td (Scriblark qualification source) Tj 0 -30 Td (Scriblark owned note) Tj ET",
                 "BT /F1 12 Tf 50 780 Td (Topic / Date Cues Notes Summary) Tj ET 0 0 0 RG 1 w 166 40 m 166 800 l S 40 700 m 555 700 l S 40 650 m 555 650 l S",
             ]
         )
@@ -223,7 +223,7 @@ class WorkflowFilesTests(unittest.TestCase):
         p, report = self.export()
         for streams in (
             ["BT /F1 18 Tf 50 740 Td (wrong text) Tj ET"] * 2,
-            ["BT /F1 18 Tf 50 740 Td (InkQuay qualification source InkQuay owned note) Tj ET"],
+            ["BT /F1 18 Tf 50 740 Td (Scriblark qualification source Scriblark owned note) Tj ET"],
         ):
             data = self.w.make_pdf(streams)
             (self.root / "first.pdf").write_bytes(data)
@@ -238,7 +238,7 @@ class WorkflowFilesTests(unittest.TestCase):
         p, report = self.export()
         data = self.w.make_pdf(
             [
-                "BT /F1 18 Tf 50 740 Td (InkQuay qualification source InkQuay owned note) Tj ET",
+                "BT /F1 18 Tf 50 740 Td (Scriblark qualification source Scriblark owned note) Tj ET",
                 "BT /F1 12 Tf 50 780 Td (Topic / Date Cues Notes Summary) Tj ET",
             ]
         )
@@ -253,7 +253,7 @@ class WorkflowFilesTests(unittest.TestCase):
     def test_missing_blank_render_duplicate_reports_and_links_are_rejected(self):
         p, report = self.export()
         data = self.w.make_pdf(
-            ["BT /F1 18 Tf 50 740 Td (InkQuay qualification source InkQuay owned note) Tj ET", ""]
+            ["BT /F1 18 Tf 50 740 Td (Scriblark qualification source Scriblark owned note) Tj ET", ""]
         )
         (self.root / "first.pdf").write_bytes(data)
         report["outputBytes"] = len(data)
