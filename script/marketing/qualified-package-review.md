@@ -49,3 +49,30 @@ Marketing capture remains pending. Its separate workflow must capture the exact
 bound package through the existing normal UI, retain raw screenshots and output
 facts, then prove its own normal close, uninstall and owned cleanup. This review
 does not certify future screenshots or substitute marketing for qualification.
+
+## First marketing activation correction
+
+Marketing run 34721890864 (capture source
+`663c9f9b02316d37ff3059add4830ba249b4c7ba`) stopped before process activation:
+the capture caller passed one argument to the qualified helper's only public
+`ActivationBroker.Activate(string appUserModelId, string arguments)` overload.
+The native qualification caller already supplies both arguments. The capture
+caller now also supplies `$null` for ordinary startup without arguments.
+
+Original artifact 10306049515 retains `capture-result.json`, 5,128 bytes,
+SHA256 `f687172ed7c4847f0c6f6d8deb6f76ad68f470f5cd23d123691bac6e2bcdbaee`.
+Its inputs/screenshots are empty and captured=false. It records unchanged
+original package bytes, no residual package, restored display, and correctly
+refused demo/profile cleanup because process ownership was never established.
+This failure does not invalidate or rerun either qualified package lifecycle.
+
+The extended existing `test_capture_operations.ps1` compiles the unchanged
+qualified broker to inspect its real signature, then executes the actual
+capture Activate closure with only the COM leaf substituted. It reproduced
+the argument-binding failure before the one-line correction. Afterward one
+attempt reaches the exact AUMID with no startup arguments; the intentional
+leaf failure cannot fabricate a PID, retained process or process ownership.
+All original lifecycle/failure cleanup cases pass. The test's qualified helper
+bytes also matched the successful Store installation receipt. Fresh Windows
+marketing capture remains pending; no package/source binding or acceptance
+gate changed.

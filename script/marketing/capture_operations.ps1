@@ -47,7 +47,7 @@ function New-ScribCaptureOperations($State,$Bound,[string]$InputRoot,[string]$Qu
         }.GetNewClosure()
         Activate={
             Add-InkQuayActivationTypes;$State.stopped=$false
-            $State.brokerPid=[int][InkQuayQualification.ActivationBroker]::Activate('1659hashfunction.InkQuay_r3hxytd7jt6c4!InkQuay')
+            $State.brokerPid=[int][InkQuayQualification.ActivationBroker]::Activate('1659hashfunction.InkQuay_r3hxytd7jt6c4!InkQuay',$null)
             $State.process=[Diagnostics.Process]::GetProcessById($State.brokerPid);$null=$State.process.SafeHandle
             Assert-ScribCaptureProcess $State;$State.processOwned=$true
             $deadline=[DateTime]::UtcNow.AddSeconds(30)

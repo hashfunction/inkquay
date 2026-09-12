@@ -21,3 +21,32 @@ foreach($name in $names){$ops[$name]={ $script:calls.Add($name);if($name -cin @(
 $r=Invoke-ScribCaptureLifecycle $ops
 Check ($r.primary_error -match 'original Workflow' -and $r.cleanup_errors.Count -eq 2 -and $script:calls[-1] -ceq 'RemoveTemporary') 'Cleanup failure hid original or skipped later cleanup'
 'PASS original helper loading, normal capture, six phase failures and continued cleanup after multiple failures.'
+
+# Compile the unchanged qualified broker solely to inspect its real contract;
+# substitute only its COM activation leaf when invoking the actual capture caller.
+Add-InkQuayActivationTypes
+$method=[InkQuayQualification.ActivationBroker].GetMethod('Activate',[type[]]@([string],[string]))
+Check ($null -ne $method -and $method.ReturnType -eq [uint32]) 'Qualified activation contract changed'
+Add-Type -TypeDefinition @'
+namespace ScribCaptureActivationReplay {
+ public static class Broker {
+  public static int Calls;
+  public static string Aumid, Arguments;
+  public static uint Activate(string appUserModelId,string arguments) {
+   Calls++;Aumid=appUserModelId;Arguments=arguments;
+   throw new System.InvalidOperationException("activation-leaf-test-stop");
+  }
+ }
+}
+'@
+$production=Get-Content (Join-Path $PSScriptRoot 'capture_operations.ps1') -Raw
+. ([scriptblock]::Create($production.Replace('[InkQuayQualification.ActivationBroker]','[ScribCaptureActivationReplay.Broker]')))
+$state=@{stopped=$true;processOwned=$false};$ops=New-ScribCaptureOperations $state @{} 'unused-inputs' $QualifiedSource
+$failure=''
+try{& $ops.Activate}catch{$failure=$_.Exception.ToString()}
+Check ($failure -match 'activation-leaf-test-stop') 'Actual capture caller did not bind the qualified two-argument broker contract'
+Check ([ScribCaptureActivationReplay.Broker]::Calls -eq 1 -and
+    [ScribCaptureActivationReplay.Broker]::Aumid -ceq '1659hashfunction.InkQuay_r3hxytd7jt6c4!InkQuay' -and
+    [string]::IsNullOrEmpty([ScribCaptureActivationReplay.Broker]::Arguments)) 'Unexpected activation identity, arguments or replay'
+Check (-not $state.stopped -and -not $state.processOwned -and -not $state.ContainsKey('process')) 'Failed activation fabricated process ownership'
+'PASS actual capture activation caller, exact qualified broker signature, one normal activation attempt and failure ownership preservation.'
