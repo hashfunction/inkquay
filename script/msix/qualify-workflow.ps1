@@ -22,6 +22,8 @@ function Get-InkWorkflowContract([string]$Source) {
     if($file.Count -ne 1){throw 'Exact File menu mnemonic source contract changed.'}
     $export=@($file[0].SelectNodes('section/item') | Where-Object { @($_.attribute | Where-Object name -eq 'action').'#text' -ceq 'win.export-as-pdf' })
     if($export.Count -ne 1 -or @($export[0].attribute | Where-Object name -eq 'label').'#text' -cne '_Export as PDF') { throw 'Exact Export as PDF mnemonic source contract changed.' }
+    if(@($export[0].attribute | Where-Object name -eq 'accel').'#text' -cne '<Ctrl><Alt>e'){throw 'Direct PDF export keyboard shortcut source contract changed.'}
+    if(@($menus.SelectNodes("//attribute[@name='accel']")|Where-Object InnerText -ceq '<Ctrl><Alt>e').Count -ne 1){throw 'Direct PDF shortcut conflicts with another menu action.'}
     $journal=@($menus.interface.menu.submenu | Where-Object { @($_.attribute | Where-Object name -eq 'label').'#text' -ceq '_Journal' })
     $items=@($journal[0].section[0].item)
     $index=-1
@@ -35,7 +37,7 @@ function Get-InkWorkflowContract([string]$Source) {
     [xml]$ui=Get-Content (Join-Path $Source 'ui/pageTemplate.glade') -Raw -Encoding utf8
     $title=[string]$ui.SelectSingleNode("//object[@id='templateDialog']/property[@name='title']").InnerText
     if($title -cne 'Configure new page template'){throw 'Template dialog title changed.'}
-    return @{configureMenuDown=$index;cornellIndex=$preset;cornellConfig='iq=2,m1=166,r1=24';templateTitle=$title;fileMnemonic='%f';exportMnemonic='e'}
+    return @{configureMenuDown=$index;cornellIndex=$preset;cornellConfig='iq=2,m1=166,r1=24';templateTitle=$title;fileMnemonic='%f';exportMnemonic='e';pdfExportShortcut='^%e'}
 }
 function Invoke-InkExportMenuSequence([ValidateSet('first','reopened')][string]$Name,$Contract,[scriptblock]$Observe,[scriptblock]$Send,[scriptblock]$DiagnosticError) {
     try {
@@ -150,13 +152,14 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
         }while([DateTime]::UtcNow -lt $deadline)
         throw $last
     }
-    function Keys($Window,[string]$Keys,[string]$Action,[switch]$PreserveMenuFocus) {
+    function Keys($Window,[string]$Keys,[string]$Action,[switch]$DirectPdfExport) {
         $result.active_operation=@{kind='input';action=$Action;title=$Window.Title;at_utc=[DateTime]::UtcNow.ToString('o')}
         Assert-Live
-        if($PreserveMenuFocus) {
+        if($DirectPdfExport) {
+            if($Keys -cne $contract.pdfExportShortcut){throw 'Unreviewed direct PDF shortcut'}
             $fresh=[InkQuayWorkflow.Native]::InspectInput([IntPtr]$Window.Handle,$State.process.Id)
             [InkQuayWorkflow.Native]::AssertExportInput($fresh,$Window.Title)
-            $nativeEvents=[InkQuayWorkflow.Native]::SendExportKeys([IntPtr]$Window.Handle,$State.process.Id,$Window.Title,$Keys)
+            $nativeEvents=[InkQuayWorkflow.Native]::SendPdfExportKeys([IntPtr]$Window.Handle,$State.process.Id,$Window.Title)
         } else {
             [InkQuayWorkflow.Native]::Focus([IntPtr]$Window.Handle,$State.process.Id)
             [Windows.Forms.SendKeys]::SendWait($Keys)
@@ -221,9 +224,15 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
             $item=Write-InkExportMenuObservation $State $main $evidence $Mode $Phase
             $result.export_menu_observations.Add($item)
         }
-        $menuSend={param($Mnemonic,$Action) Keys $exportWindow $Mnemonic $Action -PreserveMenuFocus}
-        $menuError={param($ErrorText) $result.export_menu_diagnostic_errors.Add($ErrorText.Substring(0,[Math]::Min(2048,$ErrorText.Length)))}
-        Invoke-InkExportMenuSequence $Mode $contract $menuObserve $menuSend $menuError
+        try {
+            & $menuObserve 'before-shortcut'
+            Keys $exportWindow $contract.pdfExportShortcut ('export-'+$name) -DirectPdfExport
+            & $menuObserve 'after-shortcut'
+        } catch {
+            $original=$_
+            try {& $menuObserve 'input-failure'} catch {$result.export_menu_diagnostic_errors.Add($_.Exception.ToString())}
+            throw $original
+        }
         Choose 'Export File' (Join-Path $root $name)
         $deadline=[DateTime]::UtcNow.AddSeconds(30)
         do { Assert-Live; $reports=@(Get-ChildItem -LiteralPath $root -Filter ($name+'.*.inkquay-report.json'));if($reports.Count){break};Start-Sleep -Milliseconds 200 }while([DateTime]::UtcNow -lt $deadline)

@@ -33,7 +33,6 @@ EVENTS = [
     ("save-new-note", "*source.xopp - Scriblark"),
     ("chooser-location", "Save File"),
     ("choose-saved.xopp", "Save File"),
-    ("open-export-menu-first.pdf", "saved.xopp - Scriblark"),
     ("export-first.pdf", "saved.xopp - Scriblark"),
     ("chooser-location", "Export File"),
     ("choose-first.pdf", "Export File"),
@@ -41,7 +40,6 @@ EVENTS = [
     ("open-first.pdf", "saved.xopp - Scriblark"),
     ("chooser-location", "Open file"),
     ("choose-first.pdf", "Open file"),
-    ("open-export-menu-reopened.pdf", "first.pdf - Scriblark"),
     ("export-reopened.pdf", "first.pdf - Scriblark"),
     ("chooser-location", "Export File"),
     ("choose-reopened.pdf", "Export File"),
@@ -403,8 +401,8 @@ def _validate_installation(folder, record, source, context, mode, tool_directory
         )
         if title and title.endswith(" - Scriblark"):
             require(event["handle"] == main, "Input main HWND changed")
-        if action.startswith(("open-export-menu-", "export-")):
-            expected_count = 4 if action.startswith("open-") else 2
+        if action.startswith("export-"):
+            expected_count = 6
             require(event.get("native_input_method") == "SendInput"
                     and type(event.get("native_sendinput_events")) is int
                     and event["native_sendinput_events"] == expected_count,

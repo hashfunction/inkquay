@@ -107,6 +107,17 @@ namespace InkQuayWorkflow {
                 return new[] {new ExportKey(0x45,false),new ExportKey(0x45,true)};
             throw new InvalidOperationException("Export mnemonic requires its exact observed menu state");
         }
+        public static ExportKey[] PlanPdfExportKeys(InputState state, string title) {
+            AssertExportInput(state,title);
+            if(state.AltDown || state.ControlDown || state.ShiftDown || state.WindowsKeyDown ||
+               state.ForegroundHandle!=state.MainHandle || state.Windows.Length!=1)
+                throw new InvalidOperationException("Direct PDF shortcut requires the sole owned editor and released modifiers");
+            return new[] {new ExportKey(0x11,false),new ExportKey(0x12,false),new ExportKey(0x45,false),
+                          new ExportKey(0x45,true),new ExportKey(0x12,true),new ExportKey(0x11,true)};
+        }
+        public static int SendPdfExportKeys(IntPtr main,int expectedPid,string title) {
+            return EmitExportKeys(PlanPdfExportKeys(InspectInput(main,expectedPid),title));
+        }
         // One SendInput call inserts the complete native chord in order. This
         // avoids SendKeys' opaque cross-call keyboard-state handling. It does
         // not prove GTK handled the chord; the following owned dialog must open.

@@ -37,6 +37,7 @@
     <item>
      <attribute name="label" translatable="yes">_Export as PDF</attribute>
      <attribute name="action">win.export-as-pdf</attribute>
+     <attribute name="accel">&lt;Ctrl&gt;&lt;Alt&gt;e</attribute>
     </item>
     <item>
      <attribute name="label" translatable="yes">Export as...</attribute>

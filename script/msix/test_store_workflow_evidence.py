@@ -125,9 +125,9 @@ class WorkflowTests(unittest.TestCase):
             for i, (action, title) in enumerate(policy.EVENTS)
         ]
         for event in events:
-            if event['action'].startswith(('open-export-menu-', 'export-')):
+            if event['action'].startswith('export-'):
                 event['native_input_method'] = 'SendInput'
-                event['native_sendinput_events'] = 4 if event['action'].startswith('open-') else 2
+                event['native_sendinput_events'] = 6
         self.workflow = {
             "schema_version": 1,
             **self.context,
@@ -388,7 +388,7 @@ class WorkflowTests(unittest.TestCase):
             self.check()
 
     def test_complete_independent_replay(self):
-        self.assertEqual(self.check()["input_events"], 27)
+        self.assertEqual(self.check()["input_events"], 25)
 
     def test_mingw_path_rendering_preserves_complete_receipt_and_refusals(self):
         with patch.object(policy, "PureWindowsPath", MinGWRenderedWindowsPath):
@@ -396,7 +396,7 @@ class WorkflowTests(unittest.TestCase):
                 policy.winpath(r"C:\Program Files\WindowsApps\Package\bin\App.exe"),
                 r"c:\program files\windowsapps\package\bin\app.exe",
             )
-            self.assertEqual(self.check()["input_events"], 27)
+            self.assertEqual(self.check()["input_events"], 25)
             rows = json.loads((self.folder / "loaded-modules.json").read_text())
             for origin in ("WindowsAppsBackup", "foreign"):
                 changed = copy.deepcopy(rows)
@@ -406,18 +406,16 @@ class WorkflowTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "Noncanonical"):
                 policy.winpath(r"C:\owned\..\foreign\App.exe")
 
-    def test_export_menu_inputs_are_exact_one_shot_pairs(self):
+    def test_direct_export_inputs_are_exact_one_shot_actions(self):
         self.assertEqual(
             [x for x in policy.EVENTS if "export-" in x[0] and "report" not in x[0]],
             [
-                ("open-export-menu-first.pdf", "saved.xopp - Scriblark"),
                 ("export-first.pdf", "saved.xopp - Scriblark"),
-                ("open-export-menu-reopened.pdf", "first.pdf - Scriblark"),
                 ("export-reopened.pdf", "first.pdf - Scriblark"),
             ],
         )
         original = copy.deepcopy(self.workflow)
-        for action in ("open-export-menu-first.pdf", "open-export-menu-reopened.pdf"):
+        for action in ("export-first.pdf", "export-reopened.pdf"):
             for mutation in ("omit", "replay", "reorder", "wrong-title"):
                 self.workflow = copy.deepcopy(original)
                 events = self.workflow["events"]
@@ -438,10 +436,9 @@ class WorkflowTests(unittest.TestCase):
 
     def test_native_export_emission_requires_typed_complete_event_counts(self):
         original = copy.deepcopy(self.workflow)
-        for action in ('open-export-menu-first.pdf', 'export-first.pdf',
-                       'open-export-menu-reopened.pdf', 'export-reopened.pdf'):
+        for action in ('export-first.pdf', 'export-reopened.pdf'):
             for field, value in [('native_sendinput_events', None), ('native_sendinput_events', True),
-                                 ('native_sendinput_events', 0), ('native_sendinput_events', 3),
+                                 ('native_sendinput_events', 0), ('native_sendinput_events', 2), ('native_sendinput_events', 4),
                                  ('native_input_method', 'SendKeys')]:
                 self.workflow = copy.deepcopy(original)
                 next(e for e in self.workflow['events'] if e['action'] == action)[field] = value

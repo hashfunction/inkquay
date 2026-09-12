@@ -58,6 +58,18 @@ if ($IsWindows) {
         do {[Windows.Forms.Application]::DoEvents();[Threading.Thread]::Sleep(20)}while($script:nativeExportHits -eq 0 -and [DateTime]::UtcNow -lt $deadline)
         Check ($script:nativeExportHits -eq 1 -and -not $fileMenu.DropDown.Visible) 'Native fixture Export action did not occur exactly once'
         Write-Output 'PASS actual native SendInput File/Export delivery, four/two inserted events and one fixture action.'
+        $exportMenu.ShortcutKeys=[Windows.Forms.Keys]::Control -bor [Windows.Forms.Keys]::Alt -bor [Windows.Forms.Keys]::E
+        foreach($expectedHits in @(2,3)) {
+            [void]$edit.Focus();[Windows.Forms.Application]::DoEvents()
+            $argsForEmit[0]=[InkQuayWorkflow.ExportKey[]]@([InkQuayWorkflow.ExportKey]::new(17,$false),[InkQuayWorkflow.ExportKey]::new(18,$false),[InkQuayWorkflow.ExportKey]::new(69,$false),[InkQuayWorkflow.ExportKey]::new(69,$true),[InkQuayWorkflow.ExportKey]::new(18,$true),[InkQuayWorkflow.ExportKey]::new(17,$true))
+            Check ($emit.Invoke($null,$argsForEmit) -eq 6) 'Direct PDF shortcut native event count differs'
+            $deadline=[DateTime]::UtcNow.AddSeconds(3)
+            do {[Windows.Forms.Application]::DoEvents();[Threading.Thread]::Sleep(20)}while($script:nativeExportHits -lt $expectedHits -and [DateTime]::UtcNow -lt $deadline)
+            Check ($script:nativeExportHits -eq $expectedHits) 'Direct shortcut did not invoke exactly one native fixture action'
+            $observed=[InkQuayWorkflow.Native]::InspectInput($form.Handle,$PID)
+            Check (-not $observed.ControlDown -and -not $observed.ShiftDown -and -not $observed.AltDown -and -not $observed.WindowsKeyDown) 'Shortcut left a modifier pressed'
+        }
+        Write-Output 'PASS two consecutive native Ctrl+Alt+E invocations, six events each, released modifiers and exactly one action each.'
         $popup=[Windows.Forms.Form]::new();$popup.Text='Owned observer popup fixture'
         try {
             $popup.Show($form);[Windows.Forms.Application]::DoEvents()
