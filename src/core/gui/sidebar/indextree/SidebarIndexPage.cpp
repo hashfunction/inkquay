@@ -1,4 +1,5 @@
 #include "SidebarIndexPage.h"
+#include "BookmarkFocus.h"
 
 #include <cstring>  // for strlen
 
@@ -82,7 +83,7 @@ void SidebarIndexPage::treeBookmarkSelected(GtkTreeView* treeview, SidebarIndexP
         return;
     }
 
-    gtk_widget_grab_focus(GTK_WIDGET(treeview));
+    xoj::gui::focusBookmarkTree(treeview);
 
     GtkTreeSelection* selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
 
