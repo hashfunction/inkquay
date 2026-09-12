@@ -80,19 +80,23 @@ def run_case(gdb, executable, case):
 
 def main(output):
     observer.require(sys.platform == 'win32' and os.environ.get('CI') == 'true', 'Live fixture requires Windows CI')
-    gdb = observer.verified_debugger()
-    gcc = Path(sys.executable).parent/'gcc.exe'
-    source = Path(__file__).resolve().parents[2]
-    packages = (source/'build-evidence/msys2-installed-packages.txt').read_text()
-    rows = re.findall(r'^mingw-w64-x86_64-gdb ([^\r\n]+)$',packages,re.M)
-    observer.require(len(rows) == 1 and gcc.parent.parent.name.lower() == 'mingw64', 'Native build compiler is not in recorded MINGW64 inputs')
-    initial = observer.fingerprint(gdb)
     result = {'schema_version':1, 'diagnostic_observer_fixture':True, 'passed':False, 'cases':[], 'results':[],
-        'fingerprint':initial, 'reference_gdb_package_version':rows[0], 'diagnostic_gdb_source_version':'17.2', 'gcc_sha256':observer.sha(gcc),
-        'package_list_sha256':observer.sha(source/'build-evidence/msys2-installed-packages.txt'),
+        'fingerprint':None, 'reference_gdb_package_version':None, 'diagnostic_gdb_source_version':'17.2', 'gcc_sha256':None,
+        'package_list_sha256':None,
         'source_commit':os.environ.get('GITHUB_SHA'), 'workflow_run_id':os.environ.get('GITHUB_RUN_ID'),
         'workflow_run_attempt':os.environ.get('GITHUB_RUN_ATTEMPT'), 'error':None, 'at_utc':observer.utc()}
     try:
+        # Setup can fail before any native fixture is launched. Retain that
+        # exact secondary diagnostic error; passed=False still prohibits attach.
+        gdb = observer.verified_debugger()
+        gcc = Path(sys.executable).parent/'gcc.exe'
+        source = Path(__file__).resolve().parents[2]
+        packages = (source/'build-evidence/msys2-installed-packages.txt').read_text()
+        rows = re.findall(r'^mingw-w64-x86_64-gdb ([^\r\n]+)$',packages,re.M)
+        observer.require(len(rows) == 1 and gcc.parent.parent.name.lower() == 'mingw64', 'Native build compiler is not in recorded MINGW64 inputs')
+        initial = observer.fingerprint(gdb)
+        result.update(fingerprint=initial,reference_gdb_package_version=rows[0],gcc_sha256=observer.sha(gcc),
+            package_list_sha256=observer.sha(source/'build-evidence/msys2-installed-packages.txt'))
         with tempfile.TemporaryDirectory(prefix='ink-observer-fixture-') as directory:
             executable = Path(directory)/'observer-fixture.exe'
             subprocess.run([str(gcc),'-g','-O0',str(Path(__file__).with_name('observer_fixture.c')),'-o',str(executable)],

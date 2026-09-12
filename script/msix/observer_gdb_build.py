@@ -9,6 +9,7 @@ import os
 from pathlib import Path,PurePosixPath
 import re
 import shutil
+import struct
 import subprocess
 import sys
 import tarfile
@@ -17,7 +18,9 @@ from msix_qualification import _regular_stream,_reject_link
 
 ROOT=Path(__file__).resolve().parents[2]
 BUILD=ROOT/'build-observer-gdb'
-TOOL=BUILD/'build/gdb/gdb.exe'
+# MinGW Libtool emits build/gdb/gdb.exe as a launcher, not the debugger
+# process we must retain. Only these two documented real output names exist.
+TOOL_RELATIVE_PATHS=('build/gdb/.libs/gdb.exe','build/gdb/.libs/lt-gdb.exe')
 RECORD=ROOT/'build-evidence/crash-observer-tool.json'
 GNU_SOURCE={'url':'https://ftp.gnu.org/gnu/gdb/gdb-17.2.tar.xz','version':'17.2','bytes':24658624,
     'sha256':'1c036c0d72e4b3d1fb5c94c88632add6f9d76f4d7c4d2ea793c12a9f19a3228c','license':'GPL-3.0-or-later'}
@@ -48,6 +51,29 @@ def file_record(path):
         result=hashlib.sha256();size=0
         for chunk in iter(lambda:stream.read(1048576),b''):result.update(chunk);size+=len(chunk)
     return {'bytes':size,'sha256':result.hexdigest()}
+
+
+def resolve_tool():
+    candidates=[]
+    for directory in (BUILD,BUILD/'build',BUILD/'build/gdb',BUILD/'build/gdb/.libs'):
+        try:_reject_link(directory)
+        except FileNotFoundError:pass
+    for relative in TOOL_RELATIVE_PATHS:
+        path=BUILD/relative
+        try:_reject_link(path)
+        except FileNotFoundError:continue
+        candidates.append(path)
+    require(len(candidates)==1,'Expected exactly one real Libtool diagnostic executable; launcher is never selected')
+    tool=candidates[0]
+    with _regular_stream(tool) as stream:
+        dos=stream.read(64)
+        require(len(dos)==64 and dos[:2]==b'MZ','Diagnostic executable lacks a native PE header')
+        offset=struct.unpack_from('<I',dos,60)[0];require(64<=offset<=1048576,'Diagnostic PE offset exceeds bound')
+        stream.seek(offset);header=stream.read(26)
+        require(len(header)==26 and header[:4]==b'PE\0\0' and struct.unpack_from('<H',header,4)[0]==0x8664
+            and struct.unpack_from('<H',header,24)[0]==0x20b and struct.unpack_from('<H',header,22)[0]&0x2002==2,
+            'Diagnostic tool must be a native AMD64 PE executable')
+    return tool
 
 
 def read_json(path):
@@ -117,8 +143,8 @@ def prepare():
     require(file_record(native)['sha256']==PATCHED_SHA256,'Patched GNU source differs')
 
 
-def runtime_files():
-    prefix=Path(sys.executable).parent;pending=[TOOL];found={};seen=set()
+def runtime_files(tool):
+    prefix=Path(sys.executable).parent;pending=[tool];found={};seen=set()
     while pending:
         item=pending.pop();name=item.name.lower()
         if name in seen:continue
@@ -134,12 +160,13 @@ def runtime_files():
     return found
 
 
-def validate_record(value,inputs,tool,commit,run,attempt):
+def validate_record(value,inputs,tool,commit,run,attempt,relative_tool):
     require(type(value.get('schema_version')) is int and value['schema_version']==1 and value.get('built') is True
         and value.get('diagnostic_only') is True and value.get('consumer_acceptance') is False and value.get('error') is None
         and value.get('source_commit')==commit and value.get('workflow_run_id')==run and value.get('workflow_run_attempt')==attempt
         and value.get('gnu_source')==GNU_SOURCE and value.get('source_before_sha256')==WINDOWS_NAT_SHA256
-        and value.get('source_after_sha256')==PATCHED_SHA256 and value.get('inputs')==inputs and value.get('tool')==tool,
+        and value.get('source_after_sha256')==PATCHED_SHA256 and value.get('inputs')==inputs and value.get('tool')==tool
+        and relative_tool in TOOL_RELATIVE_PATHS and value.get('tool_relative_path')==relative_tool,
         'Diagnostic GDB build/source/patch/dependency/tool receipt differs')
 
 
@@ -149,7 +176,9 @@ def finish(exit_code):
         require(exit_code==0,'Diagnostic configure/build failed with exit '+str(exit_code))
         require(build_inputs()==value['inputs'],'Recorded diagnostic build inputs changed')
         require(file_record(BUILD/'source/gdb-17.2/gdb/windows-nat.c')['sha256']==PATCHED_SHA256,'Built attach source changed')
-        value.update(tool=file_record(TOOL),runtime_files=runtime_files(),source_before_sha256=WINDOWS_NAT_SHA256,source_after_sha256=PATCHED_SHA256,
+        tool=resolve_tool();runtime=runtime_files(tool)
+        require(runtime and len(runtime)<=64,'Diagnostic runtime binding is absent or exceeds bound')
+        value.update(tool=file_record(tool),tool_relative_path=tool.relative_to(BUILD).as_posix(),runtime_files=runtime,source_before_sha256=WINDOWS_NAT_SHA256,source_after_sha256=PATCHED_SHA256,
             license_file=file_record(BUILD/'source/gdb-17.2/COPYING3'),built=True,error=None)
     except Exception as error:value.update(built=False,error=str(error)[:2048])
     value['finished_at_utc']=datetime.now(timezone.utc).isoformat()
@@ -159,17 +188,17 @@ def finish(exit_code):
             value[label+'_log']=file_record(log)
             with log.open('rb') as stream:stream.seek(max(0,log.stat().st_size-32768));value[label+'_log_tail']=stream.read(32768).decode('utf-8',errors='replace')
     write_json(RECORD,value)
-    require(value['built'],'Diagnostic GDB unavailable: '+value['error'])
+    if not value['built']:raise ValueError('Diagnostic GDB unavailable: '+value['error'])
 
 
 def verified_debugger():
-    value=read_json(RECORD)
-    validate_record(value,build_inputs(),file_record(TOOL),os.environ.get('GITHUB_SHA'),os.environ.get('GITHUB_RUN_ID'),os.environ.get('GITHUB_RUN_ATTEMPT'))
+    value=read_json(RECORD);tool=resolve_tool()
+    validate_record(value,build_inputs(),file_record(tool),os.environ.get('GITHUB_SHA'),os.environ.get('GITHUB_RUN_ID'),os.environ.get('GITHUB_RUN_ATTEMPT'),tool.relative_to(BUILD).as_posix())
     require(value.get('runtime_files') and len(value['runtime_files'])<=64,'Diagnostic runtime binding is absent')
     prefix=Path(sys.executable).parent.resolve()
     for name,expected in value['runtime_files'].items():
         path=Path(name);require(path.parent.resolve()==prefix and path.suffix.lower()=='.dll' and file_record(path)==expected,'Diagnostic runtime bytes differ')
-    return TOOL.resolve()
+    return tool.resolve()
 
 
 if __name__=='__main__':
