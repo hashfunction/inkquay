@@ -11,3 +11,6 @@ Release/verification/*.log -text -whitespace
 # Original upstream notices must retain their exact archived bytes, including
 # any CRLF endings and trailing spaces, under Git for Windows and MSYS Git.
 /Release/notice-supplement/originals/** -text -whitespace
+
+# Preserve original Windows observations used by the export input regression.
+/script/msix/fixtures/scriblark-34695588044-*.json -text -whitespace
