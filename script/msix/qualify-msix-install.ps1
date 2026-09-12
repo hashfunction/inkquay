@@ -483,6 +483,8 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         Start-Sleep -Seconds 3
         $state.process.Refresh()
         if ($state.process.HasExited -or $state.process.MainWindowHandle -eq 0 -or $state.process.MainWindowTitle -cne 'Unsaved Document - InkQuay') { throw 'Activated InkQuay did not survive the stable-window interval.' }
+        # Keep this block in the activation operation's captured state scope.
+        # GetNewClosure here creates another module and loses the inherited state.
         $collectModules = { param([string]$EvidenceName)
             $installRoot = Get-CanonicalPath $state.installed.InstallLocation
             $windowsRoot = Get-CanonicalPath $env:SystemRoot
@@ -515,7 +517,7 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
             foreach ($relative in $requiredRuntime.Keys) { if (-not $requiredRuntime[$relative]) { throw "Activated process did not load required packaged GTK/Poppler runtime: $relative" } }
             $state.modules = @($modules)
             Write-NewUtf8Json (Join-Path $state.output $EvidenceName) $state.modules
-        }.GetNewClosure()
+        }
         & $collectModules 'loaded-modules.json'
         $state.window = Get-WindowQualification $state.process $state.output
         . (Join-Path $PSScriptRoot 'qualify-workflow.ps1')
