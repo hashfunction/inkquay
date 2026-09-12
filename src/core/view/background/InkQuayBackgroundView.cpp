@@ -3,8 +3,11 @@
 
 #include <algorithm>
 
+#include <pango/pangocairo.h>
+
 #include "model/BackgroundConfig.h"
 #include "util/Color.h"
+#include "util/raii/GObjectSPtr.h"
 using namespace xoj::view;
 InkQuayBackgroundView::InkQuayBackgroundView(double w, double h, Color color, const BackgroundConfig& config,
                                              int layout):
@@ -20,12 +23,22 @@ void InkQuayBackgroundView::draw(cairo_t* cr) const {
         cairo_move_to(cr, x, y);
         cairo_line_to(cr, endX, endY);
     };
+    // Match document text's per-thread Pango backend (FontConfig on Windows).
+    // Cairo's toy DirectWrite font can share a single-threaded D2D factory with the UI.
+    xoj::util::GObjectSPtr<PangoLayout> labels(pango_cairo_create_layout(cr), xoj::util::adopt);
+    auto* context = pango_layout_get_context(labels.get());
+    pango_context_set_round_glyph_positions(context, false);
+    pango_context_set_matrix(context, nullptr);
+    auto* font = pango_font_description_from_string("Sans");
+    pango_font_description_set_absolute_size(font, 10 * PANGO_SCALE);
+    pango_layout_set_font_description(labels.get(), font);
+    pango_font_description_free(font);
     auto label = [&](double x, double y, const char* text) {
-        cairo_move_to(cr, x, y);
-        cairo_show_text(cr, text);
+        pango_layout_set_text(labels.get(), text, -1);
+        double baseline = static_cast<double>(pango_layout_get_baseline(labels.get())) / PANGO_SCALE;
+        cairo_move_to(cr, x, y - baseline);
+        pango_cairo_show_layout(cr, labels.get());
     };
-    cairo_select_font_face(cr, "Sans", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
-    cairo_set_font_size(cr, 10);
     if (layout == 1) {
         label(36, 36, "Meeting / Date");
         line(36, 50, 564, 50);
