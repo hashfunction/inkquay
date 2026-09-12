@@ -403,6 +403,12 @@ def _validate_installation(folder, record, source, context, mode, tool_directory
         )
         if title and title.endswith(" - Scriblark"):
             require(event["handle"] == main, "Input main HWND changed")
+        if action.startswith(("open-export-menu-", "export-")):
+            expected_count = 4 if action.startswith("open-") else 2
+            require(event.get("native_input_method") == "SendInput"
+                    and type(event.get("native_sendinput_events")) is int
+                    and event["native_sendinput_events"] == expected_count,
+                    "Native export chord insertion is incomplete or unobserved")
         instant = datetime.fromisoformat(
             re.sub(r"(\.\d{6})\d+(?=Z|[+-])", r"\1", event["at_utc"]).replace(
                 "Z", "+00:00"

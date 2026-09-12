@@ -80,3 +80,40 @@ foreach($mutation in @('foreign-foreground','foreign-focus','missing-focus','wro
     Check $rejected ('Native input guard accepted '+$mutation)
 }
 Write-Output 'PASS: both source-backed one-shot export sequences, six failure boundaries each, secondary-error retention, main/owned-popup focus and twelve negative native guards, and four source contract mutations.'
+
+# Never send the Export mnemonic into the unchanged reopened editor.
+$plan=[InkQuayWorkflow.Native]::PlanExportKeys((State),'first.pdf - Scriblark','%f')
+Check ((($plan | ForEach-Object {"$($_.VirtualKey):$($_.KeyUp)"}) -join ',') -ceq '18:False,70:False,70:True,18:True') 'File chord key plan differs'
+$missingMenu=$false;try{[void][InkQuayWorkflow.Native]::PlanExportKeys((State),'first.pdf - Scriblark','e')}catch{$missingMenu=$true}
+Check $missingMenu 'Export mnemonic accepted without an observed owned GTK menu'
+$menu=State;$menu.Windows+=NativeWindow 101 100 'gdkWindowTemp';$menu.Windows[1].Title='com.trieflow.inkquay'
+$plan=[InkQuayWorkflow.Native]::PlanExportKeys($menu,'first.pdf - Scriblark','e')
+Check ((($plan | ForEach-Object {"$($_.VirtualKey):$($_.KeyUp)"}) -join ',') -ceq '69:False,69:True') 'Export key plan differs'
+foreach($mutation in @('held-alt','held-control','held-shift','held-windows','foreign-menu','duplicate-menu','disabled-menu','wrong-menu-title')) {
+    $state=State;$state.Windows+=NativeWindow 101 100 'gdkWindowTemp';$state.Windows[1].Title='com.trieflow.inkquay'
+    switch($mutation){
+        'held-alt'{$state.AltDown=$true};'held-control'{$state.ControlDown=$true};'held-shift'{$state.ShiftDown=$true};'held-windows'{$state.WindowsKeyDown=$true}
+        'foreign-menu'{$state.Windows[1].Owner=999};'duplicate-menu'{$state.Windows+=$state.Windows[1]};'disabled-menu'{$state.Windows[1].Enabled=$false};'wrong-menu-title'{$state.Windows[1].Title='foreign popup'}
+    }
+    $rejected=$false;try{[void][InkQuayWorkflow.Native]::PlanExportKeys($state,'first.pdf - Scriblark','e')}catch{$rejected=$true}
+    Check $rejected ('Native chord accepted '+$mutation)
+}
+Write-Output 'PASS native File/Export key plans, missing-menu refusal and eight modifier/popup refusals.'
+foreach($phase in @('first-menu-before-export','reopened-menu-after-file')) {
+    $original=Get-Content (Join-Path $PSScriptRoot ('fixtures/scriblark-34695588044-'+$phase+'.json')) -Raw | ConvertFrom-Json
+    $state=[InkQuayWorkflow.InputState]::new()
+    foreach($field in $original.native.PSObject.Properties) {
+        if($field.Name -ceq 'Windows') {
+            $state.Windows=@(foreach($window in $field.Value) {
+                $w=[InkQuayWorkflow.Window]::new();foreach($property in $window.PSObject.Properties){$w.($property.Name)=$property.Value};$w
+            })
+        } else {$state.($field.Name)=$field.Value}
+    }
+    $title=@($state.Windows | Where-Object Handle -eq $state.MainHandle)[0].Title
+    if($phase -ceq 'first-menu-before-export') {Check ([InkQuayWorkflow.Native]::PlanExportKeys($state,$title,'e').Count -eq 2) 'Actual first open menu was rejected'}
+    else {
+        $rejected=$false;try{[void][InkQuayWorkflow.Native]::PlanExportKeys($state,$title,'e')}catch{$rejected=$true}
+        Check $rejected 'Actual reopened editor accepted Export without its menu'
+    }
+}
+Write-Output 'PASS unchanged original Windows first-menu/reopened-no-menu observations.'

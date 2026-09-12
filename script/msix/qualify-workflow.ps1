@@ -156,9 +156,15 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
         if($PreserveMenuFocus) {
             $fresh=[InkQuayWorkflow.Native]::InspectInput([IntPtr]$Window.Handle,$State.process.Id)
             [InkQuayWorkflow.Native]::AssertExportInput($fresh,$Window.Title)
-        } else {[InkQuayWorkflow.Native]::Focus([IntPtr]$Window.Handle,$State.process.Id)}
-        [Windows.Forms.SendKeys]::SendWait($Keys)
-        $events.Add([ordered]@{action=$Action;title=$Window.Title;handle=$Window.Handle;process_id=$State.process.Id;at_utc=[DateTime]::UtcNow.ToString('o')})
+            $nativeEvents=[InkQuayWorkflow.Native]::SendExportKeys([IntPtr]$Window.Handle,$State.process.Id,$Window.Title,$Keys)
+        } else {
+            [InkQuayWorkflow.Native]::Focus([IntPtr]$Window.Handle,$State.process.Id)
+            [Windows.Forms.SendKeys]::SendWait($Keys)
+            $nativeEvents=$null
+        }
+        $event=[ordered]@{action=$Action;title=$Window.Title;handle=$Window.Handle;process_id=$State.process.Id;at_utc=[DateTime]::UtcNow.ToString('o')}
+        if($null -ne $nativeEvents){$event.native_sendinput_events=$nativeEvents;$event.native_input_method='SendInput'}
+        $events.Add($event)
         Start-Sleep -Milliseconds 250
     }
     function TextKeys([string]$Text) { return [regex]::Replace($Text,'[+^%~(){}\[\]]',{param($m) '{'+$m.Value+'}'}) }

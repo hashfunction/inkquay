@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "export": "reopened",
+  "phase": "after-file",
+  "at_utc": "2026-09-12T13:36:43.3191806Z",
+  "native": {
+    "MainHandle": 328022,
+    "ForegroundHandle": 328022,
+    "FocusHandle": 328022,
+    "FocusRoot": 328022,
+    "MenuOwner": 0,
+    "ProcessId": 4400,
+    "ThreadId": 7368,
+    "ForegroundProcessId": 4400,
+    "FocusProcessId": 4400,
+    "GuiFlags": 0,
+    "AltDown": false,
+    "ControlDown": false,
+    "ShiftDown": false,
+    "ForegroundOwnerChain": [
+      328022
+    ],
+    "Windows": [
+      {
+        "Handle": 328022,
+        "Owner": 0,
+        "ProcessId": 4400,
+        "Title": "first.pdf - Scriblark",
+        "ClassName": "gdkWindowToplevel",
+        "Visible": true,
+        "Enabled": true,
+        "X": 156,
+        "Y": 81,
+        "Width": 816,
+        "Height": 639
+      }
+    ]
+  },
+  "accessibility": {
+    "errors": [],
+    "menu_controls": []
+  },
+  "screenshot": "reopened-menu-after-file.png",
+  "screenshot_sha256": "f358ff00640ca179e90e319d7d9480d2fb4c84aaffbbc8ef3d10d9913d77a803",
+  "screenshot_error": null
+}

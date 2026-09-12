@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "export": "first",
+  "phase": "before-export",
+  "at_utc": "2026-09-12T13:36:36.6851085Z",
+  "native": {
+    "MainHandle": 328022,
+    "ForegroundHandle": 328022,
+    "FocusHandle": 328022,
+    "FocusRoot": 328022,
+    "MenuOwner": 0,
+    "ProcessId": 4400,
+    "ThreadId": 7368,
+    "ForegroundProcessId": 4400,
+    "FocusProcessId": 4400,
+    "GuiFlags": 0,
+    "AltDown": false,
+    "ControlDown": false,
+    "ShiftDown": false,
+    "ForegroundOwnerChain": [
+      328022
+    ],
+    "Windows": [
+      {
+        "Handle": 197008,
+        "Owner": 328022,
+        "ProcessId": 4400,
+        "Title": "com.trieflow.inkquay",
+        "ClassName": "gdkWindowTemp",
+        "Visible": true,
+        "Enabled": true,
+        "X": 158,
+        "Y": 132,
+        "Width": 266,
+        "Height": 264
+      },
+      {
+        "Handle": 328022,
+        "Owner": 0,
+        "ProcessId": 4400,
+        "Title": "saved.xopp - Scriblark",
+        "ClassName": "gdkWindowToplevel",
+        "Visible": true,
+        "Enabled": true,
+        "X": 156,
+        "Y": 81,
+        "Width": 816,
+        "Height": 639
+      }
+    ]
+  },
+  "accessibility": {
+    "errors": [],
+    "menu_controls": []
+  },
+  "screenshot": "first-menu-before-export.png",
+  "screenshot_sha256": "12d370e3462e57c33bbf37749dc26e006b167a3326fbedfed0f3224e014d497e",
+  "screenshot_error": null
+}

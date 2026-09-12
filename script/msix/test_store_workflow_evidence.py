@@ -124,6 +124,10 @@ class WorkflowTests(unittest.TestCase):
             }
             for i, (action, title) in enumerate(policy.EVENTS)
         ]
+        for event in events:
+            if event['action'].startswith(('open-export-menu-', 'export-')):
+                event['native_input_method'] = 'SendInput'
+                event['native_sendinput_events'] = 4 if event['action'].startswith('open-') else 2
         self.workflow = {
             "schema_version": 1,
             **self.context,
@@ -430,6 +434,19 @@ class WorkflowTests(unittest.TestCase):
                 with self.subTest(action=action, mutation=mutation), self.assertRaises(
                     ValueError
                 ):
+                    self.check()
+
+    def test_native_export_emission_requires_typed_complete_event_counts(self):
+        original = copy.deepcopy(self.workflow)
+        for action in ('open-export-menu-first.pdf', 'export-first.pdf',
+                       'open-export-menu-reopened.pdf', 'export-reopened.pdf'):
+            for field, value in [('native_sendinput_events', None), ('native_sendinput_events', True),
+                                 ('native_sendinput_events', 0), ('native_sendinput_events', 3),
+                                 ('native_input_method', 'SendKeys')]:
+                self.workflow = copy.deepcopy(original)
+                next(e for e in self.workflow['events'] if e['action'] == action)[field] = value
+                self.publish()
+                with self.subTest(action=action, field=field, value=value), self.assertRaisesRegex(ValueError, 'Native export'):
                     self.check()
 
     def test_partial_workflow_and_coherent_fabricated_success_fail(self):
