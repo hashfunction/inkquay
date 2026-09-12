@@ -14,7 +14,7 @@ permissions:
 jobs:
   windows-x64:
     runs-on: windows-2025
-    timeout-minutes: 60
+    timeout-minutes: ${{ inputs.capture_crash_stack == true && 90 || 60 }}
     defaults:
       run:
         shell: msys2 {0}
@@ -44,6 +44,11 @@ jobs:
           bash script/record-msys2-inputs.sh
           cmake --version > build-evidence/cmake-version.txt
           c++ --version > build-evidence/compiler-version.txt
+      - name: Build private diagnostic GDB with corrected attach-thread shutdown policy
+        if: ${{ inputs.capture_crash_stack == true }}
+        continue-on-error: true
+        timeout-minutes: 27
+        run: bash script/msix/build-observer-gdb.sh
       - name: Configure qualified local-only features
         run: |
           cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_GTEST=ON -DDOWNLOAD_GTEST=OFF -DENABLE_CPPTRACE=OFF -DENABLE_AUDIO=OFF -DENABLE_PLUGINS=OFF -DENABLE_GTK_SOURCEVIEW=OFF

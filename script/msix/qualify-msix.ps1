@@ -17,6 +17,7 @@ $powerShell=(Get-Process -Id $PID).Path
 Invoke-Checked $python @('script/msix/test_msix_qualification.py','-v')
 Invoke-Checked $python @('script/msix/test_workflow_files.py','-v')
 Invoke-Checked $python @('script/msix/test_gdb_observer.py','-v')
+Invoke-Checked $python @('script/msix/test_observer_gdb_build.py','-v')
 foreach ($fixture in @('test_qualify_msix_install.ps1','test_msix_evidence.ps1','test_registration_ownership.ps1','test_process_observation.ps1','test_module_collection.ps1','test_window_evidence.ps1','test_defender_module.ps1','test_temporary_ownership.ps1','test_workflow_helpers.ps1','test_workflow_crash.ps1','test_crash_observer.ps1')) {
     Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File',(Join-Path $PSScriptRoot $fixture))
 }

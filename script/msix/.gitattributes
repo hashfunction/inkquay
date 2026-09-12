@@ -1,0 +1,2 @@
+# Unified-diff context retains GNU source indentation and blank-line markers.
+gdb-17.2-worker-kill-on-exit.patch -whitespace

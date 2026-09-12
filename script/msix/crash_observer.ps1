@@ -51,7 +51,11 @@ function Start-InkCrashObserver($State,[string]$SourceRoot) {
         $debugger=[Diagnostics.Process]::GetProcessById([int]$observed.debugger_process_id)
         try {
             $null=$debugger.Handle
-            $expected=Join-Path (Split-Path $python) 'gdb.exe'
+            $expected=Join-Path $SourceRoot 'build-observer-gdb/build/gdb/gdb.exe'
+            Assert-NoReparsePath $expected
+            $fixture=Get-Content $preflight -Raw|ConvertFrom-Json
+            if ((Get-CanonicalPath $fixture.fingerprint.gdb) -ine (Get-CanonicalPath $expected) -or
+                (Get-FileHash $expected).Hash.ToLowerInvariant() -cne $fixture.fingerprint.gdb_sha256) { throw 'Debugger differs from current live fixture.' }
             if ($debugger.HasExited -or $debugger.StartTime.ToUniversalTime() -lt $process.StartTime.ToUniversalTime() -or
                 $debugger.StartTime.ToUniversalTime().ToFileTimeUtc() -ne $observed.debugger_start_filetime -or
                 (Get-CanonicalPath $debugger.MainModule.FileName) -ine (Get-CanonicalPath $expected)) { throw 'Observer debugger ownership differs.' }

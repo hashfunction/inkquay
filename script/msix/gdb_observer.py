@@ -23,13 +23,15 @@ import threading
 import time
 
 from msix_qualification import _regular_stream, _reject_link
+from observer_gdb_build import verified_debugger,RECORD as TOOL_RECORD
 
 PACKAGE = 'Trieflow.InkQuay.Qualification_1.0.0.0_x64__fjvr7t994vwc4'
 MAX_BYTES = 1024 * 1024
 MAX_LINE = 65536
 FAULTS = ('SIGSEGV', 'SIGILL', 'SIGFPE', 'SIGABRT')
 CASES = ['signal-pass', 'normal-detach', 'abrupt-debugger-exit', 'timeout-detach']
-HELPERS = ['gdb_observer.py', 'test_gdb_observer_windows.py', 'observer_fixture.c']
+HELPERS = ['gdb_observer.py', 'test_gdb_observer_windows.py', 'observer_fixture.c',
+    'observer_gdb_build.py', 'build-observer-gdb.sh', 'gdb-17.2-worker-kill-on-exit.patch']
 SETUP = ['-gdb-set pagination off', '-gdb-set confirm off', '-gdb-set mi-async on',
     '-gdb-set auto-load off', '-gdb-set debuginfod enabled off',
     '-gdb-set may-call-functions off', '-gdb-set may-write-memory off', '-gdb-set may-write-registers off',
@@ -124,9 +126,9 @@ def fault_signal(line):
 
 class MiProcess:
     """Bounded asynchronous pipe transport; only this retained child is stopped."""
-    def __init__(self, arguments):
+    def __init__(self, arguments, environment=None):
         self.process = subprocess.Popen(arguments, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT, creationflags=0x08000000 if sys.platform == 'win32' else 0)
+            stderr=subprocess.STDOUT, env=environment, creationflags=0x08000000 if sys.platform == 'win32' else 0)
         self.lines = queue.Queue(maxsize=128);self.transcript = [];self.token = 0
         self.events = [];self.overflow = False
         threading.Thread(target=self._read, daemon=True).start()
@@ -227,7 +229,11 @@ class Observer:
 
     def attach(self):
         self.target.verify();self.output['dwarf_sections'] = dwarf_sections(self.target.expected['executable'])
-        self.mi = MiProcess(self.arguments);self.output['debugger_process_id'] = self.mi.process.pid
+        environment=dict(os.environ)
+        # The private debugger's recorded native runtime DLLs remain in the
+        # unchanged MINGW64 toolchain, outside the consumer package/runtime.
+        environment['PATH']=str(Path(sys.executable).parent)+os.pathsep+environment.get('PATH','')
+        self.mi = MiProcess(self.arguments,environment);self.output['debugger_process_id'] = self.mi.process.pid
         deadline = time.monotonic()+20
         for command in SETUP:
             self.mi.command(command, max(0, deadline-time.monotonic()))
@@ -287,7 +293,9 @@ class Observer:
 
 
 def fingerprint(gdb):
+    require(Path(gdb).resolve()==verified_debugger(), 'Unverified diagnostic debugger selected')
     return {'gdb':str(Path(gdb).resolve()), 'gdb_sha256':sha(gdb),
+        'diagnostic_build_record_sha256':sha(TOOL_RECORD),
         'helpers':{name:sha(Path(__file__).parent/name) for name in HELPERS}}
 
 
@@ -327,8 +335,7 @@ def main(request_path, request_hash):
     executable = Path(request['target']['executable'])
     require(executable.is_absolute() and executable.name.lower() == 'inkquay.exe' and executable.parent.name.lower() == 'bin'
         and executable.parent.parent.name.lower() == PACKAGE.lower(), 'Observer target is outside the exact installed package')
-    gdb = Path(sys.executable).parent/'gdb.exe'
-    require(gdb.parent.parent.name.lower() == 'mingw64', 'Expected the recorded native MINGW64 debugger')
+    gdb = verified_debugger()
     preflight = read_json(request['preflight'])
     validate_preflight(preflight,fingerprint(gdb),request['source_commit'],os.environ.get('GITHUB_RUN_ID'),os.environ.get('GITHUB_RUN_ATTEMPT'))
     output = Path(request['output']);_reject_link(output)

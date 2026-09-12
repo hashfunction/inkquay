@@ -1,0 +1,25 @@
+--- a/gdb/windows-nat.c
++++ b/gdb/windows-nat.c
+@@ -1953,6 +1953,13 @@
+ 
+       if (!ok)
+ 	err = (unsigned) GetLastError ();
++      else if (!DebugSetProcessKillOnExit (FALSE))
++	{
++	  /* This must run on the same worker that attached above.  */
++	  err = (unsigned) GetLastError ();
++	  DebugActiveProcessStop (pid);
++	  ok = FALSE;
++	}
+ 
+       return ok;
+     });
+@@ -1963,8 +1970,6 @@
+ 				       (unsigned) pid);
+       throw_winerror_with_name (msg.c_str (), *err);
+     }
+-
+-  DebugSetProcessKillOnExit (FALSE);
+ 
+   target_announce_attach (from_tty, pid);
+ 
