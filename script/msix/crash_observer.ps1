@@ -51,8 +51,19 @@ function Start-InkCrashObserver($State,[string]$SourceRoot) {
         $debugger=[Diagnostics.Process]::GetProcessById([int]$observed.debugger_process_id)
         try {
             $null=$debugger.Handle
-            $expected=Join-Path $SourceRoot 'build-observer-gdb/build/gdb/gdb.exe'
-            Assert-NoReparsePath $expected
+            $expected=$null
+            # Match observer_gdb_build.py's native Libtool outputs. The sibling
+            # build/gdb/gdb.exe is only a launcher and cannot own this process.
+            $candidates=@(foreach ($relative in @('build/gdb/.libs/gdb.exe','build/gdb/.libs/lt-gdb.exe')) {
+                $candidate=Join-Path $SourceRoot ('build-observer-gdb/'+$relative)
+                if (Test-Path -LiteralPath $candidate) {
+                    Assert-NoReparsePath $candidate
+                    if (-not (Test-Path -LiteralPath $candidate -PathType Leaf)) { throw 'Debugger payload is not a regular file.' }
+                    Get-CanonicalPath $candidate
+                }
+            })
+            if ($candidates.Count -ne 1) { throw 'Expected exactly one real Libtool diagnostic executable; launcher is never selected.' }
+            $expected=$candidates[0]
             $fixture=Get-Content $preflight -Raw|ConvertFrom-Json
             if ((Get-CanonicalPath $fixture.fingerprint.gdb) -ine (Get-CanonicalPath $expected) -or
                 (Get-FileHash $expected).Hash.ToLowerInvariant() -cne $fixture.fingerprint.gdb_sha256) { throw 'Debugger differs from current live fixture.' }

@@ -72,4 +72,67 @@ try {
     if ($child) { $child.Dispose() }
     Remove-Item $root -Recurse -Force
 }
+
+# Replay the actual post-readiness ownership block from Start-InkCrashObserver.
+# Only its Process property adapter is a fixture; path reads/hashes/reparse checks
+# and the production native-payload/start-time predicates execute unchanged.
+$observerSource=Get-Content (Join-Path $PSScriptRoot 'crash_observer.ps1') -Raw
+$boundaryStart=$observerSource.IndexOf('            $expected=')
+$boundaryEnd=$observerSource.IndexOf('        } finally { if (-not $State.observerDebugger)', $boundaryStart)
+Check ($boundaryStart -ge 0 -and $boundaryEnd -gt $boundaryStart) 'Actual debugger ownership boundary was not found.'
+$ownershipBoundary=[scriptblock]::Create($observerSource.Substring($boundaryStart,$boundaryEnd-$boundaryStart))
+function Invoke-DebuggerOwnershipFixture($SourceRoot,$preflight,$debugger,$process,$observed) {
+    $State=@{observerDebugger=$null}
+    . $ownershipBoundary
+    return $State.observerDebugger
+}
+$ownershipChecks=0
+foreach ($leaf in @('gdb.exe','lt-gdb.exe')) {
+    $root=Join-Path $(if ($IsWindows) { [IO.Path]::GetTempPath() } else { '/private/tmp' }) ('ink-debugger-path-'+[guid]::NewGuid().ToString('N'))
+    $nativeRoot=Join-Path $root 'build-observer-gdb/build/gdb/.libs'
+    New-Item -ItemType Directory $nativeRoot | Out-Null
+    try {
+        $native=Join-Path $nativeRoot $leaf
+        $wrapper=Join-Path (Split-Path $nativeRoot -Parent) 'gdb.exe'
+        [IO.File]::WriteAllText($native,'fixture native payload, never executed')
+        [IO.File]::WriteAllText($wrapper,'fixture Libtool launcher, never executed')
+        $preflight=Join-Path $root 'preflight.json'
+        $fingerprint=@{gdb=$native;gdb_sha256=(Get-FileHash $native).Hash.ToLowerInvariant()}
+        Write-NewUtf8Json $preflight @{fingerprint=$fingerprint}
+        $time=[DateTime]::UtcNow
+        $debugger=@{HasExited=$false;StartTime=$time;MainModule=@{FileName=$native}}
+        $process=@{StartTime=$time.AddSeconds(-1)}
+        $observed=@{debugger_start_filetime=$time.ToFileTimeUtc()}
+        $actual=Invoke-DebuggerOwnershipFixture $root $preflight $debugger $process $observed
+        Check ([object]::ReferenceEquals($actual,$debugger)) ('Actual native Libtool payload refused: '+$leaf)
+        $ownershipChecks++
+        foreach ($mode in @('wrapper','foreign','wrong-hash','missing','ambiguous','reparse','process-path','process-start','process-exited','preexisting-process')) {
+            $other=Join-Path $nativeRoot $(if ($leaf -ceq 'gdb.exe') {'lt-gdb.exe'} else {'gdb.exe'})
+            $row=$fingerprint.Clone();$candidate=@{HasExited=$false;StartTime=$time;MainModule=@{FileName=$native}}
+            switch ($mode) {
+                'wrapper' {$row.gdb=$wrapper;$row.gdb_sha256=(Get-FileHash $wrapper).Hash.ToLowerInvariant();$candidate.MainModule.FileName=$wrapper}
+                'foreign' {$row.gdb=Join-Path $root 'foreign.exe';Copy-Item $native $row.gdb;$candidate.MainModule.FileName=$row.gdb}
+                'wrong-hash' {$row.gdb_sha256='0'*64}
+                'missing' {[IO.File]::Move($native,$native+'.held')}
+                'ambiguous' {Copy-Item $native $other}
+                'reparse' {[IO.Directory]::Move($nativeRoot,$nativeRoot+'.held');$linkType=if ($IsWindows) {'Junction'} else {'SymbolicLink'};New-Item -ItemType $linkType -Path $nativeRoot -Target ($nativeRoot+'.held') | Out-Null}
+                'process-path' {$candidate.MainModule.FileName=$wrapper}
+                'process-start' {$candidate.StartTime=$time.AddSeconds(1)}
+                'process-exited' {$candidate.HasExited=$true}
+                'preexisting-process' {$candidate.StartTime=$time.AddSeconds(-2)}
+            }
+            [IO.File]::WriteAllText($preflight,(@{fingerprint=$row}|ConvertTo-Json -Depth 4))
+            $failure=$null
+            try {$null=Invoke-DebuggerOwnershipFixture $root $preflight $candidate $process $observed}
+            catch {$failure=$_.Exception.Message}
+            Check ($null -ne $failure) ('Accepted unbound debugger '+$leaf+'/'+$mode)
+            $ownershipChecks++
+            if ($mode -ceq 'reparse') {[IO.Directory]::Delete($nativeRoot);[IO.Directory]::Move($nativeRoot+'.held',$nativeRoot)}
+            if ($mode -ceq 'missing') {[IO.File]::Move($native+'.held',$native)}
+            if (Test-Path $other) {[IO.File]::Delete($other)}
+        }
+    } finally {Remove-Item -LiteralPath $root -Recurse -Force}
+}
+Write-Output "PASS: actual post-readiness debugger ownership boundary: $ownershipChecks native Libtool, wrapper/foreign/hash/reparse and process-lifetime checks."
+
 Write-Output 'PASS: default off, unowned attachment refusal, bounded secondary errors, and exact observer result identity/types with real retained helper exits.'
