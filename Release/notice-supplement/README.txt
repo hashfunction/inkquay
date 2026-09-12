@@ -1,12 +1,19 @@
 InkQuay source and original notice supplement
 
-Source, build instructions and the matching dependency source collection:
+Source, build instructions and the matching dependency source inputs:
 https://inkquay.trieflow.com/source
 
 SOURCE-INPUTS.json identifies all 66 retained native source packages, their
 recipes and archive hashes, and all 359 locked Cargo source archives used to
 prepare librsvg. It also identifies the original source-collection baseline;
 the package's sourceInputs record binds the current application revision.
+The current winpthreads 14.0.0.r375.g9c1abbbf5-1 source is a separate published
+supplement, explicitly indexed with its own URL, size, hash and matching MINGW64
+binary recipe evidence. It is not a member of the original frozen collection:
+https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-12-tintfable/mingw-w64-winpthreads-14.0.0.r375.g9c1abbbf5-1.src.tar.zst
+The source archive supports multiple MinGW environments; the index binds this
+application's MINGW64 binary, not another application's CLANG64 binary. Original
+libwinpthread COPYING is unchanged and retained in the existing MSYS2 notices.
 The source page supplies the current application source, the indexed native
 inputs, original notices, and build/relink/repackage instructions. Rebuild
 outside WindowsApps and use your own distinct package identity and certificate.

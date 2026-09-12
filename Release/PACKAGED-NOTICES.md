@@ -1,5 +1,29 @@
 # Packaged original notice supplement
 
+## Current winpthreads source supplement (2026-09-12)
+
+Run `34685959483` stopped during stage input preparation because the actual
+MINGW64 libwinpthread owner changed to `14.0.0.r375.g9c1abbbf5-1`. Its current
+preferred-form source is a separate published asset, not a new member of the
+frozen collection below. `SOURCE-INPUTS.json` now binds that exact binary archive,
+recipe, source archive, original notice and direct publication URL; every other
+owner and the frozen collection provenance remain unchanged. The existing strict
+owner/version check stays in place.
+
+Current `SOURCE-INPUTS.json`: **228,524 bytes**, SHA-256
+`af52275d063157559f738af41ad466ce6b4f7387e2526705c43a0dc55f27a879`.
+The original `NOTICE-INDEX.json` and all 735 original files remain byte-identical.
+The package still copies 738 supplement files. The source-input and ordinary
+notice-copy checks bind the updated index, README and third-party notice to the
+current package. The existing MSYS2 libwinpthread COPYING is unchanged.
+
+See the bounded proof and verification report at
+[ink-winpthreads-source-supplement-review.md](../.superpowers/sdd/portfolio-implementation/ink-winpthreads-source-supplement-review.md).
+No installed application or observer success follows from repairing this
+prerequisite; a fresh exact-source Windows diagnostic run remains required.
+
+## Original collection packaging change (historical baseline)
+
 This bounded packaging change retains the prepared original native/Cargo/Rust
 notices in the application source and copies them through the existing Windows
 `package.sh` path. It changes no application behavior, native dependency version,

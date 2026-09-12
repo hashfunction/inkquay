@@ -256,6 +256,81 @@ class PackageTests(unittest.TestCase):
         self.assertEqual(msix.inventory_tree(copied), expected)
         self.assertEqual(unrelated.read_bytes(), b"preserve unrelated content")
 
+    def test_current_mingw64_winpthread_owner_requires_exact_retained_version(self):
+        # Run 34685959483 stopped on this actual owner/version before any
+        # installed application test. The file contents here remain fixtures.
+        package = "mingw-w64-x86_64-libwinpthread"
+        current = "14.0.0.r375.g9c1abbbf5-1"
+        runtime = self.release / "bin/libwinpthread-1.dll"
+        runtime.write_bytes(b"MINGW64 runtime fixture, not a native binary")
+        native = json.loads(self.native.read_text())
+        native["files"].append({"path": "bin/libwinpthread-1.dll", **digest(runtime.read_bytes())})
+        self.native.write_text(json.dumps(native))
+        for version in (current, "14.0.0.r353.g6df76fa52-2", "99.0-unretained"):
+            with self.subTest(version=version):
+                native = json.loads(self.native.read_text())
+                native["packages"][package] = version
+                row = next(row for row in native["files"]
+                           if row["path"] == "bin/libwinpthread-1.dll")
+                row.update(package=package, packageVersion=version)
+                self.native.write_text(json.dumps(native))
+                if version == current:
+                    self.refresh()
+                    record = self.stage()
+                    copied = "share/inkquay/licenses/supplement/SOURCE-INPUTS.json"
+                    self.assertEqual(record["payload"][copied],
+                                     digest((self.source / msix.NOTICE_SOURCE / "SOURCE-INPUTS.json").read_bytes()))
+                    self.assertFalse(record["publicRelease"])
+                    self.assertFalse(record["licenseClearanceClaimed"])
+                else:
+                    with self.assertRaisesRegex(ValueError, "retained source"):
+                        msix.create_input_inventory(self.release, self.source, self.commit)
+
+    def test_winpthread_supplement_binds_mingw64_recipe_and_direct_published_source(self):
+        index = json.loads((self.source / msix.NOTICE_SOURCE / "SOURCE-INPUTS.json").read_text())
+        owners = [row for row in index["nativeOwners"]
+                  if row["package"] == "mingw-w64-x86_64-libwinpthread"]
+        self.assertEqual(len(owners), 1)
+        owner = owners[0]
+        self.assertEqual(owner["version"], "14.0.0.r375.g9c1abbbf5-1")
+        # This is the MINGW64 archive from the actual run, not TintFable's
+        # different CLANG64 binary that shares the same preferred-form source.
+        self.assertEqual(owner["binaryArchive"],
+                         "mingw-w64-x86_64-libwinpthread-14.0.0.r375.g9c1abbbf5-1-any.pkg.tar.zst")
+        self.assertEqual(owner["binaryArchiveSha256"],
+                         "1d0ed7fda332a5c879de210f3d72c75fa1f3df7cc63dd951e763dec8eb02c1ee")
+        sources = [row for row in index["nativeSourceArchives"]
+                   if row["filename"] == owner["sourceArchive"]]
+        self.assertEqual(len(sources), 1)
+        source = sources[0]
+        self.assertEqual(source["pkgbase"], owner["pkgbase"])
+        self.assertEqual(source["version"], owner["version"])
+        self.assertEqual(source["recipeSha256"], owner["binaryRecipeHash"])
+        self.assertEqual(source["recipeSha256"],
+                         "7e5cec4463bd044cddeeb584dc6aab3e91dee5afd088d382e90c6232d0dd4e17")
+        self.assertEqual(source["bytes"], 54173752)
+        self.assertEqual(source["sha256"],
+                         "7bf513784ae0bc4f1a413e1f787f7a3ba2bd7ec0503980ea4d17ddf0e4796c87")
+        self.assertEqual(source["delivery"]["kind"], "published_source_asset")
+        self.assertEqual(source["delivery"]["url"],
+                         "https://github.com/hashfunction/pixelquay/releases/download/"
+                         "native-sources-2026-09-12-tintfable/" + source["filename"])
+        self.assertEqual(set(source["delivery"]), {"kind", "url", "verifiedAtUtc"})
+        self.assertNotIn("sourceMetadataPath", source)
+        evidence = source["supplementEvidence"]
+        self.assertEqual(evidence["binaryMetadata"]["pkgbuildSha256sum"], source["recipeSha256"])
+        self.assertEqual(evidence["runtime"], {
+            "path": "bin/libwinpthread-1.dll", "bytes": 63840,
+            "sha256": "2da71960a872bd1e59b60377f798f285ce630106509d6bd1d75e553f16218b7b"})
+        self.assertEqual(evidence["copiedNotice"]["bytes"], 2883)
+        self.assertEqual(evidence["copiedNotice"]["sha256"],
+                         "63263614cdd29f2f93cba85e992f041b31f9fc7b4033692f31269489a8a1b177")
+        self.assertEqual(index["collection"]["manifestSha256"],
+                         "4e6aa5ecac3e97a52c50e620957df32fa757aa718a0f4894bec36376728bfee5")
+        self.assertEqual(index["collection"]["baselineQualificationRun"], 34641324772)
+        self.assertEqual(evidence["supersededSourceArchive"],
+                         "mingw-w64-winpthreads-14.0.0.r353.g6df76fa52-2.src.tar.zst")
+
     def test_source_index_rejects_a_different_coherently_recorded_native_version(self):
         native = json.loads(self.native.read_text())
         native["packages"][self.owner] = "99.0-unretained"

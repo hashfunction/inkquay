@@ -36,3 +36,9 @@ platform/dev/build dependency is linked into the application.
 Modified application source, native corresponding source, original notices and
 build/relink/repackage instructions: https://inkquay.trieflow.com/source
 The package's supplement/SOURCE-INPUTS.json identifies the matching source inputs.
+
+The current MINGW64 libwinpthread 14.0.0.r375.g9c1abbbf5-1 input is bound to a
+separate published preferred-form winpthreads source archive in SOURCE-INPUTS.json.
+That supplement is not a member of the earlier frozen source collection. Its
+original MIT and BSD-3-Clause-Clear COPYING remains unchanged under
+licenses/msys2/libwinpthread; supplement/README.txt includes the direct source URL.

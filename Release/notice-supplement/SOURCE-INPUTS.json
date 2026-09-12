@@ -3636,13 +3636,13 @@
       "version": "1.6.0-1"
     },
     {
-      "binaryArchive": "mingw-w64-x86_64-libwinpthread-14.0.0.r353.g6df76fa52-2-any.pkg.tar.zst",
-      "binaryArchiveSha256": "e545ccc0416bcc62555da57959598e8559eac6a6cc1e5378bac024844d4ec8eb",
-      "binaryRecipeHash": "21c15283bebaea1732dda66c046cf75ce3763f6b1ba6feb95969182a138687df",
+      "binaryArchive": "mingw-w64-x86_64-libwinpthread-14.0.0.r375.g9c1abbbf5-1-any.pkg.tar.zst",
+      "binaryArchiveSha256": "1d0ed7fda332a5c879de210f3d72c75fa1f3df7cc63dd951e763dec8eb02c1ee",
+      "binaryRecipeHash": "7e5cec4463bd044cddeeb584dc6aab3e91dee5afd088d382e90c6232d0dd4e17",
       "package": "mingw-w64-x86_64-libwinpthread",
       "pkgbase": "mingw-w64-winpthreads",
-      "sourceArchive": "mingw-w64-winpthreads-14.0.0.r353.g6df76fa52-2.src.tar.zst",
-      "version": "14.0.0.r353.g6df76fa52-2"
+      "sourceArchive": "mingw-w64-winpthreads-14.0.0.r375.g9c1abbbf5-1.src.tar.zst",
+      "version": "14.0.0.r375.g9c1abbbf5-1"
     },
     {
       "binaryArchive": "mingw-w64-x86_64-libwmf-0.2.16-1-any.pkg.tar.zst",
@@ -4836,21 +4836,101 @@
       "version": "2.37-4"
     },
     {
-      "bytes": 53936829,
+      "bytes": 54173752,
       "delivery": {
-        "collectionBytes": 524318720,
-        "collectionSha256": "f22b8de38b25bbe822975cf7968ea7f59f91f70c319c69940a1bd0158a01dc01",
-        "kind": "existing_source_collection",
-        "member": "sources/mingw-w64-winpthreads-14.0.0.r353.g6df76fa52-2.src.tar.zst",
-        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-11-c9f4add/pixelquay-native-sources-c9f4add.tar"
+        "kind": "published_source_asset",
+        "url": "https://github.com/hashfunction/pixelquay/releases/download/native-sources-2026-09-12-tintfable/mingw-w64-winpthreads-14.0.0.r375.g9c1abbbf5-1.src.tar.zst",
+        "verifiedAtUtc": "2026-09-12T09:58:13.503403+00:00"
       },
-      "filename": "mingw-w64-winpthreads-14.0.0.r353.g6df76fa52-2.src.tar.zst",
+      "filename": "mingw-w64-winpthreads-14.0.0.r375.g9c1abbbf5-1.src.tar.zst",
       "pkgbase": "mingw-w64-winpthreads",
-      "recipeSha256": "21c15283bebaea1732dda66c046cf75ce3763f6b1ba6feb95969182a138687df",
-      "sha256": "c7bc64f5f4cbc4beab2546c361d1c9f0e0709619ff6cdc6966cf24de08247e8d",
-      "sourceMetadataPath": "source-metadata/mingw-w64-winpthreads-14.0.0.r353.g6df76fa52-2.src.tar.zst/evidence.json",
-      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-winpthreads-14.0.0.r353.g6df76fa52-2.src.tar.zst",
-      "version": "14.0.0.r353.g6df76fa52-2"
+      "recipeSha256": "7e5cec4463bd044cddeeb584dc6aab3e91dee5afd088d382e90c6232d0dd4e17",
+      "sha256": "7bf513784ae0bc4f1a413e1f787f7a3ba2bd7ec0503980ea4d17ddf0e4796c87",
+      "supplementEvidence": {
+        "binaryArchiveBytes": 30551,
+        "binaryArchiveHashEvidence": {
+          "bytes": 40608,
+          "sha256": "331ee97492e1fe4783fdc816adecb1da76cce30a046af11158943b7cbd83993f"
+        },
+        "binaryArchiveUrl": "https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libwinpthread-14.0.0.r375.g9c1abbbf5-1-any.pkg.tar.zst",
+        "binaryMetadata": {
+          "architecture": "any",
+          "buildinfo": {
+            "bytes": 7398,
+            "sha256": "d04316fb3dd62e7e67b02fd3dc72eb53080538e1c0594040b2c05fc0a68839a8"
+          },
+          "license": "spdx:MIT AND BSD-3-Clause-Clear",
+          "package": "mingw-w64-x86_64-libwinpthread",
+          "pkgbase": "mingw-w64-winpthreads",
+          "pkgbuildSha256sum": "7e5cec4463bd044cddeeb584dc6aab3e91dee5afd088d382e90c6232d0dd4e17",
+          "pkginfo": {
+            "bytes": 766,
+            "sha256": "5c6688bccbe640ae3e5115962fbc0077ad3bde6f8dd50e3187fdc4962dd1c86e"
+          },
+          "version": "14.0.0.r375.g9c1abbbf5-1"
+        },
+        "copiedNotice": {
+          "binaryArchivePath": "mingw64/share/licenses/libwinpthread/COPYING",
+          "bytes": 2883,
+          "comparison": "Exact archive libwinpthread notice and both same-run copied files; companion copied path is byte equality, not an inferred package owner.",
+          "paths": [
+            "share/inkquay/licenses/msys2/libwinpthread/COPYING",
+            "share/inkquay/licenses/msys2/winpthreads/COPYING"
+          ],
+          "sha256": "63263614cdd29f2f93cba85e992f041b31f9fc7b4033692f31269489a8a1b177"
+        },
+        "nativeInventory": {
+          "bytes": 1818168,
+          "sha256": "b02e76cfa56ea0d459fb1d179494de8c3f9ff71101a2b3794033b048d85c6837"
+        },
+        "observedPublicSource": "53deb7c21f219c2f5479b9d3942a820671082653",
+        "observedRun": 34685959483,
+        "observedSource": "368fad7479e3438ac75b322cb6a8ddb521eaaa10",
+        "patch": {
+          "bytes": 1789,
+          "path": "mingw-w64-winpthreads/0001-Define-__-de-register_frame_info-in-fake-libgcc_s.patch",
+          "sha256": "2e779bcc60a1422b23e0cfdb5c0f6851f2382592bb4675d08a6bdef78d5e5c10"
+        },
+        "publicationProof": {
+          "bytes": 4449,
+          "path": "installer/windows/source/native-source-supplement-publication.json",
+          "product": "TintFable",
+          "sha256": "10a60cb7ca061c26de436ba3671a7d1a15223fc8d412473b517d7a0d253d3911"
+        },
+        "recipe": {
+          "bytes": 4484,
+          "path": "mingw-w64-winpthreads/PKGBUILD",
+          "sha256": "7e5cec4463bd044cddeeb584dc6aab3e91dee5afd088d382e90c6232d0dd4e17",
+          "supportedSystem": "MINGW64"
+        },
+        "retainedSourceProof": {
+          "bytes": 6805,
+          "deterministicExport": {
+            "bytes": 140011520,
+            "sha256": "eca113e8ecc9e907065b285036ebfcb09d97084f457098d198149cb43e393066"
+          },
+          "path": "installer/windows/source/source-supplements.json",
+          "product": "TintFable",
+          "resolvedCommit": "9c1abbbf55a3de2febee4d1f685b1bda20774c5e",
+          "sha256": "08b8cbc9ceb011d0787f1242d10df7bb4b0cbc3230f0dbda2db39be771161e22",
+          "sourceDeclaration": "mingw-w64::git+https://git.code.sf.net/p/mingw-w64/mingw-w64#commit=9c1abbbf55a3de2febee4d1f685b1bda20774c5e"
+        },
+        "runtime": {
+          "bytes": 63840,
+          "path": "bin/libwinpthread-1.dll",
+          "sha256": "2da71960a872bd1e59b60377f798f285ce630106509d6bd1d75e553f16218b7b"
+        },
+        "scope": "Current MINGW64 runtime source supplement; this archive is a separate published asset, not a member of the original collection. The collection and original-notice provenance remain unchanged. Binary metadata and bytes were independently compared with the failed native run; shared preferred-form source and publication evidence were retained from TintFable.",
+        "srcinfo": {
+          "bytes": 1390,
+          "path": "mingw-w64-winpthreads/.SRCINFO",
+          "scope": "Generated for UCRT64; actual MINGW64 binary .BUILDINFO and shared PKGBUILD establish this binary recipe binding.",
+          "sha256": "7c7488d882e286b56785565ba11d2982092bb62e96008e2ee535e94f0b1174c1"
+        },
+        "supersededSourceArchive": "mingw-w64-winpthreads-14.0.0.r353.g6df76fa52-2.src.tar.zst"
+      },
+      "upstreamUrl": "https://mirror.msys2.org/mingw/sources/mingw-w64-winpthreads-14.0.0.r375.g9c1abbbf5-1.src.tar.zst",
+      "version": "14.0.0.r375.g9c1abbbf5-1"
     },
     {
       "bytes": 1569458,
