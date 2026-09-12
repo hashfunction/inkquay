@@ -1,5 +1,19 @@
 {
   "schema_version": 1,
   "product": "Scriblark",
-  "qualified": null
+  "qualified": {
+    "source_commit": "21476437b6a187b3a8717d844fefe5f47815386c",
+    "workflow_run_id": "34710260935",
+    "workflow_run_attempt": "1",
+    "package": {
+      "bytes": 92089651,
+      "sha256": "72169ef657f1adc8c47be28760d503763e25017ef2b0f883dfeaf36b770e1deb"
+    },
+    "readiness_receipt": {
+      "bytes": 71392,
+      "sha256": "5e1e81a225fd345d85448636a9ac2b74f1fff091f694129c400ba3ac88326f4d"
+    },
+    "store_artifact_id": 10303592946,
+    "metadata_artifact_id": 10303203736
+  }
 }
