@@ -65,3 +65,40 @@ python3 -m unittest discover -s script/msix -p 'test_*.py'
 ```
 
 Root dispatch after review/public snapshot: workflow `windows.yml`, **`capture_input_diagnostics=true`, `capture_crash_stack=false`**. Read the new JSONL alongside the unchanged native before/after observations. A continuing heartbeat with native events but no GTK key identifies the GDK/GTK boundary; a GTK target/grab outside the main window identifies routing; a true propagation result identifies focused-child consumption; a false result with disabled action identifies action availability. None should be inferred before the new native trace exists. No push, Store mutation, marketing change or acceptance claim was made here; marketing preparation commit `cbfea06d` is preserved.
+
+## Native run 34703338916: preserve the export observations
+
+The original 1,670,254-byte metadata artifact and failed log were retrieved read-only to `/private/tmp/scriblark-34703338916-review` and `/private/tmp/scriblark-34703338916-failed.log`. The run used public source `a39699321f0afcfb95e604c55b5bc4649c47b1d0`; installed process 8656 / main HWND 1311220 loaded 178 recorded modules. The original failure screenshot shows the fully painted reopened `first.pdf` and two thumbnails. The original workflow again fails `Expected one exact owned workflow window: Export File (found 0)` after its second six-event Ctrl+Alt+E insertion at 16:17:22.0088208Z. The first export at 16:17:15.5757350Z produced 24,219 bytes, SHA-256 `38a544cc96364f3f25783b39a53568529130c78922a7f371c9129cd958872841`, with the original two-page, text, Cornell raster, protected-input and application-report checks passed. Reopened export is absent.
+
+The original diagnostic JSONL is **340,350 bytes / 512 records**, SHA-256 `5baa0dae019f51923065ed7cbb3cdac55ca0ceb87f94702d3e3bca7b892d5014`. It ends with the explicit terminal `truncated` record **27.612 seconds after trace startup, during Save File entry and before either export**. Of 441 native/GTK key rows, 401 are Control transitions (201 native VK_CONTROL and 200 GTK Control_L); 36 are Alt transitions and four are the initial Ctrl+O's O down/up observations. Thus the trace cannot establish the difference between the two export attempts. Initial Ctrl+O reached GTK and the open action; no export action record exists before truncation. The underlying second-export cause remains unknown.
+
+The original receipts retain `diagnostic_input_requested=true`, diagnostic acceptance false, `unsigned_package_unchanged=true`, empty residual package names, `cleanup_errors=[]`, `input_diagnostic_errors=[]` and `evidence_errors=[]`. They also explicitly retain `clean_close_verified=false`, `uninstall_verified=false`, and owned cleanup exit -1. Empty residuals are not reported as accepted lifecycle completion.
+
+The refinement changes only diagnostic observation budgeting:
+
+- Keep at most **eight modifier-only rows per stream**: native filter, GTK snooper, propagation before and propagation after. This does not restrict E/O/F chord rows, actions, focus/grab, fileLoaded or heartbeat observations beyond the unchanged global **512 records / 1 MiB** caps.
+- Every observed modifier transition still updates the independent native/GTK filtering state. Actual event `state` and `native_state` remain unchanged. New `observed_gtk_modifiers` / `observed_native_modifiers` are explicitly diagnostic masks inferred from those observed transitions, not replacements for actual event state.
+- The first omitted row in each stream emits `modifier-suppressed` with its fixed `modifier_stream`. Every retained row, including terminal truncation, carries typed cumulative `omitted_{native,gtk,before,after}_{press,release}` counts. Omitted rows therefore cannot be interpreted as absent modifier input. Later omitted modifier rows return before focus/grab inspection or string construction.
+- The production reader validates fixed stream names, first/single markers, complete typed cumulative nondecreasing counters and the restricted inferred-mask bits. It remains compatible with the original unbudgeted trace and retains exact bytes. All original callback returns, single propagation, ownership, diagnostic refusal and primary-error behavior are unchanged.
+
+Regression evidence: a real GTK modal entry receives 600 Control transitions before two actual default export-action activations. The old production logger reproduced terminal truncation and lost both action records (red log `/private/tmp/scriblark-input-budget-red.log`). The updated logger retains both. A second 600-transition replay executes the actual production propagation wrapper and focused child's consume behavior before two more default actions. The final actual GTK writer retains **62 rows / 57,975 bytes**, three explicit stream-suppression markers, cumulative omissions and five actual export-action records. Existing consumed/unconsumed, dormant, lost-raw-mask, privacy, exclusive-path and exact global-cap assertions continue to pass.
+
+The Windows-only fixture now delivers 600 real owned native SendInput modifier events before two real export shortcuts, verifies both GTK action effects and native omission counters, and preserves its partial-insertion release behavior and exact owned foreground/focus guards. This Windows branch requires the next native run; it has not been executed on macOS.
+
+Focused verification for this refinement:
+
+```sh
+cmake --build build --target xournalpp test-gtk-integration --parallel 2
+SCRIBLARK_INPUT_TEST_RECORD=/private/tmp/scriblark-input-budget-final.jsonl \
+  ctest --test-dir build -R InputDiagnostics --output-on-failure --timeout 30
+../../filequay/source/.tools/powershell-7.6.6/pwsh -NoProfile \
+  -File script/msix/test_input_diagnostics.ps1 \
+  -NativeRecord /private/tmp/scriblark-input-budget-final.jsonl
+../../filequay/source/.tools/powershell-7.6.6/pwsh -NoProfile \
+  -File script/msix/test_msix_evidence.ps1
+../../filequay/source/.tools/powershell-7.6.6/pwsh -NoProfile \
+  -File script/msix/test_store_orchestration.ps1
+python3 -m unittest discover -s script/msix -p 'test_*.py'
+```
+
+The reader passes its original eight refusal cases plus seven malformed counter/mask/marker cases, and separately copies both the actual 62-row revised GTK output and the original 512-row Windows output without changing either hash. Ten production reporting scenarios, all nine coordinator/flag-dispatch cases and all 95 Python MSIX tests pass. The actual application and GTK fixture rebuild also pass. Dispatch remains **`capture_input_diagnostics=true`, `capture_crash_stack=false`** after independent review and exact public snapshot. No input retry, shortcut change, delay, focus change or product fix is introduced.

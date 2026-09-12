@@ -20,6 +20,15 @@ std::string read(const std::filesystem::path& path) {
     return {std::istreambuf_iterator<char>(stream), {}};
 }
 struct Keys { bool consume = false; int child = 0; int activated = 0; };
+#ifdef _WIN32
+unsigned maximumCounter(const std::string& text, const std::string& field) {
+    const auto prefix = "\"" + field + "\":";
+    unsigned result = 0;
+    for (size_t pos=0; (pos=text.find(prefix, pos)) != std::string::npos; pos += prefix.size())
+        result = std::max(result, static_cast<unsigned>(std::stoul(text.substr(pos+prefix.size()))));
+    return result;
+}
+#endif
 }
 class InputDiagnosticsTest: public GtkTest {
     void runTest(GtkApplication* app) override {
@@ -71,6 +80,65 @@ class InputDiagnosticsTest: public GtkTest {
         for (bool enabled: {false, true}) {
             std::unique_ptr<InputDiagnostics> trace;
             if (enabled) { trace = std::make_unique<InputDiagnostics>(path); trace->attach(window); }
+            if (enabled) {
+                // The actual failed Windows trace exhausted 512 rows on filename
+                // modifier transitions before either export. Exercise a real GTK
+                // entry in another modal window, then retain both actual actions.
+                auto* chooser = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
+                gtk_window_set_transient_for(chooser, window);
+                gtk_window_set_modal(chooser, true);
+                auto* entry = gtk_entry_new();
+                gtk_container_add(GTK_CONTAINER(chooser), entry);
+                gtk_widget_show_all(GTK_WIDGET(chooser));
+                gtk_widget_grab_focus(entry);
+                ASSERT_EQ(gtk_window_get_focus(chooser), entry);
+                for (int i=0; i<300; ++i) {
+                    for (auto kind: {GDK_KEY_PRESS, GDK_KEY_RELEASE}) {
+                        auto* event = gdk_event_new(kind);
+                        event->key.window = GDK_WINDOW(g_object_ref(gtk_widget_get_window(GTK_WIDGET(chooser))));
+                        event->key.keyval = GDK_KEY_Control_L;
+                        event->key.state = kind == GDK_KEY_PRESS ? 0 : GDK_CONTROL_MASK;
+                        gdk_event_set_device(event, gdk_seat_get_keyboard(gdk_display_get_default_seat(gtk_widget_get_display(entry))));
+                        gtk_main_do_event(event); gdk_event_free(event);
+                    }
+                }
+                gtk_widget_destroy(GTK_WIDGET(chooser));
+                gtk_window_present(window); gtk_widget_grab_focus(child);
+                keys = {false, 0, 0}; deliver(); deliver();
+                EXPECT_EQ(keys.child, 2);
+                EXPECT_EQ(keys.activated, 2);
+                const auto afterFlood = read(path);
+                EXPECT_EQ(afterFlood.find("\"phase\":\"truncated\""), std::string::npos);
+                EXPECT_NE(afterFlood.find("\"phase\":\"modifier-suppressed\""), std::string::npos);
+                EXPECT_NE(afterFlood.find("\"omitted_gtk_press\":296"), std::string::npos);
+                EXPECT_NE(afterFlood.find("\"omitted_gtk_release\":296"), std::string::npos);
+                EXPECT_NE(afterFlood.find("\"observed_gtk_modifiers\":0"), std::string::npos);
+                const auto firstAction = afterFlood.find("\"phase\":\"export-activate\"");
+                ASSERT_NE(firstAction, std::string::npos);
+                EXPECT_NE(afterFlood.find("\"phase\":\"export-activate\"", firstAction + 1), std::string::npos);
+                // Exercise the two production propagation budgets as well; the
+                // child still receives every event and consumes exactly once.
+                keys = {true, 0, 0};
+                for (int i=0; i<300; ++i) {
+                    for (auto kind: {GDK_KEY_PRESS, GDK_KEY_RELEASE}) {
+                        auto* event = gdk_event_new(kind);
+                        event->key.window = GDK_WINDOW(g_object_ref(gtk_widget_get_window(GTK_WIDGET(window))));
+                        event->key.keyval = GDK_KEY_Control_L;
+                        event->key.state = kind == GDK_KEY_PRESS ? 0 : GDK_CONTROL_MASK;
+                        gdk_event_set_device(event, gdk_seat_get_keyboard(gdk_display_get_default_seat(gtk_widget_get_display(child))));
+                        if (kind == GDK_KEY_PRESS) EXPECT_TRUE(InputDiagnostics::propagate(window, &event->key));
+                        else InputDiagnostics::propagate(window, &event->key);
+                        gdk_event_free(event);
+                    }
+                }
+                EXPECT_EQ(keys.child, 300);
+                keys = {false, 0, 0}; deliver(); deliver();
+                EXPECT_EQ(keys.activated, 2);
+                const auto afterPropagationFlood = read(path);
+                EXPECT_EQ(afterPropagationFlood.find("\"phase\":\"truncated\""), std::string::npos);
+                EXPECT_NE(afterPropagationFlood.find("\"omitted_before_press\":296"), std::string::npos);
+                EXPECT_NE(afterPropagationFlood.find("\"omitted_after_press\":296"), std::string::npos);
+            }
             for (bool consume: {true, false}) {
                 keys = {consume, 0, 0}; deliver();
                 EXPECT_EQ(keys.child, 1);
@@ -88,30 +156,59 @@ class InputDiagnosticsTest: public GtkTest {
                 }
                 ASSERT_EQ(GetForegroundWindow(), handle);
                 gtk_widget_grab_focus(child);
-                keys = {false, 0, 0};
-                INPUT inputs[6]{};
-                const WORD codes[] = {VK_CONTROL, VK_MENU, 'E', 'E', VK_MENU, VK_CONTROL};
-                for (int i=0; i<6; ++i) { inputs[i].type=INPUT_KEYBOARD; inputs[i].ki.wVk=codes[i]; inputs[i].ki.dwFlags=i>=3 ? KEYEVENTF_KEYUP : 0; }
-                ASSERT_EQ(GetAsyncKeyState(VK_CONTROL) & 0x8000, 0);
-                ASSERT_EQ(GetAsyncKeyState(VK_MENU) & 0x8000, 0);
-                const UINT inserted = SendInput(6, inputs, sizeof(INPUT));
-                if (inserted != 6) {
-                    // A failed fixture must release only its unmatched inserted key-downs.
-                    std::vector<WORD> held;
-                    for (UINT i=0; i<inserted && i<6; ++i) {
-                        if (i<3) held.push_back(codes[i]);
-                        else held.erase(std::remove(held.begin(), held.end(), codes[i]), held.end());
+                auto sendOwned = [&](std::vector<INPUT>& inputs) {
+                    ASSERT_EQ(GetForegroundWindow(), handle);
+                    ASSERT_EQ(gtk_window_get_focus(window), child);
+                    ASSERT_EQ(GetAsyncKeyState(VK_CONTROL) & 0x8000, 0);
+                    ASSERT_EQ(GetAsyncKeyState(VK_MENU) & 0x8000, 0);
+                    const UINT inserted = SendInput(static_cast<UINT>(inputs.size()), inputs.data(), sizeof(INPUT));
+                    if (inserted != inputs.size()) {
+                        // A failed fixture releases only its unmatched inserted downs.
+                        std::vector<WORD> held;
+                        for (UINT i=0; i<inserted && i<inputs.size(); ++i) {
+                            const auto code = inputs[i].ki.wVk;
+                            if (!(inputs[i].ki.dwFlags & KEYEVENTF_KEYUP)) held.push_back(code);
+                            else held.erase(std::remove(held.begin(), held.end(), code), held.end());
+                        }
+                        for (auto it=held.rbegin(); it!=held.rend(); ++it) {
+                            INPUT release{}; release.type=INPUT_KEYBOARD; release.ki.wVk=*it; release.ki.dwFlags=KEYEVENTF_KEYUP;
+                            SendInput(1, &release, sizeof(INPUT));
+                        }
                     }
-                    for (auto it=held.rbegin(); it!=held.rend(); ++it) {
-                        INPUT release{}; release.type=INPUT_KEYBOARD; release.ki.wVk=*it; release.ki.dwFlags=KEYEVENTF_KEYUP;
-                        SendInput(1, &release, sizeof(INPUT));
-                    }
+                    ASSERT_EQ(inserted, inputs.size());
+                };
+                keys = {true, 0, 0};
+                std::vector<INPUT> modifierFlood(600);
+                for (unsigned i=0; i<modifierFlood.size(); ++i) {
+                    modifierFlood[i].type=INPUT_KEYBOARD; modifierFlood[i].ki.wVk=VK_CONTROL;
+                    modifierFlood[i].ki.dwFlags=i%2 ? KEYEVENTF_KEYUP : 0;
                 }
-                ASSERT_EQ(inserted, 6U);
-                while (keys.activated == 0 && g_get_monotonic_time() < deadline) {
+                sendOwned(modifierFlood);
+                ASSERT_FALSE(HasFatalFailure());
+                const auto floodDeadline = g_get_monotonic_time() + 3000000;
+                while ((keys.child < 300 || (GetAsyncKeyState(VK_CONTROL) & 0x8000)) && g_get_monotonic_time() < floodDeadline) {
                     g_main_context_iteration(nullptr, false); g_usleep(1000);
                 }
-                EXPECT_EQ(keys.activated, 1);
+                ASSERT_EQ(keys.child, 300);
+                keys = {false, 0, 0};
+                std::vector<INPUT> exports(12);
+                const WORD codes[] = {VK_CONTROL, VK_MENU, 'E', 'E', VK_MENU, VK_CONTROL};
+                for (unsigned i=0; i<exports.size(); ++i) {
+                    exports[i].type=INPUT_KEYBOARD; exports[i].ki.wVk=codes[i%6];
+                    exports[i].ki.dwFlags=i%6>=3 ? KEYEVENTF_KEYUP : 0;
+                }
+                sendOwned(exports);
+                ASSERT_FALSE(HasFatalFailure());
+                const auto exportDeadline = g_get_monotonic_time() + 3000000;
+                while ((keys.activated < 2 || (GetAsyncKeyState(VK_CONTROL) & 0x8000) || (GetAsyncKeyState(VK_MENU) & 0x8000)) && g_get_monotonic_time() < exportDeadline) {
+                    g_main_context_iteration(nullptr, false); g_usleep(1000);
+                }
+                EXPECT_EQ(keys.activated, 2);
+                const auto nativeFlood = read(path);
+                EXPECT_EQ(nativeFlood.find("\"phase\":\"truncated\""), std::string::npos);
+                EXPECT_NE(nativeFlood.find("\"modifier_stream\":\"native-key\""), std::string::npos);
+                EXPECT_GE(maximumCounter(nativeFlood, "omitted_native_press"), 296U);
+                EXPECT_GE(maximumCounter(nativeFlood, "omitted_native_release"), 296U);
             }
 #endif
             if (!enabled) EXPECT_FALSE(fs::exists(path));

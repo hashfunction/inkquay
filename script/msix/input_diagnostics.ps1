@@ -26,12 +26,17 @@ function Save-InkInputDiagnostics($State) {
     $text=[Text.UTF8Encoding]::new($false,$true).GetString($raw)
     $lines=$text.Substring(0,$text.Length-1).Split("`n")
     if($lines.Count -gt 512){throw 'Input diagnostic record bound exceeded'}
-    $phases=@('started','attached','gtk-key','propagate-before','propagate-after','focus','grab','open-enabled','export-enabled','open-activate','export-activate','file-loaded','heartbeat','native-key','stopped','truncated')
+    $phases=@('started','attached','gtk-key','propagate-before','propagate-after','focus','grab','open-enabled','export-enabled','open-activate','export-activate','file-loaded','heartbeat','native-key','stopped','truncated','modifier-suppressed')
+    $modifierStreams=@('native-key','gtk-key','propagate-before','propagate-after')
+    $counterPrefixes=@('native','gtk','before','after')
+    $counters=@($counterPrefixes|ForEach-Object {'omitted_'+$_+'_press';'omitted_'+$_+'_release'})
+    $budgetFields=$counters+@('observed_gtk_modifiers','observed_native_modifiers')
     $types=@('focus_type','grab_type','device_grab_type','target_type','event_widget_type')
     $booleans=@('focus_sensitive','focus_in_main','focus_has_focus','grab_in_main','grab_visible','grab_mapped','grab_sensitive','device_grab_in_main','target_in_main','event_in_main','window_active','toplevel_focus','open_present','export_present','open_enabled','export_enabled','handled')
-    $numbers=@('event_type','keyval','hardware_keycode','state','native_message','native_code','native_state')
-    $allowed=@('schema_version','diagnostic_only','sequence','process_id','monotonic_us','phase')+$types+$booleans+$numbers
+    $numbers=@('event_type','keyval','hardware_keycode','state','native_message','native_code','native_state')+$budgetFields
+    $allowed=@('schema_version','diagnostic_only','sequence','process_id','monotonic_us','phase','modifier_stream')+$types+$booleans+$numbers
     $previous=0L;$index=0;$truncated=$false
+    $previousCounters=@{};$markedStreams=@{};$budgeted=$false
     foreach($line in $lines) {
         $index++
         if($line.Length -gt 4096){throw 'Input diagnostic line bound exceeded'}
@@ -46,6 +51,24 @@ function Save-InkInputDiagnostics($State) {
             if($key -cin $booleans -and $entry[$key] -isnot [bool]){throw 'Unexpected GTK diagnostic boolean'}
             if($key -cin $numbers -and ($entry[$key] -isnot [long] -or $entry[$key] -lt 0 -or $entry[$key] -gt [uint32]::MaxValue)){throw 'Unexpected GTK diagnostic numeric field'}
         }
+        if($index -eq 1){$budgeted=@($budgetFields|Where-Object {$entry.Contains($_)}).Count -gt 0}
+        $presentBudgetFields=@($budgetFields|Where-Object {$entry.Contains($_)}).Count
+        if(($budgeted -and $presentBudgetFields -ne $budgetFields.Count) -or (-not $budgeted -and $presentBudgetFields -ne 0)){throw 'Incomplete diagnostic modifier counters'}
+        if($budgeted) {
+            foreach($counter in $counters){
+                if($previousCounters.Contains($counter) -and $entry[$counter] -lt $previousCounters[$counter]){throw 'Diagnostic modifier counter decreased'}
+                $previousCounters[$counter]=$entry[$counter]
+            }
+            foreach($mask in @('observed_gtk_modifiers','observed_native_modifiers')){
+                if($entry[$mask] -notin @(0,4,8,12)){throw 'Unexpected observed diagnostic modifier mask'}
+            }
+        }
+        if($entry.phase -ceq 'modifier-suppressed') {
+            if(-not $budgeted -or $entry.modifier_stream -isnot [string] -or $entry.modifier_stream -cnotin $modifierStreams -or $markedStreams.Contains($entry.modifier_stream)){throw 'Invalid diagnostic modifier suppression marker'}
+            $prefix=$counterPrefixes[[Array]::IndexOf($modifierStreams,$entry.modifier_stream)]
+            if(($entry['omitted_'+$prefix+'_press']+$entry['omitted_'+$prefix+'_release']) -ne 1){throw 'Diagnostic modifier marker is not the first omission'}
+            $markedStreams[$entry.modifier_stream]=$true
+        }elseif($entry.Contains('modifier_stream')){throw 'Unexpected diagnostic modifier stream'}
         if($entry.Contains('keyval') -and $entry.keyval -notin @(101,69,111,79,102,70,65507,65508,65513,65514)){throw 'Unreviewed diagnostic key code'}
         if($entry.Contains('native_code') -and $entry.native_code -notin @(17,18,162,163,164,165,69,79,70)){throw 'Unreviewed native diagnostic key code'}
         if($entry.phase -ceq 'truncated') {if($index -ne $lines.Count){throw 'Records follow diagnostic truncation'};$truncated=$true}

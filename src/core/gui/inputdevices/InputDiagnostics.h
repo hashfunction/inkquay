@@ -2,6 +2,7 @@
 #pragma once
 
 #include <cstdio>
+#include <array>
 #include <filesystem>
 #include <gtk/gtk.h>
 
@@ -18,7 +19,7 @@ public:
 
 private:
     enum class Phase { Started, Attached, GtkKey, Before, After, Focus, Grab, OpenEnabled, ExportEnabled,
-                       OpenActivate, ExportActivate, FileLoaded, Heartbeat, NativeKey, Stopped, Truncated };
+                       OpenActivate, ExportActivate, FileLoaded, Heartbeat, NativeKey, Stopped, Truncated, ModifierSuppressed };
     void record(Phase phase, GdkEventKey* key = nullptr, GtkWidget* target = nullptr, int handled = -1,
                 guint nativeMessage = 0, guint nativeCode = 0, guint nativeState = 0) noexcept;
     static bool relevant(guint key, guint state);
@@ -33,6 +34,11 @@ private:
     guint timer = 0;
     guint gtkModifiers = 0;
     guint nativeModifiers = 0;
+    // Native, GTK snooper, propagation before, propagation after. Only modifier
+    // rows have this sub-budget; E/O/F and lifecycle observations keep the global budget.
+    std::array<unsigned, 4> modifierRecords{};
+    std::array<unsigned, 4> omittedPress{};
+    std::array<unsigned, 4> omittedRelease{};
     unsigned count = 0;
     size_t bytes = 0;
     bool stopped = false;

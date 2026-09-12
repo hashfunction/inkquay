@@ -17,6 +17,7 @@ InputDiagnostics* InputDiagnostics::active = nullptr;
 namespace {
 constexpr unsigned MAX_RECORDS = 512;
 constexpr size_t MAX_BYTES = 1024 * 1024;
+constexpr unsigned MAX_MODIFIER_RECORDS_PER_STREAM = 8;
 std::string typeName(gpointer object) {
     if (!object) return "none";
     const char* type = G_OBJECT_TYPE_NAME(object);
@@ -170,7 +171,30 @@ void InputDiagnostics::record(Phase phase, GdkEventKey* key, GtkWidget* target, 
     try {
         static const char* phases[] = {"started", "attached", "gtk-key", "propagate-before", "propagate-after",
             "focus", "grab", "open-enabled", "export-enabled", "open-activate", "export-activate", "file-loaded",
-            "heartbeat", "native-key", "stopped", "truncated"};
+            "heartbeat", "native-key", "stopped", "truncated", "modifier-suppressed"};
+        static const char* streams[] = {"native-key", "gtk-key", "propagate-before", "propagate-after"};
+        static const char* prefixes[] = {"native", "gtk", "before", "after"};
+        int modifierStream = -1;
+        const bool gtkModifier = key && (key->keyval == GDK_KEY_Control_L || key->keyval == GDK_KEY_Control_R ||
+                                        key->keyval == GDK_KEY_Alt_L || key->keyval == GDK_KEY_Alt_R);
+        if (phase == Phase::NativeKey && (nativeCode == 17 || nativeCode == 18 ||
+                nativeCode == 162 || nativeCode == 163 || nativeCode == 164 || nativeCode == 165)) modifierStream = 0;
+        if (gtkModifier && phase == Phase::GtkKey) modifierStream = 1;
+        if (gtkModifier && phase == Phase::Before) modifierStream = 2;
+        if (gtkModifier && phase == Phase::After) modifierStream = 3;
+        if (modifierStream >= 0) {
+            auto& retained = modifierRecords[modifierStream];
+            if (retained < MAX_MODIFIER_RECORDS_PER_STREAM) ++retained;
+            else {
+                const bool press = key ? key->type == GDK_KEY_PRESS : (nativeMessage == 256 || nativeMessage == 260);
+                ++(press ? omittedPress : omittedRelease)[modifierStream];
+                // All transitions still update the independent observed masks in
+                // snoop/nativeFilter. Emit one explicit marker, then cumulative
+                // typed counts on every retained row, including terminal truncation.
+                if (omittedPress[modifierStream] + omittedRelease[modifierStream] > 1) return;
+                phase = Phase::ModifierSuppressed;
+            }
+        }
         if (count >= MAX_RECORDS-1 || bytes >= MAX_BYTES-4096) phase = Phase::Truncated;
         std::ostringstream line;
         line << "{\"schema_version\":1,\"diagnostic_only\":true,\"sequence\":" << count+1
@@ -181,6 +205,13 @@ void InputDiagnostics::record(Phase phase, GdkEventKey* key, GtkWidget* target, 
                 getpid()
 #endif
              << ",\"monotonic_us\":" << g_get_monotonic_time() << ",\"phase\":\"" << phases[static_cast<int>(phase)] << '"';
+        // These masks are diagnostic state inferred from every observed transition;
+        // event.state and native_state below remain the unmodified actual values.
+        line << ",\"observed_gtk_modifiers\":" << gtkModifiers << ",\"observed_native_modifiers\":" << nativeModifiers;
+        for (unsigned i=0; i<4; ++i)
+            line << ",\"omitted_" << prefixes[i] << "_press\":" << omittedPress[i]
+                 << ",\"omitted_" << prefixes[i] << "_release\":" << omittedRelease[i];
+        if (phase == Phase::ModifierSuppressed) line << ",\"modifier_stream\":\"" << streams[modifierStream] << '"';
         if (phase != Phase::Truncated) {
             auto* focus = window ? gtk_window_get_focus(window) : nullptr;
             auto* group = window ? gtk_window_get_group(window) : nullptr;

@@ -38,6 +38,31 @@ try {
         if(-not $failed -or (Test-Path (Join-Path $root 'input-diagnostics.jsonl'))){throw "Unsafe diagnostic accepted: $case"}
         Write-Output "PASS diagnostic refusal: $case"
     }
+    $budget=@{}+$record
+    foreach($prefix in @('native','gtk','before','after')){
+        $budget['omitted_'+$prefix+'_press']=0;$budget['omitted_'+$prefix+'_release']=0
+    }
+    $budget.observed_gtk_modifiers=0;$budget.observed_native_modifiers=0
+    $marker=@{}+$budget;$marker.sequence=2;$marker.monotonic_us=11;$marker.phase='modifier-suppressed'
+    $marker.modifier_stream='gtk-key';$marker.omitted_gtk_press=1
+    $state.inputDiagnosticsPath=$launch.path;$state.processOwned=$true
+    foreach($case in @('negative-counter','non-numeric-counter','decreasing-counter','bad-observed-mask','unknown-modifier-stream','incomplete-counters','duplicate-modifier-marker')){
+        $first=@{}+$budget;$second=@{}+$marker
+        switch($case){
+            'negative-counter'{$second.omitted_gtk_release=-1}
+            'non-numeric-counter'{$second.omitted_gtk_press='1'}
+            'decreasing-counter'{$first.omitted_gtk_press=2}
+            'bad-observed-mask'{$second.observed_gtk_modifiers=16}
+            'unknown-modifier-stream'{$second.modifier_stream='private string'}
+            'incomplete-counters'{$second.Remove('omitted_after_press')}
+        }
+        $raw=($first|ConvertTo-Json -Compress)+"`n"+($second|ConvertTo-Json -Compress)+"`n"
+        if($case -eq 'duplicate-modifier-marker'){$third=@{}+$second;$third.sequence=3;$third.monotonic_us=12;$raw+=($third|ConvertTo-Json -Compress)+"`n"}
+        [IO.File]::WriteAllText($launch.path,$raw,[Text.UTF8Encoding]::new($false))
+        $failed=$false;try{Save-InkInputDiagnostics $state}catch{$failed=$true}
+        if(-not $failed -or (Test-Path (Join-Path $root 'input-diagnostics.jsonl'))){throw "Unsafe modifier accounting accepted: $case"}
+        Write-Output "PASS diagnostic refusal: $case"
+    }
     if($NativeRecord) {
         $nativeRaw=[IO.File]::ReadAllBytes($NativeRecord)
         $first=([Text.UTF8Encoding]::new($false,$true).GetString($nativeRaw).Split("`n")[0])|ConvertFrom-Json
