@@ -11,6 +11,43 @@ function Invoke-ScribCaptureLifecycle($Operations){
     finally{foreach($name in @('Stop','RestoreDisplay','RemovePackage','RemoveDemoAndProfiles','RemoveTrust','RemoveKey','RemoveTemporary')){try{& $Operations[$name]|Out-Host}catch{$cleanup.Add($name+': '+$_.Exception.Message)}}}
     return @{primary_error=$primary;cleanup_errors=@($cleanup)}
 }
+function Get-ScribCaptureStartupObservation($State){
+    Assert-ScribCaptureProcess $State
+    return @{process_id=$State.process.Id;main_window_handle=[long]$State.process.MainWindowHandle;
+        main_window_title=[string]$State.process.MainWindowTitle;native_windows=@([InkQuayWorkflow.Native]::Windows($State.process.Id))}
+}
+function Wait-ScribCaptureMain($State,[ValidateRange(1,30000)][int]$TimeoutMilliseconds=30000){
+    $watch=[Diagnostics.Stopwatch]::StartNew();$samples=[Collections.Generic.List[object]]::new()
+    $receipt=@{schema_version=1;timeout_ms=$TimeoutMilliseconds;accepted=$false;observations=$samples;omitted_observations=0;elapsed_ms=0;last_rejection=$null}
+    $State.startupWindowObservation=$receipt
+    try{
+        do{
+            # Ownership failures are terminal; only incomplete window readiness
+            # converges. This never repeats activation or sends input.
+            $sample=Get-ScribCaptureStartupObservation $State
+            $sample.elapsed_ms=$watch.ElapsedMilliseconds
+            if($sample.native_windows.Count -gt 64){throw 'Capture startup native window inventory exceeds bound'}
+            if($samples.Count -lt 301){$samples.Add($sample)}else{$receipt.omitted_observations++}
+            if($watch.ElapsedMilliseconds -ge $TimeoutMilliseconds){break}
+            $window=$null
+            if($sample.main_window_handle -ne 0 -and $sample.main_window_title -ceq 'Unsaved Document - Scriblark'){
+                try{$window=Select-InkWorkflowWindow $sample.native_windows $sample.process_id $sample.main_window_handle 'Unsaved Document - Scriblark' $false}
+                catch{$receipt.last_rejection=$_.Exception.Message}
+            }else{$receipt.last_rejection='Process main HWND/title is not yet the exact startup window'}
+            if($window -and $watch.ElapsedMilliseconds -lt $TimeoutMilliseconds){
+                $State.main=[long]$window.Handle;$receipt.accepted=$true;return
+            }
+            Start-Sleep -Milliseconds ([Math]::Max(1,[Math]::Min(100,$TimeoutMilliseconds-$watch.ElapsedMilliseconds)))
+        }while($watch.ElapsedMilliseconds -lt $TimeoutMilliseconds)
+        throw ('Actual capture main window unavailable within bound: '+$receipt.last_rejection)
+    }finally{$receipt.elapsed_ms=$watch.ElapsedMilliseconds;$watch.Stop()}
+}
+function Write-ScribCaptureStartupObservation($State){
+    if($State.ContainsKey('startupWindowObservation') -and -not $State['startupWindowObservationWritten']){
+        Write-NewUtf8Json (Join-Path $State.output 'startup-window-observations.json') $State.startupWindowObservation
+        $State.startupWindowObservationWritten=$true
+    }
+}
 function New-ScribCaptureOperations($State,$Bound,[string]$InputRoot,[string]$QualifiedSource){
     $full='1659hashfunction.InkQuay_1.0.1.0_x64__r3hxytd7jt6c4';$packageName='1659hashfunction.InkQuay'
     return [ordered]@{
@@ -50,14 +87,15 @@ function New-ScribCaptureOperations($State,$Bound,[string]$InputRoot,[string]$Qu
             $State.brokerPid=[int][InkQuayQualification.ActivationBroker]::Activate('1659hashfunction.InkQuay_r3hxytd7jt6c4!InkQuay',$null)
             $State.process=[Diagnostics.Process]::GetProcessById($State.brokerPid);$null=$State.process.SafeHandle
             Assert-ScribCaptureProcess $State;$State.processOwned=$true
-            $deadline=[DateTime]::UtcNow.AddSeconds(30)
-            do{$State.process.Refresh();if($State.process.HasExited){throw 'Capture process exited during startup'};Start-Sleep -Milliseconds 100}until($State.process.MainWindowHandle -ne 0 -or [DateTime]::UtcNow -ge $deadline)
-            if($State.process.MainWindowHandle -eq 0 -or $State.process.MainWindowTitle -cne 'Unsaved Document - Scriblark'){throw 'Actual capture main window unavailable'}
-            $State.main=[long]$State.process.MainWindowHandle
+            Wait-ScribCaptureMain $State
+            Write-ScribCaptureStartupObservation $State
             Write-NewUtf8Json (Join-Path $State.output 'loaded-modules.json') (Get-ScribCaptureModules $State)
         }.GetNewClosure()
         Workflow={Invoke-ScribCaptureUi $State $QualifiedSource;Write-NewUtf8Json (Join-Path $State.output 'loaded-modules-after-capture.json') (Get-ScribCaptureModules $State)}.GetNewClosure()
-        ObserveFailure={if($State.processOwned -and -not $State.process.HasExited){Write-NewUtf8Json (Join-Path $State.output 'failure-windows.json') ([InkQuayWorkflow.Native]::Windows($State.process.Id))}}.GetNewClosure()
+        ObserveFailure={
+            if($State.processOwned -and -not $State.process.HasExited){Write-NewUtf8Json (Join-Path $State.output 'failure-windows.json') ([InkQuayWorkflow.Native]::Windows($State.process.Id))}
+            Write-ScribCaptureStartupObservation $State
+        }.GetNewClosure()
         Close={
             Assert-ScribCaptureProcess $State
             if(-not $State.process.CloseMainWindow()){throw 'Capture app refused normal close'}
