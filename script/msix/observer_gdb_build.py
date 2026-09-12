@@ -143,16 +143,91 @@ def prepare():
     require(file_record(native)['sha256']==PATCHED_SHA256,'Patched GNU source differs')
 
 
+def pe_import_names(path):
+    """Read only bounded AMD64 PE32+ import/delay descriptors, never full private tables.
+
+    Microsoft PE format: optional-header directories 1 and 13, 20/32-byte
+    descriptors, and NUL-terminated ASCII DLL names. All reads use file-backed
+    RVAs from the same retained regular-file handle; section names are irrelevant.
+    """
+    size=None
+    try:
+        with _regular_stream(path) as stream:
+            before=os.fstat(stream.fileno());size=before.st_size;read_bytes=0
+            def read(offset,count):
+                nonlocal read_bytes
+                require(0<=offset<=size and 0<=count<=size-offset,
+                    f'Truncated PE range offset={offset} bytes={count} file_bytes={size}')
+                read_bytes+=count;require(read_bytes<=65536,'PE import reads exceed 65536 bytes')
+                stream.seek(offset);raw=stream.read(count)
+                require(len(raw)==count,'PE changed/truncated during read');return raw
+            dos=read(0,64);require(dos[:2]==b'MZ','Missing DOS header')
+            offset=struct.unpack_from('<I',dos,60)[0];require(64<=offset<=1048576,'PE header offset exceeds bound')
+            coff=read(offset,24)
+            require(coff[:4]==b'PE\0\0' and struct.unpack_from('<H',coff,4)[0]==0x8664
+                and struct.unpack_from('<H',coff,22)[0]&2,'Expected native AMD64 PE image')
+            count=struct.unpack_from('<H',coff,6)[0];optional_size=struct.unpack_from('<H',coff,20)[0]
+            require(1<=count<=96 and 112<=optional_size<=4096,'PE section/optional-header bounds differ')
+            optional=read(offset+24,optional_size)
+            require(struct.unpack_from('<H',optional)[0]==0x20b,'Expected PE32+ optional header')
+            headers_size=struct.unpack_from('<I',optional,60)[0]
+            directories=struct.unpack_from('<I',optional,108)[0]
+            require(directories<=16 and 112+8*directories<=optional_size,'PE directory count exceeds optional header')
+            section_start=offset+24+optional_size
+            require(section_start+40*count<=headers_size<=size,'PE headers exceed file bounds')
+            sections=[]
+            for index in range(count):
+                section=read(section_start+40*index,40)
+                virtual_size,rva,raw_size,raw_offset=struct.unpack_from('<IIII',section,8)
+                extent=max(virtual_size,raw_size)
+                require(rva+extent<=0x100000000 and (not raw_size or
+                    headers_size<=raw_offset<=size and raw_size<=size-raw_offset),'PE section range exceeds file/RVA bounds')
+                if extent:sections.append((rva,extent,raw_offset,raw_size))
+            def location(rva,needed):
+                require(0<rva<0x100000000 and rva+needed<=0x100000000,'Import RVA exceeds bounds')
+                matches=[(raw+rva-start,raw_size-(rva-start)) for start,extent,raw,raw_size in sections
+                    if start<=rva<start+extent]
+                if rva<headers_size:matches.append((rva,headers_size-rva))
+                require(len(matches)==1 and matches[0][1]>=needed,'Import RVA is ambiguous or not file-backed')
+                return matches[0]
+            names=[]
+            for index,width,label in ((1,20,'import'),(13,32,'delay import')):
+                if directories<=index:continue
+                rva,table_size=struct.unpack_from('<II',optional,112+8*index)
+                if rva==table_size==0:continue
+                require(rva and width<=table_size<=1048576,
+                    f'{label} directory size={table_size} exceeds descriptor bounds')
+                location(rva,table_size)
+                terminated=False
+                for entry in range(min(table_size//width,65)):
+                    at,_=location(rva+entry*width,width);descriptor=read(at,width)
+                    if not any(descriptor):terminated=True;break
+                    require(len(names)<64,'PE imports exceed 64 DLL descriptors')
+                    if index==13:
+                        require(struct.unpack_from('<I',descriptor)[0]==1,'Delay import must use RVAs with no reserved flags')
+                        name_rva=struct.unpack_from('<I',descriptor,4)[0]
+                    else:name_rva=struct.unpack_from('<I',descriptor,12)[0]
+                    at,available=location(name_rva,1);raw=read(at,min(available,256))
+                    end=raw.find(b'\0');require(0<end<256,'DLL name is empty/unterminated or exceeds 255 bytes')
+                    name=raw[:end].decode('ascii')
+                    require(re.fullmatch(r'[A-Za-z0-9_.+-]+\.dll',name,re.I),'Diagnostic DLL name differs')
+                    names.append(name)
+                require(terminated,f'{label} directory has no bounded null descriptor')
+            after=os.fstat(stream.fileno())
+            require((before.st_size,before.st_mtime_ns,before.st_ctime_ns)==
+                (after.st_size,after.st_mtime_ns,after.st_ctime_ns),'PE file changed during import reads')
+            return names
+    except (ValueError,OSError) as error:
+        raise ValueError(f'Diagnostic PE imports: {str(path)[:512]} (file_bytes={size}): {str(error)[:1024]}') from error
+
+
 def runtime_files(tool):
     prefix=Path(sys.executable).parent;pending=[tool];found={};seen=set()
     while pending:
         item=pending.pop();name=item.name.lower()
         if name in seen:continue
         seen.add(name);require(len(seen)<=64,'Diagnostic runtime closure exceeds bound')
-        imports=subprocess.check_output([str(prefix/'objdump.exe'),'-p',str(item)],timeout=15)
-        require(len(imports)<=1048576,'Diagnostic PE imports exceed bound')
-        for raw in re.findall(rb'DLL Name:\s*([^\r\n]+)',imports):
-            dll=raw.decode('ascii').strip();require(re.fullmatch(r'[A-Za-z0-9_.+-]+\.dll',dll,re.I),'Diagnostic DLL name differs')
+        for dll in pe_import_names(item):
             path=prefix/dll
             if path.is_file():
                 found[str(path.resolve())]=file_record(path);pending.append(path)

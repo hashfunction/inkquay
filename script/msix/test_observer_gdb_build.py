@@ -21,7 +21,119 @@ def native_pe():
     return bytes(raw)
 
 
+def importing_pe(imports=(), delay=(), padding=0):
+    """Real PE32+ descriptor/name bytes; fixture only, never an executable run."""
+    raw=bytearray(0x2400+padding);raw[:2]=b'MZ';struct.pack_into('<I',raw,60,64)
+    raw[64:68]=b'PE\0\0';struct.pack_into('<HH',raw,68,0x8664,2)
+    struct.pack_into('<HH',raw,84,240,2);struct.pack_into('<H',raw,88,0x20b)
+    struct.pack_into('<Q',raw,112,0x140000000);struct.pack_into('<I',raw,148,0x400)
+    struct.pack_into('<I',raw,196,16)
+    raw[328:336]=b'.idata\0\0';struct.pack_into('<IIII',raw,336,0x2000,0x1000,0x2000,0x400)
+    raw[368:376]=b'.pdata\0\0';struct.pack_into('<IIII',raw,376,padding,0x4000,padding,0x2400)
+    for index,names,width,offset in ((1,imports,20,0x400),(13,delay,32,0xc00)):
+        if not names:continue
+        struct.pack_into('<II',raw,200+index*8,offset+0xc00,(len(names)+1)*width)
+        for n,name in enumerate(names):
+            at=0x1800+(0 if index==1 else 0x400)+n*64
+            encoded=name.encode('ascii')+b'\0';raw[at:at+len(encoded)]=encoded
+            if index==1:struct.pack_into('<IIIII',raw,offset+n*width,0x1800,0,0,at+0xc00,0x1800)
+            else:struct.pack_into('<8I',raw,offset+n*width,1,at+0xc00,0x1800,0x1800,0x1800,0,0,0)
+    return bytes(raw)
+
+
 class DiagnosticToolTests(unittest.TestCase):
+    def test_pe_descriptor_boundaries_reject_malformed_names_ranges_and_counts(self):
+        valid=importing_pe(['runtime.dll'],['delayed.dll'])
+        mutations=[]
+        for offset,fmt,value in ((60,'I',1048577),(68,'H',0x14c),(70,'H',97),(84,'H',111),
+                (88,'H',0x10b),(148,'I',100),(196,'I',17),(212,'I',1048577),
+                (208,'I',0xfffffff0),(0x40c,'I',0x3000),(0xc00,'I',0)):
+            raw=bytearray(valid);struct.pack_into('<'+fmt,raw,offset,value);mutations.append(raw)
+        mutations.extend((valid[:30],valid[:-1],valid.replace(b'PE\0\0',b'NOPE'),
+                          valid.replace(b'runtime.dll',b'../evil.dll'),valid.replace(b'runtime.dll',b'\xffuntime.dll')))
+        raw=bytearray(valid);raw[0x1800:0x1900]=b'a'*256;mutations.append(raw)
+        raw=bytearray(valid);raw[0x1800]=0;mutations.append(raw)
+        raw=bytearray(valid);struct.pack_into('<I',raw,212,20);mutations.append(raw) # no null descriptor
+        raw=bytearray(valid);struct.pack_into('<IIII',raw,376,0x2000,0x1000,0,0);mutations.append(raw) # ambiguous RVA
+        raw=bytearray(valid);struct.pack_into('<IIII',raw,376,0x2000,0x4000,0,0)
+        struct.pack_into('<I',raw,0x40c,0x4000);mutations.append(raw) # virtual-only name
+        raw=bytearray(importing_pe(['runtime.dll']));descriptor=bytes(raw[0x400:0x414])
+        for n in range(65):raw[0x400+n*20:0x414+n*20]=descriptor
+        struct.pack_into('<I',raw,212,66*20);mutations.append(raw)
+        with tempfile.TemporaryDirectory() as directory:
+            path=Path(directory)/'owned.dll';path.write_bytes(valid)
+            self.assertEqual(['runtime.dll','delayed.dll'],build.pe_import_names(path))
+            for index,raw in enumerate(mutations):
+                path.write_bytes(raw)
+                with self.subTest(index=index),self.assertRaisesRegex(ValueError,f'owned.dll.*file_bytes={len(raw)}'):
+                    build.pe_import_names(path)
+
+    def test_pe_reads_remain_bounded_and_do_not_read_unrelated_sections(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path=Path(directory)/'owned.exe';path.write_bytes(importing_pe(['runtime.dll'],padding=2*1024*1024))
+            actual=build._regular_stream;reads=[]
+            class Tracked:
+                def __enter__(self):self.stream=actual(path);return self
+                def __exit__(self,*args):self.stream.close()
+                def fileno(self):return self.stream.fileno()
+                def seek(self,offset):return self.stream.seek(offset)
+                def read(self,count):
+                    reads.append((self.stream.tell(),count));return self.stream.read(count)
+            with patch.object(build,'_regular_stream',return_value=Tracked()):
+                self.assertEqual(['runtime.dll'],build.pe_import_names(path))
+            self.assertLess(sum(count for _,count in reads),65536)
+            self.assertTrue(all(offset+count<=0x2400 for offset,count in reads))
+
+    def test_import_reader_rejects_redirected_or_changed_owned_file(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path=Path(directory)/'owned.exe';path.write_bytes(importing_pe(['runtime.dll']))
+            actual_lstat=Path.lstat
+            def redirected(candidate):
+                info=actual_lstat(candidate)
+                return SimpleNamespace(st_mode=info.st_mode,st_file_attributes=0x400) if candidate==path else info
+            with patch.object(Path,'lstat',autospec=True,side_effect=redirected):
+                with self.assertRaisesRegex(ValueError,'reparse'):build.pe_import_names(path)
+            actual_fstat=build.os.fstat;calls=[]
+            def changed(fd):
+                calls.append(fd)
+                if len(calls)==3:
+                    with path.open('ab') as output:output.write(b'changed during parse')
+                return actual_fstat(fd)
+            with patch.object(build.os,'fstat',side_effect=changed):
+                with self.assertRaisesRegex(ValueError,'changed during import reads'):build.pe_import_names(path)
+
+    def test_failed_import_parse_retains_exact_file_size_and_blocks_tool_receipt(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);record=root/'result.json';tool=root/'build/gdb/.libs/gdb.exe'
+            tool.parent.mkdir(parents=True);tool.write_bytes(native_pe())
+            native=root/'source/gdb-17.2/gdb/windows-nat.c';native.parent.mkdir(parents=True);native.write_bytes(b'fixture')
+            inputs={'compiler':{'sha256':'a'*64}}
+            (root/'request.json').write_text(json.dumps({'schema_version':1,'built':False,'diagnostic_only':True,
+                'consumer_acceptance':False,'inputs':inputs,'tool':None}))
+            real_record=build.file_record
+            def file_record(path):return {'sha256':build.PATCHED_SHA256} if Path(path)==native else real_record(path)
+            with patch.object(build,'BUILD',root),patch.object(build,'RECORD',record),\
+                    patch.object(build,'build_inputs',return_value=inputs),patch.object(build,'file_record',side_effect=file_record):
+                with self.assertRaisesRegex(ValueError,'gdb.exe.*file_bytes=256'):build.finish(0)
+            value=json.loads(record.read_text());self.assertIs(value['built'],False);self.assertIsNone(value['tool'])
+            self.assertIn(str(tool),value['error']);self.assertIn('file_bytes=256',value['error'])
+            self.assertIs(value['consumer_acceptance'],False)
+
+    def test_owned_pe_imports_ignore_large_unrelated_private_headers(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);prefix=root/'mingw64/bin';prefix.mkdir(parents=True)
+            tool=root/'gdb.exe';tool.write_bytes(importing_pe(['runtime.dll','KERNEL32.dll'],['delayed.dll'],padding=2*1024*1024))
+            runtime=prefix/'runtime.dll';runtime.write_bytes(importing_pe(['child.dll']))
+            child=prefix/'child.dll';child.write_bytes(importing_pe(['runtime.dll']))
+            delayed=prefix/'delayed.dll';delayed.write_bytes(importing_pe())
+            system=root/'Windows/System32';system.mkdir(parents=True);(system/'KERNEL32.dll').write_bytes(b'OS fixture')
+            # objdump -p prints unrelated private tables too. Base implementation
+            # rejects the total text size even though the import graph is small.
+            with patch.object(build.sys,'executable',str(prefix/'python.exe')),patch.dict(os.environ,{'SystemRoot':str(system.parent)}),\
+                    patch.object(build.subprocess,'check_output',return_value=b'unrelated unwind row\n'*60000) as objdump:
+                self.assertEqual({str(p.resolve()):build.file_record(p) for p in (runtime,child,delayed)},build.runtime_files(tool))
+                objdump.assert_not_called()
+
     def test_real_libtool_output_selection_excludes_launcher_and_requires_one_native_executable(self):
         for relative in ('build/gdb/.libs/gdb.exe','build/gdb/.libs/lt-gdb.exe'):
             with self.subTest(relative=relative),tempfile.TemporaryDirectory() as directory:
@@ -84,18 +196,17 @@ class DiagnosticToolTests(unittest.TestCase):
     def test_runtime_import_graph_starts_at_real_payload_and_rejects_unresolved_dlls(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);prefix=root/'mingw64/bin';prefix.mkdir(parents=True)
-            tool=root/'build/gdb/.libs/gdb.exe';tool.parent.mkdir(parents=True);tool.write_bytes(native_pe())
-            runtime=prefix/'runtime.dll';runtime.write_bytes(b'first');child=prefix/'child.dll';child.write_bytes(b'second')
+            tool=root/'build/gdb/.libs/gdb.exe';tool.parent.mkdir(parents=True)
+            tool.write_bytes(importing_pe(['runtime.dll','KERNEL32.dll']))
+            runtime=prefix/'runtime.dll';runtime.write_bytes(importing_pe(['child.dll']))
+            child=prefix/'child.dll';child.write_bytes(importing_pe(['KERNEL32.dll']))
             system=root/'Windows/System32';system.mkdir(parents=True);(system/'KERNEL32.dll').write_bytes(b'OS fixture')
-            imports={tool:b'DLL Name: runtime.dll\nDLL Name: KERNEL32.dll',runtime:b'DLL Name: child.dll',child:b'DLL Name: KERNEL32.dll'}
-            observed=[]
-            def objdump(arguments,**kwargs):
-                observed.append(Path(arguments[-1]));return imports[observed[-1]]
             with patch.object(build.sys,'executable',str(prefix/'python.exe')),patch.dict(os.environ,{'SystemRoot':str(system.parent)}),\
-                    patch.object(build.subprocess,'check_output',side_effect=objdump):
+                    patch.object(build,'pe_import_names',wraps=build.pe_import_names) as reader:
                 self.assertEqual({str(p.resolve()):build.file_record(p) for p in (runtime,child)},build.runtime_files(tool))
-                self.assertEqual(tool,observed[0]);self.assertEqual({tool,runtime,child},set(observed))
-                imports[child]=b'DLL Name: foreign.dll'
+                self.assertEqual(tool,reader.call_args_list[0].args[0])
+                self.assertEqual({tool,runtime,child},{row.args[0] for row in reader.call_args_list})
+                child.write_bytes(importing_pe(['foreign.dll']))
                 with self.assertRaisesRegex(ValueError,'Unresolved diagnostic DLL'):build.runtime_files(tool)
 
     def test_worker_patch_is_exact_single_use_and_preserves_other_code(self):
