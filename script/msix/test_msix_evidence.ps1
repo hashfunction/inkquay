@@ -8,7 +8,7 @@ function Get-InkQuayHelperEvidence {
     if($scenario -ceq 'helper-failure'){throw 'owned helper metadata unavailable'}
     return & $script:ActualHelperEvidence
 }
-foreach ($scenario in @('helper-failure','missing','changed','changed-after-success','success','write-failure','observer-success','observer-failure')) {
+foreach ($scenario in @('helper-failure','missing','changed','changed-after-success','success','write-failure','observer-success','observer-failure','input-success','input-failure')) {
     $probeRoot = Join-Path ([IO.Path]::GetTempPath()) ('inkquay-evidence-test-' + [guid]::NewGuid().ToString('N'))
     New-Item -ItemType Directory -Path $probeRoot | Out-Null
     try {
@@ -21,17 +21,26 @@ foreach ($scenario in @('helper-failure','missing','changed','changed-after-succ
             if ($scenario -eq 'missing') { Remove-Item -LiteralPath $captured.package }
             if ($scenario -in @('changed','changed-after-success')) { [IO.File]::WriteAllText($captured.package, 'changed bytes') }
             if ($scenario -eq 'write-failure') { [IO.File]::WriteAllText((Join-Path $probeRoot 'installation-qualification.json'), 'preserve existing evidence') }
-            if ($scenario -in @('observer-success','observer-failure')) {
+            if ($scenario -in @('observer-success','observer-failure','input-success','input-failure')) {
                 $captured.workflow=@{passed=$true}
                 $captured.observerErrors.Add('fixture observer diagnostic failure')
             }
-            if ($scenario -in @('success','changed-after-success','observer-success')) {
+            if($scenario.StartsWith('input-')) {
+                $captured.workflow=@{passed=$true}
+                $captured.temporary=Join-Path $probeRoot 'temporary-owned';New-Item -ItemType Directory $captured.temporary | Out-Null
+                $captured.inputDiagnosticsPath=Join-Path $captured.temporary 'input-diagnostics.jsonl'
+                # Execute the production publication/cleanup operation with absent process
+                # ownership. The secondary error must be retained without escaping it.
+                & $Operations.RemoveTemporaryFiles
+                if(Test-Path -LiteralPath $captured.temporary){throw 'Diagnostic failure skipped owned temporary cleanup'}
+            }
+            if ($scenario -in @('success','changed-after-success','observer-success','input-success')) {
                 return [pscustomobject]@{ installation_qualification_passed=$true; primary_error=$null; cleanup_errors=@() }
             }
             return [pscustomobject]@{ installation_qualification_passed=$false; primary_error='original activation failure'; cleanup_errors=@('original uninstall failure') }
         }
         $failure = $null
-        try { Invoke-InkQuayInstallQualification -PackagePath 'unused' -RecordPath 'unused' -SignToolPath 'unused' -OutputPath $probeRoot -CaptureCrashStack:($scenario.StartsWith('observer-')) | Out-Null }
+        try { Invoke-InkQuayInstallQualification -PackagePath 'unused' -RecordPath 'unused' -SignToolPath 'unused' -OutputPath $probeRoot -CaptureCrashStack:($scenario.StartsWith('observer-')) -CaptureInputDiagnostics:($scenario.StartsWith('input-')) | Out-Null }
         catch { $failure = $_.Exception.Message }
         $evidencePath = Join-Path $probeRoot 'installation-qualification.json'
         if (-not (Test-Path -LiteralPath $evidencePath)) { throw "Missing final evidence in $scenario" }
@@ -40,6 +49,17 @@ foreach ($scenario in @('helper-failure','missing','changed','changed-after-succ
             continue
         }
         $evidence = Get-Content -LiteralPath $evidencePath -Raw | ConvertFrom-Json
+        if($scenario.StartsWith('input-')) {
+            if(-not $evidence.diagnostic_input_requested -or $evidence.diagnostic_observer_requested -or
+                $evidence.installation_qualification_passed -or $evidence.workflow_acceptance -or
+                $evidence.template_pdf_workflow_tested -or $evidence.interactive_pdf_workflows_verified -or
+                $evidence.input_diagnostic_errors[0] -cne 'Input diagnostic process/path ownership is unavailable'){throw ('Input diagnostic conferred acceptance or lost secondary evidence: '+($evidence.input_diagnostic_errors -join '; '))}
+            if($scenario -ceq 'input-success') {
+                if($failure -or -not $evidence.diagnostic_run_completed){throw 'Input diagnostic control lost completed lifecycle'}
+            } elseif(-not $failure -or $evidence.primary_error -cne 'original activation failure' -or
+                $evidence.cleanup_errors[0] -cne 'original uninstall failure'){throw 'Input diagnostics displaced original errors'}
+            continue
+        }
         if ($scenario.StartsWith('observer-')) {
             if (-not $evidence.diagnostic_observer_requested -or $evidence.installation_qualification_passed -or
                 $evidence.workflow_acceptance -or $evidence.template_pdf_workflow_tested -or $evidence.interactive_pdf_workflows_verified -or
@@ -64,4 +84,4 @@ foreach ($scenario in @('helper-failure','missing','changed','changed-after-succ
         }
     } finally { Remove-Item -LiteralPath $probeRoot -Recurse -Force }
 }
-Write-Output 'PASS: eight final-hash, helper-error, diagnostic and exclusive-evidence reporting scenarios.'
+Write-Output 'PASS: ten final-hash, helper-error, diagnostic and exclusive-evidence reporting scenarios.'

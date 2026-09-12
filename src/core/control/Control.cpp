@@ -1,4 +1,5 @@
 #include "Control.h"
+#include "gui/inputdevices/InputDiagnostics.h"
 
 #include <algorithm>  // for max
 #include <cstdlib>    // for size_t
@@ -1747,6 +1748,7 @@ void Control::fileLoaded(int scrollToPage) {
     win->getXournal()->forceUpdatePagenumbers();
     getCursor()->updateCursor();
     updatePageActions();
+    InputDiagnostics::fileLoaded(getGtkWindow());
 }
 
 enum class MissingPdfDialogOptions : gint { USE_PROPOSED, SELECT_OTHER, REMOVE, CANCEL };

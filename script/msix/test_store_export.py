@@ -49,6 +49,7 @@ class RetentionTests(unittest.TestCase):
             "GITHUB_RUN_ATTEMPT": "1",
             "GITHUB_REPOSITORY": "hashfunction/inkquay",
             "INKQUAY_CAPTURE_CRASH_STACK": "false",
+            "INKQUAY_CAPTURE_INPUT_DIAGNOSTICS": "false",
         }
         self.assertEqual(export.context(valid)["workflow_run_id"], "123")
         for key, value in (
@@ -57,6 +58,8 @@ class RetentionTests(unittest.TestCase):
             ("GITHUB_RUN_ATTEMPT", "0"),
             ("GITHUB_REPOSITORY", "other/repo"),
             ("INKQUAY_CAPTURE_CRASH_STACK", "true"),
+            ("INKQUAY_CAPTURE_INPUT_DIAGNOSTICS", "true"),
+            ("INKQUAY_CAPTURE_INPUT_DIAGNOSTICS", None),
         ):
             with self.subTest(key=key), self.assertRaises(ValueError):
                 export.context({**valid, key: value})

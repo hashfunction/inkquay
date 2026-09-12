@@ -1,0 +1,66 @@
+name: Scriblark real product screenshots
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  capture-existing-store-package:
+    runs-on: windows-2025
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Test capture-only file, input and ownership boundaries
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+          python -m unittest discover -s script/marketing -p 'test_*.py' -v
+          if ($LASTEXITCODE -ne 0) { throw 'Capture Python tests failed.' }
+          $pwsh=(Get-Process -Id $PID).Path
+          foreach ($fixture in @('test_capture_operations.ps1','test_capture_frame.ps1','test_capture_display.ps1')) {
+            & $pwsh -NoProfile -File (Join-Path 'script/marketing' $fixture)
+            if ($LASTEXITCODE -ne 0) { throw "Capture PowerShell test failed: $fixture" }
+          }
+      - name: Require reviewed existing Store package binding
+        id: binding
+        shell: pwsh
+        run: |
+          python script/marketing/capture_checks.py --binding-output "$env:GITHUB_OUTPUT"
+          if ($LASTEXITCODE -ne 0) { throw 'No reviewed successful Store package is bound for capture.' }
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ steps.binding.outputs.qualified_source }}
+          path: build-evidence/qualified-source
+      - name: Verify actual qualified helper loader
+        shell: pwsh
+        run: |
+          $pwsh=(Get-Process -Id $PID).Path
+          & $pwsh -NoProfile -File script/marketing/test_capture_operations.ps1 -QualifiedSource build-evidence/qualified-source
+          if ($LASTEXITCODE -ne 0) { throw 'Original qualified-source loader and ownership replay failed.' }
+      - name: Download exact existing unsigned package and qualification records
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python script/marketing/prepare_capture.py --output "$env:RUNNER_TEMP/scriblark-capture-inputs" --qualified-source build-evidence/qualified-source
+          if ($LASTEXITCODE -ne 0) { throw 'Exact existing Store package and original evidence did not verify.' }
+      - name: Capture real notebook, page template and PDF export
+        shell: pwsh
+        run: |
+          $pwsh=(Get-Process -Id $PID).Path
+          & $pwsh -NoProfile -File script/marketing/capture.ps1 -Inputs "$env:RUNNER_TEMP/scriblark-capture-inputs" -QualifiedSource build-evidence/qualified-source -CaptureOutput build-evidence/marketing
+          if ($LASTEXITCODE -ne 0) { throw 'Actual Scriblark marketing capture failed.' }
+      - name: Retain native screenshots and capture receipts only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: Scriblark-real-product-screenshots
+          path: |
+            build-evidence/marketing/*.png
+            build-evidence/marketing/*.json
+          retention-days: 14
+          if-no-files-found: warn

@@ -1,4 +1,5 @@
 #include "XournalMain.h"
+#include "gui/inputdevices/InputDiagnostics.h"
 
 #include <algorithm>  // for copy, sort, max
 #include <array>      // for array
@@ -253,11 +254,14 @@ struct XournalMainPrivate {
         g_free(pdfFilename);
         g_free(imgFilename);
         g_free(docFilename);
+        g_free(inputDiagnosticsPath);
     }
 
     gchar** optFilename{};  ///< Array of paths, in GFilename encoding
     gchar* pdfFilename{};   ///< Single path, in GFilename encoding
     gchar* imgFilename{};   ///< Single path, in GFilename encoding
+    gchar* inputDiagnosticsPath{};
+    std::unique_ptr<InputDiagnostics> inputDiagnostics;
     gchar* docFilename{};   ///< Single path, in GFilename encoding
     gboolean showVersion = false;
     int openAtPageNumber = 0;  // when no --page is used, the document opens at the page specified in the metadata file
@@ -415,6 +419,7 @@ void on_startup(GApplication* application, XMPtr app_data) {
                                                  GTK_APPLICATION(application));
     app_data->control->initWindow(app_data->win.get());
     app_data->win->populate(app_data->gladePath.get());
+    if (app_data->inputDiagnostics) app_data->inputDiagnostics->attach(app_data->control->getGtkWindow());
 
     if (migrateResult.status != MigrateStatus::NotNeeded) {
         Util::execInUiThread(
@@ -532,10 +537,19 @@ auto on_handle_local_options(GApplication*, GVariantDict*, XMPtr app_data) -> gi
                 },
                 "saveDocument");
     }
+    if (app_data->inputDiagnosticsPath) {
+        try {
+            app_data->inputDiagnostics = std::make_unique<InputDiagnostics>(Util::fromGFilename(app_data->inputDiagnosticsPath));
+        } catch (const std::exception&) {
+            std::cerr << "Input diagnostics output could not be created exclusively." << std::endl;
+            return 1;
+        }
+    }
     return -1;
 }
 
 void on_shutdown(GApplication*, XMPtr app_data) {
+    app_data->inputDiagnostics.reset();
     app_data->control->saveSettings();
     app_data->win->getXournal()->clearSelection();
     app_data->control->getScheduler()->stop();
@@ -585,7 +599,9 @@ auto XournalMain::run(int argc, char** argv) -> int {
     g_signal_connect(app, "shutdown", G_CALLBACK(&on_shutdown), &app_data);
     g_signal_connect(app, "handle-local-options", G_CALLBACK(&on_handle_local_options), &app_data);
 
-    std::array options = {GOptionEntry{"page", 'n', 0, G_OPTION_ARG_INT, &app_data.openAtPageNumber,
+    std::array options = {GOptionEntry{"input-diagnostics", 0, 0, G_OPTION_ARG_FILENAME, &app_data.inputDiagnosticsPath,
+                                       "Write bounded read-only GTK input diagnostics to a new file", "PATH"},
+                          GOptionEntry{"page", 'n', 0, G_OPTION_ARG_INT, &app_data.openAtPageNumber,
                                        _("Jump to Page (first Page: 1)"), "N"},
                           GOptionEntry{G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_FILENAME_ARRAY, &app_data.optFilename,
                                        "<input>", nullptr},

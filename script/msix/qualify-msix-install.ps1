@@ -9,6 +9,7 @@ param(
     [Parameter()][string]$SignTool,
     [Parameter()][string]$Output,
     [Parameter()][switch]$CaptureCrashStack,
+    [Parameter()][switch]$CaptureInputDiagnostics,
     [Parameter()][ValidateSet('qualification','store')][string]$IdentityMode='qualification',
     [Parameter()][switch]$LibraryOnly
 )
@@ -171,10 +172,10 @@ namespace InkQuayQualification {
     }
 
     public static class ActivationBroker {
-        public static uint Activate(string appUserModelId) {
+        public static uint Activate(string appUserModelId, string arguments) {
             var manager = (IApplicationActivationManager)new ApplicationActivationManagerClass();
             uint processId;
-            int result = manager.ActivateApplication(appUserModelId, null, 0, out processId);
+            int result = manager.ActivateApplication(appUserModelId, arguments, 0, out processId);
             if (result < 0) Marshal.ThrowExceptionForHR(result);
             if (processId == 0) throw new InvalidOperationException("Activation broker returned process ID zero.");
             return processId;
@@ -333,7 +334,7 @@ function Write-NewUtf8Json([string]$Path, [object]$Value) {
 
 function Get-InkQuayHelperEvidence {
     $result=[ordered]@{}
-    foreach($name in @('qualify-msix-install.ps1','qualify-workflow.ps1','WorkflowNative.cs','workflow_files.py')) {
+    foreach($name in @('qualify-msix-install.ps1','qualify-workflow.ps1','WorkflowNative.cs','workflow_files.py','input_diagnostics.ps1')) {
         $path=Join-Path $PSScriptRoot $name
         Assert-NoReparsePath $path
         $result[$name]=@{bytes=(Get-Item -LiteralPath $path).Length;sha256=(Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant()}
@@ -367,7 +368,9 @@ function Assert-InkQuayRecordIdentity($Record,[ValidateSet('qualification','stor
     }
 }
 
-function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$RecordPath, [string]$SignToolPath, [string]$OutputPath, [switch]$CaptureCrashStack, [ValidateSet('qualification','store')][string]$IdentityMode='qualification') {
+. (Join-Path $PSScriptRoot 'input_diagnostics.ps1')
+
+function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$RecordPath, [string]$SignToolPath, [string]$OutputPath, [switch]$CaptureCrashStack, [switch]$CaptureInputDiagnostics, [ValidateSet('qualification','store')][string]$IdentityMode='qualification') {
     $state = [ordered]@{
         package = $null; record = $null; output = $null; temporary = $null; signedCopy = $null
         publicCertificate = $null; certificate = $null; trustedCertificate = $null; trustAttempted = $false
@@ -378,6 +381,8 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         aumid = $null; processPackageFullName = $null; modules = @(); window = $null; workflow = $null
         executableSha256 = $null
         cleanClose = $false; uninstallVerified = $false
+        inputDiagnosticsRequested = [bool]$CaptureInputDiagnostics; inputDiagnosticsPath = $null; inputDiagnosticsEvidence = $null
+        inputDiagnosticsErrors = [Collections.Generic.List[string]]::new()
         observerRequested = [bool]$CaptureCrashStack; observerProcess = $null; observerDebugger = $null; observerAttached = $false
         observerNonce = $null; observerTarget = $null; observerStopped = $false; observerEvidence = $null
         observerErrors = [Collections.Generic.List[string]]::new()
@@ -493,7 +498,10 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
             '--source-commit',$env:GITHUB_SHA,'--identity-mode',$IdentityMode,'--installed-root',$state.installed.InstallLocation)
         Add-InkQuayActivationTypes
         $state.activatedAtUtc = [DateTime]::UtcNow
-        $processId = [InkQuayQualification.ActivationBroker]::Activate($state.aumid)
+        $diagnosticLaunch=Get-InkInputDiagnosticLaunch $state.inputDiagnosticsRequested $state.temporary
+        $activationArguments=$null
+        if($diagnosticLaunch){$state.inputDiagnosticsPath=$diagnosticLaunch.path;$activationArguments=$diagnosticLaunch.arguments}
+        $processId = [InkQuayQualification.ActivationBroker]::Activate($state.aumid,$activationArguments)
         $state.brokerProcessId = [int]$processId
         $state.process = [Diagnostics.Process]::GetProcessById([int]$processId)
         $state.processHandle = $state.process.SafeHandle
@@ -640,6 +648,10 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
     }.GetNewClosure()
 
     $operations.RemoveTemporaryFiles = {
+        # The original owned process cleanup has already run. Diagnostic publication
+        # failures remain secondary and cannot replace primary/cleanup evidence.
+        try { Save-InkInputDiagnostics $state }
+        catch { $state.inputDiagnosticsErrors.Add($_.Exception.Message) }
         if ($state.temporary -and (Test-Path -LiteralPath $state.temporary)) {
             Remove-Item -LiteralPath $state.temporary -Recurse -Force -ErrorAction Stop
             if (Test-Path -LiteralPath $state.temporary) { throw 'Temporary signed-copy directory remains after cleanup.' }
@@ -667,7 +679,7 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
     try { $helperEvidence=Get-InkQuayHelperEvidence }
     catch { $evidenceErrors.Add('Qualification helper observation failed: ' + $_.Exception.Message) }
     $coreCompleted = $result.installation_qualification_passed -and $unsignedUnchanged -and $evidenceErrors.Count -eq 0
-    $qualificationPassed = $coreCompleted -and -not $state.observerRequested
+    $qualificationPassed = $coreCompleted -and -not $state.observerRequested -and -not $state.inputDiagnosticsRequested
     $evidence = [ordered]@{
         schema_version = 1
         generated_at_utc = [DateTime]::UtcNow.ToString('o')
@@ -702,7 +714,10 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         installation_qualification_passed = $qualificationPassed
         diagnostic_observer_requested = $state.observerRequested
         diagnostic_observer_attached = $state.observerAttached
-        diagnostic_run_completed = ($state.observerRequested -and $coreCompleted)
+        diagnostic_run_completed = (($state.observerRequested -or $state.inputDiagnosticsRequested) -and $coreCompleted)
+        diagnostic_input_requested = $state.inputDiagnosticsRequested
+        input_diagnostics = $state.inputDiagnosticsEvidence
+        input_diagnostic_errors = @($state.inputDiagnosticsErrors)
         diagnostic_observer = $state.observerEvidence
         observer_diagnostic_errors = @($state.observerErrors)
         workflow = $state.workflow
@@ -726,13 +741,13 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
     if (-not $coreCompleted) {
         throw "Scriblark installation qualification failed. Primary: $($result.primary_error); cleanup: $($result.cleanup_errors -join '; '); evidence: $($evidenceErrors -join '; ')"
     }
-    if ($state.observerRequested) { Write-Output 'DIAGNOSTIC ONLY: observer run completed; consumer acceptance remains false and requires an uninstrumented run.' }
+    if ($state.observerRequested -or $state.inputDiagnosticsRequested) { Write-Output 'DIAGNOSTIC ONLY: consumer acceptance remains false and requires an uninstrumented run.' }
     else { Write-Output 'PASS: broker-activated exact package, verified owned modules/window/close, uninstalled, and cleaned certificate state.' }
 }
 
 if (-not $LibraryOnly) {
     try {
-        Invoke-InkQuayInstallQualification -PackagePath $Package -RecordPath $PackageRecord -SignToolPath $SignTool -OutputPath $Output -CaptureCrashStack:$CaptureCrashStack -IdentityMode $IdentityMode
+        Invoke-InkQuayInstallQualification -PackagePath $Package -RecordPath $PackageRecord -SignToolPath $SignTool -OutputPath $Output -CaptureCrashStack:$CaptureCrashStack -CaptureInputDiagnostics:$CaptureInputDiagnostics -IdentityMode $IdentityMode
     } catch {
         Write-Error $_
         exit 1

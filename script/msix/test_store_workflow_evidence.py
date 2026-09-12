@@ -136,6 +136,7 @@ class WorkflowTests(unittest.TestCase):
             "passed": True,
             "gtk_keyboard_workflow": True,
             "diagnostic_observer": False,
+            "diagnostic_input": False,
             "error": None,
             "diagnostic_errors": [],
             "failed_operation": None,
@@ -272,6 +273,8 @@ class WorkflowTests(unittest.TestCase):
             "loaded_module_count": len(modules),
             "primary_error": None,
             "diagnostic_observer": None,
+            "input_diagnostics": None,
+            "input_diagnostic_errors": [],
         }
         for key in (
             "add_appx_completed",
@@ -289,6 +292,7 @@ class WorkflowTests(unittest.TestCase):
         for key in (
             "certificate_private_key_exported",
             "diagnostic_observer_requested",
+            "diagnostic_input_requested",
             "diagnostic_observer_attached",
             "diagnostic_run_completed",
             "physical_tablet_tested",
@@ -452,6 +456,7 @@ class WorkflowTests(unittest.TestCase):
             ("events", []),
             ("first", None),
             ("diagnostic_observer", True),
+            ("diagnostic_input", True),
             ("process_id", 18),
             ("diagnostic_errors", ["failure"]),
             ("workflow_run_attempt", "2"),
@@ -518,6 +523,7 @@ class WorkflowTests(unittest.TestCase):
         original = copy.deepcopy(self.receipt)
         for mutation in (
             "observer",
+            "input-diagnostic",
             "normal_exit",
             "uninstall",
             "residual",
@@ -527,6 +533,8 @@ class WorkflowTests(unittest.TestCase):
             self.receipt = copy.deepcopy(original)
             if mutation == "observer":
                 self.receipt["diagnostic_observer_requested"] = True
+            if mutation == "input-diagnostic":
+                self.receipt["diagnostic_input_requested"] = True
             if mutation == "normal_exit":
                 self.receipt["process_exit"]["exit_code"] = 1
             if mutation == "uninstall":

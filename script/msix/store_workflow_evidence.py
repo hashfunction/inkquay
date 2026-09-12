@@ -17,6 +17,7 @@ HELPERS = (
     "qualify-workflow.ps1",
     "WorkflowNative.cs",
     "workflow_files.py",
+    "input_diagnostics.ps1",
 )
 EVENTS = [
     ("open-source.xopp", "Unsaved Document - Scriblark"),
@@ -253,6 +254,7 @@ def _validate_installation(folder, record, source, context, mode, tool_directory
     for key in (
         "certificate_private_key_exported",
         "diagnostic_observer_requested",
+        "diagnostic_input_requested",
         "diagnostic_observer_attached",
         "diagnostic_run_completed",
         "physical_tablet_tested",
@@ -265,12 +267,14 @@ def _validate_installation(folder, record, source, context, mode, tool_directory
         "preflight_package_full_names",
         "residual_package_full_names",
         "observer_diagnostic_errors",
+        "input_diagnostic_errors",
         "cleanup_errors",
         "evidence_errors",
     ):
         require(receipt[key] == [], "Residual/error evidence: " + key)
     require(
-        receipt["primary_error"] is None and receipt["diagnostic_observer"] is None,
+        receipt["primary_error"] is None and receipt["diagnostic_observer"] is None
+        and receipt["input_diagnostics"] is None,
         "Primary or observer evidence present",
     )
     full = receipt["package_full_name"]
@@ -376,6 +380,7 @@ def _validate_installation(folder, record, source, context, mode, tool_directory
         and workflow["passed"] is True
         and workflow["gtk_keyboard_workflow"] is True
         and workflow["diagnostic_observer"] is False
+        and workflow["diagnostic_input"] is False
         and workflow["error"] is None
         and workflow["diagnostic_errors"] == []
         and workflow["failed_operation"] is None

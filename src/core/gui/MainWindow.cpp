@@ -1,4 +1,5 @@
 #include "MainWindow.h"
+#include "gui/inputdevices/InputDiagnostics.h"
 
 #include <regex>
 
@@ -99,7 +100,7 @@ MainWindow::MainWindow(GladeSearchpath* gladeSearchPath, Control* control, GtkAp
 
     // "watch over" all key events
     auto keyPropagate = +[](GtkWidget* w, GdkEvent* e, gpointer) {
-        return gtk_window_propagate_key_event(GTK_WINDOW(w), (GdkEventKey*)(e));
+        return InputDiagnostics::propagate(GTK_WINDOW(w), (GdkEventKey*)(e));
     };
     g_signal_connect(this->window, "key-press-event", G_CALLBACK(keyPropagate), nullptr);
     g_signal_connect(this->window, "key-release-event", G_CALLBACK(keyPropagate), nullptr);

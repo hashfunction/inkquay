@@ -20,7 +20,8 @@ def context(environment):
     require(
         environment.get("CI") == "true"
         and environment.get("GITHUB_REPOSITORY") == "hashfunction/inkquay"
-        and environment.get("INKQUAY_CAPTURE_CRASH_STACK") == "false",
+        and environment.get("INKQUAY_CAPTURE_CRASH_STACK") == "false"
+        and environment.get("INKQUAY_CAPTURE_INPUT_DIAGNOSTICS") == "false",
         "Unsigned retention requires normal current-repository Windows CI",
     )
     result = {

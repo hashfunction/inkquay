@@ -2,6 +2,11 @@ name: Scriblark Windows qualification
 on:
   workflow_dispatch:
     inputs:
+      capture_input_diagnostics:
+        description: 'Bounded read-only GTK input trace; cannot confer consumer acceptance'
+        type: boolean
+        required: false
+        default: false
       capture_crash_stack:
         description: 'Diagnostic observer only; cannot confer consumer acceptance'
         type: boolean
@@ -78,7 +83,8 @@ jobs:
         shell: pwsh
         env:
           INKQUAY_CAPTURE_CRASH_STACK: ${{ inputs.capture_crash_stack == true && 'true' || 'false' }}
-        run: ./script/msix/qualify-msix.ps1 -CaptureCrashStack:($env:INKQUAY_CAPTURE_CRASH_STACK -ceq 'true')
+          INKQUAY_CAPTURE_INPUT_DIAGNOSTICS: ${{ inputs.capture_input_diagnostics == true && 'true' || 'false' }}
+        run: ./script/msix/qualify-msix.ps1 -CaptureCrashStack:($env:INKQUAY_CAPTURE_CRASH_STACK -ceq 'true') -CaptureInputDiagnostics:($env:INKQUAY_CAPTURE_INPUT_DIAGNOSTICS -ceq 'true')
       - name: Preserve metadata only
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -91,11 +97,13 @@ jobs:
             build-evidence/msix-install/*.json
             build-evidence/msix-install/*.png
             build-evidence/msix-install/*.txt
+            build-evidence/msix-install/*.jsonl
             build-evidence/msix-install/workflow/*.json
             build-evidence/msix-install/workflow/*.png
             build-evidence/msix-store-install/*.json
             build-evidence/msix-store-install/*.png
             build-evidence/msix-store-install/*.txt
+            build-evidence/msix-store-install/*.jsonl
             build-evidence/msix-store-install/workflow/*.json
             build-evidence/msix-store-install/workflow/*.png
             build/Testing/Temporary/LastTest.log
@@ -103,7 +111,7 @@ jobs:
           retention-days: 14
           if-no-files-found: error
       - name: Retain exact unsigned Store package and readiness receipt
-        if: ${{ success() && inputs.capture_crash_stack != true }}
+        if: ${{ success() && inputs.capture_crash_stack != true && inputs.capture_input_diagnostics != true }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: Scriblark-Store-unsigned
