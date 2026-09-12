@@ -7,7 +7,7 @@ from demo_note import make_note, validate_note
 
 MARKER='.scriblark-capture-owner'
 NOTE='A pocket of green.xopp'
-PDF='A pocket of green.pdf'
+PDF='A pocket of green - handout.pdf'
 
 def require(condition,message):
     if not condition: raise ValueError(message)

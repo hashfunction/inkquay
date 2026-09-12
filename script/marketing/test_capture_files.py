@@ -1,5 +1,5 @@
 """Exercise real owned file creation, report checks and preservation boundaries."""
-import copy,gzip,json,tempfile,unittest
+import copy,gzip,json,re,tempfile,unittest
 from pathlib import Path
 import capture_files as f
 import capture_checks as checks
@@ -33,6 +33,34 @@ class CaptureFiles(unittest.TestCase):
             with self.subTest(key=key),self.assertRaises(ValueError):f.verify(self.state,True)
         path.write_text(json.dumps(report));(root/f.NOTE).write_bytes(b'changed')
         with self.assertRaisesRegex(ValueError,'Original'):f.verify(self.state,True)
+    def test_pdf_reopen_does_not_autoload_the_original_notebook(self):
+        # Read the unchanged product route/default. This is a filename fixture
+        # regression, not a replacement for actual installed PDF reopening.
+        source=Path(__file__).resolve().parents[2]
+        control=(source/'src/core/control/Control.cpp').read_text()
+        settings=(source/'src/core/control/settings/Settings.cpp').read_text()
+        route=control.split('if (Util::hasPdfFileExt(filepath)) {',1)[1].split('callback(this->openPdfFile',1)[0]
+        self.assertIn('this->settings->isAutoloadPdfXoj()',route)
+        self.assertIn('this->autoloadPdfXoj = true;',settings)
+        extensions=re.findall(r'"([^"\n]+)"',re.search(r'const std::vector<std::string> exts = \{([^}]+)\}',route).group(1))
+        self.assertEqual(extensions,['.xopp','.xoj','.pdf.xopp','.pdf.xoj'])
+        self.assertIn('this->openXoppFile(std::move(f)',route)
+        root=Path(self.state['root'])
+        original_stem=Path(f.NOTE).stem
+        self.assertEqual([p.name for p in (root/(original_stem+ext) for ext in extensions) if p.exists()],[f.NOTE])
+        # Old capture PDF stem chose the existing xopp; the handout must reach
+        # the normal PDF route without changing application settings or input.
+        pdf_stem=Path(f.PDF).stem
+        self.assertEqual([p.name for p in (root/(pdf_stem+ext) for ext in extensions) if p.exists()],[])
+        for ext in extensions:
+            companion=root/(pdf_stem+ext)
+            companion.write_bytes(b'unexpected companion')
+            try:
+                with self.subTest(extension=ext),self.assertRaisesRegex(ValueError,'Unexpected demo output'):
+                    f.verify(self.state,False)
+                self.assertTrue(companion.exists())
+            finally:companion.unlink()
+
     def test_unbound_and_unsafe_artifacts_fail(self):
         with self.assertRaisesRegex(ValueError,'reviewed'):checks.validate_binding(dict(schema_version=1,product='Scriblark',qualified=None))
         for name in ('../private','/absolute','C:drive','a\\b','a//b','a/./b'):

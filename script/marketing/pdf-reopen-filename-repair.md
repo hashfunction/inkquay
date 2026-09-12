@@ -1,0 +1,13 @@
+# Capture PDF companion collision
+
+Original marketing run `34723844628` reached all three real screenshot slots and the actual PDF structural-check report. It then selected `A pocket of green.pdf` through the normal Open file chooser. The final original window record remained `A pocket of green.xopp - Scriblark`, HWND `655482`, PID `5128`, visible/enabled and maximized. No dialog remained. The capture correctly refused to claim PDF reopen or normal-close success; cleanup completed without errors and the unsigned package stayed unchanged. All original images remain diagnostic until a complete successful capture.
+
+This matches an explicit product feature. `Control::openFileWithoutSavingTheCurrentDocument` checks `isAutoloadPdfXoj()` and searches the PDF stem with `.xopp`, `.xoj`, `.pdf.xopp`, and `.pdf.xoj` before opening the PDF. `Settings` defaults `autoloadPdfXoj` to true. The marketing notebook and exported PDF shared their stem, so opening the PDF chose the original notebook. The successful qualification avoids this with `saved.xopp` and `first.pdf`.
+
+Only the capture output basename changes to `A pocket of green - handout.pdf`: normal export selection, report filename matching, normal reopen selection, exact reopened title, and the independent file/report verifier agree. The original notebook bytes, UI actions, strict window predicates, structural PDF/report checks and cleanup gates are unchanged. No settings or product behavior are changed.
+
+The new regression reads the exact product route/default and exercises the real prepared fixture directory. Before the fix it failed because the original notebook was a matching PDF companion. After the fix the handout has no companion; every supported unexpected companion remains refused and preserved by the existing file boundary. All six marketing Python tests pass, as do the existing PowerShell activation/lifecycle tests, twelve startup-waiter cases and exclusive JSON writer replay.
+
+Subsequent title review: `Control::updateWindowTitle` uses the PDF filename when the loaded document has no notebook filepath, so the expected title remains exact. This is the last title assertion in capture; normal close, final file checks, module checks and uninstall follow unchanged. The original screenshots also confirm the preceding notebook, template and report-window titles.
+
+The package binding remains successful run `34710260935`, source `21476437b6a187b3a8717d844fefe5f47815386c`, unsigned SHA256 `72169ef657f1adc8c47be28760d503763e25017ef2b0f883dfeaf36b770e1deb`. A fresh actual Windows capture must complete before screenshots are published.

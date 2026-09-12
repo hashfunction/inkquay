@@ -98,9 +98,9 @@ function Invoke-ScribCaptureUi($State,[string]$QualifiedSource) {
     if($contract.pdfExportShortcut -cne '^%e'){throw 'Reviewed public PDF export shortcut differs'}
     $count=[InkQuayWorkflow.Native]::SendPdfExportKeys([IntPtr]$State.main,$State.process.Id,$title)
     $State.events.Add(@{action='export-pdf';hwnd=$State.main;title=$title;native_input_method='SendInput';native_sendinput_events=$count;at_utc=[DateTime]::UtcNow.ToString('o')});Start-Sleep -Milliseconds 350
-    Choose 'Export File' 'A pocket of green.pdf'
+    Choose 'Export File' 'A pocket of green - handout.pdf'
     $deadline=[DateTime]::UtcNow.AddSeconds(30)
-    do{Assert-ScribCaptureProcess $State;$reports=@(Get-ChildItem -LiteralPath $State.demo -File -Filter 'A pocket of green.pdf.*.inkquay-report.json');if($reports.Count -eq 1){break};Start-Sleep -Milliseconds 150}while([DateTime]::UtcNow -lt $deadline)
+    do{Assert-ScribCaptureProcess $State;$reports=@(Get-ChildItem -LiteralPath $State.demo -File -Filter 'A pocket of green - handout.pdf.*.inkquay-report.json');if($reports.Count -eq 1){break};Start-Sleep -Milliseconds 150}while([DateTime]::UtcNow -lt $deadline)
     $State.verified=Invoke-ScribCaptureFiles 'verify' $State
     $windows=[InkQuayWorkflow.Native]::Windows($State.process.Id)
     $dialogs=@($windows|Where-Object {$_.Handle -ne $State.main -and $_.Owner -eq $State.main -and $_.Enabled -and $_.ClassName -ceq 'gdkWindowToplevel' -and $_.Title -cin @('','Scriblark')})
@@ -108,7 +108,7 @@ function Invoke-ScribCaptureUi($State,[string]$QualifiedSource) {
     $dialog=Observe $dialogs[0].Title $true
     Save-ScribCaptureFrame $State '03-pdf-export' $title $dialog
     Keys $dialog '{ENTER}' 'dismiss-pdf-report'
-    Keys (Observe $title) '^o' 'reopen-exported-pdf';Choose 'Open file' 'A pocket of green.pdf'
-    $null=Observe 'A pocket of green.pdf - Scriblark';$State.pdfReopened=$true
+    Keys (Observe $title) '^o' 'reopen-exported-pdf';Choose 'Open file' 'A pocket of green - handout.pdf'
+    $null=Observe 'A pocket of green - handout.pdf - Scriblark';$State.pdfReopened=$true
     if(($State.captures -join ',') -cne '01-note-workspace,02-page-template,03-pdf-export'){throw 'Capture set incomplete'}
 }
