@@ -335,6 +335,7 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         publicCertificate = $null; certificate = $null; trustedCertificate = $null; trustAttempted = $false
         installed = $null; installedByUs = $false; process = $null; processOwned = $false; cleanupProcessExit = $null
         installAttempted = $false; brokerProcessId = 0; addCompleted = $false; ownedPackageFullName = $null; preflightPackageFullNames = @(); residualPackageFullNames = @(); processHandle = $null; processExit = $null
+        activatedAtUtc = $null; verifiedExecutablePath = $null
         unsignedPackageSha256 = $null; signedPackageSha256 = $null; signTool = $null
         aumid = $null; processPackageFullName = $null; modules = @(); window = $null; workflow = $null
         executableSha256 = $null
@@ -459,6 +460,7 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
             (Join-Path $PSScriptRoot 'verify_record.py'),'--record',$RecordPath,'--package',$state.package,
             '--source-commit',$env:GITHUB_SHA,'--installed-root',$state.installed.InstallLocation)
         Add-InkQuayActivationTypes
+        $state.activatedAtUtc = [DateTime]::UtcNow
         $processId = [InkQuayQualification.ActivationBroker]::Activate($state.aumid)
         $state.brokerProcessId = [int]$processId
         $state.process = [Diagnostics.Process]::GetProcessById([int]$processId)
@@ -470,6 +472,7 @@ function Invoke-InkQuayInstallQualification([string]$PackagePath, [string]$Recor
         if ($state.processPackageFullName -cne $state.ownedPackageFullName) { throw 'Broker process does not have the exact owned package identity.' }
         Assert-FileMatchesRecord $expectedExecutable (Get-RecordPayloadEntry $state.record 'bin/inkquay.exe') 'Activated executable' | Out-Null
         $state.processOwned = $true
+        $state.verifiedExecutablePath = $expectedExecutable
         $deadline = [DateTime]::UtcNow.AddSeconds(30)
         do {
             Start-Sleep -Milliseconds 250

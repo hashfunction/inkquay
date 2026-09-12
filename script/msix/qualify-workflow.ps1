@@ -1,6 +1,7 @@
 # Copyright 2026 Trieflow LLC. MIT. Actual installed GTK consumer workflow, no product hooks.
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version Latest
+. (Join-Path $PSScriptRoot 'workflow_crash.ps1')
 function Add-InkWorkflowTypes {
     if (-not ('InkQuayWorkflow.Native' -as [type])) { Add-Type -Path (Join-Path $PSScriptRoot 'WorkflowNative.cs') }
 }
@@ -48,7 +49,8 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
     $originalManifestHash=$null
     $result=[ordered]@{schema_version=1;source_commit=$env:GITHUB_SHA;process_id=$State.process.Id;
         package_full_name=$State.ownedPackageFullName;originals=$null;first=$null;reopened=$null;events=$events;
-        passed=$false;error=$null;diagnostic_errors=@();gtk_keyboard_workflow=$true}
+        passed=$false;error=$null;diagnostic_errors=@();gtk_keyboard_workflow=$true;
+        active_operation=$null;failed_operation=$null;crash_diagnostics=$null}
     function Assert-Live {
         $State.process.Refresh()
         if(-not $State.processOwned -or $State.processHandle.IsClosed -or $State.processHandle.IsInvalid -or $State.process.HasExited){throw 'Retained owned process is unavailable.'}
@@ -56,6 +58,7 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
             [InkQuayQualification.NativePackageProbe]::GetFullName($State.process.Handle) -cne $State.ownedPackageFullName){throw 'Workflow process executable/package identity changed.'}
     }
     function Observe([string]$Title,[bool]$Dialog=$false) {
+        $result.active_operation=@{kind='observe';title=$Title;dialog=$Dialog;at_utc=[DateTime]::UtcNow.ToString('o')}
         $deadline=[DateTime]::UtcNow.AddSeconds(20)
         do {
             Assert-Live
@@ -67,6 +70,7 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
         throw $last
     }
     function Keys($Window,[string]$Keys,[string]$Action) {
+        $result.active_operation=@{kind='input';action=$Action;title=$Window.Title;at_utc=[DateTime]::UtcNow.ToString('o')}
         Assert-Live
         [InkQuayWorkflow.Native]::Focus([IntPtr]$Window.Handle,$State.process.Id)
         [Windows.Forms.SendKeys]::SendWait($Keys)
@@ -75,6 +79,7 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
     }
     function TextKeys([string]$Text) { return [regex]::Replace($Text,'[+^%~(){}\[\]]',{param($m) '{'+$m.Value+'}'}) }
     function Capture($Window,[string]$Name) {
+        $result.active_operation=@{kind='capture';name=$Name;title=$Window.Title;at_utc=[DateTime]::UtcNow.ToString('o')}
         Assert-Live
         [InkQuayWorkflow.Native]::Focus([IntPtr]$Window.Handle,$State.process.Id)
         $fresh=@([InkQuayWorkflow.Native]::Windows($State.process.Id)|Where-Object Handle -eq $Window.Handle)
@@ -94,6 +99,7 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
         }finally{$g.Dispose();$bitmap.Dispose()}
     }
     function Files([string]$Mode) {
+        $result.active_operation=@{kind='file-verification';mode=$Mode;at_utc=[DateTime]::UtcNow.ToString('o')}
         if($originalManifestHash -and (Get-FileHash (Join-Path $root 'originals.json')).Hash -cne $originalManifestHash){throw 'Prepared original manifest changed.'}
         $raw=& $python (Join-Path $PSScriptRoot 'workflow_files.py') $Mode --root $root --tool-directory $tools 2>&1
         if($LASTEXITCODE -ne 0){throw ("Independent $Mode verification failed: "+($raw -join "`n"))}
@@ -170,7 +176,7 @@ function Invoke-InkQuayWorkflow($State,[string]$SourceRoot) {
         Assert-Live
         $result.passed=$true
     }catch{
-        $result.error=$_.Exception.ToString()
+        Add-InkWorkflowFailureEvidence $result $State $_
         try {Write-NewUtf8Json (Join-Path $evidence 'failure-windows.json') @([InkQuayWorkflow.Native]::Windows($State.process.Id))}catch{$result.diagnostic_errors+= $_.Exception.ToString()}
         try { $w=@([InkQuayWorkflow.Native]::Windows($State.process.Id)|Where-Object {$_.Enabled -and $_.Handle -eq $main});if($w.Count -eq 1){Capture $w[0] 'failure'} }catch{$result.diagnostic_errors+= $_.Exception.ToString()}
     }
